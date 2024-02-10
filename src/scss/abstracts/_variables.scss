@@ -6,6 +6,9 @@
 $color-primary: #39A7FF;
 $color-secondary: #87C4FF;
 $color-white: #E0F4FF;
+$color-black: #1b1b1b;
+$color-grey: #585858;
+
 $color-cream: #FFEED9;
 
 $color-green:#1fd455;
@@ -15,7 +18,8 @@ $color-red2:#eb8577;
 $linear-gradient: linear-gradient(90deg, $color-primary 0%, $color-secondary 54%);
 $linear-gradient-2: linear-gradient(150deg, $color-secondary 0%, $color-primary 54%);
 $linear-gradient-3: linear-gradient(150deg, $color-red 0%, $color-red2 54%);
-
+$radial-gradient: radial-gradient(circle, $color-primary 0%, $color-secondary 100%);
+$radial-gradient: radial-gradient(circle,$color-secondary 0%, $color-primary 100%);
 
 // FONTS 
 $font-family-primary: "Roboto", sans-serif;
