@@ -18,6 +18,11 @@
 
 // // LAYOUT
 @import "layout/loginLayout";
+@import "layout/registerLayout";
+@import "layout/retrievePasswordLayout";
+
 
 // // PAGES 
 @import "pages/login";
+@import "pages/register";
+@import  "pages/retrievePassword";

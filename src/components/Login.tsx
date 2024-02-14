@@ -1,10 +1,22 @@
 import React from "react";
 import { ReactComponent as LogoSvg } from "../assets/logo2.svg";
 import { FaEnvelope, FaFacebook, FaKey, FaFacebookF } from "react-icons/fa";
+import { useNavigate } from "react-router";
 
 const Login = () => {
+
+  let nav = useNavigate();
+
+  const handleSignUp = () => {
+    nav("/register");
+  };
+
+  const handleRetrivePassword = () => {
+    nav("/retrievePassword");
+  };
+
   return (
-    <div className="login">
+    <div id="login">
       <div className="login__container">
         <div className="login__header">
           <LogoSvg className="login__logo" />
@@ -19,16 +31,16 @@ const Login = () => {
         <div className="login__center">
           <div className="login__center__input">
             <FaEnvelope className="login__center__input__icon" />
-            <input type="text" placeholder="Email" />
+            <input type="text" placeholder="Email" required/>
           </div>
           <div className="login__center__input">
             <FaKey className="login__center__input__icon" />
-            <input type="password" placeholder="Password" />
+            <input type="password" placeholder="Password" required/>
           </div>
 
           <div className="login__center__checker">
             <div className="login__center__forgot">
-              <p>Forgot Password?</p>
+              <p onClick={()=>handleRetrivePassword()}>Forgot Password?</p>
             </div>
 
             <div className="login__center__checkbox">
@@ -44,7 +56,7 @@ const Login = () => {
         <div className="login__bottom">
           <div className="login__bottom__signup">
             <p>Don't have an account?</p>
-            <span>Sign Up</span>
+            <span onClick={() => handleSignUp()}>Sign Up</span>
           </div>
 
           <div className="login__bottom__socialMedia">
