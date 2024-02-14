@@ -37,7 +37,7 @@ const Login = () => {
             </div>
           </div>
           <div className="login__center__button">
-            <button className="button__first">Login</button>
+            <button className="button button__first">Login</button>
           </div>
         </div>
 

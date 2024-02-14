@@ -33,34 +33,42 @@ input, button, textarea, select {
   background-color: transparent;
 }
 
+.button, .button:link, .button:visited {
+  text-decoration: none;
+  padding: 1.5rem 4rem;
+  display: inline-block;
+  border-radius: 2rem;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 1.6rem;
+  border: none;
+  cursor: pointer;
+}
+.button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
+}
+.button:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+}
 .button__first {
-  background: linear-gradient(150deg, #87C4FF 0%, #39A7FF 54%);
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
   color: #E0F4FF;
   width: 100%;
   border: none;
-  padding: 1.5rem 3rem;
-  font-size: 1.6rem;
   font-weight: 700;
-  border-radius: 2rem;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
   text-decoration: none;
-}
-.button__first:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
-}
-.button__first:active {
-  transform: translateY(-1px);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
 }
 
 .login__container {
   background-color: #E0F4FF;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.3);
+  box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
   width: 100%;
   max-width: 40rem;
   text-align: center;
@@ -120,7 +128,7 @@ input, button, textarea, select {
 }
 .login__center__input__icon {
   font-size: 2rem;
-  color: #39A7FF;
+  color: #2781e2;
 }
 .login__center__checker {
   display: flex;
@@ -142,15 +150,19 @@ input, button, textarea, select {
   gap: 0.5rem;
   cursor: pointer;
 }
+.login__center__checkbox input[type=checkbox] {
+  cursor: pointer;
+  accent-color: #2781e2;
+}
 .login__center__forgot p {
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
-  color: #39A7FF;
-  text-decoration: underline;
+  color: #2781e2;
+  cursor: pointer;
   transition: all 0.3s;
 }
 .login__center__forgot p:hover {
-  color: #87C4FF;
+  text-decoration: underline;
 }
 .login__center__button {
   display: flex;
@@ -170,12 +182,12 @@ input, button, textarea, select {
   margin-top: 1rem;
 }
 .login__bottom__signup span {
-  color: #39A7FF;
+  color: #2781e2;
   cursor: pointer;
   transition: all 0.3s;
 }
 .login__bottom__signup span:hover {
-  color: #87C4FF;
+  text-decoration: underline;
 }
 .login__bottom__socialMedia {
   display: flex;
@@ -192,9 +204,6 @@ input, button, textarea, select {
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
 }
-.login__bottom__socialMedia:hover {
-  color: #39A7FF;
-}
 .login__bottom__socialMedia__buttons {
   display: flex;
   flex-direction: row;
@@ -208,13 +217,14 @@ input, button, textarea, select {
   align-items: center;
   padding: 1rem;
   border-radius: 50%;
-  background: linear-gradient(150deg, #87C4FF 0%, #39A7FF 54%);
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
   color: #E0F4FF;
   font-size: 2rem;
   transition: all 0.3s;
 }
 .login__bottom__socialMedia__button:hover {
-  background-color: #585858;
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
 }
 
 .login {
@@ -235,7 +245,7 @@ input, button, textarea, select {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(57, 167, 255, 0.432) 0%, rgba(135, 196, 255, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(39, 129, 226, 0.432) 0%, rgba(45, 183, 234, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
 }
 
 /*# sourceMappingURL=App.css.map */
