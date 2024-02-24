@@ -12,12 +12,12 @@ html {
   width: 100%;
   height: 100%;
   font-size: 62.5%;
-  background-color: #E0F4FF;
+  background-color: #ffffff;
 }
 
 body {
   box-sizing: border-box;
-  background-color: #E0F4FF;
+  background-color: #bcd6f1;
   font-family: "Red Hat Display", sans-serif;
   font-weight: 400;
   overflow-x: hidden;
@@ -55,7 +55,7 @@ input, button, textarea, select {
 }
 .button__first {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #E0F4FF;
+  color: #ffffff;
   width: 100%;
   border: none;
   font-weight: 700;
@@ -71,22 +71,9 @@ input, button, textarea, select {
   left: 0;
   height: 100%;
   width: 30rem;
-  padding: 1rem 1.4rem;
-  border-right: 1px solid #585858;
-}
-.sidebar__toggle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
-  position: absolute;
-  width: 2.5rem;
-  height: 2.5rem;
-  right: -1.5rem;
-  top: 3%;
-  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #E0F4FF;
-  border-radius: 50%;
+  padding: 1.4rem 1.4rem;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 .sidebar__header {
   position: relative;
@@ -102,7 +89,7 @@ input, button, textarea, select {
   flex-direction: column;
   font-size: 1.6rem;
   font-weight: 500;
-  color: #585858;
+  color: #5f5f5f;
 }
 .sidebar__header__text__companyName {
   font-weight: 600;
@@ -112,10 +99,16 @@ input, button, textarea, select {
   font-weight: 400;
 }
 .sidebar__menuBar {
-  height: calc(100% - 10rem);
+  height: calc(100% - 15rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.sidebar__menuBar__menu__links {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 .sidebar__menuBar__menu__links__searchBox {
   display: flex;
@@ -123,13 +116,14 @@ input, button, textarea, select {
   justify-content: center;
   height: 5rem;
   margin-top: 1rem;
+  color: #5f5f5f;
 }
 .sidebar__menuBar__menu__links__searchBox input {
   height: 100%;
   width: 100%;
   outline: none;
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
 }
 .sidebar__menuBar__menu__links__item {
   height: 5rem;
@@ -137,12 +131,12 @@ input, button, textarea, select {
   list-style: none;
   display: flex;
   align-items: center;
-  color: #585858;
+  color: #5f5f5f;
   width: 100%;
   border-radius: 0.6rem;
 }
 .sidebar__menuBar__menu__links__item:hover {
-  color: #E0F4FF;
+  color: #ffffff;
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
   transition: all 0.2s;
 }
@@ -155,7 +149,7 @@ input, button, textarea, select {
 }
 .sidebar__menuBar__menu__links__item__box p {
   font-size: 2rem;
-  font-weight: 600;
+  font-weight: 500;
 }
 .sidebar__menuBar__menu__links__item__icon {
   font-size: 2rem;
@@ -166,7 +160,7 @@ input, button, textarea, select {
 }
 
 .login__container {
-  background-color: #E0F4FF;
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
@@ -188,14 +182,14 @@ input, button, textarea, select {
 }
 .login__header-title {
   font-size: 3rem;
-  color: #585858;
+  color: #5f5f5f;
   font-family: "Red Hat Display", sans-serif;
   margin-bottom: 1rem;
 }
 .login__header-subtitle {
   font-size: 1rem;
   font-weight: 400;
-  color: #585858;
+  color: #5f5f5f;
   font-family: "Roboto", sans-serif;
 }
 .login__center {
@@ -213,19 +207,19 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #E0F4FF;
+  background-color: #ffffff;
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   border-radius: 1rem;
-  color: #585858;
+  color: #5f5f5f;
   padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(88, 88, 88, 0.8);
+  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
   margin-bottom: 1rem;
   width: 70%;
   transition: all 0.3s;
 }
 .login__center__input:focus {
-  border: 1px solid #585858;
+  border: 1px solid #5f5f5f;
 }
 .login__center__input__icon {
   font-size: 2rem;
@@ -239,7 +233,7 @@ input, button, textarea, select {
   width: 70%;
   font-family: "Roboto", sans-serif;
   font-size: 1.4rem;
-  color: #585858;
+  color: #5f5f5f;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
@@ -279,7 +273,7 @@ input, button, textarea, select {
   gap: 0.5rem;
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
-  color: #585858;
+  color: #5f5f5f;
   margin-top: 1rem;
 }
 .login__bottom__signup span {
@@ -297,7 +291,7 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
-  color: #585858;
+  color: #5f5f5f;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -319,7 +313,7 @@ input, button, textarea, select {
   padding: 1rem;
   border-radius: 50%;
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #E0F4FF;
+  color: #ffffff;
   font-size: 2rem;
   transition: all 0.3s;
 }
@@ -329,7 +323,7 @@ input, button, textarea, select {
 }
 
 .register__container {
-  background-color: #E0F4FF;
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
@@ -351,14 +345,14 @@ input, button, textarea, select {
 }
 .register__header-title {
   font-size: 3rem;
-  color: #585858;
+  color: #5f5f5f;
   font-family: "Red Hat Display", sans-serif;
   margin-bottom: 1rem;
 }
 .register__header-subtitle {
   font-size: 1rem;
   font-weight: 400;
-  color: #585858;
+  color: #5f5f5f;
   font-family: "Roboto", sans-serif;
 }
 .register__center {
@@ -376,19 +370,19 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #E0F4FF;
+  background-color: #ffffff;
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   border-radius: 1rem;
-  color: #585858;
+  color: #5f5f5f;
   padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(88, 88, 88, 0.8);
+  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
   margin-bottom: 1rem;
   width: 70%;
   transition: all 0.3s;
 }
 .register__center__input:focus {
-  border: 1px solid #585858;
+  border: 1px solid #5f5f5f;
 }
 .register__center__input__icon {
   font-size: 2rem;
@@ -402,7 +396,7 @@ input, button, textarea, select {
   width: 70%;
   font-family: "Roboto", sans-serif;
   font-size: 1.4rem;
-  color: #585858;
+  color: #5f5f5f;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
@@ -443,7 +437,7 @@ input, button, textarea, select {
   gap: 0.5rem;
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
-  color: #585858;
+  color: #5f5f5f;
   margin-top: 1rem;
 }
 .register__bottom__signup span {
@@ -461,7 +455,7 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
-  color: #585858;
+  color: #5f5f5f;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -483,7 +477,7 @@ input, button, textarea, select {
   padding: 1rem;
   border-radius: 50%;
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #E0F4FF;
+  color: #ffffff;
   font-size: 2rem;
   transition: all 0.3s;
 }
@@ -493,7 +487,7 @@ input, button, textarea, select {
 }
 
 .retrievePassword__container {
-  background-color: #E0F4FF;
+  background-color: #ffffff;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
@@ -515,14 +509,14 @@ input, button, textarea, select {
 }
 .retrievePassword__header-title {
   font-size: 3rem;
-  color: #585858;
+  color: #5f5f5f;
   font-family: "Red Hat Display", sans-serif;
   margin-bottom: 1rem;
 }
 .retrievePassword__header-subtitle {
   font-size: 1rem;
   font-weight: 400;
-  color: #585858;
+  color: #5f5f5f;
   font-family: "Roboto", sans-serif;
 }
 .retrievePassword__center {
@@ -540,19 +534,19 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #E0F4FF;
+  background-color: #ffffff;
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   border-radius: 1rem;
-  color: #585858;
+  color: #5f5f5f;
   padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(88, 88, 88, 0.8);
+  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
   margin-bottom: 1rem;
   width: 70%;
   transition: all 0.3s;
 }
 .retrievePassword__center__input:focus {
-  border: 1px solid #585858;
+  border: 1px solid #5f5f5f;
 }
 .retrievePassword__center__input__icon {
   font-size: 2rem;
@@ -566,7 +560,7 @@ input, button, textarea, select {
   width: 70%;
   font-family: "Roboto", sans-serif;
   font-size: 1.4rem;
-  color: #585858;
+  color: #5f5f5f;
   margin-bottom: 1rem;
   margin-top: 1rem;
 }
@@ -607,7 +601,7 @@ input, button, textarea, select {
   gap: 0.5rem;
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
-  color: #585858;
+  color: #5f5f5f;
   margin-top: 1rem;
 }
 .retrievePassword__bottom__signup span {
@@ -625,7 +619,7 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   margin-top: 1rem;
-  color: #585858;
+  color: #5f5f5f;
   cursor: pointer;
   transition: all 0.3s;
 }
@@ -647,7 +641,7 @@ input, button, textarea, select {
   padding: 1rem;
   border-radius: 50%;
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #E0F4FF;
+  color: #ffffff;
   font-size: 2rem;
   transition: all 0.3s;
 }

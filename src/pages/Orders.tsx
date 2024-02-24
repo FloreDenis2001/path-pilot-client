@@ -3,7 +3,11 @@ import Sidebar from '../components/Sidebar'
 
 const Orders = () => {
   return (
+
+    <div className="orders">
     <Sidebar/>
+
+    </div>
   )
 }
 

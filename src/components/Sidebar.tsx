@@ -9,6 +9,7 @@ import {
   FaIdCard,
   FaTruck,
   FaFile,
+  FaRoute,
 } from "react-icons/fa";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -34,9 +35,7 @@ const Sidebar = () => {
           </div>
         </div>
 
-        <div className="sidebar__toggle">
-          <FaCaretRight />
-        </div>
+      
       </div>
 
       <div className="sidebar__menuBar">
@@ -59,6 +58,14 @@ const Sidebar = () => {
                 <FaMap className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Maps
+                </p>
+              </div>
+            </li>
+            <li className="sidebar__menuBar__menu__links__item">
+              <div className="sidebar__menuBar__menu__links__item__box">
+                <FaRoute className="sidebar__menuBar__menu__links__item__icon" />
+                <p className="siderBar__menuBar__menu__links__item__text">
+                 Routes
                 </p>
               </div>
             </li>
@@ -91,7 +98,7 @@ const Sidebar = () => {
                 <FaFile className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Reports
-                </p>
+                </p> 
               </div>
             </li>
           </ul>
