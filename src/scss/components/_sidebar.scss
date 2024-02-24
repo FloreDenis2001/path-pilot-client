@@ -1,0 +1,118 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30rem;
+  padding: 1rem 1.4rem;
+
+  &__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    position: absolute;
+    width: 2.5rem;
+    height: 2.5rem;
+    right: -1.5rem;
+    top: 3%;
+    background: $linear-gradient-2;
+    color: $color-white;
+    border-radius: 50%;
+  }
+
+  &__header {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &__imageBox {
+      &__image {
+        width: 6rem;
+        border-radius: 0.6rem;
+      }
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+      font-size: 1.6rem;
+      font-weight: 500;
+      color: $color-grey;
+
+      &__companyName {
+        font-weight: 600;
+      }
+      &__adminName {
+        margin-top: 0.2rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  &__menuBar {
+    height: calc(100% - 10rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__menu {
+
+      &__links {
+        &__searchBox {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 5rem;
+          margin-top: 1rem;
+          input {
+            height: 100%;
+            width: 100%;
+            outline: none;
+            border: none;
+            font-size: 1.4rem;
+          }
+        }
+
+        &__item {
+          height: 5rem;
+          margin-top: 1rem;
+          list-style: none;
+          display: flex;
+          align-items: center;
+          color: $color-grey;
+          width: 100%;
+          border-radius: 0.6rem;
+
+          &:hover{
+            color: $color-white;
+            background:$linear-gradient-2;
+            transition: all 0.2s;
+          }
+
+          &__box {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+         
+
+            p {
+              font-size: 2rem;
+              font-weight: 600;
+            }
+          }
+
+          &__icon {
+            font-size: 2rem;
+            min-width: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

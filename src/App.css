@@ -21,7 +21,7 @@ body {
   font-family: "Red Hat Display", sans-serif;
   font-weight: 400;
   overflow-x: hidden;
-  height: auto;
+  height: 100vh;
 }
 
 input, button, textarea, select {
@@ -63,6 +63,106 @@ input, button, textarea, select {
   transition: all 0.2s;
   text-align: center;
   text-decoration: none;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 30rem;
+  padding: 1rem 1.4rem;
+  border-right: 1px solid #585858;
+}
+.sidebar__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  position: absolute;
+  width: 2.5rem;
+  height: 2.5rem;
+  right: -1.5rem;
+  top: 3%;
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  color: #E0F4FF;
+  border-radius: 50%;
+}
+.sidebar__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.sidebar__header__imageBox__image {
+  width: 6rem;
+  border-radius: 0.6rem;
+}
+.sidebar__header__text {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #585858;
+}
+.sidebar__header__text__companyName {
+  font-weight: 600;
+}
+.sidebar__header__text__adminName {
+  margin-top: 0.2rem;
+  font-weight: 400;
+}
+.sidebar__menuBar {
+  height: calc(100% - 10rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sidebar__menuBar__menu__links__searchBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  margin-top: 1rem;
+}
+.sidebar__menuBar__menu__links__searchBox input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.4rem;
+}
+.sidebar__menuBar__menu__links__item {
+  height: 5rem;
+  margin-top: 1rem;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  color: #585858;
+  width: 100%;
+  border-radius: 0.6rem;
+}
+.sidebar__menuBar__menu__links__item:hover {
+  color: #E0F4FF;
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  transition: all 0.2s;
+}
+.sidebar__menuBar__menu__links__item__box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.sidebar__menuBar__menu__links__item__box p {
+  font-size: 2rem;
+  font-weight: 600;
+}
+.sidebar__menuBar__menu__links__item__icon {
+  font-size: 2rem;
+  min-width: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .login__container {

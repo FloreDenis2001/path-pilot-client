@@ -4,7 +4,6 @@ import { FaEnvelope, FaFacebook, FaKey, FaFacebookF } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-
   let nav = useNavigate();
 
   const handleSignUp = () => {
@@ -13,6 +12,10 @@ const Login = () => {
 
   const handleRetrivePassword = () => {
     nav("/retrievePassword");
+  };
+
+  const handleOrders = () => {
+    nav("/dashboard/orders");
   };
 
   return (
@@ -31,16 +34,16 @@ const Login = () => {
         <div className="login__center">
           <div className="login__center__input">
             <FaEnvelope className="login__center__input__icon" />
-            <input type="text" placeholder="Email" required/>
+            <input type="text" placeholder="Email" required />
           </div>
           <div className="login__center__input">
             <FaKey className="login__center__input__icon" />
-            <input type="password" placeholder="Password" required/>
+            <input type="password" placeholder="Password" required />
           </div>
 
           <div className="login__center__checker">
             <div className="login__center__forgot">
-              <p onClick={()=>handleRetrivePassword()}>Forgot Password?</p>
+              <p onClick={() => handleRetrivePassword()}>Forgot Password?</p>
             </div>
 
             <div className="login__center__checkbox">
@@ -49,7 +52,12 @@ const Login = () => {
             </div>
           </div>
           <div className="login__center__button">
-            <button className="button button__first">Login</button>
+            <button
+              className="button button__first"
+              onClick={() => handleOrders()}
+            >
+              Login
+            </button>
           </div>
         </div>
 
