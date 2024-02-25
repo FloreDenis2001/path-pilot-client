@@ -17,7 +17,7 @@ html {
 
 body {
   box-sizing: border-box;
-  background-color: #bcd6f1;
+  background-color: #ffffff;
   font-family: "Red Hat Display", sans-serif;
   font-weight: 400;
   overflow-x: hidden;
@@ -73,7 +73,7 @@ input, button, textarea, select {
   width: 30rem;
   padding: 1.4rem 1.4rem;
   background-color: #ffffff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 .sidebar__header {
   position: relative;
