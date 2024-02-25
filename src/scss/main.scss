@@ -7,11 +7,12 @@
 
 // //BASE 
 @import "base/base";
-
+@import "base/typography";
 
 // // COMPONENTS 
 @import "components/button";
 @import "components/sidebar";
+@import "components/input";
 
 
 
@@ -27,3 +28,4 @@
 @import "pages/login";
 @import "pages/register";
 @import  "pages/retrievePassword";
+@import  "pages/orders";

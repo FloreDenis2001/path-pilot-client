@@ -17,7 +17,7 @@ html {
 
 body {
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: #bcd6f1;
   font-family: "Red Hat Display", sans-serif;
   font-weight: 400;
   overflow-x: hidden;
@@ -31,6 +31,27 @@ input, button, textarea, select {
   border: none;
   outline: none;
   background-color: transparent;
+}
+
+.heading-primary {
+  font-size: 3rem;
+  color: #5f5f5f;
+  font-family: "Red Hat Display", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.heading-secondary {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #5f5f5f;
+  font-family: "Roboto", sans-serif;
+}
+
+.heading-bottom {
+  padding: 1rem;
+  font-size: 1rem;
+  font-family: "Roboto", sans-serif;
+  color: #7a7a7a;
 }
 
 .button, .button:link, .button:visited {
@@ -56,13 +77,78 @@ input, button, textarea, select {
 .button__first {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
   color: #ffffff;
-  width: 100%;
+  width: 25rem;
   border: none;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
   text-decoration: none;
+}
+.button__box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.button__box__second {
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  width: 15rem;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.4rem;
+  color: #ffffff;
+}
+.button__box__second:active {
+  transform: scale(0.9);
+  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+}
+.button__socialMedia {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  border-radius: 50%;
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  color: #ffffff;
+  font-size: 2rem;
+  transition: all 0.3s;
+}
+.button__socialMedia:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
+}
+.button__second {
+  background: transparent;
+  color: #5f5f5f;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+}
+.button__search {
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  border: 1px solid rgba(122, 122, 122, 0.3);
+  padding-inline: 0.9rem;
+  padding-block: 0.5rem;
+  border-radius: 1rem;
+  height: 5rem;
+  width: 15rem;
+  font-size: 1.6rem;
+  letter-spacing: 2px;
+  align-self: flex-end;
 }
 
 .sidebar {
@@ -74,6 +160,27 @@ input, button, textarea, select {
   padding: 1.4rem 1.4rem;
   background-color: #ffffff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+.sidebar__collapse {
+  width: 8.8rem;
+  transition: all 0.3s;
+}
+.sidebar__collapse p {
+  display: none;
+}
+.sidebar__close {
+  position: absolute;
+  top: 3rem;
+  right: -1.4rem;
+  font-size: 2.5rem;
+  color: #ffffff;
+  cursor: pointer;
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
 }
 .sidebar__header {
   position: relative;
@@ -99,7 +206,7 @@ input, button, textarea, select {
   font-weight: 400;
 }
 .sidebar__menuBar {
-  height: calc(100% - 15rem);
+  height: calc(100% - 11rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -159,6 +266,88 @@ input, button, textarea, select {
   justify-content: center;
 }
 
+.inputBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #ffffff;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  color: #5f5f5f;
+  padding-bottom: 1rem;
+  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
+  margin-bottom: 1rem;
+  width: 70%;
+  transition: all 0.3s;
+}
+.inputBox:focus {
+  border: 1px solid #5f5f5f;
+}
+.inputBox__icon {
+  font-size: 2rem;
+  color: #2781e2;
+}
+
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.searchBox label {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+}
+.searchBox__input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  height: 5rem;
+  color: #5f5f5f;
+  border: 1px solid rgba(122, 122, 122, 0.3);
+  padding-inline: 0.9rem;
+  padding-block: 0.5rem;
+  border-radius: 1rem;
+  width: 40rem;
+}
+.searchBox input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 1.6rem;
+}
+.searchBox__icon {
+  font-size: 2rem;
+  color: #2781e2;
+}
+
+.filtersBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.filtersBox label {
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+}
+.filtersBox select {
+  border: 1px solid rgba(122, 122, 122, 0.3);
+  padding-inline: 0.7rem;
+  padding-block: 0.5rem;
+  border-radius: 1rem;
+  gap: 2rem;
+  height: 5rem;
+  color: #5f5f5f;
+  width: 20rem;
+}
+
 .login__container {
   background-color: #ffffff;
   padding: 2rem;
@@ -180,18 +369,6 @@ input, button, textarea, select {
   align-items: center;
   margin-bottom: 2rem;
 }
-.login__header-title {
-  font-size: 3rem;
-  color: #5f5f5f;
-  font-family: "Red Hat Display", sans-serif;
-  margin-bottom: 1rem;
-}
-.login__header-subtitle {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #5f5f5f;
-  font-family: "Roboto", sans-serif;
-}
 .login__center {
   padding-block: 2rem;
   display: flex;
@@ -199,31 +376,6 @@ input, button, textarea, select {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-}
-.login__center__input {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #ffffff;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.6rem;
-  border-radius: 1rem;
-  color: #5f5f5f;
-  padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
-  margin-bottom: 1rem;
-  width: 70%;
-  transition: all 0.3s;
-}
-.login__center__input:focus {
-  border: 1px solid #5f5f5f;
-}
-.login__center__input__icon {
-  font-size: 2rem;
-  color: #2781e2;
 }
 .login__center__checker {
   display: flex;
@@ -284,43 +436,6 @@ input, button, textarea, select {
 .login__bottom__signup span:hover {
   text-decoration: underline;
 }
-.login__bottom__socialMedia {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  color: #5f5f5f;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.login__bottom__socialMedia p {
-  font-size: 1rem;
-  font-family: "Roboto", sans-serif;
-}
-.login__bottom__socialMedia__buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-.login__bottom__socialMedia__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 50%;
-  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #ffffff;
-  font-size: 2rem;
-  transition: all 0.3s;
-}
-.login__bottom__socialMedia__button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
-}
 
 .register__container {
   background-color: #ffffff;
@@ -343,18 +458,6 @@ input, button, textarea, select {
   align-items: center;
   margin-bottom: 2rem;
 }
-.register__header-title {
-  font-size: 3rem;
-  color: #5f5f5f;
-  font-family: "Red Hat Display", sans-serif;
-  margin-bottom: 1rem;
-}
-.register__header-subtitle {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #5f5f5f;
-  font-family: "Roboto", sans-serif;
-}
 .register__center {
   padding-block: 2rem;
   display: flex;
@@ -362,31 +465,6 @@ input, button, textarea, select {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-}
-.register__center__input {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #ffffff;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.6rem;
-  border-radius: 1rem;
-  color: #5f5f5f;
-  padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
-  margin-bottom: 1rem;
-  width: 70%;
-  transition: all 0.3s;
-}
-.register__center__input:focus {
-  border: 1px solid #5f5f5f;
-}
-.register__center__input__icon {
-  font-size: 2rem;
-  color: #2781e2;
 }
 .register__center__checker {
   display: flex;
@@ -448,43 +526,6 @@ input, button, textarea, select {
 .register__bottom__signup span:hover {
   text-decoration: underline;
 }
-.register__bottom__socialMedia {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  color: #5f5f5f;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.register__bottom__socialMedia p {
-  font-size: 1rem;
-  font-family: "Roboto", sans-serif;
-}
-.register__bottom__socialMedia__buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-.register__bottom__socialMedia__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 50%;
-  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #ffffff;
-  font-size: 2rem;
-  transition: all 0.3s;
-}
-.register__bottom__socialMedia__button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
-}
 
 .retrievePassword__container {
   background-color: #ffffff;
@@ -507,18 +548,6 @@ input, button, textarea, select {
   align-items: center;
   margin-bottom: 2rem;
 }
-.retrievePassword__header-title {
-  font-size: 3rem;
-  color: #5f5f5f;
-  font-family: "Red Hat Display", sans-serif;
-  margin-bottom: 1rem;
-}
-.retrievePassword__header-subtitle {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #5f5f5f;
-  font-family: "Roboto", sans-serif;
-}
 .retrievePassword__center {
   padding-block: 2rem;
   display: flex;
@@ -526,31 +555,6 @@ input, button, textarea, select {
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
-}
-.retrievePassword__center__input {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: #ffffff;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.6rem;
-  border-radius: 1rem;
-  color: #5f5f5f;
-  padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
-  margin-bottom: 1rem;
-  width: 70%;
-  transition: all 0.3s;
-}
-.retrievePassword__center__input:focus {
-  border: 1px solid #5f5f5f;
-}
-.retrievePassword__center__input__icon {
-  font-size: 2rem;
-  color: #2781e2;
 }
 .retrievePassword__center__checker {
   display: flex;
@@ -612,43 +616,6 @@ input, button, textarea, select {
 .retrievePassword__bottom__signup span:hover {
   text-decoration: underline;
 }
-.retrievePassword__bottom__socialMedia {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
-  color: #5f5f5f;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.retrievePassword__bottom__socialMedia p {
-  font-size: 1rem;
-  font-family: "Roboto", sans-serif;
-}
-.retrievePassword__bottom__socialMedia__buttons {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-}
-.retrievePassword__bottom__socialMedia__button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  border-radius: 50%;
-  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
-  color: #ffffff;
-  font-size: 2rem;
-  transition: all 0.3s;
-}
-.retrievePassword__bottom__socialMedia__button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
-}
 
 #login {
   background-image: url("./assets/background-login-page.jpg");
@@ -709,6 +676,63 @@ input, button, textarea, select {
   right: 0;
   bottom: 0;
   background: linear-gradient(180deg, rgba(39, 129, 226, 0.432) 0%, rgba(45, 183, 234, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  height: 100%;
+}
+.orders__container {
+  height: 100%;
+  width: 80%;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.orders__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  width: 80%;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+.orders__filters {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-evenly;
+  font-size: 1.6rem;
+  color: #5f5f5f;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: center;
+  text-decoration: none;
+  padding-inline: 1rem;
+  padding-block: 2.5rem;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  width: 80%;
+  transition: all 0.3s;
+}
+.orders__filters:focus {
+  border: 1px solid #5f5f5f;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoDefault from "../assets/logoDefault.png";
 import {
   FaCaretRight,
@@ -15,8 +15,14 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sidebar = () => {
+
+  const [sidebar, setSidebar] = useState(false);
+
+  const showSidebar = () => setSidebar(!sidebar);
+
+
   return (
-    <header className="sidebar">
+    <header className={sidebar === true ? "sidebar" : "sidebar sidebar__collapse"}>
       <div className="sidebar__box">
         <div className="sidebar__header">
           <div className="sidebar__header__imageBox">
@@ -34,8 +40,10 @@ const Sidebar = () => {
             <p className="sidebar__header__text__adminName">Flore Denis</p>
           </div>
         </div>
+      </div>
 
-      
+      <div className="sidebar__close" onClick={()=>showSidebar()}>
+        <FaCaretRight className="sidebar__close__icon" />
       </div>
 
       <div className="sidebar__menuBar">

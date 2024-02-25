@@ -22,8 +22,8 @@ const Registration = () => {
           <div className="register__header">
             <LogoSvg className="register__logo" />
 
-            <h1 className="register__header-title">Create your account !</h1>
-            <h4 className="register__header-subtitle">
+            <h1 className="heading-primary">Create your account !</h1>
+            <h4 className="heading-secondary">
               Reengage with precision pathfinding: Your gateway to streamlined
               route optimization and smarter travel decisions.
             </h4>
@@ -31,26 +31,26 @@ const Registration = () => {
         </div>
 
         <div className="register__center">
-          <div className="register__center__input">
-            <FaSignature className="register__center__input__icon" />
+          <div className="inputBox">
+            <FaSignature className="inputBox__icon" />
             <input type="text" placeholder="First Name" required />
           </div>
-          <div className="register__center__input">
-            <FaSignature className="register__center__input__icon" />
+          <div className="inputBox">
+            <FaSignature className="inputBox__icon" />
             <input type="text" placeholder="Last Name" required />
           </div>
-          <div className="register__center__input">
-            <FaEnvelope className="register__center__input__icon" />
+          <div className="inputBox">
+            <FaEnvelope className="inputBox__icon" />
             <input type="text" placeholder="Email" required />
           </div>
 
-          <div className="register__center__input">
-            <FaKey className="register__center__input__icon" />
+          <div className="inputBox">
+            <FaKey className="inputBox__icon" />
             <input type="password" placeholder="Password" required />
           </div>
 
-          <div className="register__center__input">
-            <FaPhoneAlt className="register__center__input__icon" />
+          <div className="inputBox">
+            <FaPhoneAlt className="inputBox__icon" />
             <input type="tel" placeholder="Phone Number" required />
           </div>
 
@@ -60,19 +60,19 @@ const Registration = () => {
         </div>
 
         <div className="register__bottom">
-          <div className="login__bottom__signup">
+          <div className="register__bottom__signup">
             <p>Do you have an account?</p>
             <span onClick={() => handleSignIn()}>Sign In</span>
           </div>
 
-          <div className="register__bottom__socialMedia">
-            <p>Or create your account with social media</p>
-            <div className="register__bottom__socialMedia__buttons">
-              <button className="register__bottom__socialMedia__button">
+          <div className="register__media">
+            <p className="heading-bottom">Or create your account with social media</p>
+            <div className="button__box">
+              <button className="button__socialMedia">
                 <FaEnvelope />
               </button>
 
-              <button className="register__bottom__socialMedia__button">
+              <button className="button__socialMedia">
                 <FaFacebookF />
               </button>
             </div>

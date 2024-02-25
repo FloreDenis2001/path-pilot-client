@@ -1,0 +1,21 @@
+.heading-primary {
+    font-size: 3rem;
+    color: $color-grey;
+    font-family: $font-family-secondary;
+    margin-bottom: 1rem;
+}
+
+
+.heading-secondary {
+    font-size: 1rem;
+    font-weight: 400;
+    color: $color-grey;
+    font-family: $font-family-primary;
+}
+
+.heading-bottom{
+        padding: 1rem;
+        font-size: 1rem;
+        font-family: $font-family-primary;
+        color: $color-grey-light;
+}
