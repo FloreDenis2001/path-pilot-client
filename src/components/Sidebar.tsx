@@ -10,6 +10,7 @@ import {
   FaTruck,
   FaFile,
   FaRoute,
+  FaFileInvoice,
 } from "react-icons/fa";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -82,6 +83,14 @@ const Sidebar = () => {
                 <FaCubes className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Orders
+                </p>
+              </div>
+            </li>
+            <li className="sidebar__menuBar__menu__links__item">
+              <div className="sidebar__menuBar__menu__links__item__box">
+                <FaFileInvoice className="sidebar__menuBar__menu__links__item__icon" />
+                <p className="siderBar__menuBar__menu__links__item__text">
+                  Invoices
                 </p>
               </div>
             </li>

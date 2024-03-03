@@ -1,13 +1,10 @@
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 100%;
-  width: 30rem;
+  width: 35rem;
   padding: 1.4rem 1.4rem;
   background-color: $color-white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-
+  position: relative;
 
   &__collapse{
     width: 8.8rem;
@@ -52,6 +49,7 @@
       color: $color-grey;
 
       &__companyName {
+        font-size: 1.5rem;
         font-weight: 600;
       }
       &__adminName {

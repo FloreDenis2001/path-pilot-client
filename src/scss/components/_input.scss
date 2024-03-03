@@ -47,7 +47,7 @@
     padding-inline: 0.9rem;
     padding-block: 0.5rem;
     border-radius: 1rem;
-    width: 40rem;
+    width: 35rem;
 
   }
 
@@ -74,6 +74,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 20%;
 
   label {
     font-weight: 600;
@@ -89,6 +90,6 @@
     gap: 2rem;
     height: 5rem;
     color: $color-grey;
-    width: 20rem;
+    width: 100%;
   }
 }
