@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import RetrievePassword from "./pages/RetrievePassword";
 import Orders from "./pages/Orders";
 import Drivers from "./pages/Drivers";
+import Vehicle from "./pages/Vehicle";
 
 function App() {
   return (
@@ -20,7 +21,7 @@ function App() {
           <Route path="/retrievePassword" element={<RetrievePassword />} />
           <Route path="/dashboard/orders" element={<Orders />} />
           <Route path="/dashboard/drivers" element={<Drivers />} />
-          <Route path="/dashboard/vehicle" element={<Drivers />} />
+          <Route path="/dashboard/vehicles" element={<Vehicle />} />
         </Routes>
       </BrowserRouter>
     </div>

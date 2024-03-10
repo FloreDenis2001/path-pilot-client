@@ -6,29 +6,33 @@ import ModalAddOrders from "../components/order/ModalAddOrders";
 import OptionsDropDownDrivers from "../components/driver/OptionsDropDownDrivers";
 import ModalDriversDetails from "../components/driver/ModalDriversDetails";
 import ModalEditDriver from "../components/driver/ModalEditDriver";
+import OptionsDropDownVehicle from "../components/vehicle/OptionsDropDownVehicle";
+import ModalAddVehicle from "../components/vehicle/ModalAddVehicle";
+import ModalVehicleDetails from "../components/vehicle/ModalVehicleDetails";
+import ModalEditVehicle from "../components/vehicle/ModalEditVehicle";
 
 const Vehicle = () => {
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
-  const [openDriverDetails, setOpenDriverDetails] = useState(false);
+  const [openVehicleDetails, setOpenVehicleDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
   };
 
-  const handleOpenModalAddOrder = () => {
+  const handleOpenModalAddVehicle = () => {
     setOpenModal(!openModal);
   };
 
-  const handleOpenDriverDetails = () => {
-    setOpenDriverDetails(!openDriverDetails);
+  const handleOpenVehicleDetails = () => {
+    setOpenVehicleDetails(!openVehicleDetails);
   };
 
   const handleOpenModalEdit = () => {
     setOpenModalEdit(!openModalEdit);
   };
-  const handlePrintOrder = () => {
+  const handleDeleteVehicle = () => {
     console.log("Print Order");
   };
 
@@ -37,13 +41,13 @@ const Vehicle = () => {
       <Sidebar />
       <div className="drivers__container">
         <div className="drivers__header">
-          <h1 className="heading-primary">Drivers</h1>
+          <h1 className="heading-primary">Vehicles</h1>
           <div
-            onClick={() => handleOpenModalAddOrder()}
+            onClick={() => handleOpenModalAddVehicle()}
             className="button__box__second"
           >
             <FaPlus />
-            <button>New Driver </button>
+            <button>New Vehicle </button>
           </div>
         </div>
 
@@ -80,30 +84,25 @@ const Vehicle = () => {
           </button>
         </div>
 
-        <div className="drivers__table">
+        <div className="vehicle__table">
           <table>
             <thead>
               <tr>
-                <th>Driver No.</th>
-                <th>Driver</th>
-                <th>Email</th>
-                <th>License Number</th>
-                <th>Phone</th>
+                <th>Vehicle No.</th>
+                <th>Registration Number</th>
+                <th>Type</th>
+                <th>Capacity(cm3)</th>
                 <th>Status</th>
                 <th>Actions</th>
               </tr>
             </thead>
 
             <tbody>
-             
-            
-            
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
@@ -111,19 +110,17 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
@@ -131,18 +128,17 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
@@ -150,18 +146,17 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
@@ -169,19 +164,17 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
@@ -189,19 +182,17 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__inActive">Inactive</span>
                 </td>
@@ -209,19 +200,17 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
               <tr>
                 <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
                 <td>994127721522</td>
-                <td>0756789012</td>
+                <td>Truck</td>
+                <td>700</td>
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
@@ -229,55 +218,31 @@ const Vehicle = () => {
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-
+                    onDetails={handleOpenVehicleDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteVehicle}
                   />
                 </td>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
-                <td>994127721522</td>
-                <td>0756789012</td>
-                <td className="td__status ">
-                  <span className="td__status__active">Active</span>
-                </td>
-                <td>
-                  <OptionsDropDownDrivers
-                    index={3}
-                    onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-
-                    onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
-                  />
-                </td>
-              </tr>
-
-           
-           
             </tbody>
           </table>
           <Pagination />
         </div>
       </div>
       {openModal && (
-        <ModalAddOrders
-          handleOpenModalAddOrder={() => handleOpenModalAddOrder()}
+        <ModalAddVehicle
+          handleOpenModalAddVehicle={() => handleOpenModalAddVehicle()}
         />
       )}
-      {openDriverDetails && (
-        <ModalDriversDetails handleOpenModal={() => handleOpenDriverDetails()} />
+      {openVehicleDetails && (
+        <ModalVehicleDetails
+          handleOpenModal={() => handleOpenVehicleDetails()}
+        />
       )}
 
       {openModalEdit && (
-        <ModalEditDriver handleOpenModal={()=>handleOpenModalEdit()} />
+        <ModalEditVehicle handleOpenModal={() => handleOpenModalEdit()} />
       )}
-
-
     </section>
   );
 };

@@ -11,7 +11,7 @@ interface OptionsDropDownRowProps {
   onDelete: () => void;
 }
         
-const OptionsDropDownDrivers: React.FC<OptionsDropDownRowProps> = ({
+const OptionsDropDownVehicle: React.FC<OptionsDropDownRowProps> = ({
   index,
   onToggle,
   onDetails,
@@ -78,4 +78,4 @@ const OptionsDropDownDrivers: React.FC<OptionsDropDownRowProps> = ({
   );
 };
 
-export default OptionsDropDownDrivers;
+export default OptionsDropDownVehicle;

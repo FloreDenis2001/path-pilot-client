@@ -2,11 +2,11 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import OptionsDropDownOrderDetails from "./OptionsDropDownDrivers";
-interface ModalOrdersProps {
+interface ModalDriversProps {
   handleOpenModal: () => void;
 }
 
-const ModalDriversDetails: React.FC<ModalOrdersProps> = ({ handleOpenModal }) => {
+const ModalDriversDetails: React.FC<ModalDriversProps> = ({ handleOpenModal }) => {
   return (
     <section className="modal">
       <div className="modal__container">

@@ -9,6 +9,7 @@ import ModalEditOrder from "../components/order/ModalEditOrder";
 import OptionsDropDownDrivers from "../components/driver/OptionsDropDownDrivers";
 import ModalDriversDetails from "../components/driver/ModalDriversDetails";
 import ModalEditDriver from "../components/driver/ModalEditDriver";
+import ModalAddDriver from "../components/driver/ModalAddDriver";
 
 const Drivers = () => {
   const [openDropdown, setOpenDropdown] = useState(-1);
@@ -20,7 +21,7 @@ const Drivers = () => {
     setOpenDropdown(openDropdown === index ? -1 : index);
   };
 
-  const handleOpenModalAddOrder = () => {
+  const handleOpenModalAddDriver = () => {
     setOpenModal(!openModal);
   };
 
@@ -31,9 +32,11 @@ const Drivers = () => {
   const handleOpenModalEdit = () => {
     setOpenModalEdit(!openModalEdit);
   };
-  const handlePrintOrder = () => {
-    console.log("Print Order");
+ 
+  const handleDeleteDriver = () => {
+    console.log("Delete Driver");
   };
+ 
 
   return (
     <section className="drivers">
@@ -42,7 +45,7 @@ const Drivers = () => {
         <div className="drivers__header">
           <h1 className="heading-primary">Drivers</h1>
           <div
-            onClick={() => handleOpenModalAddOrder()}
+            onClick={() => handleOpenModalAddDriver()}
             className="button__box__second"
           >
             <FaPlus />
@@ -110,14 +113,34 @@ const Drivers = () => {
                 <td className="td__status ">
                   <span className="td__status__active">Active</span>
                 </td>
+           
+                <td>
+                    <OptionsDropDownDrivers
+                        index={3}
+                        onToggle={handleDropdownToggle}
+                        onDetails={handleOpenDriverDetails}
+                        onEdit={handleOpenModalEdit}
+                        onDelete={handleDeleteDriver}
+                    />
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Flore Denis</td>
+                <td>floredenis907@yahoo.com</td>
+                <td>994127721522</td>
+                <td>0756789012</td>
+                <td className="td__status ">
+                  <span className="td__status__active">Active</span>
+                </td>
                 <td>
                   <OptionsDropDownDrivers
                     index={3}
                     onToggle={handleDropdownToggle}
                     onDetails={handleOpenDriverDetails}
+                    onEdit={handleOpenModalEdit}
+                    onDelete={handleDeleteDriver}
 
-                    onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -136,46 +159,8 @@ const Drivers = () => {
                     onToggle={handleDropdownToggle}
                     onDetails={handleOpenDriverDetails}
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
-                <td>994127721522</td>
-                <td>0756789012</td>
-                <td className="td__status ">
-                  <span className="td__status__active">Active</span>
-                </td>
-                <td>
-                  <OptionsDropDownDrivers
-                    index={3}
-                    onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
-                    onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
-                  />
-                </td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Flore Denis</td>
-                <td>floredenis907@yahoo.com</td>
-                <td>994127721522</td>
-                <td>0756789012</td>
-                <td className="td__status ">
-                  <span className="td__status__active">Active</span>
-                </td>
-                <td>
-                  <OptionsDropDownDrivers
-                    index={3}
-                    onToggle={handleDropdownToggle}
-                    onDetails={handleOpenDriverDetails}
+                    onDelete={handleDeleteDriver}
 
-                    onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -195,7 +180,29 @@ const Drivers = () => {
                     onDetails={handleOpenDriverDetails}
 
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteDriver}
+
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Flore Denis</td>
+                <td>floredenis907@yahoo.com</td>
+                <td>994127721522</td>
+                <td>0756789012</td>
+                <td className="td__status ">
+                  <span className="td__status__active">Active</span>
+                </td>
+                <td>
+                  <OptionsDropDownDrivers
+                    index={3}
+                    onToggle={handleDropdownToggle}
+                    onDetails={handleOpenDriverDetails}
+
+                    onEdit={handleOpenModalEdit}
+                    onDelete={handleDeleteDriver}
+
                   />
                 </td>
               </tr>
@@ -215,7 +222,8 @@ const Drivers = () => {
                     onDetails={handleOpenDriverDetails}
 
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteDriver}
+
                   />
                 </td>
               </tr>
@@ -235,7 +243,8 @@ const Drivers = () => {
                     onDetails={handleOpenDriverDetails}
 
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteDriver}
+
                   />
                 </td>
               </tr>
@@ -255,7 +264,8 @@ const Drivers = () => {
                     onDetails={handleOpenDriverDetails}
 
                     onEdit={handleOpenModalEdit}
-                    onPrint={handlePrintOrder}
+                    onDelete={handleDeleteDriver}
+
                   />
                 </td>
               </tr>
@@ -268,8 +278,8 @@ const Drivers = () => {
         </div>
       </div>
       {openModal && (
-        <ModalAddOrders
-          handleOpenModalAddOrder={() => handleOpenModalAddOrder()}
+        <ModalAddDriver
+          handleOpenModalAddDriver={() => handleOpenModalAddDriver()}
         />
       )}
       {openDriverDetails && (
