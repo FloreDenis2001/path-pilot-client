@@ -14,7 +14,7 @@ const ModalEditOrder: React.FC<ModalOrdersProps> = ({ handleOpenModal }) => {
 
         <div className="modal__container__header__actions">
           <span className="modal__container__header__actions__status" >Pending</span>
-          {/* <OptionsDropDownOrderDetails onDelete={() => {}} onDownload={() => {}} onMarkDevivered={() => {}} onPrint={() => {}} onToggle={() => {}} index={1} /> */}
+          <OptionsDropDownOrderDetails onDelete={() => {}} onDownload={() => {}} onMarkDevivered={() => {}} onPrint={() => {}} onToggle={() => {}} index={1} />
         </div>
       </div>
 

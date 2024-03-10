@@ -20,6 +20,7 @@ function App() {
           <Route path="/retrievePassword" element={<RetrievePassword />} />
           <Route path="/dashboard/orders" element={<Orders />} />
           <Route path="/dashboard/drivers" element={<Drivers />} />
+          <Route path="/dashboard/vehicle" element={<Drivers />} />
         </Routes>
       </BrowserRouter>
     </div>

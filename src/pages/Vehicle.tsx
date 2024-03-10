@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { FaEllipsisV, FaPlus, FaSearch } from "react-icons/fa";
-import OptionsDropDownRow from "../components/order/OptionsDropDownRow";
 import Pagination from "../components/Pagination";
 import ModalAddOrders from "../components/order/ModalAddOrders";
-import ModalOrderDetails from "../components/order/ModalOrderDetails";
-import ModalEditOrder from "../components/order/ModalEditOrder";
 import OptionsDropDownDrivers from "../components/driver/OptionsDropDownDrivers";
 import ModalDriversDetails from "../components/driver/ModalDriversDetails";
 import ModalEditDriver from "../components/driver/ModalEditDriver";
 
-const Drivers = () => {
+const Vehicle = () => {
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
   const [openDriverDetails, setOpenDriverDetails] = useState(false);
@@ -285,4 +282,4 @@ const Drivers = () => {
   );
 };
 
-export default Drivers;
+export default Vehicle;
