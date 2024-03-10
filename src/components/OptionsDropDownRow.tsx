@@ -6,11 +6,17 @@ import { FaEdit, FaEllipsisV, FaPrint, FaReceipt } from "react-icons/fa";
 interface OptionsDropDownRowProps {
   index: number;
   onToggle: (index: number) => void;
+  onDetails: () => void;
+  onEdit: () => void;
+  onPrint: () => void;
 }
 
 const OptionsDropDownRow: React.FC<OptionsDropDownRowProps> = ({
   index,
-  onToggle
+  onToggle,
+  onDetails,
+  onEdit,
+  onPrint,
 }) => {
   const [isActive, setIsActive] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -47,21 +53,21 @@ const OptionsDropDownRow: React.FC<OptionsDropDownRowProps> = ({
       </div>
 
         <ul className={isActive === false ? "dropdown__menu":"dropdown__menu active"}>
-          <li>
+          <li onClick={()=>onDetails()}>
             <a href="#">
               <FaReceipt className="dropdonw__icon" />
               <button>Details</button>
             </a>
           </li>
 
-          <li>
+          <li onClick={()=>onEdit()}>
             <a href="#">
               <FaEdit className="dropdonw__icon" />
               <button>Edit</button>
             </a>
           </li>
 
-          <li>
+          <li onClick={()=>onPrint()}>
             <a href="#">
               <FaPrint className="dropdonw__icon" />
               <button>Print Order</button>

@@ -3,12 +3,33 @@ import Sidebar from "../components/Sidebar";
 import { FaEllipsisV, FaPlus, FaSearch } from "react-icons/fa";
 import OptionsDropDownRow from "../components/OptionsDropDownRow";
 import Pagination from "../components/Pagination";
+import ModalAddOrders from "../components/ModalAddOrders";
+import ModalOrderDetails from "../components/ModalOrderDetails";
+import ModalEditOrder from "../components/ModalEditOrder";
 
 const Orders = () => {
   const [openDropdown, setOpenDropdown] = useState(-1);
+  const [openModal, setOpenModal] = useState(false);
+  const [openOrderDetails, setOpenOrderDetails] = useState(false);
+  const [openModalEdit, setOpenModalEdit] = useState(false);
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
+  };
+
+  const handleOpenModalAddOrder = () => {
+    setOpenModal(!openModal);
+  };
+
+  const handleOpenOrdersDetails = () => {
+    setOpenOrderDetails(!openOrderDetails);
+  };
+
+  const handleOpenModalEdit = () => {
+    setOpenModalEdit(!openModalEdit);
+  };
+  const handlePrintOrder = () => {
+    console.log("Print Order");
   };
 
   return (
@@ -17,7 +38,10 @@ const Orders = () => {
       <div className="orders__container">
         <div className="orders__header">
           <h1 className="heading-primary">Orders</h1>
-          <div className="button__box__second">
+          <div
+            onClick={() => handleOpenModalAddOrder()}
+            className="button__box__second"
+          >
             <FaPlus />
             <button>New Order</button>
           </div>
@@ -72,9 +96,6 @@ const Orders = () => {
             </thead>
 
             <tbody>
-             
-             
-           
               <tr>
                 <td>2</td>
                 <td>Jane Doe</td>
@@ -89,6 +110,9 @@ const Orders = () => {
                   <OptionsDropDownRow
                     index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -104,8 +128,11 @@ const Orders = () => {
                 </td>
                 <td>
                   <OptionsDropDownRow
-                    index={4}
+                    index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -121,8 +148,11 @@ const Orders = () => {
                 </td>
                 <td>
                   <OptionsDropDownRow
-                    index={5}
+                    index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -138,8 +168,11 @@ const Orders = () => {
                 </td>
                 <td>
                   <OptionsDropDownRow
-                    index={6}
+                    index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -155,8 +188,11 @@ const Orders = () => {
                 </td>
                 <td>
                   <OptionsDropDownRow
-                    index={7}
+                    index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -172,8 +208,11 @@ const Orders = () => {
                 </td>
                 <td>
                   <OptionsDropDownRow
-                    index={8}
+                    index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -189,8 +228,11 @@ const Orders = () => {
                 </td>
                 <td>
                   <OptionsDropDownRow
-                    index={9}
+                    index={3}
                     onToggle={handleDropdownToggle}
+                    onDetails={handleOpenOrdersDetails}
+                    onEdit={handleOpenModalEdit}
+                    onPrint={handlePrintOrder}
                   />
                 </td>
               </tr>
@@ -199,6 +241,19 @@ const Orders = () => {
           <Pagination />
         </div>
       </div>
+      {openModal && (
+        <ModalAddOrders
+          handleOpenModalAddOrder={() => handleOpenModalAddOrder()}
+        />
+      )}
+      {openOrderDetails && (
+        <ModalOrderDetails handleOpenModal={() => handleOpenOrdersDetails()} />
+      )}
+
+      {openModalEdit && (
+        <ModalEditOrder handleOpenModal={()=>handleOpenModalEdit()} />
+      )}
+      {/* <ModalOrderDetails handleOpenModal={()=>handleOpenOrdersDetails()} /> */}
     </section>
   );
 };

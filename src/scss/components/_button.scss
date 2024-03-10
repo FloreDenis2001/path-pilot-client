@@ -129,5 +129,57 @@
 
   }
 
+  &__close{
+    color: $color-white;
+    padding: 0.5rem 0.7rem;
+    background: $linear-gradient-3;
+    border: none;
+    cursor: pointer;
+    font-size: 1.6rem;
+    border-radius: 50%;
+    display: flex;
+    align-self: flex-start;
+    justify-content: center;
+
+    &:active {
+      transform: scale(0.9);
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    }
+  }
+
+  &__modal{
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid rgba($color-grey-light, 0.3);
+    padding-inline: 0.9rem;
+    padding-block: 0.5rem;
+    border-radius: 1rem;
+    width: 10rem;
+    font-size: 1.6rem;
+    display: flex;
+    align-self: flex-end;
+    justify-content: center;
+    color: $color-white;
+
+    &__icon{
+      align-self:center;
+    }
+
+    &:active {
+      transform: scale(0.9);
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    }
+
+    &__save{
+     background: $linear-gradient-2;
+
+    }
+
+    &__cancel{
+      background: $color-grey;
+    }
+  }
+
   
 }
