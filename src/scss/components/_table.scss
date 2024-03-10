@@ -81,10 +81,10 @@ table {
           &__pending {
             background: $linear-gradient-2;
           }
-          &__completed {
+          &__completed , &__active {
             background: $linear-gradient-4;
           }
-          &__refused {
+          &__refused ,&__inActive{
             background: $linear-gradient-3;
           }
         }
