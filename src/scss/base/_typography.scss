@@ -19,3 +19,12 @@
         font-family: $font-family-primary;
         color: $color-grey-light;
 }
+
+.progress{
+
+    &__icon{
+        font-size: 2rem;
+        color: $color-white;
+    }
+
+}

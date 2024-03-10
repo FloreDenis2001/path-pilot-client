@@ -1,0 +1,32 @@
+.information{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__header{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1.2rem;
+
+        svg{
+            font-size: 1.6rem;
+            color:$color-primary;
+        }
+    }
+
+    &__column{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        width: 31%;
+    }
+
+    &__body{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 1.1rem;
+    }
+}
