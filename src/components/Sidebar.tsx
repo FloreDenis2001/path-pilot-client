@@ -63,8 +63,8 @@ const Sidebar = () => {
             <input type="search" placeholder="Search..." />
           </li>
           <ul className="sidebar__menuBar__menu__links">
-            <li className="sidebar__menuBar__menu__links__item">
-              <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard")}>
+            <li className="sidebar__menuBar__menu__links__item" onClick={()=>handleNavigation("/dashboard")}>
+              <div className="sidebar__menuBar__menu__links__item__box" >
                 <FaHome className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Dashboard
@@ -79,8 +79,8 @@ const Sidebar = () => {
                 </p>
               </div>
             </li>
-            <li className="sidebar__menuBar__menu__links__item">
-              <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/orders")}>
+            <li className="sidebar__menuBar__menu__links__item" onClick={()=>handleNavigation("/dashboard/orders")}>
+              <div className="sidebar__menuBar__menu__links__item__box" >
                 <FaCubes className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Orders
@@ -95,16 +95,16 @@ const Sidebar = () => {
                 </p>
               </div>
             </li> */}
-            <li className="sidebar__menuBar__menu__links__item">
-              <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/drivers")}>
+            <li className="sidebar__menuBar__menu__links__item" onClick={()=>handleNavigation("/dashboard/drivers")}>
+              <div className="sidebar__menuBar__menu__links__item__box" >
                 <FaIdCard className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Drivers
                 </p>
               </div>
             </li>
-            <li className="sidebar__menuBar__menu__links__item">
-              <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/vehicles")}>
+            <li className="sidebar__menuBar__menu__links__item"  onClick={()=>handleNavigation("/dashboard/vehicles")}>
+              <div className="sidebar__menuBar__menu__links__item__box">
                 <FaTruck className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Vehicle
@@ -133,8 +133,8 @@ const Sidebar = () => {
         </div>
 
         <div className="sidebar__menuBar__bottomMenu">
-          <li className="sidebar__menuBar__menu__links__item">
-            <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/")}>
+          <li className="sidebar__menuBar__menu__links__item" onClick={()=>handleNavigation("/")}>
+            <div className="sidebar__menuBar__menu__links__item__box" >
               <FontAwesomeIcon
                 icon={faRightFromBracket}
                 className="sidebar__menuBar__menu__links__item__icon"

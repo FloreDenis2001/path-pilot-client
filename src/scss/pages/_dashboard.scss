@@ -1,0 +1,193 @@
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  height: 100vh;
+
+  &__container {
+    height: 100%;
+    width: 100%;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    background-color: $color-white;
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 90%;
+    max-width: 120rem;
+  }
+
+  &__stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 90%;
+    max-width: 120rem;
+
+    &__box {
+      background: $color-white;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 30%;
+      max-width: 30rem;
+      min-width: 22rem;
+      height: 17rem;
+      padding: 2rem;
+      border-radius: 1rem;
+      gap: 1rem;
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+      p {
+        font-size: 2rem;
+        font-weight: 700;
+        color: $color-grey;
+        font-family: $font-family-primary;
+      }
+
+      span{
+        font-size: 1.4rem;
+        color: $color-grey-light;
+        font-family: $font-family-primary;
+        font-weight: 300;
+
+      }
+      &__iconS {
+        font-size: 1.8rem;
+
+        color: $color-white;
+        background: $linear-gradient-2;
+        padding: 1rem;
+        border-radius: 1rem;
+      }
+      &__iconE {
+        font-size: 1.8rem;
+
+        color: $color-white;
+        background: $linear-gradient-3;
+        padding: 1rem;
+        border-radius: 1rem;
+      }
+      &__iconP {
+        font-size: 1.8rem;
+
+        color: $color-white;
+        background: $linear-gradient-4;
+        padding: 1rem;
+        border-radius: 1rem;
+      }
+    }
+  }
+
+  &__recent{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding-block: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 90%;
+    max-width: 120rem;
+    background-color: $color-white;
+    padding: 2rem;
+  }
+
+  &__notification{
+    position: relative;
+    svg{
+      font-size: 2rem;
+      color: $color-grey;
+    }
+
+    span{
+        position: absolute;
+        top: -7px;
+        right: -1rem;
+        background: $linear-gradient-3;
+        color: $color-white;
+        padding-inline: 0.5rem;
+        border-radius: 50%;
+        font-size: 1.2rem;
+    }
+
+  }
+
+  &__updates{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-block: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    background-color: $color-white;
+    padding: 2rem;
+    margin: 2rem;
+    height: 90%;
+    box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+   gap: 2rem;
+    &__box{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+        padding: 1rem;
+        border-radius: 1rem;
+        background-color: $color-white;
+        box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+        width: 100%;
+        overflow-y: auto;
+        &__header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 2rem;
+            width: 100%;
+            h3{
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: $color-grey;
+            font-family: $font-family-primary;
+            }
+            span{
+            font-size: 1.4rem;
+            color: $color-grey-light;
+            font-family: $font-family-primary;
+            font-weight: 300;
+            }
+        }
+        &__body{
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+    }
+  }
+}
