@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { FaPlus } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,8 +11,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import ProgressSteps from "../components/ProgressSteps";
 import OrderInformation from "../components/route/OrderInformation";
+import DriverInformation from "../components/route/DriverInformation";
+import VehicleInformation from "../components/route/VehicleInformation";
+import InvoicesInformation from "../components/route/InvoicesInformation";
+import ReportsInformation from "../components/route/ReportsInformation";
 
 const RouteMap = () => {
+  const [activeButton, setActiveButton] = useState("order");
+
+  const handleButtonClick = (button: string) => {
+    setActiveButton(button);
+  };
+
   return (
     <section className="route">
       <Sidebar />
@@ -286,9 +296,9 @@ const RouteMap = () => {
         <div className="route__map__header">
           <div className="route__map__header__info">
             <h3>
-              Order Id :  <span>#AAEWGGGAWAEKW</span>
+              Order Id : <span>#AAEWGGGAWAEKW</span>
             </h3>
-              <button className="button__status2">On Delivery</button>
+            <button className="button__status2">On Delivery</button>
           </div>
 
           <div className="route__map__header__progress">
@@ -308,17 +318,46 @@ const RouteMap = () => {
         </div>
 
         <div className="route__map__details">
-           <div className="route__map__details__actions">
-              <button className="button__details active">Order Information</button>
-              <button className="button__details">Driver</button>
-              <button className="button__details">Vehicle</button>
-              <button className="button__details">Invoices</button>
-              <button className="button__details">Reports</button>
-           </div>
-           <OrderInformation/>
+          <div className="route__map__details__actions">
+            <button
+              className={`button__details ${
+                activeButton === "order" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("order")} // Setează butonul Order Information ca activ când este apăsat
+            >
+              Order Information
+            </button>
+            <button
+              className={`button__details ${
+                activeButton === "driver" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("driver")} // Setează butonul Driver ca activ când este apăsat
+            >
+              Driver
+            </button>
+            <button
+              className={`button__details ${
+                activeButton === "vehicle" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("vehicle")} // Setează butonul Vehicle ca activ când este apăsat
+            >
+              Vehicle
+            </button>
+            <button
+              className={`button__details ${
+                activeButton === "invoices" ? "active" : ""
+              }`}
+              onClick={() => handleButtonClick("invoices")} // Setează butonul Invoices ca activ când este apăsat
+            >
+              Invoices
+            </button>
+          
+          </div>
+          {activeButton === "order" && <OrderInformation />}
+          {activeButton === "driver" && <DriverInformation />}
+          {activeButton === "vehicle" && <VehicleInformation />}
+          {activeButton === "invoices" && <InvoicesInformation />}
         </div>
-
-        
       </div>
     </section>
   );

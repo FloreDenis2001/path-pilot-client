@@ -88,7 +88,7 @@
     text-decoration: none;
   }
 
-  &__search  {
+  &__search {
     background: $linear-gradient-2;
     color: $color-white;
     border: none;
@@ -105,8 +105,8 @@
     align-self: flex-end;
     justify-content: center;
 
-    &__icon{
-      align-self:center;
+    &__icon {
+      align-self: center;
     }
 
     &:active {
@@ -115,7 +115,7 @@
     }
   }
 
-  &__pagination{
+  &__pagination {
     display: inline-flex;
     align-items: center;
     font-size: 1.4rem;
@@ -125,11 +125,9 @@
     outline: none;
     border: none;
     cursor: pointer;
-
-
   }
 
-  &__close{
+  &__close {
     color: $color-white;
     padding: 0.5rem 0.7rem;
     background: $linear-gradient-3;
@@ -165,7 +163,7 @@
     }
   }
 
-  &__modal{
+  &__modal {
     border: none;
     cursor: pointer;
     transition: all 0.2s;
@@ -180,8 +178,8 @@
     justify-content: center;
     color: $color-white;
 
-    &__icon{
-      align-self:center;
+    &__icon {
+      align-self: center;
     }
 
     &:active {
@@ -189,24 +187,23 @@
       box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
     }
 
-    &__save{
-     background: $linear-gradient-2;
-
+    &__save {
+      background: $linear-gradient-2;
     }
 
-    &__cancel{
+    &__cancel {
       background: $color-grey;
     }
 
-    &__delete{
+    &__delete {
       background: $linear-gradient-3;
     }
   }
 
-  &__status{
+  &__status {
     position: absolute;
     top: 1.5rem;
-    right:2rem;
+    right: 2rem;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-size: 1.4rem;
@@ -216,7 +213,7 @@
     transition: all 0.3s ease-in-out;
     cursor: pointer;
   }
-  &__status2{
+  &__status2 {
     padding: 0.5rem 1rem;
     border-radius: 5px;
     font-size: 1.4rem;
@@ -228,13 +225,19 @@
     cursor: pointer;
   }
 
-  &__details{
+  &__details {
     font-size: 1.8rem;
     font-weight: bold;
-    padding-bottom: 0.5rem;
+    padding: 0.2rem 1rem;
+    color: $color-grey;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
 
-    &.active{
-      border-bottom: 1px solid $color-primary;
+    &.active {
+      border-bottom: 1px solid $color-secondary;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
   }
 }

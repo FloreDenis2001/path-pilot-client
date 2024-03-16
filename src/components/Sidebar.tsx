@@ -11,10 +11,13 @@ import {
   FaFile,
   FaRoute,
   FaFileInvoice,
+  FaBox,
 } from "react-icons/fa";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
+
+
 
 const Sidebar = () => {
 
@@ -81,6 +84,14 @@ const Sidebar = () => {
                 <FaCubes className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Orders
+                </p>
+              </div>
+            </li>
+            <li className="sidebar__menuBar__menu__links__item">
+              <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/packages")}>
+                <FaBox className="sidebar__menuBar__menu__links__item__icon" />
+                <p className="siderBar__menuBar__menu__links__item__text">
+                  Packages
                 </p>
               </div>
             </li>

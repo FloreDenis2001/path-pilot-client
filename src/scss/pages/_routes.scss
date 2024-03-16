@@ -12,7 +12,7 @@
     height: 100%;
     min-width: 25%;
     padding: 1rem;
-      
+
     background-color: $color-white;
     margin: 0rem 2rem;
     box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
@@ -40,12 +40,24 @@
       height: 100%;
       overflow-y: auto;
       scrollbar-width: thin;
-        scrollbar-color: $color-primary $color-white;
-        padding: 1rem;
-        border-radius: 2rem;
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+      scrollbar-color: $color-grey-light $color-white;
+
+      padding: 1rem;
 
       cursor: pointer;
+
+      &::-webkit-scrollbar {
+        width: 8px; 
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background-color: $color-grey-light; 
+        border-radius: 10px; 
+      }
+      
+      &::-webkit-scrollbar-track {
+        background-color: $color-white; 
+      }
     }
   }
 
@@ -67,63 +79,59 @@
       margin: 0 auto;
       width: 100%;
 
-      &__info{
+      &__info {
         width: 100%;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-        h3{
-            font-family: $font-family-primary;
-            font-size: 1.8rem;
-            color: $color-grey;
-            margin-bottom: 1rem;
-            font-weight: 300;
+        h3 {
+          font-family: $font-family-primary;
+          font-size: 1.8rem;
+          color: $color-grey;
+          margin-bottom: 1rem;
+          font-weight: 300;
         }
-        span{
-            font-family: $font-family-primary;
-            font-size: 1.8rem;
-            color: $color-grey;
-            margin-bottom: 1rem;
-            font-weight: 900;
+        span {
+          font-family: $font-family-primary;
+          font-size: 1.8rem;
+          color: $color-grey;
+          margin-bottom: 1rem;
+          font-weight: 900;
         }
-
-        
       }
 
-      &__progress{
+      &__progress {
         padding-block: 2rem;
-        span{
-            font-family: $font-family-primary;
-            font-size: 1.5rem;
-            color: $color-grey;
-            font-weight: 300;
-        
+        span {
+          font-family: $font-family-primary;
+          font-size: 1.5rem;
+          color: $color-grey;
+          font-weight: 300;
         }
       }
     }
 
     &__body {
-        width: 100%;
-        height: 40rem;
+      width: 100%;
+      height: 40rem;
     }
 
-    &__details{
+    &__details {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      margin-top: 1rem;
+
+      &__actions {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         gap: 2rem;
+        align-items: center;
         width: 100%;
-
-        &__actions{
-            display: flex;
-            flex-direction: row;
-            gap: 2rem;
-            align-items: center;
-            width: 100%;
-        }
-
+      }
     }
-
   }
 
   &__card {
@@ -135,10 +143,11 @@
     height: 15rem;
     position: relative;
     background: $color-white;
-    border-radius: 1rem;
 
     &.active {
-      border: 1px solid $color-secondary;
+    
+      border-bottom: 3px solid $color-secondary;
+      box-shadow: 0px 0px 8px 0px rgba($color-grey-light,0.8);
     }
 
     &__header {
@@ -197,23 +206,6 @@
           box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
         }
       }
-
-      // &__box{
-      //     display: flex;
-      //     flex-direction: column;
-      //     align-items: flex-start;
-      //     border-left: 1px solid $color-rgba;
-      //     padding-left: 2rem;
-      //     width: 50%;
-      //     gap: 1rem;
-
-      //     h2{
-      //         font-family: $font-family-primary;
-      //         font-size: 2.5rem;
-      //         color: $color-grey;
-      //         margin-bottom: 1rem;
-      //     }
-      // }
     }
   }
 }

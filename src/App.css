@@ -263,10 +263,16 @@ input, button, textarea, select {
 .button__details {
   font-size: 1.8rem;
   font-weight: bold;
-  padding-bottom: 0.5rem;
+  padding: 0.2rem 1rem;
+  color: #5f5f5f;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 .button__details.active {
-  border-bottom: 1px solid #2781e2;
+  border-bottom: 1px solid #2DB7EA;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
 
 .sidebar {
@@ -708,6 +714,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   font-size: 1.6rem;
   color: #2781e2;
 }
+.information__header h2 {
+  color: #5f5f5f;
+  font-weight: 500;
+}
 .information__column {
   display: flex;
   flex-direction: column;
@@ -718,7 +728,14 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  font-size: 1.1rem;
+  font-size: 1.4rem;
+  border-left: 1px solid #2781e2;
+  padding-left: 1rem;
+  margin-left: 0.5rem;
+}
+.information__body h3, .information__body p {
+  font-weight: 400;
+  color: #5f5f5f;
 }
 
 .modal {
@@ -1582,11 +1599,19 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   height: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #2781e2 #ffffff;
+  scrollbar-color: #7a7a7a #ffffff;
   padding: 1rem;
-  border-radius: 2rem;
-  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
   cursor: pointer;
+}
+.route__container__maps::-webkit-scrollbar {
+  width: 8px;
+}
+.route__container__maps::-webkit-scrollbar-thumb {
+  background-color: #7a7a7a;
+  border-radius: 10px;
+}
+.route__container__maps::-webkit-scrollbar-track {
+  background-color: #ffffff;
 }
 .route__map {
   display: flex;
@@ -1645,6 +1670,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  margin-top: 1rem;
 }
 .route__map__details__actions {
   display: flex;
@@ -1662,10 +1688,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   height: 15rem;
   position: relative;
   background: #ffffff;
-  border-radius: 1rem;
 }
 .route__card.active {
-  border: 1px solid #2DB7EA;
+  border-bottom: 3px solid #2DB7EA;
+  box-shadow: 0px 0px 8px 0px rgba(122, 122, 122, 0.8);
 }
 .route__card__header {
   display: flex;

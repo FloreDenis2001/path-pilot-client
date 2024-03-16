@@ -14,6 +14,11 @@
             font-size: 1.6rem;
             color:$color-primary;
         }
+
+        h2{
+            color: $color-grey;
+            font-weight: 500;
+        }
     }
 
     &__column{
@@ -27,6 +32,15 @@
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        font-size: 1.1rem;
+        font-size: 1.4rem;
+
+            border-left: 1px solid $color-primary;
+            padding-left: 1rem;
+            margin-left: 0.5rem;
+
+        h3,p{
+            font-weight: 400;
+            color: $color-grey;
+        }
     }
 }
