@@ -87,14 +87,14 @@ const Sidebar = () => {
                 </p>
               </div>
             </li>
-            <li className="sidebar__menuBar__menu__links__item">
+            {/* <li className="sidebar__menuBar__menu__links__item">
               <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/packages")}>
                 <FaBox className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
                   Packages
                 </p>
               </div>
-            </li>
+            </li> */}
             <li className="sidebar__menuBar__menu__links__item">
               <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/drivers")}>
                 <FaIdCard className="sidebar__menuBar__menu__links__item__icon" />
