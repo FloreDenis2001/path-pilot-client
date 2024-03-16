@@ -112,7 +112,7 @@ const Sidebar = () => {
               </div>
             </li>
        
-            <li className="sidebar__menuBar__menu__links__item">
+            {/* <li className="sidebar__menuBar__menu__links__item">
               <div className="sidebar__menuBar__menu__links__item__box" onClick={()=>handleNavigation("/dashboard/invoices")}>
                 <FaFileInvoice className="sidebar__menuBar__menu__links__item__icon" />
                 <p className="siderBar__menuBar__menu__links__item__text">
@@ -128,7 +128,7 @@ const Sidebar = () => {
                   Reports
                 </p> 
               </div>
-            </li>
+            </li> */}
           </ul>
         </div>
 

@@ -323,7 +323,7 @@ const RouteMap = () => {
               className={`button__details ${
                 activeButton === "order" ? "active" : ""
               }`}
-              onClick={() => handleButtonClick("order")} // Setează butonul Order Information ca activ când este apăsat
+              onClick={() => handleButtonClick("order")} 
             >
               Order Information
             </button>
@@ -331,7 +331,7 @@ const RouteMap = () => {
               className={`button__details ${
                 activeButton === "driver" ? "active" : ""
               }`}
-              onClick={() => handleButtonClick("driver")} // Setează butonul Driver ca activ când este apăsat
+              onClick={() => handleButtonClick("driver")} 
             >
               Driver
             </button>
@@ -339,7 +339,7 @@ const RouteMap = () => {
               className={`button__details ${
                 activeButton === "vehicle" ? "active" : ""
               }`}
-              onClick={() => handleButtonClick("vehicle")} // Setează butonul Vehicle ca activ când este apăsat
+              onClick={() => handleButtonClick("vehicle")} 
             >
               Vehicle
             </button>
@@ -347,7 +347,7 @@ const RouteMap = () => {
               className={`button__details ${
                 activeButton === "invoices" ? "active" : ""
               }`}
-              onClick={() => handleButtonClick("invoices")} // Setează butonul Invoices ca activ când este apăsat
+              onClick={() => handleButtonClick("invoices")} 
             >
               Invoices
             </button>

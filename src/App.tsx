@@ -10,6 +10,7 @@ import Orders from "./pages/Orders";
 import Drivers from "./pages/Drivers";
 import Vehicle from "./pages/Vehicle";
 import RouteMap from "./pages/RouteMap";
+import DashBoard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/dashboard/drivers" element={<Drivers />} />
           <Route path="/dashboard/vehicles" element={<Vehicle />} />
           <Route path="/dashboard/routes" element={<RouteMap />} />
+          <Route path="/dashboard" element={<DashBoard />} />
         </Routes>
       </BrowserRouter>
     </div>
