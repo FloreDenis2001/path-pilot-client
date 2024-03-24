@@ -7,17 +7,23 @@
 
 // //BASE 
 @import "base/base";
-
+@import "base/typography";
 
 // // COMPONENTS 
 @import "components/button";
 @import "components/sidebar";
+@import "components/input";
+@import "components/table";
+@import "components/dropdown";
+@import "components/pagination";
+@import "components/information";
 
 
 
 
 
 // // LAYOUT
+@import "layout/modal";
 @import "layout/loginLayout";
 @import "layout/registerLayout";
 @import "layout/retrievePasswordLayout";
@@ -27,3 +33,8 @@
 @import "pages/login";
 @import "pages/register";
 @import  "pages/retrievePassword";
+@import  "pages/orders";
+@import  "pages/drivers";
+@import  "pages/vehicle";
+@import  "pages/routes";
+@import  "pages/dashboard";

@@ -24,20 +24,20 @@ const Login = () => {
         <div className="login__header">
           <LogoSvg className="login__logo" />
 
-          <h1 className="login__header-title">Welcome back to PathPilot!</h1>
-          <h4 className="login__header-subtitle">
+          <h1 className="heading-primary">Welcome back to PathPilot!</h1>
+          <h4 className="heading-secondary">
             Reengage with precision pathfinding: Your gateway to streamlined
             route optimization and smarter travel decisions.
           </h4>
         </div>
 
         <div className="login__center">
-          <div className="login__center__input">
-            <FaEnvelope className="login__center__input__icon" />
+          <div className="inputBox">
+            <FaEnvelope className="inputBox__icon" />
             <input type="text" placeholder="Email" required />
           </div>
-          <div className="login__center__input">
-            <FaKey className="login__center__input__icon" />
+          <div className="inputBox">
+            <FaKey className="inputBox__icon" />
             <input type="password" placeholder="Password" required />
           </div>
 
@@ -63,18 +63,18 @@ const Login = () => {
 
         <div className="login__bottom">
           <div className="login__bottom__signup">
-            <p>Don't have an account?</p>
+            <p className="heading-bottom" >Don't have an account?</p>
             <span onClick={() => handleSignUp()}>Sign Up</span>
           </div>
 
           <div className="login__bottom__socialMedia">
             <p>Or sign in with social media</p>
-            <div className="login__bottom__socialMedia__buttons">
-              <button className="login__bottom__socialMedia__button">
+            <div className="button__box">
+              <button className="button__socialMedia">
                 <FaEnvelope />
               </button>
 
-              <button className="login__bottom__socialMedia__button">
+              <button className="button__socialMedia">
                 <FaFacebookF />
               </button>
             </div>

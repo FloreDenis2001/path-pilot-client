@@ -1,12 +1,33 @@
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
   height: 100%;
-  width: 30rem;
+  width: 35rem;
   padding: 1.4rem 1.4rem;
   background-color: $color-white;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+
+  &__collapse{
+    width: 8.8rem;
+    transition: all 0.3s;
+    p{
+      display: none;
+    }
+  }
+
+  &__close{
+    position: absolute;
+    top:3rem;
+    right: -1.4rem;
+    font-size: 2.5rem;
+    color: $color-white;
+    cursor: pointer;
+    background:$linear-gradient-2;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+  }
 
   &__header {
     position: relative;
@@ -28,6 +49,7 @@
       color: $color-grey;
 
       &__companyName {
+        font-size: 1.5rem;
         font-weight: 600;
       }
       &__adminName {
@@ -38,7 +60,7 @@
   }
 
   &__menuBar {
-    height: calc(100% - 15rem);
+    height: calc(100% - 11rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,6 +98,7 @@
           color: $color-grey;
           width: 100%;
           border-radius: 0.6rem;
+          cursor: pointer;
 
           &:hover{
             color: $color-white;

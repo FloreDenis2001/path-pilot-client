@@ -1,0 +1,81 @@
+.vehicle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    height: 100vh;
+  
+  
+    &__container {
+      height: 100%;
+      width: 100%;
+      padding-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+  
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem;
+      background-color: $color-white;
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+      margin-bottom: 2rem;
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      margin: 0 auto;
+      margin-bottom: 1rem;
+      width: 90%;
+      max-width: 120rem;
+    }
+  
+    &__filters {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      font-size: 1.6rem;
+      color: $color-grey;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      padding-inline: 1rem;
+      padding-block: 2.5rem;
+      border-radius: 1rem;
+      background-color: $color-white;
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+      margin: 0 auto;
+      margin-bottom: 1rem;
+      transition: all 0.3s;
+      width: 90%;
+      max-width: 120rem;
+  
+      &:focus {
+        border: 1px solid $color-grey;
+      }
+    }
+  
+    &__table {
+      padding: 2.5rem 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      max-width: 120rem;
+      z-index: 1;
+      margin: 0 auto;
+      border-collapse: collapse;
+      box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+      border-radius: 1rem;
+      margin-bottom: 2rem;
+      background-color: $color-white;
+    }
+  }
+  
