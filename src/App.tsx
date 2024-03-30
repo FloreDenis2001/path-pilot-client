@@ -11,6 +11,7 @@ import Drivers from "./pages/Drivers";
 import Vehicle from "./pages/Vehicle";
 import RouteMap from "./pages/RouteMap";
 import DashBoard from "./pages/Dashboard";
+import MapTest from "./components/map/MapTest";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/dashboard/vehicles" element={<Vehicle />} />
           <Route path="/dashboard/routes" element={<RouteMap />} />
           <Route path="/dashboard" element={<DashBoard />} />
+          <Route path="/directions" element={<MapTest />} />
         </Routes>
       </BrowserRouter>
     </div>

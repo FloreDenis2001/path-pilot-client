@@ -1,0 +1,9 @@
+      // const response = await fetch(
+      //   `http://localhost:8080/api/v1/maps/directions?origin=${encodeURIComponent(
+      //     origin
+      //   )}&destination=${encodeURIComponent(destination)}`
+      // );
+      // if (!response.ok) {
+      //   throw new Error("Nu merge");
+      // }
+      // const data = await response.json();
