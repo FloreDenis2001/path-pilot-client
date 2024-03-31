@@ -14,7 +14,6 @@ import OrderInformation from "../components/route/OrderInformation";
 import DriverInformation from "../components/route/DriverInformation";
 import VehicleInformation from "../components/route/VehicleInformation";
 import InvoicesInformation from "../components/route/InvoicesInformation";
-import ReportsInformation from "../components/route/ReportsInformation";
 
 const RouteMap = () => {
   const [activeButton, setActiveButton] = useState("order");

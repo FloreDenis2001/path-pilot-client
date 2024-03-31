@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../../../components/Sidebar";
 import { FaEllipsisV, FaPlus, FaSearch } from "react-icons/fa";
-import OptionsDropDownRow from "../components/order/OptionsDropDownRow";
-import Pagination from "../components/Pagination";
-import ModalAddOrders from "../components/order/ModalAddOrders";
-import ModalOrderDetails from "../components/order/ModalOrderDetails";
-import ModalEditOrder from "../components/order/ModalEditOrder";
+import OptionsDropDownRow from "../../../components/order/OptionsDropDownRow";
+import Pagination from "../../../components/Pagination";
+import ModalAddOrders from "./ModalAddOrders";
+import ModalOrderDetails from "./ModalOrderDetails";
+import ModalEditOrder from "./ModalEditOrder";
 
 const Orders = () => {
   const [openDropdown, setOpenDropdown] = useState(-1);

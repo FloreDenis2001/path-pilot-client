@@ -1,12 +1,12 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
+import Login from "./modules/auth/components/Login";
+import Registration from "./modules/auth/components/Registration";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import RetrievePassword from "./pages/RetrievePassword";
-import Orders from "./pages/Orders";
+import Orders from "./modules/orders/components/Orders";
 import Drivers from "./pages/Drivers";
 import Vehicle from "./pages/Vehicle";
 import RouteMap from "./pages/RouteMap";

@@ -66,6 +66,8 @@ const MapTest = () => {
             value={destinations.join(",")}
             onChange={(e) => setDestinations(e.target.value.split(","))}
           />
+
+          
         </label>
         <button type="submit">Get Optimized Route</button>
       </form>
