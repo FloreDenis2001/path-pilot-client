@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../../../components/Sidebar";
 import { FaEllipsisV, FaPlus, FaSearch } from "react-icons/fa";
-import OptionsDropDownRow from "../../../components/order/OptionsDropDownRow";
+import OptionsDropDownRow from "./OptionsDropDownRow";
 import Pagination from "../../../components/Pagination";
 import ModalAddOrders from "./ModalAddOrders";
 import ModalOrderDetails from "./ModalOrderDetails";
