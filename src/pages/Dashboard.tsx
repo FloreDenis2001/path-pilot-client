@@ -1,29 +1,54 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Sidebar from "../components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faBell,
   faChartColumn,
   faEnvelope,
   faMoneyBill,
   faTruckRampBox,
 } from "@fortawesome/free-solid-svg-icons";
 import Badge from "@mui/material/Badge";
+import image from "../assets/logoDefault.png";
+import { FaSearch } from "react-icons/fa";
+import BarChartComponent from "../components/BarChartComponent";
+import { Chart, registerables } from "chart.js";
 
+Chart.register(...registerables);
 const DashBoard = () => {
+  const labelsData = ["January", "February", "March", "April", "May", "June"];
+  const expensesData = [65, 59, 80, 81, 56, 55];
+  const profitData = [28, 48, 40, 19, 86, 27];
+
+
+  let priceService = 206.85;
+  let priceExpenses = 153.85;
+  let priceProfit = 200.85;
   return (
     <section className="dashboard">
       <Sidebar />
-      <div className="dashboard__container">
-        <div className="dashboard__header">
-          <h1 className="heading-primary">Dashboard</h1>
-          {/* <div className="dashboard__notification">
-            <FontAwesomeIcon
-              className="dashboard__notification__icon"
-              icon={faEnvelope}
-            />
-            <span>4</span>
-          </div> */}
+      <div className="dashboard__header">
+        <h1 className="heading-primary">Dashboard</h1>
+
+        <div className="dashboard__header__options">
+          <div className="dashboard__header__searchBox">
+            <FaSearch />
+            <input type="search" placeholder="Search anything..." />
+          </div>
+
+          <div className="dashboard__header__options__notification">
+            <Badge badgeContent={4} color="primary">
+              <FontAwesomeIcon icon={faBell} />
+            </Badge>
+          </div>
+
+          <div className="dashboard__header__options__profile">
+            <img src={image} alt="" width={25} />
+          </div>
         </div>
+      </div>
+
+      <div className="dashboard__container">
         <div className="dashboard__stats">
           <div className="dashboard__stats__box">
             <FontAwesomeIcon
@@ -31,7 +56,7 @@ const DashBoard = () => {
               icon={faTruckRampBox}
             />
             <h2 className="heading-card">Services</h2>
-            <p>$ 206.200,85</p>
+            <p>${priceService}</p>
             <span>Last Month</span>
           </div>
           <div className="dashboard__stats__box">
@@ -40,7 +65,7 @@ const DashBoard = () => {
               icon={faChartColumn}
             />
             <h2 className="heading-card">Expenses</h2>
-            <p>$ 153.060,85</p>
+            <p>${priceExpenses}</p>
             <span>Last Month</span>
           </div>
           <div className="dashboard__stats__box">
@@ -49,115 +74,33 @@ const DashBoard = () => {
               icon={faMoneyBill}
             />
             <h2 className="heading-card">Profit</h2>
-            <p>$ 200.000,85</p>
+            <p>${priceProfit}</p>
             <span>Last Month</span>
           </div>
         </div>
 
-        <div className="dashboard__recent">
-          <h2 className="heading-primary">Recent Orders</h2>
-          <table>
-            <thead>
-              <tr>
-                <th>Order No.</th>
-                <th>Customer</th>
-                <th>Origin Address</th>
-                <th>Destination Address</th>
-                <th>Order Date</th>
-                <th>Delivery Date</th>
-                <th>Status</th>
-                <th>View</th>
-              </tr>
-            </thead>
+        <div className="dashboard__bar">
 
-            <tbody>
-              <tr>
-                <td>2</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__completed">Completed</span>
-                </td>
-                <td>Details</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__pending">Pending</span>
-                </td>
-                <td>Details</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__refused">Refused</span>
-                </td>
-                <td>Details</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__completed">Completed</span>
-                </td>
-                <td>Details</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__completed">Completed</span>
-                </td>
-                <td>Details</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__completed">Completed</span>
-                </td>
-                <td>Details</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Jane Doe</td>
-                <td>Germany</td>
-                <td>Romania</td>
-                <td>2021-10-10</td>
-                <td>2021-10-20</td>
-                <td className="td__status ">
-                  <span className="td__status__pending">Pending</span>
-                </td>
-                <td>Details</td>
-              </tr>
-            </tbody>
-          </table>
+          <div className="dashboard__bar__box">
+            <h2>Bar Chart Example</h2>
+            <BarChartComponent
+              labels={labelsData}
+              expensesData={expensesData}
+              profitData={profitData}
+            />
+          </div>
+          
+          <div className="dashboard__bar__box">
+            <h2>Bar Chart Example</h2>
+            <BarChartComponent
+              labels={labelsData}
+              expensesData={expensesData}
+              profitData={profitData}
+            />
+          </div>
+
         </div>
+    
       </div>
 
       <div className="dashboard__updates">

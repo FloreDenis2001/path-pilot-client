@@ -1,9 +1,7 @@
 export default interface User {
-    id: string;
-    name: string;
-    email: string;
+    username: string;
     password: string;
+    email: string;
     role: string;
-    createdAt: Date;
-    updatedAt: Date;
+    company_id: number;
 }

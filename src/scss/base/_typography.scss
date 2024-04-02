@@ -1,14 +1,17 @@
 .heading-primary {
     font-size: 3rem;
+    font-weight: 400;
     color: $color-grey;
     font-family: $font-family-secondary;
     margin-bottom: 1rem;
 }
 .heading-card {
     font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     color: $color-grey;
     font-family: $font-family-secondary; 
-    font-weight: bold;
 }
 
 
