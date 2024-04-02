@@ -12,9 +12,12 @@ import Vehicle from "./pages/Vehicle";
 import RouteMap from "./pages/RouteMap";
 import DashBoard from "./pages/Dashboard";
 import MapTest from "./components/map/MapTest";
+import LoginProvider from "./modules/context/LoginProvider";
 
 function App() {
   return (
+
+    <LoginProvider>
     <div className="App">
       <BrowserRouter>
         <Routes>
@@ -31,6 +34,7 @@ function App() {
         </Routes>
       </BrowserRouter>
     </div>
+    </LoginProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import React from "react";
-import { ReactComponent as LogoSvg } from "../assets/logo2.svg";
+import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
+
 import {
   FaSignature,
   FaEnvelope,
