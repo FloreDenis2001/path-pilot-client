@@ -4,12 +4,15 @@
     color: $color-white;
     font-family: $font-family-secondary;
     margin-bottom: 1rem;
+
+    @include respond(phone){
+        font-size: 2.5rem;
+    }
 }
 .heading-container {
     font-size: 2rem;
     font-weight: 400;
     color: $color-white;
-
     font-family: $font-family-secondary;
     margin-bottom: 1rem;
 }
@@ -81,3 +84,33 @@
 .blue{
     color: $color-primary;
 }
+
+.done{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-green2;
+    background-color: rgba($color-green, $alpha: 0.2);
+}
+
+.ongoing{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-yellow2;
+    background-color: rgba($color-yellow, $alpha: 0.2);
+}
+
+.cancelled{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-red2;
+    background-color: rgba($color-red, $alpha: 0.2);
+}
+
+.intransit{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-purple2;
+    background-color: rgba($color-purple, $alpha: 0.2);
+}
+
+

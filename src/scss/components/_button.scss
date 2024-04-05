@@ -57,6 +57,9 @@
         transform: scale(0.9);
         box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
       }
+
+
+    
     }
   }
 
@@ -77,15 +80,23 @@
     }
   }
 
-  &__second {
-    background: transparent;
-    color: $color-grey;
+  &__secondary {
+    background-color: $color-black-2;
+    color: $color-white;
+    font-size: 1.6rem;
+    padding: 0.5rem 2rem;
     border: none;
-    font-weight: 700;
+    border-radius: 0.5rem;
     cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-    text-decoration: none;
+    transition: all 0.3s;
+    &:hover {
+      transform: scale(0.9);
+    }
+
+    @include respond(big-desktop) {  
+
+      font-size: 2rem;  
+    }
   }
 
   &__search {
@@ -239,5 +250,16 @@
       border-bottom: 1px solid $color-secondary;
       box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     }
+  }
+
+  &__text{
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: $color-grey-light;
+    text-align: center;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
   }
 }

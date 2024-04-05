@@ -1,7 +1,6 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  border: none;
   box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
 
   thead {
@@ -22,32 +21,36 @@ table {
       border-right: none;
       border-bottom: none;
       border-left: none;
+
+      @include respond(phone) {
+        font-size: 1.1rem;
+      }
     }
   }
 
   tbody {
-    background-color: green;
-
     tr {
       font-size: 1.3rem;
-      color: $color-grey;
+      color: $color-white-2;
       text-align: center;
       text-decoration: none;
       padding-inline: 1rem;
-      background-color: $color-white;
+      background-color: $color-black;
       box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
       margin: 0 auto;
       margin-bottom: 2rem;
       transition: all 0.3s;
-      border-top: none;
-      border-right: none;
-      border-bottom: none;
-      border-left: none;
+      border: 1px solid $color-grey;
+      border-radius: 1rem;
+      cursor: pointer;
+
+      &:hover {
+        background-color: $color-black-2;
+      }
 
       td {
-
         font-size: 1.3rem;
-        color: $color-grey;
+        color: $color-white-2;
         font-weight: 600;
         text-align: center;
         text-decoration: none;
@@ -60,6 +63,11 @@ table {
         border-right: none;
         border-bottom: none;
         border-left: none;
+
+        @include respond(phone) {
+          font-size: 1.2rem;
+          height: 5rem;
+        }
       }
 
       .td {
@@ -76,15 +84,21 @@ table {
             border-radius: 1rem;
             padding-inline: 0.5rem;
             color: $color-white;
+
+            @include respond(phone) {
+              min-width: 4rem;
+            }
           }
 
           &__pending {
             background: $linear-gradient-2;
           }
-          &__completed , &__active {
+          &__completed,
+          &__active {
             background: $linear-gradient-4;
           }
-          &__refused ,&__inActive{
+          &__refused,
+          &__inActive {
             background: $linear-gradient-3;
           }
         }

@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LogoDefault from "../assets/logoDefault.png";
 import {
   FaCaretRight,
   FaHome,
-  FaMap,
-  FaSearch,
   FaCubes,
   FaIdCard,
   FaTruck,
@@ -15,7 +13,6 @@ import {
 } from "react-icons/fa";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useNavigate } from "react-router";
 
 const Sidebar = () => {
@@ -27,6 +24,19 @@ const Sidebar = () => {
   const handleNavigation = (path: string) => {
     nav(path);
   };
+
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 900) {
+        setSidebar(false);
+      } else {
+        setSidebar(true);
+      }
+    }
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <header
@@ -42,13 +52,11 @@ const Sidebar = () => {
             />
           </div>
 
-            <p className="sidebar__header__text"> PATHPILOT</p>
+          <p className="sidebar__header__text"> PATHPILOT</p>
         </div>
       </div>
 
-      <div className="sidebar__close" onClick={() => showSidebar()}>
-        <FaCaretRight className="sidebar__close__icon" />
-      </div>
+    
 
       <div className="sidebar__menuBar">
         <ul className="sidebar__menuBar__menu">

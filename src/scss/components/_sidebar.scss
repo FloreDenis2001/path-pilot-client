@@ -7,27 +7,57 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  z-index: 1000;
+  height: 100vh;
+
+  @include respond(tab-port) {
+    grid-area: 1 / 1 / 13 / 2;
+  }
+
+  @include respond(phone) {
+    display: none;
+  }
+
   &__collapse {
     width: 8.8rem;
     transition: all 0.3s;
     p {
       display: none;
     }
+  }
 
-    
+  &__mobile {
+    width: 30rem;
+    padding: 2rem;
+    padding-bottom: 0;
+    background: $color-black;
+    height: 100vh;
+    position: relative;
+    &__overlay {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      background-color: $color-black-2;
+      z-index: 1000;
+      display: none;
+
+     
+    }
+
+
   }
 
   &__close {
     position: absolute;
-    top: 3rem;
+    top: 5rem;
     right: -1.4rem;
-    font-size: 2.5rem;
+    font-size: 2rem;
     color: $color-white;
     cursor: pointer;
-    background: $linear-gradient-2;
+    background: $linear-gradient-3;
     display: grid;
     place-items: center;
-    border-radius: 50%;
+    border-radius: 0.5rem;
     width: 3rem;
     height: 3rem;
   }
@@ -36,6 +66,11 @@
     position: relative;
     display: flex;
     align-items: center;
+    height: 10rem;
+
+    @include respond(tab-port) {
+      height: 7rem;
+    }
 
     &__imageBox {
       &__image {
@@ -58,13 +93,21 @@
     flex-direction: column;
     justify-content: space-between;
 
+    @include respond(tab-port) {
+      height: calc(100% - 15rem);
+    }
+
+    @include respond(phone) {
+      height: calc(100% - 15rem);
+      
+    }
+
     &__menu {
       display: flex;
       flex-direction: column;
       gap: 1rem;
 
       margin-top: 1rem;
-     
 
       &__link {
         height: 5rem;
@@ -78,6 +121,10 @@
         border-radius: 0.6rem;
         cursor: pointer;
 
+        @include respond(phone) {
+          height: 4rem;
+        }
+
         p {
           font-size: 1.8rem;
           font-weight: 500;
@@ -90,14 +137,13 @@
           transition: all 0.2s;
         }
 
-          &__icon {
-            font-size: 2rem;
-            min-width: 6rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-          }
-       
+        &__icon {
+          font-size: 2rem;
+          min-width: 6rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
       }
     }
   }

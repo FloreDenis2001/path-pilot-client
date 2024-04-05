@@ -1,5 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@300;400;500;800;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,500;1,500;1,900&display=swap");
+/*
+0 - 600px:      Phone
+600 - 900px:    Tablet portrait
+900 - 1200px:   Tablet landscape
+[1200 - 1600] is where our normal styles apply
+1600px + :      Big desktop
+
+$breakpoint arguement choices:
+- phone
+- tab-port
+- tab-land
+- big-desktop
+
+ORDER: Base + typography > general layout + grid > page layout > components
+
+1em = 16px
+*/
 *,
 *::after,
 *::before {
@@ -39,6 +56,11 @@ input, button, textarea, select {
   color: #ffffff;
   font-family: "Red Hat Display", sans-serif;
   margin-bottom: 1rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .heading-primary {
+    font-size: 2.5rem;
+  }
 }
 
 .heading-container {
@@ -107,6 +129,34 @@ input, button, textarea, select {
 
 .blue {
   color: #2781e2;
+}
+
+.done {
+  padding: 0.3rem;
+  border-radius: 5px;
+  color: #5fb976;
+  background-color: rgba(65, 231, 168, 0.2);
+}
+
+.ongoing {
+  padding: 0.3rem;
+  border-radius: 5px;
+  color: #f0e929;
+  background-color: rgba(240, 201, 41, 0.2);
+}
+
+.cancelled {
+  padding: 0.3rem;
+  border-radius: 5px;
+  color: #eb8577;
+  background-color: rgba(240, 47, 47, 0.2);
+}
+
+.intransit {
+  padding: 0.3rem;
+  border-radius: 5px;
+  color: #8b77eb;
+  background-color: rgba(169, 41, 240, 0.2);
 }
 
 .button, .button:link, .button:visited {
@@ -178,15 +228,23 @@ input, button, textarea, select {
   transform: translateY(-3px);
   box-shadow: 0 1rem 2rem rgba(33, 33, 43, 0.2);
 }
-.button__second {
-  background: transparent;
-  color: #5f5f5f;
+.button__secondary {
+  background-color: #181820;
+  color: #ffffff;
+  font-size: 1.6rem;
+  padding: 0.5rem 2rem;
   border: none;
-  font-weight: 700;
+  border-radius: 0.5rem;
   cursor: pointer;
-  transition: all 0.2s;
-  text-align: center;
-  text-decoration: none;
+  transition: all 0.3s;
+}
+.button__secondary:hover {
+  transform: scale(0.9);
+}
+@media only screen and (min-width: 100em) {
+  .button__secondary {
+    font-size: 2rem;
+  }
 }
 .button__search {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
@@ -324,6 +382,16 @@ input, button, textarea, select {
   border-bottom: 1px solid #2DB7EA;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
 }
+.button__text {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #7a7a7a;
+  text-align: center;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
 
 .sidebar {
   padding: 1.4rem 1.4rem;
@@ -334,6 +402,18 @@ input, button, textarea, select {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  z-index: 1000;
+  height: 100vh;
+}
+@media only screen and (max-width: 56.25em) {
+  .sidebar {
+    grid-area: 1/1/13/2;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .sidebar {
+    display: none;
+  }
 }
 .sidebar__collapse {
   width: 8.8rem;
@@ -342,17 +422,33 @@ input, button, textarea, select {
 .sidebar__collapse p {
   display: none;
 }
+.sidebar__mobile {
+  width: 30rem;
+  padding: 2rem;
+  padding-bottom: 0;
+  background: #21212b;
+  height: 100vh;
+  position: relative;
+}
+.sidebar__mobile__overlay {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: #181820;
+  z-index: 1000;
+  display: none;
+}
 .sidebar__close {
   position: absolute;
-  top: 3rem;
+  top: 5rem;
   right: -1.4rem;
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ffffff;
   cursor: pointer;
-  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  background: linear-gradient(150deg, #f02f2f 0%, #eb8577 54%);
   display: grid;
   place-items: center;
-  border-radius: 50%;
+  border-radius: 0.5rem;
   width: 3rem;
   height: 3rem;
 }
@@ -360,6 +456,12 @@ input, button, textarea, select {
   position: relative;
   display: flex;
   align-items: center;
+  height: 10rem;
+}
+@media only screen and (max-width: 56.25em) {
+  .sidebar__header {
+    height: 7rem;
+  }
 }
 .sidebar__header__imageBox__image {
   width: 6rem;
@@ -376,6 +478,16 @@ input, button, textarea, select {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@media only screen and (max-width: 56.25em) {
+  .sidebar__menuBar {
+    height: calc(100% - 15rem);
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .sidebar__menuBar {
+    height: calc(100% - 15rem);
+  }
 }
 .sidebar__menuBar__menu {
   display: flex;
@@ -394,6 +506,11 @@ input, button, textarea, select {
   min-width: 100%;
   border-radius: 0.6rem;
   cursor: pointer;
+}
+@media only screen and (max-width: 37.5em) {
+  .sidebar__menuBar__menu__link {
+    height: 4rem;
+  }
 }
 .sidebar__menuBar__menu__link p {
   font-size: 1.8rem;
@@ -499,7 +616,6 @@ input, button, textarea, select {
 table {
   width: 100%;
   border-collapse: collapse;
-  border: none;
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 table thead {
@@ -521,28 +637,32 @@ table thead th {
   border-bottom: none;
   border-left: none;
 }
-table tbody {
-  background-color: green;
+@media only screen and (max-width: 37.5em) {
+  table thead th {
+    font-size: 1.1rem;
+  }
 }
 table tbody tr {
   font-size: 1.3rem;
-  color: #5f5f5f;
+  color: #e7e7e7;
   text-align: center;
   text-decoration: none;
   padding-inline: 1rem;
-  background-color: #ffffff;
+  background-color: #21212b;
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin: 0 auto;
   margin-bottom: 2rem;
   transition: all 0.3s;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
+  border: 1px solid #5f5f5f;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+table tbody tr:hover {
+  background-color: #181820;
 }
 table tbody tr td {
   font-size: 1.3rem;
-  color: #5f5f5f;
+  color: #e7e7e7;
   font-weight: 600;
   text-align: center;
   text-decoration: none;
@@ -554,6 +674,12 @@ table tbody tr td {
   border-right: none;
   border-bottom: none;
   border-left: none;
+}
+@media only screen and (max-width: 37.5em) {
+  table tbody tr td {
+    font-size: 1.2rem;
+    height: 5rem;
+  }
 }
 table tbody tr .td__status {
   display: flex;
@@ -569,6 +695,11 @@ table tbody tr .td__status * {
   border-radius: 1rem;
   padding-inline: 0.5rem;
   color: #ffffff;
+}
+@media only screen and (max-width: 37.5em) {
+  table tbody tr .td__status * {
+    min-width: 4rem;
+  }
 }
 table tbody tr .td__status__pending {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
@@ -1217,7 +1348,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 
 .retrievePassword__container {
-  background-color: #ffffff;
+  background-color: #21212b;
   padding: 2rem;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
@@ -1348,7 +1479,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 
 #retrievePassword {
-  background-image: url("./assets/background-login-page.jpg");
+  background-image: url("./assets/slate-texture-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -1364,7 +1495,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(39, 129, 226, 0.432) 0%, rgba(45, 183, 234, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
 }
 
 .orders {
@@ -1784,6 +1915,11 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   min-height: 100vh;
   max-height: 100vh;
 }
+@media only screen and (max-width: 56.25em) {
+  .dashboard {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
 .dashboard__header {
   grid-area: 1/3/3/13;
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
@@ -1797,6 +1933,45 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin-bottom: 2rem;
   margin-block: 1rem 2rem;
   margin-inline: 2rem;
+  max-width: 130rem;
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__header {
+    min-width: calc(100% - 4rem);
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  .dashboard__header {
+    grid-area: 1/2/3/13;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__header {
+    grid-area: 1/1/3/13;
+  }
+}
+.dashboard__header__left {
+  margin-left: 2rem;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
+}
+.dashboard__header__left svg {
+  display: none;
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__header__left svg {
+    display: block;
+    font-size: 2rem;
+    color: #2781e2;
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+  .dashboard__header__left svg:hover {
+    background-color: #181820;
+  }
 }
 .dashboard__header__searchBox {
   display: flex;
@@ -1820,10 +1995,14 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .dashboard__header__searchBox svg {
   font-size: 2rem;
-  color: #7a7a7a;
+  color: #2781e2;
+}
+@media only screen and (max-width: 56.25em) {
+  .dashboard__header__searchBox {
+    display: none;
+  }
 }
 .dashboard__header h1 {
-  margin-left: 3rem;
   margin-bottom: 0;
 }
 .dashboard__header__options {
@@ -1832,6 +2011,12 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   gap: 2rem;
   margin-right: 3rem;
+}
+@media only screen and (max-width: 56.25em) {
+  .dashboard__header__options {
+    gap: 1rem;
+    margin-right: 1rem;
+  }
 }
 .dashboard__header__options__notification .MuiBadge-badge {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
@@ -1844,6 +2029,9 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .dashboard__header__options__notification svg {
   font-size: 2.2rem;
   color: #f0c929;
+}
+.dashboard__header__options__notification svg:hover {
+  transform: scale(1.1);
 }
 .dashboard__header__options__profile {
   display: flex;
@@ -1868,32 +2056,187 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #888 transparent;
+  max-width: 135rem;
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__container {
+    min-width: 100%;
+  }
+}
+@media only screen and (max-width: 56.25em) {
+  .dashboard__container {
+    grid-area: 3/2/13/13;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__container {
+    grid-area: 3/1/13/13;
+  }
 }
 .dashboard__bar {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
   width: 100%;
 }
+@media only screen and (max-width: 75em) {
+  .dashboard__bar {
+    flex-direction: column;
+  }
+}
 .dashboard__bar__box {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  justify-content: space-around;
   background-color: #21212b;
   padding: 4rem;
   width: calc(100% - 4rem);
-  height: 40rem;
+  height: 50rem;
+  width: 60%;
   margin-left: 2rem;
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 0.6rem;
 }
+@media only screen and (max-width: 75em) {
+  .dashboard__bar__box {
+    width: calc(100% - 4rem);
+    padding: 2rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__bar__box h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .dashboard__bar__box canvas {
+    max-width: 35rem;
+    max-height: 27rem;
+  }
+}
 .dashboard__bar__box h2 {
   font-size: 2.5rem;
   font-weight: 400;
-  color: #5f5f5f;
+  color: #ffffff;
   font-family: "Red Hat Display", sans-serif;
-  place-self: start;
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__bar__box h2 {
+    font-size: 3rem;
+  }
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__bar__box {
+    justify-content: space-evenly;
+    padding: 6rem;
+    padding-top: 2rem;
+  }
+}
+.dashboard__bar__drivers {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 35%;
+  height: 50rem;
+  margin-right: 2rem;
+  background-color: #21212b;
+  padding: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+  border-radius: 0.6rem;
+}
+@media only screen and (max-width: 75em) {
+  .dashboard__bar__drivers {
+    width: calc(100% - 4rem);
+    padding: 2rem;
+    margin-left: 2rem;
+  }
+}
+.dashboard__bar__drivers__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+.dashboard__bar__drivers__header h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Red Hat Display", sans-serif;
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__bar__drivers__header h2 {
+    font-size: 3rem;
+  }
+}
+.dashboard__bar__drivers__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
+  height: 100%;
+}
+.dashboard__bar__drivers__content img {
+  width: 3.5em;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 1px solid #2DB7EA;
+}
+.dashboard__bar__drivers__content__notification {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid #5f5f5f;
+  border-radius: 0.5rem;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #181820;
+}
+.dashboard__bar__drivers__content__notification__more {
+  align-self: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+.dashboard__bar__drivers__content__notification__more:hover {
+  background-color: #21212b;
+  color: #2781e2;
+}
+.dashboard__bar__drivers__content__notification__main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+.dashboard__bar__drivers__content__notification__info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.7rem;
+  width: 100%;
+}
+.dashboard__bar__drivers__content__notification__info h3 {
+  font-size: 1.3rem;
+  color: #e7e7e7;
+}
+.dashboard__bar__drivers__content__notification__details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+.dashboard__bar__drivers__content__notification__details p {
+  font-size: 1.1rem;
+  color: #e7e7e7;
 }
 .dashboard__stats {
   display: flex;
@@ -1916,6 +2259,16 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   padding: 1rem;
   gap: 1rem;
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+}
+@media only screen and (max-width: 75em) {
+  .dashboard__stats__box {
+    width: 45%;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__stats__box {
+    width: 100%;
+  }
 }
 .dashboard__stats__box__header {
   display: flex;
@@ -1964,14 +2317,93 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   padding: 1rem;
   border-radius: 1rem;
 }
-.dashboard__recent {
-  padding-block: 2rem;
-  margin-bottom: 2rem;
-  margin-bottom: 2rem;
-  margin: 0 auto;
+.dashboard__orders {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+  gap: 2rem;
   margin-bottom: 1rem;
-  width: 90%;
-  background-color: #ffffff;
+}
+@media only screen and (max-width: 75em) {
+  .dashboard__orders {
+    flex-direction: column;
+  }
+}
+.dashboard__orders__pie {
+  margin-left: 2rem;
+  background-color: #21212b;
+  width: 35%;
+  border-radius: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+}
+@media only screen and (max-width: 75em) {
+  .dashboard__orders__pie {
+    width: calc(100% - 4rem);
+    margin-left: 2rem;
+    margin-top: 2rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__orders__pie h2 {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .dashboard__orders__pie canvas {
+    max-width: 30rem;
+    max-height: 27rem;
+  }
+}
+.dashboard__orders__pie canvas {
+  max-width: 35rem;
+  max-height: 35rem;
+}
+.dashboard__orders__pie h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  font-family: "Red Hat Display", sans-serif;
+  margin-block: 2rem;
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__orders__pie h2 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+}
+@media only screen and (min-width: 100em) {
+  .dashboard__orders__pie {
+    padding-inline: 4rem;
+    padding-block: 2rem;
+  }
+}
+.dashboard__orders__table {
+  width: 60%;
+  background-color: #21212b;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1rem;
+  margin-right: 2rem;
+  border-radius: 0.6rem;
+}
+@media only screen and (max-width: 75em) {
+  .dashboard__orders__table {
+    width: calc(100% - 4rem);
+    margin-left: 2rem;
+    margin-top: 2rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .dashboard__orders__table {
+    padding: 1rem;
+  }
 }
 
 /*# sourceMappingURL=App.css.map */
