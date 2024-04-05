@@ -1,6 +1,6 @@
 .sidebar {
   padding: 1.4rem 1.4rem;
-  background-color: $color-white;
+  background-color: $color-black;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   position: relative;
   grid-area: 1 / 1 / 13 / 3;
@@ -45,7 +45,7 @@
     }
 
     &__text {
-      color: $color-grey;
+      color: $color-white;
       font-size: 2rem;
       font-weight: 600;
       letter-spacing: 1px;
@@ -73,7 +73,7 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        color: $color-grey;
+        color: $color-white-2;
         min-width: 100%;
         border-radius: 0.6rem;
         cursor: pointer;
@@ -86,17 +86,18 @@
 
         &:hover {
           color: $color-white;
-          background: $linear-gradient-2;
+          background: $color-black-2;
           transition: all 0.2s;
         }
 
-        &__icon {
-          font-size: 2rem;
-          min-width: 6rem;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
+          &__icon {
+            font-size: 2rem;
+            min-width: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+       
       }
     }
   }

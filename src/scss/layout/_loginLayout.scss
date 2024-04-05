@@ -1,6 +1,6 @@
 .login {
   &__container {
-    background-color: $color-white;
+    background-color: $color-black;
     padding: 2rem;
     border-radius: 10px;
     box-shadow: 0 0 10px 0 rgba($color-black, 0.8);
@@ -59,6 +59,11 @@
         cursor: pointer;
         accent-color: $color-primary;
       }
+
+      label {
+        cursor: pointer;
+        color: $color-white-2;
+      }
     }
 
     &__forgot {
@@ -104,6 +109,13 @@
       }
     }
 
+    &__socialMedia {
+      p{
+        color: $color-white-2;
+      }
+    }
+
   }
 }
   
+

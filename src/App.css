@@ -17,7 +17,7 @@ html {
 
 body {
   box-sizing: border-box;
-  background-color: #dcdfe2;
+  background-color: #181820;
   font-family: "Red Hat Display", sans-serif;
   font-weight: 400;
   overflow-x: hidden;
@@ -36,7 +36,15 @@ input, button, textarea, select {
 .heading-primary {
   font-size: 3rem;
   font-weight: 400;
-  color: #5f5f5f;
+  color: #ffffff;
+  font-family: "Red Hat Display", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.heading-container {
+  font-size: 2rem;
+  font-weight: 400;
+  color: #ffffff;
   font-family: "Red Hat Display", sans-serif;
   margin-bottom: 1rem;
 }
@@ -46,14 +54,14 @@ input, button, textarea, select {
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #5f5f5f;
+  color: #ffffff;
   font-family: "Red Hat Display", sans-serif;
 }
 
 .heading-secondary {
   font-size: 1rem;
   font-weight: 400;
-  color: #5f5f5f;
+  color: #ffffff;
   font-family: "Roboto", sans-serif;
 }
 
@@ -61,12 +69,44 @@ input, button, textarea, select {
   padding: 1rem;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
-  color: #7a7a7a;
+  color: #ffffff;
 }
 
 .progress__icon {
   font-size: 2rem;
   color: #ffffff;
+}
+
+.yellow {
+  color: #f0e929;
+}
+
+.red {
+  color: #eb8577;
+}
+
+.green {
+  color: #41e7a8;
+}
+
+.purple {
+  color: #8b77eb;
+}
+
+.pink {
+  color: #eb77d8;
+}
+
+.orange {
+  color: #f0a929;
+}
+
+.brown {
+  color: #a97929;
+}
+
+.blue {
+  color: #2781e2;
 }
 
 .button, .button:link, .button:visited {
@@ -83,11 +123,11 @@ input, button, textarea, select {
 }
 .button:hover {
   transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 1rem 2rem rgba(33, 33, 43, 0.2);
 }
 .button:active {
   transform: translateY(-1px);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .button__first {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
@@ -120,7 +160,7 @@ input, button, textarea, select {
 }
 .button__box__second:active {
   transform: scale(0.9);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .button__socialMedia {
   margin-top: 1rem;
@@ -136,7 +176,7 @@ input, button, textarea, select {
 }
 .button__socialMedia:hover {
   transform: translateY(-3px);
-  box-shadow: 0 1rem 2rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 1rem 2rem rgba(33, 33, 43, 0.2);
 }
 .button__second {
   background: transparent;
@@ -170,7 +210,7 @@ input, button, textarea, select {
 }
 .button__search:active {
   transform: scale(0.9);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .button__pagination {
   display: inline-flex;
@@ -197,7 +237,7 @@ input, button, textarea, select {
 }
 .button__close:active {
   transform: scale(0.9);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .button__pluse {
   color: #ffffff;
@@ -213,7 +253,7 @@ input, button, textarea, select {
 }
 .button__pluse:active {
   transform: scale(0.9);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .button__modal {
   border: none;
@@ -235,7 +275,7 @@ input, button, textarea, select {
 }
 .button__modal:active {
   transform: scale(0.9);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .button__modal__save {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
@@ -287,7 +327,7 @@ input, button, textarea, select {
 
 .sidebar {
   padding: 1.4rem 1.4rem;
-  background-color: #ffffff;
+  background-color: #21212b;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   position: relative;
   grid-area: 1/1/13/3;
@@ -326,7 +366,7 @@ input, button, textarea, select {
   border-radius: 0.6rem;
 }
 .sidebar__header__text {
-  color: #5f5f5f;
+  color: #ffffff;
   font-size: 2rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -350,7 +390,7 @@ input, button, textarea, select {
   display: flex;
   flex-direction: row;
   align-items: center;
-  color: #5f5f5f;
+  color: #e7e7e7;
   min-width: 100%;
   border-radius: 0.6rem;
   cursor: pointer;
@@ -362,7 +402,7 @@ input, button, textarea, select {
 }
 .sidebar__menuBar__menu__link:hover {
   color: #ffffff;
-  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  background: #181820;
   transition: all 0.2s;
 }
 .sidebar__menuBar__menu__link__icon {
@@ -380,13 +420,13 @@ input, button, textarea, select {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: #ffffff;
+  background-color: #181820;
   font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   border-radius: 1rem;
-  color: #5f5f5f;
+  color: #ffffff;
   padding-bottom: 1rem;
-  box-shadow: 0 0 5px 0 rgba(95, 95, 95, 0.8);
+  box-shadow: 0 0 5px 0 rgba(33, 33, 43, 0.8);
   margin-bottom: 1rem;
   width: 70%;
   transition: all 0.3s;
@@ -460,7 +500,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   border: none;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 table thead {
   background: #2781e2;
@@ -491,7 +531,7 @@ table tbody tr {
   text-decoration: none;
   padding-inline: 1rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin: 0 auto;
   margin-bottom: 2rem;
   transition: all 0.3s;
@@ -561,7 +601,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .dropdown__toggle:active {
   transform: scale(1.2);
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
 }
 .dropdown__menu {
   display: flex;
@@ -569,7 +609,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   gap: 1rem;
   margin-top: 1rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.9);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.9);
   z-index: 1000;
   position: absolute;
   top: 2.5rem;
@@ -763,7 +803,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   background-color: #ffffff;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
+  box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
   max-width: 90rem;
   text-align: center;
@@ -830,7 +870,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  border-left: 1px solid rgba(122, 122, 122, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
   padding-left: 2rem;
   width: 50%;
   gap: 1rem;
@@ -873,7 +913,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   justify-content: center;
   gap: 0.2rem;
   width: 100%;
-  border-left: 1px solid rgba(122, 122, 122, 0.3);
+  border-left: 1px solid rgba(255, 255, 255, 0.3);
   padding-left: 0.5rem;
   margin-bottom: 0.5rem;
 }
@@ -938,7 +978,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .modal__container__body__content__select select {
   width: 100%;
   padding: 1rem;
-  border: 1px solid rgba(122, 122, 122, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   font-family: "Roboto", sans-serif;
   font-size: 1.4rem;
@@ -966,7 +1006,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .modal__container__body__content__input input {
   width: 100%;
   padding: 1rem;
-  border: 1px solid rgba(122, 122, 122, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 5px;
   font-family: "Roboto", sans-serif;
   font-size: 1.4rem;
@@ -988,10 +1028,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 
 .login__container {
-  background-color: #ffffff;
+  background-color: #21212b;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
+  box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
   max-width: 40rem;
   text-align: center;
@@ -1040,6 +1080,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   cursor: pointer;
   accent-color: #2781e2;
 }
+.login__center__checkbox label {
+  cursor: pointer;
+  color: #e7e7e7;
+}
 .login__center__forgot p {
   font-size: 1.4rem;
   font-family: "Roboto", sans-serif;
@@ -1075,12 +1119,15 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .login__bottom__signup span:hover {
   text-decoration: underline;
 }
+.login__bottom__socialMedia p {
+  color: #e7e7e7;
+}
 
 .register__container {
-  background-color: #ffffff;
+  background-color: #21212b;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
+  box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
   max-width: 40rem;
   text-align: center;
@@ -1165,12 +1212,15 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .register__bottom__signup span:hover {
   text-decoration: underline;
 }
+.register__bottom__signup p {
+  color: #ffffff;
+}
 
 .retrievePassword__container {
   background-color: #ffffff;
   padding: 2rem;
   border-radius: 10px;
-  box-shadow: 0 0 10px 0 rgba(27, 27, 27, 0.8);
+  box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
   max-width: 40rem;
   text-align: center;
@@ -1257,7 +1307,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 
 #login {
-  background-image: url("./assets/background-login-page.jpg");
+  background-image: url("./assets/slate-texture-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -1274,11 +1324,11 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(39, 129, 226, 0.432) 0%, rgba(45, 183, 234, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
 }
 
 #register {
-  background-image: url("./assets/background-login-page.jpg");
+  background-image: url("./assets/slate-texture-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -1294,7 +1344,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(180deg, rgba(39, 129, 226, 0.432) 0%, rgba(45, 183, 234, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+  background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
 }
 
 #retrievePassword {
@@ -1341,7 +1391,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   padding: 2rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin-bottom: 2rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
@@ -1366,7 +1416,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   padding-block: 2.5rem;
   border-radius: 1rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin: 0 auto;
   margin-bottom: 1rem;
   transition: all 0.3s;
@@ -1387,7 +1437,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   z-index: 1;
   margin: 0 auto;
   border-collapse: collapse;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 1rem;
   margin-bottom: 2rem;
   background-color: #ffffff;
@@ -1416,7 +1466,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   padding: 2rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin-bottom: 2rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
@@ -1441,7 +1491,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   padding-block: 2.5rem;
   border-radius: 1rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin: 0 auto;
   margin-bottom: 1rem;
   transition: all 0.3s;
@@ -1462,7 +1512,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   z-index: 1;
   margin: 0 auto;
   border-collapse: collapse;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 1rem;
   margin-bottom: 2rem;
   background-color: #ffffff;
@@ -1491,7 +1541,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   padding: 2rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin-bottom: 2rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
@@ -1516,7 +1566,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   padding-block: 2.5rem;
   border-radius: 1rem;
   background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   margin: 0 auto;
   margin-bottom: 1rem;
   transition: all 0.3s;
@@ -1537,7 +1587,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   z-index: 1;
   margin: 0 auto;
   border-collapse: collapse;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 1rem;
   margin-bottom: 2rem;
   background-color: #ffffff;
@@ -1736,8 +1786,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .dashboard__header {
   grid-area: 1/3/3/13;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
-  background-color: #ffffff;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+  background-color: #21212b;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1745,10 +1795,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin-bottom: 2rem;
   border-radius: 0.5rem;
   margin-bottom: 2rem;
-  margin: 0 auto;
-  margin-block: 1rem;
-  width: 92%;
-  max-width: 127rem;
+  margin-block: 1rem 2rem;
+  margin-inline: 2rem;
 }
 .dashboard__header__searchBox {
   display: flex;
@@ -1756,8 +1804,9 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   justify-content: center;
   height: 4rem;
   color: #7a7a7a;
-  background-color: #ffffff;
+  background-color: #181820;
   border-radius: 1rem;
+  padding: 1rem;
   gap: 1rem;
   width: 20rem;
   margin-right: 2rem;
@@ -1789,12 +1838,12 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 400;
-  padding-inline: 0.3rem;
+  padding-inline: 0.1rem;
   border-radius: 50%;
 }
 .dashboard__header__options__notification svg {
-  font-size: 2rem;
-  color: #5f5f5f;
+  font-size: 2.2rem;
+  color: #f0c929;
 }
 .dashboard__header__options__profile {
   display: flex;
@@ -1810,31 +1859,33 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   border: 1px solid #2DB7EA;
 }
 .dashboard__container {
-  grid-area: 3/3/13/11;
+  grid-area: 3/3/13/13;
   display: flex;
   flex-direction: column;
-  background-color: #1b1b1b;
-  gap: 1rem;
+  background-color: transparent;
+  gap: 2rem;
+  position: relative;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #888 transparent;
 }
 .dashboard__bar {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  padding-block: 2rem;
-  margin-bottom: 2rem;
-  margin-bottom: 2rem;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  width: 90%;
+  align-items: flex-start;
+  gap: 2rem;
+  width: 100%;
 }
 .dashboard__bar__box {
   display: grid;
   place-items: center;
-  background-color: #ffffff;
-  padding: 5rem;
-  width: 45%;
+  background-color: #21212b;
+  padding: 4rem;
+  width: calc(100% - 4rem);
   height: 40rem;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  margin-left: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 0.6rem;
 }
 .dashboard__bar__box h2 {
@@ -1848,38 +1899,40 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-block: 2rem;
-  margin-bottom: 2rem;
-  margin-bottom: 2rem;
-  margin: 0 auto;
-  margin-bottom: 1rem;
-  width: 90%;
-  max-width: 120rem;
+  flex-wrap: wrap;
+  margin-left: 2rem;
+  width: calc(100% - 4rem);
+  gap: 2rem;
 }
 .dashboard__stats__box {
-  background: #ffffff;
+  background-color: #21212b;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 30%;
-  max-width: 30rem;
-  min-width: 22rem;
+  justify-content: center;
+  width: 23%;
   border-radius: 0.5rem;
   height: 17rem;
-  padding: 2rem;
+  padding: 1rem;
   gap: 1rem;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+}
+.dashboard__stats__box__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-direction: row;
 }
 .dashboard__stats__box p {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: bold;
   letter-spacing: 1px;
-  color: #5f5f5f;
+  color: #ffffff;
   font-family: "Red Hat Display", sans-serif;
 }
 .dashboard__stats__box span {
   font-size: 1.4rem;
-  color: #7a7a7a;
+  color: #e7e7e7;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
 }
@@ -1887,6 +1940,13 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   font-size: 1.8rem;
   color: #ffffff;
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.dashboard__stats__box__iconShip {
+  font-size: 1.8rem;
+  color: #ffffff;
+  background: linear-gradient(150deg, #a929f0 0%, #8b77eb 54%);
   padding: 1rem;
   border-radius: 1rem;
 }
@@ -1912,64 +1972,6 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin-bottom: 1rem;
   width: 90%;
   background-color: #ffffff;
-}
-.dashboard__notification {
-  position: relative;
-}
-.dashboard__notification svg {
-  font-size: 2rem;
-  color: #5f5f5f;
-}
-.dashboard__notification span {
-  position: absolute;
-  top: -7px;
-  right: -1rem;
-  background: linear-gradient(150deg, #f02f2f 0%, #eb8577 54%);
-  color: #ffffff;
-  padding-inline: 0.5rem;
-  border-radius: 50%;
-  font-size: 1.2rem;
-}
-.dashboard__updates {
-  grid-area: 3/11/13/13;
-  background-color: bisque;
-}
-.dashboard__updates__box {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: #ffffff;
-  box-shadow: 0 0.5rem 1rem rgba(27, 27, 27, 0.2);
-  width: 100%;
-  overflow-y: auto;
-}
-.dashboard__updates__box__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 2rem;
-  width: 100%;
-}
-.dashboard__updates__box__header h3 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #5f5f5f;
-  font-family: "Roboto", sans-serif;
-}
-.dashboard__updates__box__header span {
-  font-size: 1.4rem;
-  color: #7a7a7a;
-  font-family: "Roboto", sans-serif;
-  font-weight: 300;
-}
-.dashboard__updates__box__body {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  width: 100%;
 }
 
 /*# sourceMappingURL=App.css.map */

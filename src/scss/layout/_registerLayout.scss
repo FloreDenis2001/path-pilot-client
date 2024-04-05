@@ -1,6 +1,6 @@
 .register {
     &__container {
-      background-color: $color-white;
+      background-color: $color-black;
       padding: 2rem;
       border-radius: 10px;
       box-shadow: 0 0 10px 0 rgba($color-black, 0.8);
@@ -103,6 +103,10 @@
           &:hover {
             text-decoration: underline;
           }
+        }
+
+        p{
+          color: $color-white;
         }
       }
   

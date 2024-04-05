@@ -1,7 +1,15 @@
 .heading-primary {
     font-size: 3rem;
     font-weight: 400;
-    color: $color-grey;
+    color: $color-white;
+    font-family: $font-family-secondary;
+    margin-bottom: 1rem;
+}
+.heading-container {
+    font-size: 2rem;
+    font-weight: 400;
+    color: $color-white;
+
     font-family: $font-family-secondary;
     margin-bottom: 1rem;
 }
@@ -10,7 +18,8 @@
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: $color-grey;
+    color: $color-white;
+
     font-family: $font-family-secondary; 
 }
 
@@ -18,7 +27,8 @@
 .heading-secondary {
     font-size: 1rem;
     font-weight: 400;
-    color: $color-grey;
+    color: $color-white;
+
     font-family: $font-family-primary;
 }
 
@@ -26,7 +36,7 @@
         padding: 1rem;
         font-size: 1rem;
         font-family: $font-family-primary;
-        color: $color-grey-light;
+        color: $color-white;
 }
 
 .progress{
@@ -34,6 +44,40 @@
     &__icon{
         font-size: 2rem;
         color: $color-white;
+
     }
 
+}
+
+.yellow{
+    color: $color-yellow2;
+}
+
+.red{
+    color: $color-red2;
+}
+
+.green{
+    color: $color-green;
+}
+
+
+.purple{
+    color: $color-purple2;
+}
+
+.pink{
+    color: $color-pink;
+}
+
+.orange{
+    color: $color-orange;
+}
+
+.brown{
+    color: $color-brown;
+}
+
+.blue{
+    color: $color-primary;
 }

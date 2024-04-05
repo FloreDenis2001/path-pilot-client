@@ -19,7 +19,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import { useNavigate } from "react-router";
 
 const Sidebar = () => {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
   let nav = useNavigate();
 
   const showSidebar = () => setSidebar(!sidebar);
@@ -56,46 +56,46 @@ const Sidebar = () => {
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard")}
           >
-            <FaHome className="sidebar__menuBar__menu__link__icon" />
+            <FaHome className="sidebar__menuBar__menu__link__icon blue" />
             <p>Dashboard</p>
           </li>
           <li className="sidebar__menuBar__menu__link">
-            <FaRoute className="sidebar__menuBar__menu__link__icon" />
+            <FaRoute className="sidebar__menuBar__menu__link__icon yellow" />
             <p>Routes</p>
           </li>
           <li
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard/orders")}
           >
-            <FaCubes className="sidebar__menuBar__menu__link__icon" />
+            <FaCubes className="sidebar__menuBar__menu__link__icon pink" />
             <p>Orders</p>
           </li>
           <li className="sidebar__menuBar__menu__link">
-            <FaBox className="sidebar__menuBar__menu__link__icon" />
+            <FaBox className="sidebar__menuBar__menu__link__icon brown " />
             <p>Packages</p>
           </li>
           <li
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard/drivers")}
           >
-            <FaIdCard className="sidebar__menuBar__menu__link__icon" />
+            <FaIdCard className="sidebar__menuBar__menu__link__icon green" />
             <p>Drivers</p>
           </li>
           <li
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard/vehicles")}
           >
-            <FaTruck className="sidebar__menuBar__menu__link__icon" />
+            <FaTruck className="sidebar__menuBar__menu__link__icon orange" />
             <p>Vehicle</p>
           </li>
 
           <li className="sidebar__menuBar__menu__link">
-            <FaFileInvoice className="sidebar__menuBar__menu__link__icon" />
+            <FaFileInvoice className="sidebar__menuBar__menu__link__icon purple" />
             <p>Invoices</p>
           </li>
 
           <li className="sidebar__menuBar__menu__link">
-            <FaFile className="sidebar__menuBar__menu__link__icon" />
+            <FaFile className="sidebar__menuBar__menu__link__icon red" />
             <p>Reports</p>
           </li>
         </ul>
@@ -108,7 +108,7 @@ const Sidebar = () => {
         >
           <FontAwesomeIcon
             icon={faRightFromBracket}
-            className="sidebar__menuBar__menu__link__icon"
+            className="sidebar__menuBar__menu__link__icon blue"
           />
           <p>Logout</p>
         </li>

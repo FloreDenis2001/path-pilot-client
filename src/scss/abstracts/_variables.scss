@@ -6,10 +6,12 @@
 $color-primary: #2781e2;
 $color-secondary: #2DB7EA;
 $color-white: #ffffff;
-$color-white-2: #dcdfe2;
-$color-black: #1b1b1b;
+$color-white-2: #e7e7e7;
+$color-black: #21212b;
+$color-black-2:#181820;
 $color-grey-light: #7a7a7a;
 $color-grey: #5f5f5f;
+
 
 $color-cream: #FFEED9;
 
@@ -17,7 +19,23 @@ $color-green:#41e7a8;
 $color-green2:#5fb976;
 $color-red:#f02f2f;
 $color-red2:#eb8577;
-$color-rgba: rgba($color-grey-light, 0.3);
+$color-yellow:#f0c929;
+$color-purple:#a929f0;
+$color-purple2:#8b77eb;
+$color-yellow2:#f0e929;
+
+$color-orange:#f0a929;
+$color-orange2:#eb8b77;
+
+
+
+$color-pink:#eb77d8;
+
+$color-brown:#a97929;
+$color-brown2:#ebc677;
+
+
+$color-rgba: rgba($color-white, 0.3);
 
 // GRADIENTS
 
@@ -27,6 +45,8 @@ $linear-gradient: linear-gradient(90deg, $color-primary 0%, $color-secondary 54%
 $linear-gradient-2: linear-gradient(150deg, $color-secondary 0%, $color-primary 54%);
 $linear-gradient-3: linear-gradient(150deg, $color-red 0%, $color-red2 54%);
 $linear-gradient-4: linear-gradient(150deg, $color-green 0%, $color-green2 54%);
+$linear-gradient-5: linear-gradient(150deg, $color-yellow 0%, $color-yellow2 54%);
+$linear-gradient-6: linear-gradient(150deg, $color-purple 0%, $color-purple2 54%);
 $radial-gradient: radial-gradient(circle, $color-primary 0%, $color-secondary 100%);
 $radial-gradient: radial-gradient(circle,$color-secondary 0%, $color-primary 100%);
 
