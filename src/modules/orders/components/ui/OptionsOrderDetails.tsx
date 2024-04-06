@@ -3,18 +3,18 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaEdit, FaEllipsisV, FaPrint, FaReceipt } from "react-icons/fa";
 
-interface OptionsDropDownRowProps {
+interface OptionsOrderDetailsProps {
   index: number;
   onToggle: (index: number) => void;
-  onDetails: () => void;
+  onDelete: () => void;
   onEdit: () => void;
   onPrint: () => void;
 }
 
-const OptionsDropDownRow: React.FC<OptionsDropDownRowProps> = ({
+const OptionsOrderDetails: React.FC<OptionsOrderDetailsProps> = ({
   index,
   onToggle,
-  onDetails,
+  onDelete,
   onEdit,
   onPrint,
 }) => {
@@ -23,7 +23,10 @@ const OptionsDropDownRow: React.FC<OptionsDropDownRowProps> = ({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsActive(false);
       }
     };
@@ -52,30 +55,33 @@ const OptionsDropDownRow: React.FC<OptionsDropDownRowProps> = ({
         <FaEllipsisV />
       </div>
 
-        <ul className={isActive === false ? "dropdown__menu":"dropdown__menu active"}>
-          <li onClick={()=>onDetails()}>
-            <a href="#">
-              <FaReceipt className="dropdonw__icon" />
-              <button>Details</button>
-            </a>
-          </li>
+      <ul
+        className={
+          isActive === false ? "dropdown__menu" : "dropdown__menu active"
+        }
+      >
+        <li onClick={() => onPrint()}>
+          <a href="#">
+            <FaPrint className="dropdonw__icon" />
+            <button>Print Order</button>
+          </a>
+        </li>
+        <li onClick={() => onEdit()}>
+          <a href="#">
+            <FaEdit className="dropdonw__icon" />
+            <button>Edit</button>
+          </a>
+        </li>
 
-          <li onClick={()=>onEdit()}>
-            <a href="#">
-              <FaEdit className="dropdonw__icon" />
-              <button>Edit</button>
-            </a>
-          </li>
-
-          <li onClick={()=>onPrint()}>
-            <a href="#">
-              <FaPrint className="dropdonw__icon" />
-              <button>Print Order</button>
-            </a>
-          </li>
-        </ul>
+        <li onClick={() => onDelete()}>
+          <a href="#">
+            <FaReceipt className="dropdonw__icon" />
+            <button>Delete</button>
+          </a>
+        </li>
+      </ul>
     </div>
   );
 };
 
-export default OptionsDropDownRow;
+export default OptionsOrderDetails;

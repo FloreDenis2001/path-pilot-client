@@ -38,7 +38,6 @@ const Drivers = () => {
   return (
     <section className="drivers">
       <Sidebar />
-      <div className="drivers__container">
         <div className="drivers__header">
           <h1 className="heading-primary">Drivers</h1>
           <div
@@ -273,7 +272,6 @@ const Drivers = () => {
           </table>
           <Pagination />
         </div>
-      </div>
       {openModal && (
         <ModalAddDriver
           handleOpenModalAddDriver={() => handleOpenModalAddDriver()}

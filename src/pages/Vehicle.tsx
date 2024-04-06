@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Sidebar from "../components/Sidebar";
 import { FaEllipsisV, FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../components/Pagination";
-import ModalAddOrders from "../modules/orders/components/ModalAddOrders";
+import ModalAddOrders from "../modules/orders/components/forms/ModalAddOrders";
 import OptionsDropDownDrivers from "../components/driver/OptionsDropDownDrivers";
 import ModalDriversDetails from "../components/driver/ModalDriversDetails";
 import ModalEditDriver from "../components/driver/ModalEditDriver";
@@ -39,7 +39,6 @@ const Vehicle = () => {
   return (
     <section className="drivers">
       <Sidebar />
-      <div className="drivers__container">
         <div className="drivers__header">
           <h1 className="heading-primary">Vehicles</h1>
           <div
@@ -228,7 +227,6 @@ const Vehicle = () => {
           </table>
           <Pagination />
         </div>
-      </div>
       {openModal && (
         <ModalAddVehicle
           handleOpenModalAddVehicle={() => handleOpenModalAddVehicle()}

@@ -33,6 +33,8 @@ const Sidebar = () => {
         setSidebar(true);
       }
     }
+
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
@@ -56,8 +58,6 @@ const Sidebar = () => {
         </div>
       </div>
 
-    
-
       <div className="sidebar__menuBar">
         <ul className="sidebar__menuBar__menu">
           <li
@@ -67,17 +67,15 @@ const Sidebar = () => {
             <FaHome className="sidebar__menuBar__menu__link__icon blue" />
             <p>Dashboard</p>
           </li>
-          <li className="sidebar__menuBar__menu__link">
-            <FaRoute className="sidebar__menuBar__menu__link__icon yellow" />
-            <p>Routes</p>
-          </li>
           <li
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard/orders")}
           >
-            <FaCubes className="sidebar__menuBar__menu__link__icon pink" />
+            <FaCubes className="sidebar__menuBar__menu__link__icon yellow" />
+
             <p>Orders</p>
           </li>
+
           <li className="sidebar__menuBar__menu__link">
             <FaBox className="sidebar__menuBar__menu__link__icon brown " />
             <p>Packages</p>

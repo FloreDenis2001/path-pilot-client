@@ -33,7 +33,7 @@
   label {
     font-weight: 600;
     font-size: 1.4rem;
-    color: $color-grey;
+    color: $color-white;
   }
 
   &__input{
@@ -60,6 +60,8 @@
     outline: none;
     border: none;
     font-size: 1.6rem;
+    color: $color-white;
+
  
   }
 
@@ -79,7 +81,8 @@
   label {
     font-weight: 600;
     font-size: 1.4rem;
-    color: $color-grey;
+    color: $color-white;
+
   }
 
   select {
@@ -89,7 +92,8 @@
     border-radius: 1rem;
     gap: 2rem;
     height: 5rem;
-    color: $color-grey;
+    color: $color-white;
+
     width: 100%;
   }
 }

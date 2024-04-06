@@ -1,7 +1,7 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import OptionsDropDownOrderDetails from "./OptionsDropDownOrderDetails";
+import OptionsDropDownOrderDetails from "../ui/OptionsDropDownOrderDetails";
 interface ModalOrdersProps {
   handleOpenModal: () => void;
 }

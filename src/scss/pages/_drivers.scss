@@ -1,28 +1,17 @@
 .drivers {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 2rem;
-    height: 100vh;
-  
-  
-    &__container {
-      height: 100%;
-      width: 100%;
-      padding-top: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 2rem;
-    }
-  
+  display: grid;
+  grid-template-columns: 15rem repeat(11, 1fr);
+  grid-template-rows: 2rem repeat(11 , 1fr);
+  min-height: 100vh;
+  max-height: 100vh;
+
     &__header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 2rem;
-      background-color: $color-white;
+      background-color: $color-black;
+
       box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
       margin-bottom: 2rem;
       border-radius: 1rem;
@@ -31,9 +20,11 @@
       margin-bottom: 1rem;
       width: 90%;
       max-width: 120rem;
+      grid-area: 2 / 3 / 3 / 13;
     }
   
     &__filters {
+      grid-area: 3 / 3 / 4 / 13;
       display: flex;
       gap: 2rem;
       align-items: center;
@@ -48,7 +39,8 @@
       padding-inline: 1rem;
       padding-block: 2.5rem;
       border-radius: 1rem;
-      background-color: $color-white;
+      background-color: $color-black;
+
       box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
       margin: 0 auto;
       margin-bottom: 1rem;
@@ -62,6 +54,7 @@
     }
   
     &__table {
+      grid-area: 4 / 3 /11/ 13;
       padding: 2.5rem 1rem;
       display: flex;
       flex-direction: column;
@@ -75,7 +68,7 @@
       box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
       border-radius: 1rem;
       margin-bottom: 2rem;
-      background-color: $color-white;
+      background-color: $color-black;
     }
   }
   

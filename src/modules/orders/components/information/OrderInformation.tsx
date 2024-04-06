@@ -1,63 +1,70 @@
-import React from "react";
+import {
+  faBoxOpen,
+  faLocationDot,
+  faUser,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTruck, faMapMarkerAlt, faUser } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
+import { FaSearchLocation } from "react-icons/fa";
 
-const DriverInformation = () => {
+const OrderInformation = () => {
   return (
     <div className="information">
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faTruck} />
-          <h2>Driver Information</h2>
+          <FontAwesomeIcon icon={faBoxOpen} className="brown" />
+          <h2>Delivery Info</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Vehicle Number</h3>
-            <p>KAR 1234</p>
+            <h3>Pickup Date</h3>
+            <p>26 Dec 2023</p>
           </div>
           <div className="information__body__textBox">
-            <h3>License Plate</h3>
-            <p>ABC123</p>
+            <h3>Drop Off Time</h3>
+            <p>4 Days Estimation</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Driver Name</h3>
-            <p>John Doe</p>
+            <h3>Total Weight </h3>
+            <p>30.85 KG</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faMapMarkerAlt} />
+          <FontAwesomeIcon icon={faLocationDot} className="blue"  />
           <h2>Location</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Current Location</h3>
-            <p>5th Avenue, New York, NY, USA</p>
+            <h3>Pickup Location</h3>
+            <p>5th Cross, 9th Main, Indiranagar, Bangalore, Karnataka, India</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Last Seen</h3>
-            <p>1 hour ago</p>
+            <h3>Drop Off Location</h3>
+            <p>
+              10th Cross, 9th Main, Indiranagar, Bangalore, Karnataka, India
+            </p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faUser} />
-          <h2>Contact Info</h2>
+          <FontAwesomeIcon icon={faUser} className="yellow"  />
+          <h2>Customer Info</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Full Name</h3>
-            <p>John Doe</p>
+            <p>Flore Denis</p>
           </div>
           <div className="information__body__textBox">
             <h3>Email</h3>
-            <p>johndoe@example.com</p>
+            <p>floredenis907@yahoo.com</p>
           </div>
           <div className="information__body__textBox">
             <h3>Phone No</h3>
-            <p>123-456-7890</p>
+            <p>075138911</p>
           </div>
         </div>
       </div>
@@ -65,4 +72,4 @@ const DriverInformation = () => {
   );
 };
 
-export default DriverInformation;
+export default OrderInformation;

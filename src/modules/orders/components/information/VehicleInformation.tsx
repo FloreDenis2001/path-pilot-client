@@ -1,63 +1,67 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFileInvoice, faCalendarAlt, faMoneyBillWave } from "@fortawesome/free-solid-svg-icons";
+import { faCar, faGasPump, faCog } from "@fortawesome/free-solid-svg-icons";
 
-const InvoicesInformation = () => {
+const VehicleInformation = () => {
   return (
     <div className="information">
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faFileInvoice} />
-          <h2>Invoice Information</h2>
+          <FontAwesomeIcon icon={faCar} className="orange"  />
+          <h2>Vehicle Info</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Invoice Number</h3>
-            <p>INV-2023-001</p>
+            <h3>Make</h3>
+            <p>Toyota</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Issue Date</h3>
-            <p>15 Mar 2024</p>
+            <h3>Model</h3>
+            <p>Camry</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Due Date</h3>
-            <p>30 Mar 2024</p>
+            <h3>Year</h3>
+            <p>2020</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faCalendarAlt} />
-          <h2>Payment Schedule</h2>
+          <FontAwesomeIcon icon={faGasPump} className="purple"  />
+          <h2>Fuel Information</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Payment Terms</h3>
-            <p>Net 30 Days</p>
+            <h3>Fuel Type</h3>
+            <p>Petrol</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Payment Method</h3>
-            <p>Bank Transfer</p>
+            <h3>Fuel Capacity</h3>
+            <p>60 liters</p>
+          </div>
+          <div className="information__body__textBox">
+            <h3>Current Fuel Level</h3>
+            <p>40 liters</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faMoneyBillWave} />
-          <h2>Amount</h2>
+          <FontAwesomeIcon icon={faCog} className="red"  />
+          <h2>Maintenance</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Total Amount</h3>
-            <p>$1500.00</p>
+            <h3>Last Service</h3>
+            <p>20 Jan 2024</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Amount Paid</h3>
-            <p>$0.00</p>
+            <h3>Next Service Due</h3>
+            <p>20 Jul 2024</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Amount Due</h3>
-            <p>$1500.00</p>
+            <h3>Mileage</h3>
+            <p>50,000 km</p>
           </div>
         </div>
       </div>
@@ -65,4 +69,4 @@ const InvoicesInformation = () => {
   );
 };
 
-export default InvoicesInformation;
+export default VehicleInformation;

@@ -219,28 +219,19 @@
     border-radius: 5px;
     font-size: 1.4rem;
     font-weight: 600;
-    color: $color-white;
-    background-color: $color-primary;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
-  }
-  &__status2 {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: $color-primary;
-    background-color: $color-white;
-    transition: all 0.3s ease-in-out;
-    border: 1px solid $color-primary;
-    cursor: pointer;
+
+    @include respond(tab-land) {
+      font-size: 1.2rem;
+    }
   }
 
   &__details {
     font-size: 1.8rem;
     font-weight: bold;
     padding: 0.2rem 1rem;
-    color: $color-grey;
+    color: $color-white-2;
     border: none;
     background-color: transparent;
     cursor: pointer;
@@ -248,7 +239,10 @@
 
     &.active {
       border-bottom: 1px solid $color-secondary;
-      box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    }
+
+    @include respond(tab-land) {
+      font-size: 1.5rem;
     }
   }
 

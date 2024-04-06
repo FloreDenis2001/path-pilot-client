@@ -22,7 +22,9 @@ const SidebarMobile = () => {
   };
 
   function closeSidebar(): void {
-    const sidebar = document.querySelector(".sidebar__mobile__overlay") as HTMLElement;
+    const sidebar = document.querySelector(
+      ".sidebar__mobile__overlay"
+    ) as HTMLElement;
     sidebar.style.display = "none";
   }
 
@@ -41,7 +43,7 @@ const SidebarMobile = () => {
           <p className="sidebar__header__text"> PATHPILOT</p>
         </div>
 
-        <div className="sidebar__close" onClick={()=>closeSidebar()}>
+        <div className="sidebar__close" onClick={() => closeSidebar()}>
           <FontAwesomeIcon icon={faXmark} className="sidebar__close__icon" />
         </div>
 
@@ -54,17 +56,14 @@ const SidebarMobile = () => {
               <FaHome className="sidebar__menuBar__menu__link__icon blue" />
               <p>Dashboard</p>
             </li>
-            <li className="sidebar__menuBar__menu__link">
-              <FaRoute className="sidebar__menuBar__menu__link__icon yellow" />
-              <p>Routes</p>
-            </li>
             <li
               className="sidebar__menuBar__menu__link"
               onClick={() => handleNavigation("/dashboard/orders")}
             >
-              <FaCubes className="sidebar__menuBar__menu__link__icon pink" />
+              <FaCubes className="sidebar__menuBar__menu__link__icon yellow" />
               <p>Orders</p>
             </li>
+
             <li className="sidebar__menuBar__menu__link">
               <FaBox className="sidebar__menuBar__menu__link__icon brown " />
               <p>Packages</p>

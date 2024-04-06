@@ -3,7 +3,6 @@
     font-weight: 400;
     color: $color-white;
     font-family: $font-family-secondary;
-    margin-bottom: 1rem;
 
     @include respond(phone){
         font-size: 2.5rem;

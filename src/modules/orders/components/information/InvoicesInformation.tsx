@@ -1,70 +1,67 @@
-import {
-  faBoxOpen,
-  faLocationDot,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { FaSearchLocation } from "react-icons/fa";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faFileInvoice,
+  faCalendarAlt,
+  faMoneyBillWave,
+} from "@fortawesome/free-solid-svg-icons";
 
-const OrderInformation = () => {
+const InvoicesInformation = () => {
   return (
     <div className="information">
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faBoxOpen} />
-          <h2>Delivery Information</h2>
+          <FontAwesomeIcon icon={faFileInvoice} className="purple" />
+          <h2>Invoice Info</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Pickup Date</h3>
-            <p>26 Dec 2023</p>
+            <h3>Invoice Number</h3>
+            <p>INV-2023-001</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Drop Off Time</h3>
-            <p>4 Days Estimation</p>
+            <h3>Issue Date</h3>
+            <p>15 Mar 2024</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Total Weight </h3>
-            <p>30.85 KG</p>
+            <h3>Due Date</h3>
+            <p>30 Mar 2024</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faLocationDot} />
-          <h2>Location</h2>
+          <FontAwesomeIcon icon={faCalendarAlt} className="blue" />
+          <h2>Payment</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Pickup Location</h3>
-            <p>5th Cross, 9th Main, Indiranagar, Bangalore, Karnataka, India</p>
+            <h3>Payment Terms</h3>
+            <p>Net 30 Days</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Drop Off Location</h3>
-            <p>
-              10th Cross, 9th Main, Indiranagar, Bangalore, Karnataka, India
-            </p>
+            <h3>Payment Method</h3>
+            <p>Bank Transfer</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faUser} />
-          <h2>Customer Info</h2>
+          <FontAwesomeIcon icon={faMoneyBillWave} className="green" />
+          <h2>Amount</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Full Name</h3>
-            <p>Flore Denis</p>
+            <h3>Total Amount</h3>
+            <p>$1500.00</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Email</h3>
-            <p>floredenis907@yahoo.com</p>
+            <h3>Amount Paid</h3>
+            <p>$0.00</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Phone No</h3>
-            <p>075138911</p>
+            <h3>Amount Due</h3>
+            <p>$1500.00</p>
           </div>
         </div>
       </div>
@@ -72,4 +69,4 @@ const OrderInformation = () => {
   );
 };
 
-export default OrderInformation;
+export default InvoicesInformation;
