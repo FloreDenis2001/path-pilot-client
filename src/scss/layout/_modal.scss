@@ -196,7 +196,7 @@
         h2 {
           font-family: $font-family-primary;
           font-size: 2rem;
-          color: $color-grey;
+          color: $color-white;
           margin-bottom: 1rem;
         }
 
@@ -264,13 +264,14 @@
             padding-left: 1rem;
             font-weight: 600;
             font-size: 1.4rem;
-            color: $color-grey;
+            color: $color-white-2;
           }
 
           input {
             width: 100%;
             padding: 1rem;
             border: 1px solid $color-rgba;
+            background-color: $color-black-2;
             border-radius: 5px;
             font-family: $font-family-primary;
             font-size: 1.4rem;

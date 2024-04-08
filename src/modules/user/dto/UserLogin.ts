@@ -1,8 +1,10 @@
 export default interface UserLogin{
     id:number,
-    email:string,
-    token:string,
+    username:string,
     firstName:string,
     lastName:string,
-    userRole:string,
+    role:string,
+    email:string,
+    phone:string,
+    token:string,
  }

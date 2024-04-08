@@ -12,11 +12,13 @@ export const LoginContext = React.createContext<LoginContextType | null>(null);
 const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
   const [user, setUser] = useState<UserLogin>({
     id: 0,
-    email: "NOEMAIL",
-    token: "NOTOKEN",
+    username: "NOUSERNAME",
     firstName: "NOFIRSTNAME",
     lastName: "NOLASTNAME",
-    userRole: "NOUSERROLE",
+    email: "NOEMAIL",
+    role: "NOUSERROLE",
+    phone: "NOPHONE",
+    token: "NOTOKEN",
   });
 
   useEffect(() => {
@@ -31,20 +33,22 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
     setUser(user);
   }
 
-  function logOut(){
+  function logOut() {
     Cookies.remove("authedUser");
     setUserCookie({
       id: 0,
-      email: "NOEMAIL",
-      token: "NOTOKEN",
+      username: "NOUSERNAME",
       firstName: "NOFIRSTNAME",
       lastName: "NOLASTNAME",
-      userRole: "NOUSERROLE",
+      email: "NOEMAIL",
+      role: "NOUSERROLE",
+      phone: "NOPHONE",
+      token: "NOTOKEN",
     });
   }
 
   return (
-    <LoginContext.Provider value={{ user, setUserCookie,logOut }}>
+    <LoginContext.Provider value={{ user, setUserCookie, logOut }}>
       {children}
     </LoginContext.Provider>
   );
