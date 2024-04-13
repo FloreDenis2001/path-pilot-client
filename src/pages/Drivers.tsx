@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../modules/core/components/Sidebar";
 import {  FaPlus, FaSearch } from "react-icons/fa";
-import Pagination from "../components/Pagination";
+import Pagination from "../modules/core/components/Pagination";
 
 import OptionsDropDownDrivers from "../components/driver/OptionsDropDownDrivers";
 import ModalDriversDetails from "../components/driver/ModalDriversDetails";

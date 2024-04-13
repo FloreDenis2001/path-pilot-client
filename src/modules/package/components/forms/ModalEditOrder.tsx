@@ -1,5 +1,5 @@
 import React from 'react'
-import OptionsDropDownOrderDetails from '../ui/OptionsDropDownOrderDetails';
+import OptionsDropDownOrderDetails from '../../../orders/components/ui/OptionsDropDownOrderDetails';
 interface ModalOrdersProps {
     handleOpenModal: () => void;
   }

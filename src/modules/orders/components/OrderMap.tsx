@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
+import Sidebar from "../../core/components/Sidebar";
 import { FaPlus } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,11 +15,11 @@ import OrderInformation from "./information/OrderInformation";
 import DriverInformation from "./information/DriverInformation";
 import VehicleInformation from "./information/VehicleInformation";
 import InvoicesInformation from "./information/InvoicesInformation";
-import SidebarMobile from "../../../components/SidebarMobile";
-import ModalAddOrders from "./forms/ModalAddOrders";
-import ModalOrderDetails from "./forms/ModalOrderDetails";
-import ModalEditOrder from "./forms/ModalEditOrder";
-import OptionsOrders from "./ui/OptionsOrders";
+import SidebarMobile from "../../core/components/SidebarMobile";
+import ModalAddOrders from "../../package/components/forms/ModalAddPackage";
+import ModalOrderDetails from "../../package/components/forms/ModalOrderDetails";
+import ModalEditOrder from "../../package/components/forms/ModalEditOrder";
+import OptionsOrders from "../../package/components/ui/OptionsPackage";
 import OptionsOrderDetails from "./ui/OptionsOrderDetails";
 
 const OrderMap = () => {
@@ -71,13 +71,7 @@ const OrderMap = () => {
             <h1 className="heading-primary">Orders</h1>
           </div>
 
-          <OptionsOrders
-              index={3}
-              onToggle={handleDropdownToggle}
-              onAdd={handleOpenModalAddOrder}
-              onImport={() => console.log("Import Orders")}
-              onExport={() => console.log("Export Orders")}
-            />
+      
         </div>
 
         <div className="order__container__maps">

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../modules/core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faArrowRight,
@@ -14,10 +14,10 @@ import {
 import Badge from "@mui/material/Badge";
 import image from "../assets/logoDefault.png";
 import { FaSearch } from "react-icons/fa";
-import BarChartComponent from "../components/BarChartComponent";
+import BarChartComponent from "../modules/core/components/BarChartComponent";
 import { Chart, registerables } from "chart.js";
-import DoughnutChart from "../components/DoughnutChart";
-import SidebarMobile from "../components/SidebarMobile";
+import DoughnutChart from "../modules/core/components/DoughnutChart";
+import SidebarMobile from "../modules/core/components/SidebarMobile";
 
 Chart.register(...registerables);
 const DashBoard = () => {

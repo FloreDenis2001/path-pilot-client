@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useRef, useEffect } from "react";
 import { FaEdit, FaEllipsisV, FaPrint, FaReceipt } from "react-icons/fa";
 
-interface OptionsOrdersProps {
+interface OptionsPackageProps {
   index: number;
   onToggle: (index: number) => void;
   onAdd: () => void;
@@ -17,7 +17,7 @@ interface OptionsOrdersProps {
   onExport: () => void;
 }
 
-const OptionsOrders: React.FC<OptionsOrdersProps> = ({
+const OptionsPackage: React.FC<OptionsPackageProps> = ({
   index,
   onToggle,
   onAdd,
@@ -69,7 +69,7 @@ const OptionsOrders: React.FC<OptionsOrdersProps> = ({
         <li onClick={() => onAdd()}>
           <a href="#">
             <FontAwesomeIcon className="dropdonw__icon" icon={faPlus} />
-            <button>Add Order</button>
+            <button>Add Package</button>
           </a>
         </li>
 
@@ -91,4 +91,4 @@ const OptionsOrders: React.FC<OptionsOrdersProps> = ({
   );
 };
 
-export default OptionsOrders;
+export default OptionsPackage;

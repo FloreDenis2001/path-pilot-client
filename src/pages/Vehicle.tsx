@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Sidebar from "../components/Sidebar";
+import Sidebar from "../modules/core/components/Sidebar";
 import { FaEllipsisV, FaPlus, FaSearch } from "react-icons/fa";
-import Pagination from "../components/Pagination";
-import ModalAddOrders from "../modules/orders/components/forms/ModalAddOrders";
+import Pagination from "../modules/core/components/Pagination";
+import ModalAddOrders from "../modules/package/components/forms/ModalAddPackage";
 import OptionsDropDownDrivers from "../components/driver/OptionsDropDownDrivers";
 import ModalDriversDetails from "../components/driver/ModalDriversDetails";
 import ModalEditDriver from "../components/driver/ModalEditDriver";
