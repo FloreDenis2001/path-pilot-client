@@ -29,6 +29,42 @@ class PackageService extends ApiServer {
       return Promise.reject([]);
     }
   };
+
+
+  deletePackage = async (awb: string): Promise<any> => {
+    const response = await this.api<null, any>(
+      `/packages/delete/` + awb,
+      "DELETE",
+      null,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.json();
+      return data;
+    } else {
+      return Promise.reject([]);
+    }
+  };
+
+
+  updatePackage = async (awb:string ,data: PackageRequest): Promise<any> => {
+    const response = await this.api<PackageRequest, any>(
+      `/packages/edit/` + awb,
+      "PUT",
+      data,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.json();
+      console.log(data);
+      return data;
+    } else {
+      return Promise.reject([]);
+    }
+  };
+
+
+
 }
 
 export default PackageService;

@@ -11,14 +11,13 @@ import {
   faRoad,
 } from "@fortawesome/free-solid-svg-icons";
 import ProgressSteps from "./ui/ProgressSteps";
-import OrderInformation from "./information/OrderInformation";
+import OrderInformation from "../../package/components/information/PackInformation";
 import DriverInformation from "./information/DriverInformation";
 import VehicleInformation from "./information/VehicleInformation";
-import InvoicesInformation from "./information/InvoicesInformation";
+import InvoicesInformation from "../../package/components/information/InvoiceInformation";
 import SidebarMobile from "../../core/components/SidebarMobile";
 import ModalAddOrders from "../../package/components/forms/ModalAddPackage";
 import ModalOrderDetails from "../../package/components/forms/ModalOrderDetails";
-import ModalEditOrder from "../../package/components/forms/ModalEditOrder";
 import OptionsOrders from "../../package/components/ui/OptionsPackage";
 import OptionsOrderDetails from "./ui/OptionsOrderDetails";
 
@@ -313,13 +312,13 @@ const OrderMap = () => {
               Invoices
             </button>
           </div>
-          {activeButton === "order" && <OrderInformation />}
+          {/* {activeButton === "order" && <OrderInformation />}
           {activeButton === "driver" && <DriverInformation />}
           {activeButton === "vehicle" && <VehicleInformation />}
-          {activeButton === "invoices" && <InvoicesInformation />}
+          {activeButton === "invoices" && <InvoicesInformation />} */}
         </div>
       </div>
-
+{/* 
       {openModal && (
         <ModalAddOrders
           handleOpenModalAddOrder={() => handleOpenModalAddOrder()}
@@ -327,11 +326,11 @@ const OrderMap = () => {
       )}
       {openOrderDetails && (
         <ModalOrderDetails handleOpenModal={() => handleOpenOrdersDetails()} />
-      )}
+      )} */}
 
-      {openModalEdit && (
+      {/* {openModalEdit && (
         <ModalEditOrder handleOpenModal={() => handleOpenModalEdit()} />
-      )}
+      )} */}
     </section>
   );
 };

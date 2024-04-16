@@ -11,14 +11,19 @@ import Package from "../../model/Package";
 
 interface PackageCardProps {
   pack: Package;
+  onClick: (pack: Package) => void;
 }
 
-const PackageCard: React.FC<PackageCardProps> = ({ pack }) => {
+const PackageCard: React.FC<PackageCardProps> = ({ pack, onClick }) => {
+  const handlePackClick = () => {
+    onClick(pack);
+  };
+
   return (
-    <div className="order__card">
+    <div className="order__card " onClick={handlePackClick}>
       <div className="order__card__header">
-        <h2>Client : </h2>
-        <span>{pack.shipmentDTO.originName}</span>
+        <h2>AWB : </h2>
+        <span>{pack.awb}</span>
       </div>
 
       <div className="order__card__body">
@@ -42,7 +47,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack }) => {
             icon={faMoneyBill}
             className="order__card__body__infoItem__icon orange"
           />
-          <span>{pack.shipmentDTO.distance}</span>
+          <span>{pack.totalAmount} RON</span>
         </div>
 
         <div className="order__card__body__infoItem">
@@ -50,7 +55,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack }) => {
             icon={faClock}
             className="order__card__body__infoItem__icon purple"
           />
-          <span>{pack.shipmentDTO.distance}</span>
+          <span>4 days</span>
         </div>
       </div>
 

@@ -6,8 +6,14 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { FaSearchLocation } from "react-icons/fa";
+import Package from "../../model/Package";
 
-const OrderInformation = () => {
+interface PackInformationProps {
+  pack: Package;
+}
+
+const PackInformation: React.FC<PackInformationProps> = ({ pack }) => {
+  console.log(pack);  
   return (
     <div className="information">
       <div className="information__column">
@@ -17,54 +23,64 @@ const OrderInformation = () => {
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
-            <h3>Pickup Date</h3>
-            <p>26 Dec 2023</p>
+            <h3>Width  </h3>
+            <p>{pack.width} cm</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Drop Off Time</h3>
-            <p>4 Days Estimation</p>
+            <h3>Height </h3>
+            <p>{pack.height} cm</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Total Weight </h3>
-            <p>30.85 KG</p>
+            <h3>Weight </h3>
+            <p>{pack.weight} kg</p>
+          </div>
+          <div className="information__body__textBox">
+            <h3>Total Ammount  </h3>
+            <p>{pack.totalAmount} RON</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faLocationDot} className="blue"  />
+          <FontAwesomeIcon icon={faLocationDot} className="blue" />
           <h2>Location</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Pickup Location</h3>
-            <p>5th Cross, 9th Main, Indiranagar, Bangalore, Karnataka, India</p>
+            <p>
+              {pack.shipmentDTO.origin.country} , {pack.shipmentDTO.origin.city} , {pack.shipmentDTO.origin.street} , {pack.shipmentDTO.origin.streetNumber} , {pack.shipmentDTO.origin.postalCode}
+            </p>
           </div>
           <div className="information__body__textBox">
             <h3>Drop Off Location</h3>
             <p>
-              10th Cross, 9th Main, Indiranagar, Bangalore, Karnataka, India
+            {pack.shipmentDTO.destination.country} , {pack.shipmentDTO.destination.city} , {pack.shipmentDTO.destination.street} , {pack.shipmentDTO.destination.streetNumber} , {pack.shipmentDTO.destination.postalCode} 
+            </p>
+          </div>
+
+          <div className="information__body__textBox">
+            <h3>Distance </h3>
+            <p>
+              {pack.shipmentDTO.distance}638  km
             </p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faUser} className="yellow"  />
+          <FontAwesomeIcon icon={faUser} className="yellow" />
           <h2>Customer Info</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Full Name</h3>
-            <p>Flore Denis</p>
+            <p>{pack.shipmentDTO.originName}</p>
           </div>
-          <div className="information__body__textBox">
-            <h3>Email</h3>
-            <p>floredenis907@yahoo.com</p>
-          </div>
+      
           <div className="information__body__textBox">
             <h3>Phone No</h3>
-            <p>075138911</p>
+            <p>{pack.shipmentDTO.originPhone}</p>
           </div>
         </div>
       </div>
@@ -72,4 +88,4 @@ const OrderInformation = () => {
   );
 };
 
-export default OrderInformation;
+export default PackInformation;

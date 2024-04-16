@@ -20,11 +20,14 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal }) => {
 
         <div className="modal__container__body">
           <div className="modal__container__body__content">
-            <h2>Vehicle Information  </h2>
+            <h2>Vehicle Information </h2>
             <div className="modal__container__body__content__main--drivers">
               <div className="modal__container__body__content__input">
                 <label>Registration Number</label>
-                <input type="text" placeholder="Enter the registration number"  />
+                <input
+                  type="text"
+                  placeholder="Enter the registration number"
+                />
               </div>{" "}
               <div className="modal__container__body__content__input">
                 <label>Type</label>
@@ -34,7 +37,6 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal }) => {
                 <label>Capacity(cm3)</label>
                 <input type="text" placeholder="Enter the  capacity" />
               </div>
-
               <div className="modal__container__body__content__select">
                 <label>Status</label>
                 <select name="status" id="modal__status">

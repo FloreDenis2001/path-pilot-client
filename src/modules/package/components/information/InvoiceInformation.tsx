@@ -5,8 +5,13 @@ import {
   faCalendarAlt,
   faMoneyBillWave,
 } from "@fortawesome/free-solid-svg-icons";
+import Package from "../../model/Package";
 
-const InvoicesInformation = () => {
+interface InvoiceInformationProps {
+  pack: Package;
+}
+
+const InvoiceInformation:React.FC<InvoiceInformationProps> = ({pack}) => {
   return (
     <div className="information">
       <div className="information__column">
@@ -69,4 +74,4 @@ const InvoicesInformation = () => {
   );
 };
 
-export default InvoicesInformation;
+export default InvoiceInformation;

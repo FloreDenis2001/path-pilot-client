@@ -3,5 +3,5 @@ export default interface Address {
     city:string;
     street:string;
     streetNumber:string;
-    postalCode:string;
+    postalCode:string;    
 }

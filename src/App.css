@@ -996,13 +996,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   border-radius: 5px;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #2781e2;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-}
-.modal__container__header__actions__status:hover {
-  background-color: #2781e2;
 }
 .modal__container__body {
   display: flex;
@@ -1158,6 +1153,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .modal__container__body__content__input input {
   width: 100%;
   padding: 1rem;
+  color: #e7e7e7;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background-color: #181820;
   border-radius: 5px;
@@ -1711,7 +1707,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .order__card {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 0.6rem;
   gap: 1rem;
   width: 100%;
