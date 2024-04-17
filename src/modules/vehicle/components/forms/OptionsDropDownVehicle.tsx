@@ -1,5 +1,3 @@
-// OptionsDropDownRow.tsx
-
 import React, { useState, useRef, useEffect } from "react";
 import { FaEdit, FaEllipsisV, FaLock, FaPrint, FaReceipt, FaTrash } from "react-icons/fa";
 

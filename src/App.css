@@ -569,6 +569,7 @@ select {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 0.5rem;
 }
 .searchBox label {
   font-weight: 600;
@@ -606,6 +607,7 @@ select {
   flex-direction: column;
   align-items: flex-start;
   width: 20%;
+  gap: 0.5rem;
 }
 .filtersBox label {
   font-weight: 600;
@@ -614,13 +616,18 @@ select {
 }
 .filtersBox select {
   border: 1px solid rgba(122, 122, 122, 0.3);
-  padding-inline: 0.7rem;
+  padding-inline: 1rem;
   padding-block: 0.5rem;
   border-radius: 1rem;
   gap: 2rem;
   height: 5rem;
   color: #ffffff;
   width: 100%;
+}
+.filtersBox option {
+  font-size: 1.6rem;
+  color: #ffffff;
+  background-color: #181820;
 }
 
 table {
@@ -630,6 +637,7 @@ table {
 }
 table thead {
   background: #2781e2;
+  border: 1px solid #2781e2;
 }
 table thead th {
   font-size: 1.3rem;
@@ -663,7 +671,7 @@ table tbody tr {
   margin: 0 auto;
   margin-bottom: 2rem;
   transition: all 0.3s;
-  border: 1px solid #5f5f5f;
+  border: 1px solid #7a7a7a;
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -1931,7 +1939,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 90%;
   max-width: 120rem;
   z-index: 1;

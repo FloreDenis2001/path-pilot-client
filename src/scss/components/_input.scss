@@ -28,6 +28,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 0.5rem;
   
 
   label {
@@ -77,6 +78,7 @@
   flex-direction: column;
   align-items: flex-start;
   width: 20%;
+  gap: 0.5rem;
 
   label {
     font-weight: 600;
@@ -87,13 +89,20 @@
 
   select {
     border: 1px solid rgba($color-grey-light,0.3);
-    padding-inline: 0.7rem;
+    padding-inline: 1rem;
     padding-block: 0.5rem;
     border-radius: 1rem;
     gap: 2rem;
     height: 5rem;
     color: $color-white;
-
     width: 100%;
+
+
+  }
+
+  option{
+    font-size: 1.6rem;
+    color: $color-white;
+    background-color: $color-black-2;
   }
 }
