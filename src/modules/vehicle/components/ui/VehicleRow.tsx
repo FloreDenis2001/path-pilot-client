@@ -51,7 +51,7 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
         <td>{vehicle.fuelType}</td>
         <td>{vehicle.fuelConsumption}</td>
         <td className="td__status ">
-          {vehicle.isActive ? (
+          {vehicle.active === true ? (
             <span className="td__status__active">Active</span>
           ) : (
             <span className="td__status__inActive">InActive</span>

@@ -2,23 +2,31 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../../core/components/Pagination";
+import { useDispatch, useSelector } from 'react-redux';
 import Vehicle from "../models/Vehicle";
 import VehicleService from "../service/VehicleService";
 import VehicleRow from "./ui/VehicleRow";
 import ModalAddVehicle from "./forms/ModalAddVehicle";
+import { selectVehicles, selectVehiclesState } from "../../../store/vehicles/vehicles.selectors";
 
 const VehicleMap = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const retriveState = useSelector(selectVehiclesState);
+  const dispatch = useDispatch();
   const vehiclesPerPage = 8;
+
+  const  vehicles = useSelector(selectVehicles);
 
   let [myVehicles, setMyVehicles] = useState<Vehicle[]>([]);
 
   const vehicleService = new VehicleService();
 
   const fetchVehicles = async () => {
+    // dispatch();
     try {
       let vehicles = await vehicleService.allVehicles();
+      console.log(vehicles);
       setMyVehicles(vehicles);
     } catch (err) {
       console.log((err as Error).message);

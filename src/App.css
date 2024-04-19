@@ -1119,6 +1119,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: column;
   gap: 0.5rem;
   font-family: "Roboto", sans-serif;
+  color: #ffffff;
   transition: all 0.3s ease-in-out;
   font-size: 1.5rem;
   align-items: flex-start;
@@ -1128,7 +1129,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   padding-left: 1rem;
   font-weight: 600;
   font-size: 1.4rem;
-  color: #5f5f5f;
+  color: #ffffff;
 }
 .modal__container__body__content__select select {
   width: 100%;
@@ -1141,6 +1142,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .modal__container__body__content__select select:focus {
   border: 1px solid #2781e2;
+}
+.modal__container__body__content option {
+  color: #ffffff;
+  background-color: #181820;
 }
 .modal__container__body__content__input {
   display: flex;

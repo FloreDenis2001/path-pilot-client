@@ -7,20 +7,27 @@ interface ModalVehicleProps {
   handleOpenModal: () => void;
   vehicle: Vehicle;
 }
-const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal , vehicle }) => {
+const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
+  handleOpenModal,
+  vehicle,
+}) => {
   let [make, setMake] = useState<string>(vehicle.make);
   let [model, setModel] = useState<string>(vehicle.model);
   let [year, setYear] = useState<number>(vehicle.year);
   let [fuelType, setFuelType] = useState<string>(vehicle.fuelType);
-  let [fuelConsumption, setFuelConsumption] = useState<number>(vehicle.fuelConsumption);
+  let [fuelConsumption, setFuelConsumption] = useState<number>(
+    vehicle.fuelConsumption
+  );
   let [lastService, setLastService] = useState<Date>(vehicle.lastService);
   let [nextService, setNextService] = useState<Date>(vehicle.nextService);
   let [km, setKm] = useState<number>(vehicle.km);
-  let [registrationNumber, setRegistrationNumber] = useState<string>(vehicle.registrationNumber);
+  let [registrationNumber, setRegistrationNumber] = useState<string>(
+    vehicle.registrationNumber
+  );
   let [capacity, setCapacity] = useState<number>(vehicle.capacity);
+  let [active, setIsActive] = useState<boolean>(vehicle.active);
 
   const vehicleService = new VehicleService();
-
 
   const updateVehicle = async () => {
     let data = {
@@ -34,8 +41,10 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal , vehic
       km,
       registrationNumber,
       capacity,
+      active
     } as Vehicle;
-
+    
+    console.log(data);
     try {
       await vehicleService.updateVehicle(data);
     } catch (err) {
@@ -43,10 +52,8 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal , vehic
     }
 
     handleOpenModal();
-
   };
 
-  
   return (
     <section className="modal">
       <div className="modal__container">
@@ -163,6 +170,14 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal , vehic
                   onChange={(e) => setCapacity(parseInt(e.target.value))}
                 />
               </div>
+
+              <div className="modal__container__body__content__select">
+                <label htmlFor="">IsActive</label>
+                <select name="" id="" value={active ? 'true' : 'false'} onChange={(e) => setIsActive(e.target.value === "true")}>
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -174,7 +189,12 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({ handleOpenModal , vehic
           >
             Cancel
           </button>
-          <button className="button__modal  button__modal__save" onClick={updateVehicle}>Update</button>
+          <button
+            className="button__modal  button__modal__save"
+            onClick={updateVehicle}
+          >
+            Update
+          </button>
         </div>
       </div>
     </section>

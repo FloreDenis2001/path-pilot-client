@@ -15,7 +15,7 @@ export default interface Vehicle{
     km:number;
     registrationNumber:string;
     capacity:number;
-    isActive:boolean;
+    active:boolean;
     routes:Route[];
     
 }
