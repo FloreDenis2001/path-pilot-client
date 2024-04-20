@@ -1,16 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LogoDefault from "../../../assets/logoDefault.png";
-import {
-  FaCaretRight,
-  FaHome,
-  FaCubes,
-  FaIdCard,
-  FaTruck,
-  FaFile,
-  FaRoute,
-  FaFileInvoice,
-  FaBox,
-} from "react-icons/fa";
+import { FaHome, FaCubes, FaIdCard, FaTruck, FaFile, FaFileInvoice, FaBox } from "react-icons/fa";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
@@ -19,7 +9,6 @@ const Sidebar = () => {
   const [sidebar, setSidebar] = useState(true);
   let nav = useNavigate();
 
-  const showSidebar = () => setSidebar(!sidebar);
 
   const handleNavigation = (path: string) => {
     nav(path);

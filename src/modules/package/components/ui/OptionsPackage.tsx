@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useRef, useEffect } from "react";
-import { FaEdit, FaEllipsisV, FaPrint, FaReceipt } from "react-icons/fa";
+import {FaEllipsisV } from "react-icons/fa";
 
 interface OptionsPackageProps {
   index: number;
@@ -67,24 +67,18 @@ const OptionsPackage: React.FC<OptionsPackageProps> = ({
         }
       >
         <li onClick={() => onAdd()}>
-          <a href="#">
             <FontAwesomeIcon className="dropdonw__icon" icon={faPlus} />
             <button>Add Package</button>
-          </a>
         </li>
 
         <li onClick={() => onImport()}>
-          <a href="#">
             <FontAwesomeIcon className="dropdonw__icon" icon={faFileImport} />
             <button>Imports XML</button>
-          </a>
         </li>
 
         <li onClick={() => onExport()}>
-          <a href="#">
             <FontAwesomeIcon className="dropdonw__icon" icon={faFileExport} />
             <button>Exports XML</button>
-          </a>
         </li>
       </ul>
     </div>

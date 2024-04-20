@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -15,8 +15,6 @@ import ModalAddPackage from "./forms/ModalAddPackage";
 const PackageMap = () => {
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
-  const [openOrderDetails, setOpenOrderDetails] = useState(false);
-  const [openModalEdit, setOpenModalEdit] = useState(false);
   const [packClicked, setPackClicked] = useState<Package>();
 
   const hanlderPackageClick = (pack: Package) => {
@@ -37,13 +35,7 @@ const PackageMap = () => {
     setOpenModal(!openModal);
   };
 
-  const handleOpenOrdersDetails = () => {
-    setOpenOrderDetails(!openOrderDetails);
-  };
 
-  const handleOpenModalEdit = () => {
-    setOpenModalEdit(!openModalEdit);
-  };
 
   function openMenu(): void {
     const sidebar = document.querySelector(

@@ -2,17 +2,7 @@ import { faRightFromBracket, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import LogoDefault from "../../../assets/logoDefault.png";
 
-import React from "react";
-import {
-  FaBox,
-  FaCubes,
-  FaFile,
-  FaFileInvoice,
-  FaHome,
-  FaIdCard,
-  FaRoute,
-  FaTruck,
-} from "react-icons/fa";
+import { FaBox, FaCubes, FaFile, FaFileInvoice, FaHome, FaIdCard, FaTruck } from "react-icons/fa";
 import { useNavigate } from "react-router";
 
 const SidebarMobile = () => {

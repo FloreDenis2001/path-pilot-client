@@ -1,24 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
-import { FaPlus } from "react-icons/fa";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faCirclePlay,
-  faCircleStop,
-  faClock,
-  faIdCard,
-  faRoad,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCirclePlay, faCircleStop, faClock, faRoad } from "@fortawesome/free-solid-svg-icons";
 import ProgressSteps from "./ui/ProgressSteps";
-import OrderInformation from "../../package/components/information/PackInformation";
 import DriverInformation from "./information/DriverInformation";
 import VehicleInformation from "./information/VehicleInformation";
-import InvoicesInformation from "../../package/components/information/InvoiceInformation";
 import SidebarMobile from "../../core/components/SidebarMobile";
-import ModalAddOrders from "../../package/components/forms/ModalAddPackage";
-import ModalOrderDetails from "../../package/components/forms/ModalOrderDetails";
-import OptionsOrders from "../../package/components/ui/OptionsPackage";
 import OptionsOrderDetails from "./ui/OptionsOrderDetails";
 
 const OrderMap = () => {
@@ -28,7 +15,6 @@ const OrderMap = () => {
     setActiveButton(button);
   };
   const [openDropdown, setOpenDropdown] = useState(-1);
-  const [openModal, setOpenModal] = useState(false);
   const [openOrderDetails, setOpenOrderDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
 
@@ -36,9 +22,7 @@ const OrderMap = () => {
     setOpenDropdown(openDropdown === index ? -1 : index);
   };
 
-  const handleOpenModalAddOrder = () => {
-    setOpenModal(!openModal);
-  };
+ 
 
   const handleOpenOrdersDetails = () => {
     setOpenOrderDetails(!openOrderDetails);

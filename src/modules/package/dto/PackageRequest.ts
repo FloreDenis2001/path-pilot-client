@@ -6,6 +6,7 @@ export default interface PackageRequest {
     weight: number;
     height: number;
     width: number;
+    length: number;
     deliveryDescription: string;
     originName: string;
     destinationName: string;

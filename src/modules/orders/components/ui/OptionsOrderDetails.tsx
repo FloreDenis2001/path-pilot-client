@@ -61,23 +61,17 @@ const OptionsOrderDetails: React.FC<OptionsOrderDetailsProps> = ({
         }
       >
         <li onClick={() => onPrint()}>
-          <a href="#">
             <FaPrint className="dropdonw__icon" />
             <button>Print Order</button>
-          </a>
         </li>
         <li onClick={() => onEdit()}>
-          <a href="#">
             <FaEdit className="dropdonw__icon" />
             <button>Edit</button>
-          </a>
         </li>
 
         <li onClick={() => onDelete()}>
-          <a href="#">
             <FaReceipt className="dropdonw__icon" />
             <button>Delete</button>
-          </a>
         </li>
       </ul>
     </div>

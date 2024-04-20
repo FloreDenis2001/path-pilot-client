@@ -788,30 +788,22 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .dropdown__menu li {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 1rem;
   cursor: pointer;
   transition: all 0.2s;
   list-style: none;
   width: 100%;
   color: #ffffff;
+  gap: 1rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #ffffff;
 }
 .dropdown__menu li:hover {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
 }
 .dropdown__menu li:hover a {
-  color: #ffffff;
-}
-.dropdown__menu a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-align: left;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1.4rem;
-  font-weight: 700;
-  width: 100%;
   color: #ffffff;
 }
 

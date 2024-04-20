@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import OptionsOrderDetails from "../../../orders/components/ui/OptionsOrderDetails";
-import OrderInformation from "../information/PackInformation";
 import InvoicesInformation from "../information/InvoiceInformation";
 import Package from "../../model/Package";
 import PackInformation from "../information/PackInformation";
@@ -13,26 +12,26 @@ interface PackProps {
 
 const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   const [activeButton, setActiveButton] = useState("package");
-  const original =
-    pack.shipmentDTO.origin.city +
-    " , " +
-    pack.shipmentDTO.origin.country +
-    " , " +
-    pack.shipmentDTO.origin.street +
-    " , " +
-    pack.shipmentDTO.origin.streetNumber;
-  const destination =
-    pack.shipmentDTO.destination.city +
-    " , " +
-    pack.shipmentDTO.destination.country +
-    " , " +
-    pack.shipmentDTO.destination.street +
-    " , " +
-    pack.shipmentDTO.destination.streetNumber;
+  // const original =
+  //   pack.shipmentDTO.origin.city +
+  //   " , " +
+  //   pack.shipmentDTO.origin.country +
+  //   " , " +
+  //   pack.shipmentDTO.origin.street +
+  //   " , " +
+  //   pack.shipmentDTO.origin.streetNumber;
+  // const destination =
+  //   pack.shipmentDTO.destination.city +
+  //   " , " +
+  //   pack.shipmentDTO.destination.country +
+  //   " , " +
+  //   pack.shipmentDTO.destination.street +
+  //   " , " +
+  //   pack.shipmentDTO.destination.streetNumber;
 
-  const apiKey = "AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0";
-  const [openModal, setOpenModal] = useState(false);
-  const [openOrderDetails, setOpenOrderDetails] = useState(false);
+  // const apiKey = "AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0";
+  // const [openModal, setOpenModal] = useState(false);
+  // const [openOrderDetails, setOpenOrderDetails] = useState(false);
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
   };

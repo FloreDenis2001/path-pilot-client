@@ -31,6 +31,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
   let [weight, setWeight] = useState<number>(0);
   let [height, setHeight] = useState<number>(0);
   let [width, setWidth] = useState<number>(0);
+  let [length, setLength] = useState<number>(0);
   let [totalAmmount, setTotalAmmount] = useState<number>(0);
   let [deliveryDetails, setDeliveryDetails] = useState<string>("");
 
@@ -63,6 +64,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
       weight: weight,
       height: height,
       width: width,
+      length: length,
       deliveryDescription: deliveryDetails,
       originName: originName,
       destinationName: destinationName,
@@ -264,6 +266,16 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
                   required
                   placeholder="Enter the height"
                   onChange={(e) => setHeight(+e.target.value)}
+                />
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label htmlFor="">Length</label>
+                <input
+                  type="number"
+                  required
+                  placeholder="Enter the length"
+                  onChange={(e) => setLength(+e.target.value)}
                 />
               </div>
 

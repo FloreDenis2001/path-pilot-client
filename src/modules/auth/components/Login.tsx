@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
-import { FaEnvelope, FaFacebook, FaKey, FaFacebookF } from "react-icons/fa";
+import { FaEnvelope, FaKey, FaFacebookF } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 
@@ -19,8 +19,8 @@ type FormData = {
 
 const Login: React.FC = () =>  {
   
-  const  { user,setUserCookie,logOut } = useContext(LoginContext) as LoginContextType;
-  const { register, handleSubmit , formState:{errors} } = useForm<FormData>();
+  const  {setUserCookie} = useContext(LoginContext) as LoginContextType;
+  const { register, handleSubmit} = useForm<FormData>();
   let userService = new UserService();
   let nav=useNavigate();
 

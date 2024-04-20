@@ -1,4 +1,3 @@
-import React, { useEffect, useRef, useState } from "react";
 import Sidebar from "../modules/core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

@@ -1,5 +1,5 @@
 import React from "react";
-import { FaEnvelope, FaFacebookF } from "react-icons/fa";
+import { FaEnvelope} from "react-icons/fa";
 import { ReactComponent as LogoSvg } from "../assets/logo2.svg";
 import { useNavigate } from "react-router-dom";
 

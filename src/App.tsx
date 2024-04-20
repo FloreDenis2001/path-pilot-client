@@ -1,5 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import Login from "./modules/auth/components/Login";
 import Registration from "./modules/auth/components/Registration";

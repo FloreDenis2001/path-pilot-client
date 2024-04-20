@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
 
 import {
@@ -18,7 +18,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Registration = () => {
   let nav = useNavigate();
-  const { user, setUserCookie } = useContext(LoginContext) as LoginContextType;
+  const { setUserCookie } = useContext(LoginContext) as LoginContextType;
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");

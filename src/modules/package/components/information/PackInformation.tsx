@@ -5,7 +5,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { FaSearchLocation } from "react-icons/fa";
 import Package from "../../model/Package";
 
 interface PackInformationProps {
@@ -29,6 +28,10 @@ const PackInformation: React.FC<PackInformationProps> = ({ pack }) => {
           <div className="information__body__textBox">
             <h3>Height </h3>
             <p>{pack.height} cm</p>
+          </div>
+          <div className="information__body__textBox">
+            <h3>Length </h3>
+            <p>{pack.length} cm</p>
           </div>
           <div className="information__body__textBox">
             <h3>Weight </h3>

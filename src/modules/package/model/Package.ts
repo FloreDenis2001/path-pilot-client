@@ -5,6 +5,7 @@ export default interface Package {
     width:number;
     height:number;
     weight:number;
+    length:number;
     type:string;
     totalAmount:number;
     deliveryDescription:string;

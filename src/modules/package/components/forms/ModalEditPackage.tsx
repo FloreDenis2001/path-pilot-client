@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-import OptionsDropDownOrderDetails from "../../../orders/components/ui/OptionsDropDownOrderDetails";
 import Package from "../../model/Package";
 import PackageService from "../../service/PackageService";
 import { LoginContext } from "../../../context/LoginProvider";
@@ -58,6 +57,7 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
 
   let [weight, setWeight] = useState<number>(pack.weight);
   let [height, setHeight] = useState<number>(pack.height);
+  let [length, setLength] = useState<number>(pack.length);
   let [width, setWidth] = useState<number>(pack.width);
   let [totalAmount, setTotalAmount] = useState<number>(pack.totalAmount);
   let [deliveryDetails, setDeliveryDetails] = useState<string>(
@@ -66,16 +66,16 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
 
   let servicePackage = new PackageService();
 
-  const  { user } = useContext(LoginContext) as LoginContextType;
+  const { user } = useContext(LoginContext) as LoginContextType;
 
-
-  const handleEditPackage = async () =>  {
+  const handleEditPackage = async () => {
     const packageRequest = {
       customerId: user.id as number,
       totalAmount: totalAmount,
       weight: weight,
       height: height,
       width: width,
+      length: length,
       deliveryDescription: deliveryDetails,
       originName: originName,
       destinationName: destinationName,
@@ -98,7 +98,7 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
     };
     await servicePackage.updatePackage(pack.awb, packageRequest);
     handleOpenModal();
-  }
+  };
 
   return (
     <section className="modal">
@@ -220,7 +220,6 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
                 />
               </div>
 
-
               <div className="modal__container__body__content__input">
                 <label htmlFor="">City</label>
                 <input
@@ -302,6 +301,16 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
                   placeholder="Enter the height"
                   value={height}
                   onChange={(e) => setHeight(Number(e.target.value))}
+                />
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label htmlFor="">Length</label>
+                <input
+                  type="text"
+                  placeholder="Enter the length"
+                  value={length}
+                  onChange={(e) => setLength(Number(e.target.value))}
                 />
               </div>
 

@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../../core/components/Pagination";
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import Vehicle from "../models/Vehicle";
 import VehicleService from "../service/VehicleService";
 import VehicleRow from "./ui/VehicleRow";
 import ModalAddVehicle from "./forms/ModalAddVehicle";
-import { selectVehicles, selectVehiclesState } from "../../../store/vehicles/vehicles.selectors";
+// import { selectVehicles, selectVehiclesState } from "../../../store/vehicles/vehicles.selectors";
 
 const VehicleMap = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const retriveState = useSelector(selectVehiclesState);
-  const dispatch = useDispatch();
+  // const retriveState = useSelector(selectVehiclesState);
+  // const dispatch = useDispatch();
   const vehiclesPerPage = 8;
 
-  const  vehicles = useSelector(selectVehicles);
+  // const  vehicles = useSelector(selectVehicles);
 
   let [myVehicles, setMyVehicles] = useState<Vehicle[]>([]);
 
