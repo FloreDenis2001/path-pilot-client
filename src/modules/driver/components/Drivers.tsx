@@ -5,12 +5,20 @@ import ModalAddDriver from "./froms/ModalAddDriver";
 import Driver from "../models/Driver";
 import DriverService from "../service/DriverService";
 import DriverRow from "./ui/DriverRow";
+import Pagination from "../../core/components/Pagination";
 
 const Drivers = () => {
   const [openModal, setOpenModal] = useState(false);
   const [drivers, setDrivers] = useState<Driver[]>([]);
   const driverService = new DriverService();
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const driversPerPage = 8;
+  const indexOfLastDrivers = currentPage * driversPerPage;
+  const indexOfFirstDrivers = indexOfLastDrivers - driversPerPage;
+  const currentDrivers = drivers.slice(
+    indexOfFirstDrivers,
+    indexOfLastDrivers
+  );
   const fetchDrivers = async () => {
     try {
       let drivers = await driverService.getAllDrivers();
@@ -28,6 +36,9 @@ const Drivers = () => {
     setOpenModal(!openModal);
   };
 
+  const handlePageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <section className="drivers">
       <Sidebar />
@@ -91,12 +102,16 @@ const Drivers = () => {
           </thead>
 
           <tbody>
-            {drivers.map((driver) => (
+            {currentDrivers.map((driver) => (
               <DriverRow driver={driver} />
             ))}
           </tbody>
         </table>
-        {/* <Pagination /> */}
+        <Pagination
+          totalPages={Math.ceil(drivers.length / driversPerPage)}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </div>
       {openModal && (
         <ModalAddDriver

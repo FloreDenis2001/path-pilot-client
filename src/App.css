@@ -1962,7 +1962,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 90%;
   max-width: 120rem;
   z-index: 1;

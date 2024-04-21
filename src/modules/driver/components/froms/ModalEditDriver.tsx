@@ -2,6 +2,8 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Driver from "../../models/Driver";
+import DriverService from "../../service/DriverService";
+import DriverUpdateRequest from "../../dto/DriverUpdateRequest";
 interface ModalOrdersProps {
   handleOpenModal: () => void;
   driver: Driver;
@@ -14,13 +16,31 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
   const [email, setEmail] = useState(driver.email);
   const [firstName, setFirstName] = useState(driver.firstName);
   const [lastName, setLastName] = useState(driver.lastName);
-  const [password, setPassword] = useState("");
   const [licenseNumber, setLicenseNumber] = useState(driver.licenseNumber);
   const [phone, setPhone] = useState(driver.phone);
   const [salary, setSalary] = useState(driver.salary);
   const [rating, setRating] = useState(driver.rating);
   const [experience, setExperience] = useState(driver.experience);
   const [isAvailable, setIsAvailabe] = useState(driver.isAvailable);
+  const driverService = new DriverService();
+
+  const handleUpdate = async () => {
+    let data = {
+      username,
+      email,
+      firstName,
+      lastName,
+      phone,
+      salary,
+      rating,
+      experience,
+      licenseNumber,
+      isAvailable,
+    } as DriverUpdateRequest;
+    let response = await driverService.updateDriver(data);
+    console.log(response);
+    handleOpenModal();
+  }
 
   return (
     <section className="modal">
@@ -47,7 +67,28 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
                   value={username}
                   onChange={(e) => setUsername(e.target.value)}
                 />
-              </div>{" "}
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label>First Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter the first name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                />
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label>Last Name</label>
+                <input
+                  type="text"
+                  placeholder="Enter the last name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
+              </div>
+
               <div className="modal__container__body__content__input">
                 <label>Email</label>
                 <input
@@ -57,15 +98,7 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-              <div className="modal__container__body__content__input">
-                <label>Password</label>
-                <input
-                  type="password"
-                  placeholder="Enter password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
+       
               <div className="modal__container__body__content__input">
                 <label>License Number</label>
                 <input
@@ -128,11 +161,14 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
         </div>
 
         <div className="modal__container__footer">
-          <button className="button__modal button__modal__cancel" onClick={() => handleOpenModal()}>
+          <button
+            className="button__modal button__modal__cancel"
+            onClick={() => handleOpenModal()}
+          >
             Cancel
           </button>
-          <button className="button__modal button__modal__save">Save</button>
-          </div>
+          <button className="button__modal button__modal__save" onClick={handleUpdate}>Save</button>
+        </div>
       </div>
     </section>
   );

@@ -15,25 +15,24 @@ import AddDriver from "./modules/driver/components/froms/AddDriver";
 
 function App() {
   return (
-
     <LoginProvider>
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Registration />} />
-          <Route path="/retrievePassword" element={<RetrievePassword />} />
-          <Route path="/dashboard/orders" element={<OrderMap />} />
-          <Route path="/dashboard/packages" element={<PackageMap />} />
-          <Route path="/dashboard/drivers" element={<Drivers />} />
-          <Route path="/dashboard/vehicles" element={<Vehicle />} />
-          <Route path="/dashboard" element={<DashBoard />} />
-          <Route path="/directions" element={<MapTest />} />
-          <Route path="/drivers/add/" element={<AddDriver/>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+      <div className="App">
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Registration />} />
+            <Route path="/retrievePassword" element={<RetrievePassword />} />
+            <Route path="/dashboard/orders" element={<OrderMap />} />
+            <Route path="/dashboard/packages" element={<PackageMap />} />
+            <Route path="/dashboard/drivers" element={<Drivers />} />
+            <Route path="/dashboard/vehicles" element={<Vehicle />} />
+            <Route path="/dashboard" element={<DashBoard />} />
+            <Route path="/directions" element={<MapTest />} />
+            <Route path="/drivers/add/" element={<AddDriver />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </LoginProvider>
   );
 }
