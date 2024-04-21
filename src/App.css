@@ -555,6 +555,7 @@ select {
   box-shadow: 0 0 5px 0 rgba(33, 33, 43, 0.8);
   margin-bottom: 1rem;
   width: 70%;
+  max-width: 26rem;
   transition: all 0.3s;
 }
 .inputBox:focus {
@@ -1370,6 +1371,95 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   color: #ffffff;
 }
 
+.sendEmail__container {
+  background-color: #21212b;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
+  width: 100%;
+  max-width: 40rem;
+  text-align: center;
+  z-index: 1;
+}
+.sendEmail__logo {
+  width: 13rem;
+  height: 13rem;
+}
+.sendEmail__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.sendEmail__center {
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sendEmail__center__checker {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.sendEmail__center__checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.sendEmail__center__checkbox input[type=checkbox] {
+  cursor: pointer;
+  accent-color: #2781e2;
+}
+.sendEmail__center__forgot p {
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  color: #2781e2;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.sendEmail__center__forgot p:hover {
+  text-decoration: underline;
+}
+.sendEmail__center__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  width: 70%;
+}
+.sendEmail__bottom__signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  color: #5f5f5f;
+  margin-top: 1rem;
+}
+.sendEmail__bottom__signup span {
+  color: #2781e2;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.sendEmail__bottom__signup span:hover {
+  text-decoration: underline;
+}
+
 .retrievePassword__container {
   background-color: #21212b;
   padding: 2rem;
@@ -1481,7 +1571,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
 }
 
-#register {
+#register, #sendEmail {
   background-image: url("./assets/slate-texture-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -1491,7 +1581,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   position: relative;
 }
-#register:before {
+#register:before, #sendEmail:before {
   content: "";
   position: absolute;
   top: 0;
@@ -1499,6 +1589,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   right: 0;
   bottom: 0;
   background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+}
+
+#sendEmail {
+  width: 100%;
 }
 
 #retrievePassword {

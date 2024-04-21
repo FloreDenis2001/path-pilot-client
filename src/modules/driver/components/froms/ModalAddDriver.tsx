@@ -1,6 +1,7 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { FaEnvelope } from "react-icons/fa";
+import { ReactComponent as LogoSvg } from "../../../../assets/logo2.svg";
+import React, { useState } from "react";
+import DriverService from "../../service/DriverService";
 
 interface ModalAddDriverProps {
   handleOpenModalAddDriver: () => void;
@@ -9,71 +10,55 @@ interface ModalAddDriverProps {
 const ModalAddDriver: React.FC<ModalAddDriverProps> = ({
   handleOpenModalAddDriver,
 }) => {
+  let [email, setEmail] = useState("");
+  const driverService = new DriverService();
+
+  const sendEmail = async (email: string) => {
+    try {
+      let driver = await driverService.sendEmail({ to: email });
+      console.log(driver);
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+    handleOpenModalAddDriver();
+  };
   return (
     <section className="modal">
-      <div className="modal__container">
-        <div className="modal__container__header">
-          <div className="modal__container__header__title">
-            <span>New Driver</span>
+      <div id="sendEmail">
+        <div className="sendEmail__container">
+          <div className="sendEmail__header">
+            <LogoSvg className="sendEmail__logo" />
+
+            <h1 className="heading-primary">Create Driver !</h1>
+            <h4 className="heading-secondary">
+              Create a new driver by entering the email address. You will
+              receive an email with instructions for creating a password.
+            </h4>
           </div>
 
-          <button
-            className="button__close"
-            onClick={() => handleOpenModalAddDriver()}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
-        </div>
-
-        <div className="modal__container__body">
-          <div className="modal__container__body__content">
-            <h2>Driver information : </h2>
-            <div className="modal__container__body__content__main">
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">Username</label>
-                <input type="text" placeholder="Enter the username" />
-              </div>
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">Name</label>
-                <input type="text" placeholder="Enter the name" />
-              </div>
-
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">Email</label>
-                <input type="text" placeholder="Enter the email" />
-              </div>
-
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">Password</label>
-                <input type="text" placeholder="Enter the email" />
-              </div>
-
-
-
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">Phone</label>
-                <input type="text" placeholder="Enter phone number" />
-              </div>
-
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">License Number</label>
-                <input type="text" placeholder="Enter the license number" />
-              </div>
-
+          <div className="sendEmail__center">
+            <div className="inputBox">
+              <FaEnvelope className="inputBox__icon" />
+              <input
+                type="text"
+                placeholder="Email"
+                required
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
+            <button
+              className="button button__first"
+              onClick={() => sendEmail(email)}
+            >
+              Send
+            </button>
+            <button
+              className="button__text"
+              onClick={() => handleOpenModalAddDriver()}
+            >
+              Cancel
+            </button>
           </div>
-
-
-        </div>
-
-        <div className="modal__container__footer">
-          <button
-            className="button__modal   button__modal__cancel"
-            onClick={() => handleOpenModalAddDriver()}
-          >
-            Cancel
-          </button>
-          <button className="button__modal  button__modal__save">Save</button>
         </div>
       </div>
     </section>

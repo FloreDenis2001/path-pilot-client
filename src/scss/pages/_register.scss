@@ -1,4 +1,4 @@
-#register{
+#register, #sendEmail{
     background-image: url('./assets/slate-texture-background.jpg');
 
     background-size: cover;
@@ -17,4 +17,8 @@
         bottom: 0;
         background: linear-gradient(180deg, rgba($color-black, 0.432) 0%, rgba($color-black-2, 0.685) 100%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 100%);
     }
+}
+
+#sendEmail{
+    width: 100%;
 }
