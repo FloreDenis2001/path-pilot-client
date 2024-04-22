@@ -1,116 +1,96 @@
 .register {
-    &__container {
-      background-color: $color-black;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px 0 rgba($color-black, 0.8);
-      width: 100%;
-      max-width: 40rem;
-      text-align: center;
-      z-index: 1;
-    }
-  
-    &__logo {
-      width: 13rem;
-      height: 13rem;
-    }
-  
-    &__header {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 2rem;
-  
-    }
-  
-    &__center {
-      padding-block: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-  
-      gap: 0.5rem;
-  
-    
-  
-      &__checker {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: space-between;
-        align-items: center;
-        width: 70%;
-        font-family: $font-family-primary;
-        font-size: 1.4rem;
-        color: $color-grey;
-        margin-bottom: 1rem;
-        margin-top: 1rem;
-      }
-  
-      &__checkbox {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        cursor: pointer;
-  
-        input[type='checkbox'] {
-          cursor: pointer;
-          accent-color: $color-primary;
-        }
-      }
-  
-      &__forgot {
-        p {
-          font-size: 1.4rem;
-          font-family: $font-family-primary;
-          color: $color-primary;
-          cursor: pointer;
-          transition: all 0.3s;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-  
-      &__button {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        margin-top: 2rem;
-        width: 70%;
-      }
-    }
-  
-    &__bottom {
-      &__signup {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 1.4rem;
-        font-family: $font-family-primary;
-        color: $color-grey;
-        margin-top: 1rem;
-  
-        span {
-          color: $color-primary;
-          cursor: pointer;
-          transition: all 0.3s;
-          &:hover {
-            text-decoration: underline;
-          }
-        }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-black;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px 0 rgba($color-black, 0.8);
+    width: 100%;
+    max-width: 60rem;
+    text-align: center;
+    min-height: 80%;
+    z-index: 1;
+  }
 
-        p{
-          color: $color-white;
+  &__logo {
+    width: 13rem;
+    height: 13rem;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  &__center {
+    padding-block: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+
+    &__checker {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: space-between;
+      align-items: center;
+      width: 70%;
+      font-family: $font-family-primary;
+      font-size: 1.4rem;
+      color: $color-grey;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+
+    &__checkbox {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        cursor: pointer;
+        accent-color: $color-primary;
+      }
+    }
+
+    &__forgot {
+      p {
+        font-size: 1.4rem;
+        font-family: $font-family-primary;
+        color: $color-primary;
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          text-decoration: underline;
         }
       }
-  
- 
+    }
+
+    &__button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 2rem;
+      width: 70%;
     }
   }
-    
+
+  &__bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+  }
+}

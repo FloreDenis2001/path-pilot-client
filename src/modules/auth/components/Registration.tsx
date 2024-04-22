@@ -1,166 +1,172 @@
-import { useContext, useState } from "react";
-import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
-
-import {
-  FaSignature,
-  FaEnvelope,
-  FaKey,
-  FaPhoneAlt,
-  FaFacebookF,
-} from "react-icons/fa";
-import { useNavigate } from "react-router";
+import FormUser from "../../user/components/FormUser";
+import FormAddress from "../../address/components/FormAddress";
+import FormCompany from "../../company/components/forms/FormCompany";
+import { useMultistepForm } from "../../core/hooks/useMultistepForm";
+import QontoConnector from "./ui/QontoConnector";
+import { FormEvent, useEffect, useState } from "react";
 import RegisterRequest from "../../user/dto/RegisterRequest";
+import { Company } from "../../company/models/Company";
+import Address from "../../address/model/Address";
 import UserService from "../../user/service/UserService";
-import LoginContextType from "../../user/models/LoginContextType";
-import { LoginContext } from "../../context/LoginProvider";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router";
 
 const Registration = () => {
-  let nav = useNavigate();
-  const { setUserCookie } = useContext(LoginContext) as LoginContextType;
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  let userService = new UserService();
+  let [dataAddressUser, setDataAddressUser] = useState({
+    street: "",
+    city: "",
+    country: "",
+    postalCode: "",
+  } as Address);
 
-  let handleSignIn = async () => {
-    let data = {
-      username,
-      email,
-      firstName,
-      lastName,
-      password,
-      phone,
-    } as RegisterRequest;
-    let rez = await userService.register(data);
-    setUserCookie(rez);
-    nav("/dashboard");
+  let [dataUser, setDataUser] = useState({
+    username: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    phone: "",
+    address: dataAddressUser,
+  } as RegisterRequest);
+
+
+  let [dataAddress, setDataAddress] = useState({
+    street: "",
+    city: "",
+    country: "",
+    postalCode: "",
+  } as Address);
+
+  let [dataCompany, setDataCompany] = useState({
+    name: "",
+    registrationNumber: "",
+    industry: "",
+    capital: 0,
+    phone: "",
+    email: "",
+    website: "",
+    address: dataAddress,
+  } as Company);
+
+  let [data, setData] = useState({
+    user: dataUser,
+    company: dataCompany,
+  });
+
+  const nav = useNavigate();
+
+  const userService = new UserService();
+
+  function updateDataUser(data: RegisterRequest) {
+    setDataUser(data);
+  }
+
+  function updateDataCompany(data: Company) {
+    setDataCompany(data);
+  }
+
+  function updateDataAddress(data: Address) {
+    setDataAddress(data);
+  }
+
+  function updateDataAddressUser(data: Address) {
+    setDataAddressUser(data);
+  }
+
+  const {
+    currentStepIndex,
+    step,
+    nextStep,
+    prevStep,
+    isFirstStep,
+    isLastStep,
+  } = useMultistepForm([
+    <FormUser {...dataUser} updateDataUser={updateDataUser} />,
+    <FormAddress
+      title="User Address"
+      {...dataAddressUser}
+      updateDataAddress={updateDataAddressUser}
+    />,
+    <FormCompany {...dataCompany} updateDataCompany={updateDataCompany} />,
+    <FormAddress
+      title="Company Address"
+      {...dataAddress}
+      updateDataAddress={updateDataAddress}
+    />,
+  ]);
+
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    nextStep();
+  }
+  
+  useEffect(() => {
+    setDataCompany((prevCompany) => ({
+      ...prevCompany,
+      address: dataAddress,
+    }));
+  }, [dataAddress]);
+
+  useEffect(() => {
+    setDataUser((prevUser) => ({
+      ...prevUser,
+      address: dataAddressUser,
+    }));
+  }, [dataAddressUser]);
+
+  useEffect(() => {
+    setData({ user: dataUser, company: dataCompany });
+  }, [dataUser, dataCompany]);
+
+  const handleCreateAccount = async () => {
+    console.log(data);
+
+    try {
+      let response = await userService.register(data);
+      alert("Account created successfully");
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+
+    nav("/login");
   };
 
   return (
-    <div id="register">
+    <form id="register" onSubmit={onSubmit}>
       <div className="register__container">
-        <div className="register__header">
-          <div className="register__header">
-            <LogoSvg className="register__logo" />
+        <QontoConnector key={currentStepIndex} step={currentStepIndex} />
+        {step}
 
-            <h1 className="heading-primary">Create your account !</h1>
-            <h4 className="heading-secondary">
-              Reengage with precision pathfinding: Your gateway to streamlined
-              route optimization and smarter travel decisions.
-            </h4>
-          </div>
+        <div className="register__bottom">
+          {!isFirstStep && (
+            <button
+              type="button"
+              className="button button__prev"
+              onClick={prevStep}
+            >
+              Back
+            </button>
+          )}
+
+          {!isLastStep && (
+            <button type="submit" className=" button button__next">
+              Next
+            </button>
+          )}
         </div>
 
-        <div className="register__center">
-          <div className="inputBox">
-            <FontAwesomeIcon icon={faUser} className="inputBox__icon" />
-            <input
-              type="text"
-              placeholder="Username"
-              required
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-
-          <div className="inputBox">
-            <FaSignature className="inputBox__icon" />
-            <input
-              type="text"
-              placeholder="First Name"
-              required
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-          </div>
-          <div className="inputBox">
-            <FaSignature className="inputBox__icon" />
-            <input
-              type="text"
-              placeholder="Last Name"
-              required
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-          </div>
-
-          <div className="inputBox">
-            <FaEnvelope className="inputBox__icon" />
-            <input
-              type="text"
-              placeholder="Email"
-              required
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-            />
-          </div>
-
-          <div className="inputBox">
-            <FaKey className="inputBox__icon" />
-            <input
-              type="password"
-              placeholder="Password"
-              required
-              value={password}
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-            />
-          </div>
-
-          <div className="inputBox">
-            <FaPhoneAlt className="inputBox__icon" />
-            <input
-              type="tel"
-              placeholder="Phone Number"
-              required
-              value={phone}
-              onChange={(e) => {
-                setPhone(e.target.value);
-              }}
-            />
-          </div>
-
+        {isLastStep && (
           <div className="register__center__button">
             <button
               className="button button__first"
-              onClick={() => handleSignIn()}
+              onClick={() => handleCreateAccount()}
             >
-              Create account
+              Create Account
             </button>
           </div>
-        </div>
-
-        <div className="register__bottom">
-          <div className="register__bottom__signup">
-            <p>Do you have an account?</p>
-            <span onClick={() => nav("/login")}>Sign In</span>
-          </div>
-
-          <div className="register__media">
-            <p className="heading-bottom">
-              Or create your account with social media
-            </p>
-            <div className="button__box">
-              <button className="button__socialMedia">
-                <FaEnvelope />
-              </button>
-
-              <button className="button__socialMedia">
-                <FaFacebookF />
-              </button>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
-    </div>
+    </form>
   );
 };
 
