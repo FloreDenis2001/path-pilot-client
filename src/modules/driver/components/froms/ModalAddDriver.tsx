@@ -1,7 +1,9 @@
 import { FaEnvelope } from "react-icons/fa";
 import { ReactComponent as LogoSvg } from "../../../../assets/logo2.svg";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import DriverService from "../../service/DriverService";
+import { LoginContext } from "../../../context/LoginProvider";
+import LoginContextType from "../../../user/models/LoginContextType";
 
 interface ModalAddDriverProps {
   handleOpenModalAddDriver: () => void;
@@ -12,10 +14,14 @@ const ModalAddDriver: React.FC<ModalAddDriverProps> = ({
 }) => {
   let [email, setEmail] = useState("");
   const driverService = new DriverService();
+  const { user, setUserCookie } = useContext(LoginContext) as LoginContextType;
 
   const sendEmail = async (email: string) => {
     try {
-      let driver = await driverService.sendEmail({ to: email });
+      let driver = await driverService.sendEmail(
+        { to: email },
+        user.companyRegistrationNumber
+      );
       console.log(driver);
     } catch (err) {
       console.log((err as Error).message);

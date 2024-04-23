@@ -9,5 +9,5 @@ export default interface UserLogin{
     email:string,
     phone:string,
     token:string,
-    companyRegistrationNumber:number,
+    companyRegistrationNumber:string,
  }

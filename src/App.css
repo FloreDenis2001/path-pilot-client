@@ -316,7 +316,7 @@ select {
   font-size: 1.6rem;
   border-radius: 50%;
   display: flex;
-  align-self: flex-start;
+  align-self: center;
   justify-content: center;
 }
 .button__close:active {
@@ -978,7 +978,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
-  max-width: 90rem;
+  max-width: 95rem;
   text-align: center;
   z-index: 1;
 }
@@ -986,11 +986,12 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-content: center;
   margin-bottom: 2rem;
 }
 .modal__container__header__title {
-  font-family: "Roboto", sans-serif;
+  font-family: "Red Hat Display", sans-serif;
+  text-transform: uppercase;
   font-size: 3rem;
   color: #ffffff;
   margin-bottom: 1rem;
@@ -1023,7 +1024,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .modal__container__body {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 .modal__container__body__orderDetails {
@@ -1086,109 +1088,44 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin-bottom: 0.5rem;
 }
 .modal__container__body__content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  align-items: flex-start;
-  margin-bottom: 2rem;
-}
-.modal__container__body__content__text {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.modal__container__body__content__text p {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  font-weight: 400;
-}
-.modal__container__body__content h2 {
-  font-family: "Roboto", sans-serif;
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
+  gap: 2rem;
+  width: 100%;
 }
 .modal__container__body__content__main {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
   width: 100%;
-  gap: 2rem;
+}
+.modal__container__body__content h2 {
+  font-family: "Red Hat Display", sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 2.5rem;
+  color: #ffffff;
   margin-bottom: 1rem;
-}
-.modal__container__body__content__main--drivers {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-block: 1rem;
-}
-.modal__container__body__content__select {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  color: #ffffff;
-  transition: all 0.3s ease-in-out;
-  font-size: 1.5rem;
-  align-items: flex-start;
-  width: 20%;
-}
-.modal__container__body__content__select label {
-  padding-left: 1rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #ffffff;
-}
-.modal__container__body__content__select select {
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
-  transition: all 0.3s ease-in-out;
-}
-.modal__container__body__content__select select:focus {
-  border: 1px solid #2781e2;
-}
-.modal__container__body__content option {
-  color: #ffffff;
-  background-color: #181820;
 }
 .modal__container__body__content__input {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  transition: all 0.3s ease-in-out;
-  font-size: 1.5rem;
   align-items: flex-start;
-  width: 20%;
+  margin-bottom: 1rem;
+  width: 30%;
 }
 .modal__container__body__content__input label {
-  padding-left: 1rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #e7e7e7;
-}
-.modal__container__body__content__input input {
-  width: 100%;
-  padding: 1rem;
-  color: #e7e7e7;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: #181820;
-  border-radius: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
-  transition: all 0.3s ease-in-out;
-}
-.modal__container__body__content__input input:focus {
-  border: 1px solid #2781e2;
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 .modal__container__footer, .modal__container__footer--drivers {
   display: flex;
@@ -1373,7 +1310,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   gap: 1rem;
   margin-top: 2rem;
-  width: 70%;
+  width: 100%;
 }
 .register__bottom {
   display: flex;

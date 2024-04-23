@@ -56,9 +56,9 @@ class DriverService extends ApiServer {
     }
   };
 
-  sendEmail = async (email: { to: string }): Promise<void> => {
+  sendEmail = async (email: { to: string }, companyRegistrationNumber:string): Promise<void> => {
     const response = await this.api<Object, void>(
-      `/email/send`,
+      `/email/send?companyRegistrationNumber=${companyRegistrationNumber}`,
       "POST",
       email,
       ""

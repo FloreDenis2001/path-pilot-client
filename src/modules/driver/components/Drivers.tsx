@@ -15,10 +15,7 @@ const Drivers = () => {
   const driversPerPage = 8;
   const indexOfLastDrivers = currentPage * driversPerPage;
   const indexOfFirstDrivers = indexOfLastDrivers - driversPerPage;
-  const currentDrivers = drivers.slice(
-    indexOfFirstDrivers,
-    indexOfLastDrivers
-  );
+  const currentDrivers = drivers.slice(indexOfFirstDrivers, indexOfLastDrivers);
   const fetchDrivers = async () => {
     try {
       let drivers = await driverService.getAllDrivers();
@@ -107,11 +104,14 @@ const Drivers = () => {
             ))}
           </tbody>
         </table>
-        <Pagination
-          totalPages={Math.ceil(drivers.length / driversPerPage)}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
+
+        {drivers.length && (
+          <Pagination
+            totalPages={Math.ceil(drivers.length / driversPerPage)}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
       {openModal && (
         <ModalAddDriver

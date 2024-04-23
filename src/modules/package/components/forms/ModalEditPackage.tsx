@@ -96,7 +96,7 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
         streetNumber: destinationNumber,
       },
     };
-    await servicePackage.updatePackage(pack.awb, packageRequest);
+    // await servicePackage.updatePackage(pack.awb, packageRequest);
     handleOpenModal();
   };
 

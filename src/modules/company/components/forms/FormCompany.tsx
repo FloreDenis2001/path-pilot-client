@@ -3,6 +3,7 @@ import {
   FaEnvelope,
   FaGlobe,
   FaKey,
+  FaMoneyBill,
   FaPhoneAlt,
   FaSignature,
 } from "react-icons/fa";
@@ -121,7 +122,7 @@ const FormCompany: React.FC<FormCompanyProps> = ({
         </div>
 
         <div className="inputBox">
-          <FaKey className="inputBox__icon" />
+          <FaMoneyBill className="inputBox__icon" />
           <input
             type="text"
             placeholder="Capital"
