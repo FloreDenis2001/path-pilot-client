@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
 import { FaGlobe, FaHashtag, FaSignature } from "react-icons/fa";
-import { useNavigate } from "react-router";
+import Address from "../model/Address";
 
 interface FormAddressProps {
   title: string;
@@ -20,17 +20,16 @@ const FormAddress: React.FC<FormAddressProps> = ({ title, city: initialCity, str
   const [country, setCountry] = useState<string>(initialCountry || "");
   const [postalCode, setPostalCode] = useState<string>(initialPostalCode || "");
 
-  const nav = useNavigate();
+  const  memorizedUpdateDataAddress = useCallback(
+    (data: Address) => {
+      updateDataAddress(data);
+    },
+    [updateDataAddress]
+  );
 
   useEffect(() => {
-    return () => {
-      updateDataAddress({ city, street, streetNumber, country, postalCode });
-    };
-  }, [city, street, streetNumber, country, postalCode]);
-
-  const handleSignIn = () => {
-    // nav("/login");
-  };
+    memorizedUpdateDataAddress({ city, street, streetNumber, country, postalCode });
+  }, [city, street, streetNumber, country, postalCode, memorizedUpdateDataAddress]);
 
   return (
    <>

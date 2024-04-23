@@ -1,5 +1,6 @@
 import ApiServer from "../../system/service/ApiServer";
 import LoginRequest from "../../user/dto/LoginRequest";
+import DriverCreateRequest from "../dto/DriverCreateRequest";
 import DriverUpdateRequest from "../dto/DriverUpdateRequest";
 import Driver from "../models/Driver";
 
@@ -19,9 +20,9 @@ class DriverService extends ApiServer {
     }
   };
 
-  addDriver = async (driver: Driver): Promise<void> => {
+  addDriver = async (driver: DriverCreateRequest): Promise<void> => {
     try {
-      const response = await this.api<Driver, string>(
+      const response = await this.api<DriverCreateRequest, string>(
         `/drivers/create`,
         "POST",
         driver,

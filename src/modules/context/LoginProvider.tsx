@@ -18,6 +18,7 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
     email: "NOEMAIL",
     role: "NOUSERROLE",
     phone: "NOPHONE",
+    companyRegistrationNumber: 0,
     token: "NOTOKEN",
   });
 
@@ -43,6 +44,7 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
       email: "NOEMAIL",
       role: "NOUSERROLE",
       phone: "NOPHONE",
+      companyRegistrationNumber: 0,
       token: "NOTOKEN",
     });
   }

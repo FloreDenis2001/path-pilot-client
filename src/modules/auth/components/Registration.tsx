@@ -2,7 +2,7 @@ import FormUser from "../../user/components/FormUser";
 import FormAddress from "../../address/components/FormAddress";
 import FormCompany from "../../company/components/forms/FormCompany";
 import { useMultistepForm } from "../../core/hooks/useMultistepForm";
-import QontoConnector from "./ui/QontoConnector";
+import QontoConnector from "../../core/components/QontoConnector";
 import { FormEvent, useEffect, useState } from "react";
 import RegisterRequest from "../../user/dto/RegisterRequest";
 import { Company } from "../../company/models/Company";
@@ -131,10 +131,12 @@ const Registration = () => {
     nav("/login");
   };
 
+  const nameSteps = ["User Details", "User Address", "Company Details", "Company Address"];
+
   return (
     <form id="register" onSubmit={onSubmit}>
       <div className="register__container">
-        <QontoConnector key={currentStepIndex} step={currentStepIndex} />
+        <QontoConnector key={currentStepIndex} step={currentStepIndex} nameSteps={nameSteps} />
         {step}
 
         <div className="register__bottom">

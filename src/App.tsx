@@ -11,7 +11,7 @@ import MapTest from "./components/map/MapTest";
 import LoginProvider from "./modules/context/LoginProvider";
 import OrderMap from "./modules/orders/components/OrderMap";
 import PackageMap from "./modules/package/components/PackageMap";
-import AddDriver from "./modules/driver/components/froms/AddDriver";
+import RegistrationDriver from "./modules/driver/components/froms/RegistrationDriver";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
             <Route path="/dashboard/vehicles" element={<Vehicle />} />
             <Route path="/dashboard" element={<DashBoard />} />
             <Route path="/directions" element={<MapTest />} />
-            <Route path="/drivers/add/" element={<AddDriver />} />
+            <Route path="/drivers/add/" element={<RegistrationDriver />} />
           </Routes>
         </BrowserRouter>
       </div>

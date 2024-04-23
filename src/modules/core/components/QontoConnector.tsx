@@ -71,19 +71,22 @@ function QontoStepIcon(props: StepIconProps) {
   );
 }
 
-const steps = ["User Details","User Address", "Company Details", "Company Address"];
 
 interface StepActiveProps {
   step: number;
+  nameSteps: string[];
 }
 
-const CustomizedSteppers: React.FC<StepActiveProps> = ({ step }) => {
+const CustomizedSteppers: React.FC<StepActiveProps> = ({ step , nameSteps }) => {
+
+  const steps =nameSteps;
+
   return (
     <Stack sx={{ width: "100%" }} spacing={4}>
       <Stepper
         alternativeLabel
         activeStep={step}
-        connector={<QontoConnector />}
+        // connector={<QontoConnector />}
       >
         {steps.map((label) => (
           <Step key={label}>

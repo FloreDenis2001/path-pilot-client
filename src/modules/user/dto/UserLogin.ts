@@ -1,3 +1,5 @@
+import { Company } from "../../company/models/Company";
+
 export default interface UserLogin{
     id:number,
     username:string,
@@ -7,4 +9,5 @@ export default interface UserLogin{
     email:string,
     phone:string,
     token:string,
+    companyRegistrationNumber:number,
  }

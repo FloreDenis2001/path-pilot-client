@@ -27,7 +27,6 @@ const Login: React.FC = () =>  {
 
 
   let onSubmit = async (data: FormData) => {
-
     try {
       let user = await userService.login(data);
       setUserCookie(user);

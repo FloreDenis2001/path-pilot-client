@@ -1,12 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
 
-import {
-  FaSignature,
-  FaEnvelope,
-  FaKey,
-  FaPhoneAlt,
-} from "react-icons/fa";
+import { FaSignature, FaEnvelope, FaKey, FaPhoneAlt } from "react-icons/fa";
 import RegisterRequest from "../../user/dto/RegisterRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
@@ -39,10 +34,33 @@ const FormUser: React.FC<FormUserProps> = ({
   const [lastName, setLastName] = useState(initialLastName || "");
   const [password, setPassword] = useState(initialPassword || "");
   const [phone, setPhone] = useState(initialPhone || "");
+  const memoizedUpdateDataUser = useCallback(
+    (data: RegisterRequest) => {
+      updateDataUser(data);
+    },
+    [updateDataUser]
+  );
 
   useEffect(() => {
-    updateDataUser({ username, email, firstName, lastName, password, phone , address: initialAddress});
-  }, [username, email, firstName, lastName, password, phone]);
+    memoizedUpdateDataUser({
+      username,
+      email,
+      firstName,
+      lastName,
+      password,
+      phone,
+      address: initialAddress,
+    });
+  }, [
+    username,
+    email,
+    firstName,
+    lastName,
+    password,
+    phone,
+    initialAddress,
+    memoizedUpdateDataUser,
+  ]);
 
   return (
     <>
