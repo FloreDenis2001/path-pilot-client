@@ -1,18 +1,18 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PackageRequest from "../../dto/PackageRequest";
 import Address from "../../../address/model/Address";
 import PackageService from "../../service/PackageService";
 import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
-import FormPackageDelivery from "./FormPackageDelivery";
 import FormPickUp from "./FormPickUp";
 import FormDelivery from "./FormDelivery";
 import { useMultistepForm } from "../../../core/hooks/useMultistepForm";
 import QontoConnector from "../../../core/components/QontoConnector";
 import PackageAddress from "../../dto/PackageAddress";
 import PackageDetails from "../../dto/PackageDetails";
+import FormPackageDelivery from "./FormPackageDelivery";
 
 interface ModalAddPackageProps {
   handleOpenModalAddOrder: () => void;
@@ -23,59 +23,69 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
 }) => {
   const { user } = useContext(LoginContext) as LoginContextType;
 
-  const originAddress: Address = {
-    country: "",
-    city: "",
-    street: "",
-    streetNumber: "",
-    postalCode: "",
-  };
+  
 
-  const originDetails: PackageAddress = {
+  let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
-    address: originAddress,
-  };
-
-  const destinationAddress: Address = {
-    country: "",
-    city: "",
-    street: "",
-    streetNumber: "",
-    postalCode: "",
-  };
+    address: {} as Address,
+  });
 
 
-  const destinationDetails: PackageAddress = {
+
+  let [destinationDetails, setDestinationDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
-    address: destinationAddress,
-  };
+    address: {} as Address,
+  });
 
-  const packageDetail: PackageDetails= {
+  let [packageDetailsInfo, setPackageDetailsInfo] = useState<PackageDetails>({
     totalAmount: 0,
     weight: 0,
     height: 0,
     width: 0,
     length: 0,
-  };
+    deliveryDetails: "",
+  });
 
-
-  const packageRequest: PackageRequest = {
+  let [packageRequest, setPackageRequest] = useState<PackageRequest>({
     customerId: user.id,
     originDetails: originDetails,
     destinationDetails: destinationDetails,
-    packageDetails: packageDetail,
-  };
+    packageDetails: packageDetailsInfo,
+  });
 
   let servicePackage = new PackageService();
 
   const handleCreatePackage = async () => {
-    const response = await servicePackage.createPackage(packageRequest);
-    if (response) {
-      handleOpenModalAddOrder();
-    }
+    console.log(packageRequest);
+    // const response = await servicePackage.createPackage(packageRequest);
+    // if (response) {
+    //   handleOpenModalAddOrder();
+    // }
   };
+
+  const updatePackageDetails = (data: PackageDetails) => {
+    setPackageDetailsInfo(data);
+  };
+
+  const updatePickUp = (data: PackageAddress) => {
+    setOriginDetails(data);
+  };
+
+  const updateDelivery = (data: PackageAddress) => {
+    setDestinationDetails(data);
+  };
+
+  useEffect(() => {
+    setPackageRequest({
+      customerId: user.id,
+      originDetails: originDetails,
+      destinationDetails: destinationDetails,
+      packageDetails: packageDetailsInfo,
+    });
+  }
+  , [originDetails, destinationDetails, packageDetailsInfo]);
 
   const {
     currentStepIndex,
@@ -85,9 +95,12 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
     isFirstStep,
     isLastStep,
   } = useMultistepForm([
-    // <FormPackageDelivery />,
-    <FormPickUp />,
-    <FormDelivery />,
+    <FormPackageDelivery
+      {...packageDetailsInfo}
+      updatePackageDetails={updatePackageDetails}
+    />,
+    <FormPickUp {...originDetails} updatePickUp={updatePickUp}/>,
+    <FormDelivery {...destinationDetails} updateDelivery={updateDelivery}/>,
   ]);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -97,9 +110,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
 
   const nameSteps = ["Package Delivery", "Pick Up Address", "Delivery Address"];
 
-  function handleCreateAccount(): void {
-    throw new Error("Function not implemented.");
-  }
+
 
   return (
     <form className="modal" onSubmit={onSubmit}>
@@ -138,10 +149,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
           )}
 
           {!isLastStep && (
-            <button
-              type="submit"
-              className=" button button__next"
-            >
+            <button type="submit" className=" button button__next">
               Next
             </button>
           )}
@@ -151,7 +159,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
           <div className="register__center__button">
             <button
               className="button button__first"
-              onClick={() => handleCreateAccount()}
+              onClick={() => handleCreatePackage()}
             >
               Create Account
             </button>

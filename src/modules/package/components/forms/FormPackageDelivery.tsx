@@ -2,19 +2,19 @@ import {
   faArrowDown19,
   faMoneyBill,
   faSignature,
-  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
-import { FaMoneyBill } from "react-icons/fa";
+import React, { useCallback, useEffect, useState } from "react";
+import PackageDetails from "../../dto/PackageDetails";
 
 interface FormPackageDeliveryProps {
   weight: number;
   height: number;
   width: number;
   length: number;
-  totalAmmount: number;
+  totalAmount: number;
   deliveryDetails: string;
+  updatePackageDetails: (data: PackageDetails) => void;
 }
 
 const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
@@ -22,28 +22,46 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
   height: initialHeight,
   width: initialWidth,
   length: initialLength,
-  totalAmmount: initialTotalAmmount,
+  totalAmount: initialTotalAmount,
   deliveryDetails: initialDeliveryDetails,
+  updatePackageDetails,
 }) => {
   let [weight, setWeight] = useState<number>(initialWeight || 0);
   let [height, setHeight] = useState<number>(initialHeight || 0);
   let [width, setWidth] = useState<number>(initialWidth || 0);
   let [length, setLength] = useState<number>(initialLength || 0);
-  let [totalAmmount, setTotalAmmount] = useState<number>(
-    initialTotalAmmount || 0
+  let [totalAmount, setTotalAmount] = useState<number>(
+    initialTotalAmount || 0
   );
   let [deliveryDetails, setDeliveryDetails] = useState<string>(
     initialDeliveryDetails || ""
   );
 
-//   useEffect(() => {
-//     setWeight(initialWeight);
-//     setHeight(initialHeight);
-//     setWidth(initialWidth);
-//     setLength(initialLength);
-//     setTotalAmmount(initialTotalAmmount);
-//     setDeliveryDetails(initialDeliveryDetails);
-//   }, [initialWeight, initialHeight, initialWidth, initialLength]);
+  const memorizedUpdatePackageDetails = useCallback(
+    (data: PackageDetails) => {
+      updatePackageDetails(data);
+    },
+    [updatePackageDetails]
+  );
+
+
+  const updatePackageDetailsData = () => {
+    memorizedUpdatePackageDetails({
+      totalAmount: totalAmount,
+      weight: weight,
+      height: height,
+      width: width,
+      length: length,
+      deliveryDetails: deliveryDetails,
+    });
+  };
+
+  useEffect(() => {
+    updatePackageDetailsData();
+  }, [weight, height, width, length, totalAmount, deliveryDetails]);
+
+
+
 
   return (
     <div className="modal__container__body__content">
@@ -56,6 +74,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
             <input
               type="number"
               required
+              value={weight}
               placeholder="Enter the weight"
               onChange={(e) => setWeight(+e.target.value)}
             />
@@ -72,6 +91,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
               type="number"
               required
               placeholder="Enter the height"
+              value={height}
               onChange={(e) => setHeight(+e.target.value)}
             />
           </div>
@@ -85,6 +105,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
             <input
               type="number"
               required
+              value={length}
               placeholder="Enter the length"
               onChange={(e) => setLength(+e.target.value)}
             />
@@ -100,6 +121,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
             <input
               type="number"
               required
+              value={width}
               placeholder="Enter the width"
               onChange={(e) => setWidth(+e.target.value)}
             />
@@ -116,7 +138,8 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
               type="number"
               placeholder="Enter the price"
               required
-              onChange={(e) => setTotalAmmount(+e.target.value)}
+              value={totalAmount}
+              onChange={(e) => setTotalAmount(+e.target.value)}
             />
           </div>
         </div>
@@ -130,6 +153,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
             <input
               type="text"
               placeholder="Enter the details for our driver"
+              value={deliveryDetails}
               onChange={(e) => setDeliveryDetails(e.target.value)}
             />
           </div>

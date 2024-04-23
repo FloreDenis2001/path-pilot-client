@@ -4,4 +4,5 @@ export default interface PackageDetails {
     height: number;
     width: number;
     length: number;
+    deliveryDetails: string;
 }
