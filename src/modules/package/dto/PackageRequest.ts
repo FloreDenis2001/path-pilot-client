@@ -3,8 +3,8 @@ import PackageAddress from "./PackageAddress";
 import PackageDetails from "./PackageDetails";
 
 export default interface PackageRequest {
-    customerId: number;
+    customerEmail: string;
     packageDetails: PackageDetails;
-    originDetails: PackageAddress;
-    destinationDetails: PackageAddress;
+    origin: PackageAddress;
+    destination: PackageAddress;
 }

@@ -7,6 +7,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import Package from "../../model/Package";
+import { PackageStatus } from "../../model/PackageStatus";
 
 interface PackageCardProps {
   pack: Package;
@@ -46,7 +47,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack, onClick }) => {
             icon={faMoneyBill}
             className="order__card__body__infoItem__icon orange"
           />
-          <span>{pack.totalAmount} RON</span>
+          <span>{pack.packageDetails.totalAmount} RON</span>
         </div>
 
         <div className="order__card__body__infoItem">
@@ -59,10 +60,10 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack, onClick }) => {
       </div>
 
       <div className="order__card__status">
-        {pack.type === "ASSIGNED" ? (
-          <button className="button__status assigned">{pack.type}</button>
+        {pack.status === PackageStatus.ASSIGNED ? (
+          <button className="button__status assigned">{pack.status}</button>
         ) : (
-          <button className="button__status cancelled">{pack.type}</button>
+          <button className="button__status cancelled">{pack.status}</button>
         )}
       </div>
     </div>

@@ -13,7 +13,7 @@ interface FormPackageDeliveryProps {
   width: number;
   length: number;
   totalAmount: number;
-  deliveryDetails: string;
+  deliveryDescription: string;
   updatePackageDetails: (data: PackageDetails) => void;
 }
 
@@ -23,7 +23,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
   width: initialWidth,
   length: initialLength,
   totalAmount: initialTotalAmount,
-  deliveryDetails: initialDeliveryDetails,
+  deliveryDescription: initialDeliveryDescription,
   updatePackageDetails,
 }) => {
   let [weight, setWeight] = useState<number>(initialWeight || 0);
@@ -33,8 +33,8 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
   let [totalAmount, setTotalAmount] = useState<number>(
     initialTotalAmount || 0
   );
-  let [deliveryDetails, setDeliveryDetails] = useState<string>(
-    initialDeliveryDetails || ""
+  let [deliveryDescription, setDeliveryDescription] = useState<string>(
+    initialDeliveryDescription || ""
   );
 
   const memorizedUpdatePackageDetails = useCallback(
@@ -52,13 +52,13 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
       height: height,
       width: width,
       length: length,
-      deliveryDetails: deliveryDetails,
+      deliveryDescription: deliveryDescription,
     });
   };
 
   useEffect(() => {
     updatePackageDetailsData();
-  }, [weight, height, width, length, totalAmount, deliveryDetails]);
+  }, [weight, height, width, length, totalAmount, deliveryDescription]);
 
 
 
@@ -153,8 +153,8 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
             <input
               type="text"
               placeholder="Enter the details for our driver"
-              value={deliveryDetails}
-              onChange={(e) => setDeliveryDetails(e.target.value)}
+              value={deliveryDescription}
+              onChange={(e) => setDeliveryDescription(e.target.value)}
             />
           </div>
         </div>

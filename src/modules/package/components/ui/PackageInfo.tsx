@@ -67,12 +67,12 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
     doc.setFontSize(12);
     doc.setTextColor("#666");
     doc.text(`Package AWB: ${pack.awb}`, 10, 30);
-    doc.text(`Width: ${pack.width} cm`, 10, 40);
-    doc.text(`Height: ${pack.height} cm`, 10, 50);
-    doc.text(`Weight: ${pack.weight} g`, 10, 60);
-    doc.text(`Type: ${pack.type}`, 10, 70);
-    doc.text(`Total Amount: ${pack.totalAmount} RON`, 10, 80);
-    doc.text(`Delivery Description: ${pack.deliveryDescription}`, 10, 90);
+    doc.text(`Width: ${pack.packageDetails.width} cm`, 10, 40);
+    doc.text(`Height: ${pack.packageDetails.height} cm`, 10, 50);
+    doc.text(`Weight: ${pack.packageDetails.weight} g`, 10, 60);
+    // doc.text(`Type: ${pack.}`, 10, 70);
+    doc.text(`Total Amount: ${pack.packageDetails.totalAmount} RON`, 10, 80);
+    doc.text(`Delivery Description: ${pack.packageDetails.deliveryDescription}`, 10, 90);
 
     doc.setTextColor("#333");
     doc.text("Origin Information:", 10, 110);

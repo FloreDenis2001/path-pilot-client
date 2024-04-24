@@ -31,8 +31,6 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
     address: {} as Address,
   });
 
-
-
   let [destinationDetails, setDestinationDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
@@ -45,24 +43,24 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
     height: 0,
     width: 0,
     length: 0,
-    deliveryDetails: "",
+    deliveryDescription: "",
   });
 
   let [packageRequest, setPackageRequest] = useState<PackageRequest>({
-    customerId: user.id,
-    originDetails: originDetails,
-    destinationDetails: destinationDetails,
+    customerEmail: user.email,
     packageDetails: packageDetailsInfo,
+    origin: originDetails,
+    destination: destinationDetails,
   });
 
   let servicePackage = new PackageService();
 
   const handleCreatePackage = async () => {
     console.log(packageRequest);
-    // const response = await servicePackage.createPackage(packageRequest);
-    // if (response) {
-    //   handleOpenModalAddOrder();
-    // }
+    const response = await servicePackage.createPackage(packageRequest);
+    if (response) {
+      handleOpenModalAddOrder();
+    }
   };
 
   const updatePackageDetails = (data: PackageDetails) => {
@@ -79,9 +77,9 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
 
   useEffect(() => {
     setPackageRequest({
-      customerId: user.id,
-      originDetails: originDetails,
-      destinationDetails: destinationDetails,
+      customerEmail: user.email,
+      origin: originDetails,
+      destination: destinationDetails,
       packageDetails: packageDetailsInfo,
     });
   }
@@ -161,7 +159,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
               className="button button__first"
               onClick={() => handleCreatePackage()}
             >
-              Create Account
+              Create Package
             </button>
           </div>
         )}

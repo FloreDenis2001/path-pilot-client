@@ -23,23 +23,23 @@ const PackInformation: React.FC<PackInformationProps> = ({ pack }) => {
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Width  </h3>
-            <p>{pack.width} cm</p>
+            <p>{pack.packageDetails.width} cm</p>
           </div>
           <div className="information__body__textBox">
             <h3>Height </h3>
-            <p>{pack.height} cm</p>
+            <p>{pack.packageDetails.height} cm</p>
           </div>
           <div className="information__body__textBox">
             <h3>Length </h3>
-            <p>{pack.length} cm</p>
+            <p>{pack.packageDetails.length} cm</p>
           </div>
           <div className="information__body__textBox">
             <h3>Weight </h3>
-            <p>{pack.weight} kg</p>
+            <p>{pack.packageDetails.weight} kg</p>
           </div>
           <div className="information__body__textBox">
             <h3>Total Ammount  </h3>
-            <p>{pack.totalAmount} RON</p>
+            <p>{pack.packageDetails.totalAmount} RON</p>
           </div>
         </div>
       </div>
