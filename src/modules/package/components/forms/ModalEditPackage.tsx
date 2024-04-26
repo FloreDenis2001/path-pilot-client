@@ -13,6 +13,8 @@ import PackageAddress from "../../dto/PackageAddress";
 import PackageDetails from "../../dto/PackageDetails";
 import Address from "../../../address/model/Address";
 import PackageRequest from "../../dto/PackageRequest";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 interface ModalEditPackageProps {
   handleOpenModal: () => void;
   pack: Package;
@@ -37,7 +39,7 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   });
 
   let [packageDetailsInfo, setPackageDetailsInfo] = useState<PackageDetails>({
-    totalAmount:pack.packageDetails.totalAmount,
+    totalAmount: pack.packageDetails.totalAmount,
     weight: pack.packageDetails.weight,
     height: pack.packageDetails.height,
     width: pack.packageDetails.width,
@@ -107,18 +109,23 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
         <div className="modal__container__header">
           <div className="modal__container__header__title">
             <span>Edit Package</span>
-          </div>
-
-          <div className="modal__container__header__actions">
-            {pack.status === PackageStatus.UNASSIGNED ? (
-              <span className="modal__container__header__actions__status cancelled">
-                UNASSIGNED
-              </span>
-            ) : (
-              <span className="modal__container__header__actions__status done">
-                ASSINGED
-              </span>
-            )}
+            <div className="modal__container__header__actions">
+              {pack.status === PackageStatus.UNASSIGNED ? (
+                <span className="modal__container__header__actions__status cancelled">
+                  UNASSIGNED
+                </span>
+              ) : (
+                <span className="modal__container__header__actions__status done">
+                  ASSINGED
+                </span>
+              )}
+              <button
+                className="button__close"
+                onClick={() => handleOpenModal()}
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </button>
+            </div>
           </div>
         </div>
 

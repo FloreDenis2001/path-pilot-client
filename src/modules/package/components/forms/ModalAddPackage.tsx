@@ -23,8 +23,6 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
 }) => {
   const { user } = useContext(LoginContext) as LoginContextType;
 
-  
-
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
@@ -82,8 +80,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
       destination: destinationDetails,
       packageDetails: packageDetailsInfo,
     });
-  }
-  , [originDetails, destinationDetails, packageDetailsInfo]);
+  }, [originDetails, destinationDetails, packageDetailsInfo]);
 
   const {
     currentStepIndex,
@@ -97,8 +94,8 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
       {...packageDetailsInfo}
       updatePackageDetails={updatePackageDetails}
     />,
-    <FormPickUp {...originDetails} updatePickUp={updatePickUp}/>,
-    <FormDelivery {...destinationDetails} updateDelivery={updateDelivery}/>,
+    <FormPickUp {...originDetails} updatePickUp={updatePickUp} />,
+    <FormDelivery {...destinationDetails} updateDelivery={updateDelivery} />,
   ]);
 
   const onSubmit = async (e: React.FormEvent) => {
@@ -108,22 +105,19 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
 
   const nameSteps = ["Package Delivery", "Pick Up Address", "Delivery Address"];
 
-
-
   return (
     <form className="modal" onSubmit={onSubmit}>
       <div className="modal__container">
         <div className="modal__container__header">
           <div className="modal__container__header__title">
             <span>Create Package</span>
+            <button
+              className="button__close"
+              onClick={() => handleOpenModalAddOrder()}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
           </div>
-
-          <button
-            className="button__close"
-            onClick={() => handleOpenModalAddOrder()}
-          >
-            <FontAwesomeIcon icon={faXmark} />
-          </button>
         </div>
 
         <div className="modal__container__body">

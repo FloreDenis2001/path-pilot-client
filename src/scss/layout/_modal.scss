@@ -52,17 +52,21 @@
     &__header {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-content: center;
       margin-bottom: 2rem;
 
       &__title {
         font-family: $font-family-secondary;
         text-transform: uppercase;
         font-size: 3rem;
+        display: flex;
+        flex-direction: row;
         color: $color-white;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
         margin-bottom: 1rem;
         width: 95%;
+        margin: 2rem;
       }
 
       &__actions {
@@ -70,9 +74,9 @@
         flex-direction: row;
         justify-content: flex-end;
         align-items: center;
-        width: 5%;
+        width: fit-content;
         margin-left: auto;
-        gap: 1rem;
+        gap: 2rem;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
 
