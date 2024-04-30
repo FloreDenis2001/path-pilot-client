@@ -13,6 +13,10 @@ html {
   background-color: $color-white;
 }
 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 body {
   box-sizing: border-box;
   background-color: $color-black-2;
@@ -46,7 +50,6 @@ select {
   background-color: transparent;
 }
 
-
-.MuiStack-root span{
+.MuiStack-root span {
   font-size: 1.3rem;
 }

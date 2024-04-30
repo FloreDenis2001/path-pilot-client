@@ -17,6 +17,10 @@
     cursor: pointer;
   }
 
+  svg{
+    margin-right: 1rem;
+  }
+
   
 
   &:hover {
@@ -194,6 +198,11 @@
     align-self: flex-end;
     justify-content: center;
     color: $color-white;
+
+    &__confirm{
+      background: $linear-gradient-2;
+
+    }
 
     &__icon {
       align-self: center;

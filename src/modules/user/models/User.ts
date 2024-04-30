@@ -10,4 +10,5 @@ export default interface User {
     address : Address;
     role: string;
     company_id: number;
+    image : string;
 }

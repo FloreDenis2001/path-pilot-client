@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import ModalAddDriver from "./froms/ModalAddDriver";
@@ -6,6 +6,8 @@ import Driver from "../models/Driver";
 import DriverService from "../service/DriverService";
 import DriverRow from "./ui/DriverRow";
 import Pagination from "../../core/components/Pagination";
+import { LoginContext } from "../../context/LoginProvider";
+import LoginContextType from "../../user/models/LoginContextType";
 
 const Drivers = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -16,9 +18,11 @@ const Drivers = () => {
   const indexOfLastDrivers = currentPage * driversPerPage;
   const indexOfFirstDrivers = indexOfLastDrivers - driversPerPage;
   const currentDrivers = drivers.slice(indexOfFirstDrivers, indexOfLastDrivers);
+
+  let {user} =useContext(LoginContext) as LoginContextType;
   const fetchDrivers = async () => {
     try {
-      let drivers = await driverService.getAllDrivers();
+      let drivers = await driverService.getAllDriversByCompany(user.companyRegistrationNumber);
       setDrivers(drivers);
     } catch (err) {
       console.log((err as Error).message);
@@ -99,8 +103,8 @@ const Drivers = () => {
           </thead>
 
           <tbody>
-            {currentDrivers.map((driver) => (
-              <DriverRow driver={driver} />
+            {currentDrivers.map((driver,key) => (
+              <DriverRow key={key} driver={driver} />
             ))}
           </tbody>
         </table>

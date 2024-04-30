@@ -4,6 +4,9 @@ import Vehicle from "../../models/Vehicle";
 import ModalVehicleDetails from "../forms/ModalVehicleDetails";
 import ModalEditVehicle from "../forms/ModalEditVehicle";
 import VehicleService from "../../service/VehicleService";
+import { set } from "react-hook-form";
+import Toast from "../../../../components/Dialog";
+import Dialog from "../../../../components/Dialog";
 
 interface VehicleRowProps {
   vehicle: Vehicle;
@@ -13,7 +16,7 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openVehicleDetails, setOpenVehicleDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
-  const vehicleService = new VehicleService();
+  const [openDialogDelete, setOpenDialogDelete] = useState(false);
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
@@ -27,15 +30,7 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
     setOpenModalEdit(!openModalEdit);
   };
   const handleDeleteVehicle = async () => {
-
-    
-    try {
-      await vehicleService.deleteVehicle(vehicle.registrationNumber);
-    } catch (err) {
-      console.log((err as Error).message);
-    }
-
-
+    setOpenDialogDelete(!openDialogDelete);
   };
 
   return (
@@ -74,7 +69,18 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
       )}
 
       {openModalEdit && (
-        <ModalEditVehicle vehicle={vehicle} handleOpenModal={() => handleOpenModalEdit()} />
+        <ModalEditVehicle
+          vehicle={vehicle}
+          handleOpenModal={() => handleOpenModalEdit()}
+        />
+      )}
+
+      {openDialogDelete && (
+        <Dialog
+          vehicleRegistrationNumber={vehicle.registrationNumber}
+          title="Are you sure ?"
+          handleOpenModal={() => handleDeleteVehicle()}
+        />
       )}
     </>
   );

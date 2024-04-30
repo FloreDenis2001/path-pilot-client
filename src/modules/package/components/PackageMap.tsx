@@ -35,8 +35,6 @@ const PackageMap = () => {
     setOpenModal(!openModal);
   };
 
-
-
   function openMenu(): void {
     const sidebar = document.querySelector(
       ".sidebar__mobile__overlay"
@@ -92,6 +90,11 @@ const PackageMap = () => {
             );
           })}
         </div>
+
+        {/* BUTTON GENERATE ROUTES */}
+        {/* <div className="order__container__footer">
+          <button className="button button__first">Generate Routes</button>
+        </div> */}
       </div>
 
       {packClicked && <PackageInfo pack={packClicked} />}

@@ -12,24 +12,24 @@ interface PackProps {
 
 const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   const [activeButton, setActiveButton] = useState("package");
-  // const original =
-  //   pack.shipmentDTO.origin.city +
-  //   " , " +
-  //   pack.shipmentDTO.origin.country +
-  //   " , " +
-  //   pack.shipmentDTO.origin.street +
-  //   " , " +
-  //   pack.shipmentDTO.origin.streetNumber;
-  // const destination =
-  //   pack.shipmentDTO.destination.city +
-  //   " , " +
-  //   pack.shipmentDTO.destination.country +
-  //   " , " +
-  //   pack.shipmentDTO.destination.street +
-  //   " , " +
-  //   pack.shipmentDTO.destination.streetNumber;
+  const original =
+    pack.shipmentDTO.origin.city +
+    " , " +
+    pack.shipmentDTO.origin.country +
+    " , " +
+    pack.shipmentDTO.origin.street +
+    " , " +
+    pack.shipmentDTO.origin.streetNumber;
+  const destination =
+    pack.shipmentDTO.destination.city +
+    " , " +
+    pack.shipmentDTO.destination.country +
+    " , " +
+    pack.shipmentDTO.destination.street +
+    " , " +
+    pack.shipmentDTO.destination.streetNumber;
 
-  // const apiKey = "AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0";
+  const apiKey = "AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0";
   // const [openModal, setOpenModal] = useState(false);
   // const [openOrderDetails, setOpenOrderDetails] = useState(false);
   const handleButtonClick = (button: string) => {
@@ -122,14 +122,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       </div>
 
       <div className="order__map__body">
-        {/* <iframe
+         {/* <iframe
           title="map"
           src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}
           loading="lazy"
-        ></iframe> */}
+        ></iframe>  */}
       </div>
 
       <div className="order__map__details">

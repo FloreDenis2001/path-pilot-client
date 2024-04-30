@@ -17,31 +17,59 @@ import BarChartComponent from "../modules/core/components/BarChartComponent";
 import { Chart, registerables } from "chart.js";
 import DoughnutChart from "../modules/core/components/DoughnutChart";
 import SidebarMobile from "../modules/core/components/SidebarMobile";
+import { useContext, useEffect, useState } from "react";
+import LoginContextType from "../modules/user/models/LoginContextType";
+import { LoginContext } from "../modules/context/LoginProvider";
+import UserService from "../modules/user/service/UserService";
+import { useNavigate } from "react-router";
 
 Chart.register(...registerables);
 const DashBoard = () => {
   const labelsData = ["January", "February", "March", "April", "May", "June"];
   const expensesData = [65, 59, 80, 81, 56, 55];
   const profitData = [28, 48, 40, 19, 86, 27];
-
+  const [userImage, setUserImage] = useState("");
   let priceService = 206.85;
   let shipments = 500;
   let priceExpenses = 153.85;
   let priceProfit = 200.85;
 
   function openMenu(): void {
-    const sidebar = document.querySelector(".sidebar__mobile__overlay") as HTMLElement;
+    const sidebar = document.querySelector(
+      ".sidebar__mobile__overlay"
+    ) as HTMLElement;
     sidebar.style.display = "flex";
-
   }
 
+  const userService = new UserService();
+  const nav = useNavigate();
+  const fetchUserImage = async () => {
+    try {
+      let userImage = await userService.getImage(user.email);
+      console.log(userImage);
+      setUserImage(userImage);
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserImage();
+  }, []);
+
+  let { user } = useContext(LoginContext) as LoginContextType;
+  console.log(user);
+
+  const handlerNavProfile = () => {
+    nav("/profile");
+  };
   return (
     <section className="dashboard">
       <Sidebar />
       <SidebarMobile />
       <div className="dashboard__header">
         <div className="dashboard__header__left">
-          <FontAwesomeIcon icon={faBars}  onClick={()=>openMenu()}/>
+          <FontAwesomeIcon icon={faBars} onClick={() => openMenu()} />
           <h1 className="heading-primary">Dashboard</h1>
         </div>
 
@@ -57,8 +85,29 @@ const DashBoard = () => {
             </Badge>
           </div>
 
-          <div className="dashboard__header__options__profile">
-            <img src={image} alt="" width={25} />
+          <div
+            className="dashboard__header__options__profile"
+            onClick={handlerNavProfile}
+          >
+            {userImage ? (
+              <>
+                <img
+                  src={`data:image/jpeg;base64,${userImage}`}
+                  alt="user-photo"
+                  width={25}
+                />
+                <p>
+                  {user.firstName} {user.lastName}
+                </p>
+              </>
+            ) : (
+              <>
+                <img src={image} alt="default-user" width={25} />
+                <p>
+                  {user.firstName} {user.lastName}
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>

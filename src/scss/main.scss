@@ -1,16 +1,13 @@
-// // ABSTRACTS 
-
-
+// // ABSTRACTS
 
 @import "abstracts/variables";
 @import "abstracts/mixins";
 
-
-// //BASE 
+// //BASE
 @import "base/base";
 @import "base/typography";
 
-// // COMPONENTS 
+// // COMPONENTS
 @import "components/button";
 @import "components/sidebar";
 @import "components/input";
@@ -19,10 +16,6 @@
 @import "components/pagination";
 @import "components/information";
 
-
-
-
-
 // // LAYOUT
 @import "layout/modal";
 @import "layout/loginLayout";
@@ -30,12 +23,12 @@
 @import "layout/sendEmail";
 @import "layout/retrievePasswordLayout";
 
-
-// // PAGES 
+// // PAGES
 @import "pages/login";
 @import "pages/register";
-@import  "pages/retrievePassword";
-@import  "pages/order";
-@import  "pages/drivers";
-@import  "pages/vehicle";
-@import  "pages/dashboard";
+@import "pages/retrievePassword";
+@import "pages/order";
+@import "pages/drivers";
+@import "pages/vehicle";
+@import "pages/dashboard";
+@import "pages/profile";

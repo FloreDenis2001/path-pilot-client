@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import LoginContextType from "../../user/models/LoginContextType";
 import UserService from "../../user/service/UserService";
 import { LoginContext } from "../../context/LoginProvider";
+import UserLogin from "../../user/dto/UserLogin";
 
 type FormData = {
   email: string;
@@ -29,7 +30,8 @@ const Login: React.FC = () =>  {
   let onSubmit = async (data: FormData) => {
     try {
       let user = await userService.login(data);
-      setUserCookie(user);
+      console.log(user);
+      setUserCookie(user as UserLogin);
       handleNavHome();
      
     } catch (error) {

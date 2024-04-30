@@ -1,9 +1,20 @@
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowUp19,
+  faMoneyBill,
+  faPhone,
+  faRankingStar,
+  faSignature,
+  faToggleOff,
+  faToggleOn,
+  faUser,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState } from "react";
 import Driver from "../../models/Driver";
 import DriverService from "../../service/DriverService";
 import DriverUpdateRequest from "../../dto/DriverUpdateRequest";
+import { FaEnvelope } from "react-icons/fa";
 interface ModalOrdersProps {
   handleOpenModal: () => void;
   driver: Driver;
@@ -40,7 +51,7 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
     let response = await driverService.updateDriver(data);
     console.log(response);
     handleOpenModal();
-  }
+  };
 
   return (
     <section className="modal">
@@ -57,104 +68,170 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
 
         <div className="modal__container__body">
           <div className="modal__container__body__content">
-            <h2>Driver Information : </h2>
-            <div className="modal__container__body__content__main--drivers">
+            <h2>Driver Information</h2>
+            <div className="modal__container__body__content__main">
               <div className="modal__container__body__content__input">
                 <label>Username</label>
-                <input
-                  type="text"
-                  placeholder="Enter the name"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
+                <div className="inputBox">
+                  <FontAwesomeIcon icon={faUser} className="inputBox__icon" />
+
+                  <input
+                    type="text"
+                    placeholder="Enter the name"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
               </div>
 
               <div className="modal__container__body__content__input">
                 <label>First Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter the first name"
-                  value={firstName}
-                  onChange={(e) => setFirstName(e.target.value)}
-                />
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faSignature}
+                    className="inputBox__icon"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter the first name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
+                </div>
               </div>
 
               <div className="modal__container__body__content__input">
                 <label>Last Name</label>
-                <input
-                  type="text"
-                  placeholder="Enter the last name"
-                  value={lastName}
-                  onChange={(e) => setLastName(e.target.value)}
-                />
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faSignature}
+                    className="inputBox__icon"
+                  />
+
+                  <input
+                    type="text"
+                    placeholder="Enter the last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
+                </div>
               </div>
 
               <div className="modal__container__body__content__input">
                 <label>Email</label>
-                <input
-                  type="text"
-                  placeholder="Enter the email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
+
+                <div className="inputBox">
+                  <FaEnvelope className="inputBox__icon" />
+                  <input
+                    type="text"
+                    placeholder="Enter the email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
               </div>
-       
+
               <div className="modal__container__body__content__input">
                 <label>License Number</label>
-                <input
-                  type="text"
-                  placeholder="Enter the license number"
-                  value={licenseNumber}
-                  onChange={(e) => setLicenseNumber(e.target.value)}
-                />
+
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faSignature}
+                    className="inputBox__icon"
+                  />
+                  <input
+                    type="text"
+                    placeholder="Enter the license number"
+                    value={licenseNumber}
+                    onChange={(e) => setLicenseNumber(e.target.value)}
+                  />
+                </div>
               </div>
               <div className="modal__container__body__content__input">
                 <label>Phone</label>
-                <input
-                  type="text"
-                  placeholder="Enter phone number"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
+                <div className="inputBox">
+                  <FontAwesomeIcon icon={faPhone} className="inputBox__icon" />
+                  <input
+                    type="text"
+                    placeholder="Enter phone number"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                  />
+                </div>
               </div>
               <div className="modal__container__body__content__input">
                 <label>Salary</label>
-                <input
-                  type="number"
-                  placeholder="Enter the salary"
-                  value={salary}
-                  onChange={(e) => setSalary(Number(e.target.value))}
-                />
+
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faMoneyBill}
+                    className="inputBox__icon"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Enter the salary"
+                    value={salary}
+                    onChange={(e) => setSalary(Number(e.target.value))}
+                  />
+                </div>
               </div>
               <div className="modal__container__body__content__input">
                 <label>Rating</label>
-                <input
-                  type="number"
-                  placeholder="Enter the rating"
-                  value={rating}
-                  onChange={(e) => setRating(Number(e.target.value))}
-                />
+
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faRankingStar}
+                    className="inputBox__icon"
+                  />
+                  <input
+                    type="number"
+                    placeholder="Enter the rating"
+                    value={rating}
+                    onChange={(e) => setRating(Number(e.target.value))}
+                  />
+                </div>
               </div>
               <div className="modal__container__body__content__input">
                 <label>Experience</label>
-                <input
-                  type="number"
-                  placeholder="Enter the experience"
-                  value={experience}
-                  onChange={(e) => setExperience(Number(e.target.value))}
-                />
+
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faArrowUp19}
+                    className="inputBox__icon"
+                  />
+
+                  <input
+                    type="number"
+                    placeholder="Enter the experience"
+                    value={experience}
+                    onChange={(e) => setExperience(Number(e.target.value))}
+                  />
+                </div>
               </div>
               <div className="modal__container__body__content__select">
                 <label>Status</label>
-                <select
-                  name="status"
-                  id="modal__status"
-                  value={isAvailable ? "active" : "inactive"}
-                  onChange={(e) => setIsAvailabe(e.target.value === "active")}
-                >
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
+                <div className="inputBox">
+                  {isAvailable ? (
+                    <FontAwesomeIcon
+                      icon={faToggleOn}
+                      className="inputBox__icon"
+                    />
+                  ) : (
+                    <FontAwesomeIcon
+                      icon={faToggleOff}
+                      className="inputBox__icon"
+                    />
+                  )}
+                  <select
+                    name="status"
+                    id="modal__status"
+                    value={isAvailable ? "active" : "inactive"}
+                    onChange={(e) => setIsAvailabe(e.target.value === "active")}
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                  </select>
+                </div>
               </div>
             </div>
           </div>
@@ -167,7 +244,12 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
           >
             Cancel
           </button>
-          <button className="button__modal button__modal__save" onClick={handleUpdate}>Save</button>
+          <button
+            className="button__modal button__modal__save"
+            onClick={handleUpdate}
+          >
+            Update
+          </button>
         </div>
       </div>
     </section>

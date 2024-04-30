@@ -48,9 +48,9 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
         <td>{driver.salary}</td>
         <td className="td__status ">
           {!driver.isAvailable ? (
-            <span className="td__status__active">Active</span>
+            <span className="td__status__active">On Drive</span>
           ) : (
-            <span className="td__status__inActive">InActive</span>
+            <span className="td__status__inActive">Off Drive</span>
           )}
         </td>
 

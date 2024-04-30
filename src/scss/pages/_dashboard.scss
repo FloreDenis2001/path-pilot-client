@@ -17,11 +17,10 @@
     justify-content: space-between;
     align-items: center;
     padding-block: 2rem;
-    margin-bottom: 2rem;
     border-radius: 0.5rem;
-    margin-bottom: 2rem;
-    margin-block: 1rem 2rem;
-    margin-inline: 2rem;
+    margin: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
     max-width: 130rem;
 
     @include respond(big-desktop) {
@@ -130,28 +129,48 @@
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        margin-left: 1rem;
+        cursor: pointer;
+        padding: 1rem 1.5rem;
+        border-radius: 0.5rem;
+
+        &:hover {
+          background-color: $color-black-2;
+        }
+
         img {
           width: 3.5em;
           height: 3.5rem;
           border-radius: 50%;
           border: 1px solid $color-secondary;
         }
+
+        p {
+          font-size: 1.6rem;
+          color: $color-white;
+          font-family: $font-family-secondary;
+          margin-left: 1rem;
+        }
+
+       
       }
     }
   }
 
   &__container {
     grid-area: 3 / 3 / 13/ 13;
+    box-shadow: 0 0.5rem 1rem rgba($color-black-2, 0.2);
+    background-color: $color-black-2;
     display: flex;
     flex-direction: column;
-    background-color: transparent;
-    gap: 2rem;
-    position: relative;
+    align-items: center;
     overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #888 transparent;
-    max-width: 135rem;
+    padding-block: 2rem;
+    border-radius: 0.5rem;
+    gap: 2rem;
+    margin: 1rem;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    max-width: 130rem;
 
     @include respond(big-desktop) {
       min-width: 100%;
@@ -188,7 +207,6 @@
       width: calc(100% - 4rem);
       height: 50rem;
       width: 60%;
-      margin-left: 2rem;
       box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
       border-radius: 0.6rem;
 
@@ -346,8 +364,8 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    margin-left: 2rem;
-    width: calc(100% - 4rem);
+    width: 100%;
+    padding-right: 2rem;
     gap: 2rem;
 
     &__box {
@@ -437,7 +455,6 @@
     }
 
     &__pie {
-      margin-left: 2rem;
       background-color: $color-black;
       width: 35%;
       border-radius: 0.6rem;

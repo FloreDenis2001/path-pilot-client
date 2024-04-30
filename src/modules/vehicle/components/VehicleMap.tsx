@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../../core/components/Pagination";
+import image from "../../../assets/logoDefault.png";
+
 // import { useDispatch, useSelector } from 'react-redux';
 import Vehicle from "../models/Vehicle";
 import VehicleService from "../service/VehicleService";
 import VehicleRow from "./ui/VehicleRow";
 import ModalAddVehicle from "./forms/ModalAddVehicle";
+import { LoginContext } from "../../context/LoginProvider";
+import LoginContextType from "../../user/models/LoginContextType";
+import UserService from "../../user/service/UserService";
 // import { selectVehicles, selectVehiclesState } from "../../../store/vehicles/vehicles.selectors";
 
 const VehicleMap = () => {
@@ -20,12 +25,14 @@ const VehicleMap = () => {
 
   let [myVehicles, setMyVehicles] = useState<Vehicle[]>([]);
 
+  let { user } = useContext(LoginContext) as LoginContextType;
   const vehicleService = new VehicleService();
 
   const fetchVehicles = async () => {
-    // dispatch();
     try {
-      let vehicles = await vehicleService.allVehicles();
+      let vehicles = await vehicleService.allVehiclesByCompany(
+        user.companyRegistrationNumber
+      );
       console.log(vehicles);
       setMyVehicles(vehicles);
     } catch (err) {
@@ -57,13 +64,13 @@ const VehicleMap = () => {
       <Sidebar />
       <div className="drivers__header">
         <h1 className="heading-primary">Vehicles</h1>
-        <div
+        <button
           onClick={() => handleOpenModalAddVehicle()}
           className="button__box__second"
         >
           <FaPlus />
-          <button>New Vehicle </button>
-        </div>
+          <span>New Vehicle </span>
+        </button>
       </div>
 
       <div className="drivers__filters">

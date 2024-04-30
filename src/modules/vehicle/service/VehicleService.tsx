@@ -2,14 +2,14 @@ import ApiServer from "../../system/service/ApiServer";
 import Vehicle from "../models/Vehicle";
 
 class VehicleService extends ApiServer {
-  createVehicle = async (data: Vehicle): Promise<any> => {
-    const response = await this.api<any, any>(
+  createVehicle = async (data: Vehicle): Promise<Vehicle> => {
+    const response = await this.api<Vehicle, Vehicle>(
       `/vehicles/create`,
       "POST",
       data,
       ""
     );
-    if (response.status === 200) {
+    if (response.status === 201) {
       const data = await response.json();
       return data;
     } else {
@@ -17,9 +17,9 @@ class VehicleService extends ApiServer {
     }
   };
 
-  allVehicles = async (): Promise<Vehicle[]> => {
+  allVehiclesByCompany = async (companyRegistrationNumber:string): Promise<Vehicle[]> => {
     const response = await this.api<null, Vehicle[]>(
-      `/vehicles/findAll`,
+      `/vehicles/getVehiclesByCompanyRegistrationNumber=${companyRegistrationNumber}`,
       "GET",
       null,
       ""

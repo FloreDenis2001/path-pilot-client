@@ -1,14 +1,27 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import LogoDefault from "../../../assets/logoDefault.png";
-import { FaHome, FaCubes, FaIdCard, FaTruck, FaFile, FaFileInvoice, FaBox } from "react-icons/fa";
+import {
+  FaHome,
+  FaCubes,
+  FaIdCard,
+  FaTruck,
+  FaFile,
+  FaFileInvoice,
+  FaBox,
+} from "react-icons/fa";
+import image from "../../../assets/logoDefault.png";
+
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
+import UserService from "../../user/service/UserService";
+import LoginContextType from "../../user/models/LoginContextType";
+import { LoginContext } from "../../context/LoginProvider";
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(true);
   let nav = useNavigate();
-
+  const [userImage, setUserImage] = useState<string>();
 
   const handleNavigation = (path: string) => {
     nav(path);
@@ -27,6 +40,24 @@ const Sidebar = () => {
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const userService = new UserService();
+
+  const fetchUserImage = async () => {
+    try {
+      let userImage = await userService.getImage(user.email);
+      console.log(userImage);
+      setUserImage(userImage);
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+  };
+
+  const { user } = useContext(LoginContext) as LoginContextType;
+
+  useEffect(() => {
+    fetchUserImage();
   }, []);
 
   return (
@@ -106,7 +137,7 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar__menuBar__bottomMenu">
-        <li
+          <li
           className="sidebar__menuBar__menu__link"
           onClick={() => handleNavigation("/")}
         >

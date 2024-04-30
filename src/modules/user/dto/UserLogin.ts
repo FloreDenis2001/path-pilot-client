@@ -10,4 +10,4 @@ export default interface UserLogin{
     phone:string,
     token:string,
     companyRegistrationNumber:string,
- }
+}

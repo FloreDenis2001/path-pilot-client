@@ -5,9 +5,10 @@ import DriverUpdateRequest from "../dto/DriverUpdateRequest";
 import Driver from "../models/Driver";
 
 class DriverService extends ApiServer {
-  getAllDrivers = async (): Promise<Driver[]> => {
+
+  getAllDriversByCompany = async (registrationNumber:string): Promise<Driver[]> => {
     const response = await this.api<null, Driver[]>(
-      `/drivers/all`,
+      `/drivers/allByCompany?registrationNumber=${registrationNumber}`,
       "GET",
       null,
       ""

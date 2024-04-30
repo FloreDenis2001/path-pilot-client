@@ -19,8 +19,7 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
     role: "NOUSERROLE",
     phone: "NOPHONE",
     companyRegistrationNumber: "0",
-    token: "NOTOKEN",
-  });
+    token: "NOTOKEN"  });
 
   useEffect(() => {
     const authedUser = Cookies.get("authedUser");
@@ -34,6 +33,8 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
     setUser(user);
   }
 
+  
+
   function logOut() {
     Cookies.remove("authedUser");
     setUserCookie({
@@ -45,7 +46,7 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
       role: "NOUSERROLE",
       phone: "NOPHONE",
       companyRegistrationNumber: "0",
-      token: "NOTOKEN",
+      token: "NOTOKEN"
     });
   }
 

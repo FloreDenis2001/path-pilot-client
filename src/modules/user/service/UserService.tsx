@@ -33,6 +33,21 @@ class UserService extends ApiServer {
       return Promise.reject([]);
     }
   };
+
+  getImage = async (email: string): Promise<string> => {
+    const response = await this.api<null, string>(
+      `/image/user/?email=${email}`,
+      "GET",
+      null,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.text();
+      return data;
+    } else {
+      return Promise.reject([]);
+    }
+  }
 }
 
 export default UserService;
