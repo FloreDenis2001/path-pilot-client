@@ -28,8 +28,12 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
   let [fuelConsumption, setFuelConsumption] = useState<number>(
     vehicle.fuelConsumption
   );
-  let [lastService, setLastService] = useState<Date>(new Date(vehicle.lastService));
-  let [nextService, setNextService] = useState<Date>(new Date(vehicle.nextService));
+  let [lastService, setLastService] = useState<Date>(
+    new Date(vehicle.lastService)
+  );
+  let [nextService, setNextService] = useState<Date>(
+    new Date(vehicle.nextService)
+  );
   let [km, setKm] = useState<number>(vehicle.km);
   let [capacity, setCapacity] = useState<number>(vehicle.capacity);
 
@@ -37,8 +41,7 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
 
   useEffect(() => {
     console.log(vehicle);
-  }
-  , []);
+  }, []);
 
   const updateVehicle = async () => {
     let data = {
@@ -135,23 +138,21 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
                     icon={faGasPump}
                     className="inputBox__icon"
                   />
-                   <select
+                  <select
                     name="fuelType"
                     id="fuelType"
                     value={fuelType}
                     onChange={(e) =>
-                      setFuelType(parseInt(e.target.value) as FuelType)
+                      setFuelType(e.target.value as FuelType)
                     }
                   >
-                    {Object.keys(FuelType).map((key) => {
-                      const fuelTypeValue =
-                        FuelType[key as keyof typeof FuelType];
-                      return (
+                    {Object.values(FuelType)
+                      .filter((value) => typeof value === "string")
+                      .map((fuelTypeValue) => (
                         <option key={fuelTypeValue} value={fuelTypeValue}>
-                          {key}
+                          {fuelTypeValue}
                         </option>
-                      );
-                    })}
+                      ))}
                   </select>
                 </div>
               </div>
@@ -184,12 +185,14 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
                   />
                   <input
                     type="date"
-                    value={lastService instanceof Date ? lastService.toISOString().split("T")[0]  : ''}
-
+                    value={
+                      lastService instanceof Date
+                        ? lastService.toISOString().split("T")[0]
+                        : ""
+                    }
                     placeholder="Enter the last service"
                     onChange={(e) => setLastService(new Date(e.target.value))}
                   />
-
                 </div>
               </div>
 
@@ -202,7 +205,11 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
                   />
                   <input
                     type="date"
-                    value={nextService instanceof Date ? nextService.toISOString().split("T")[0]  : ''}
+                    value={
+                      nextService instanceof Date
+                        ? nextService.toISOString().split("T")[0]
+                        : ""
+                    }
                     placeholder="Enter the next service"
                     onChange={(e) => setNextService(new Date(e.target.value))}
                   />

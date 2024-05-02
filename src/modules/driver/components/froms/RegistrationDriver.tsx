@@ -7,26 +7,28 @@ import DriverCreateRequest from "../../dto/DriverCreateRequest";
 import { useLocation, useNavigate } from "react-router";
 import DriverService from "../../service/DriverService";
 import QontoConnector from "../../../core/components/QontoConnector";
+import EmailService from "../../../email/services/EmailService";
 
 const RegistrationDriver = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const code = searchParams.get("code");
   const expires = searchParams.get("expires");
-  const companyRegistrationNumber = searchParams.get("company");
+  const companyRegistrationNumber = searchParams.get("identifier");
+  const emailService = new EmailService();
+  const driverService = new DriverService();
 
   let handleRemoveLinkAfterCreate = async () => {
-    await driverService.removeLink(code as string);
+    await emailService.removeLink(code as string);
   };
   const nav = useNavigate();
 
   const [isValid, setIsValid] = useState(false);
-  const driverService = new DriverService();
 
   const handlerVerificationCode = async () => {
     try {
       if (code && expires) {
-        let response = await driverService.isValid(code);
+        let response = await emailService.isValid(code);
         setIsValid(response);
       }
     } catch (error) {
@@ -79,23 +81,21 @@ const RegistrationDriver = () => {
 
   useEffect(() => {
     if (companyRegistrationNumber !== null) {
-      setDataDriver(prevDriver => ({
+      setDataDriver((prevDriver) => ({
         ...prevDriver,
         companyRegistrationNumber: companyRegistrationNumber,
       }));
     }
   }, [companyRegistrationNumber]);
-  
-  
 
   const handleCreateAccount = async () => {
+    handlerVerificationCode();
     try {
       await driverService.addDriver(dataDriver);
       handleRemoveLinkAfterCreate();
     } catch (error) {
       console.log((error as Error).message);
     }
-    handlerVerificationCode();
     nav("/login");
   };
 
@@ -119,7 +119,11 @@ const RegistrationDriver = () => {
   return isValid ? (
     <form id="register" onSubmit={onSubmit}>
       <div className="register__container">
-        <QontoConnector key={currentStepIndex} step={currentStepIndex} nameSteps={nameSteps} />
+        <QontoConnector
+          key={currentStepIndex}
+          step={currentStepIndex}
+          nameSteps={nameSteps}
+        />
         {step}
 
         <div className="register__bottom">
@@ -152,7 +156,9 @@ const RegistrationDriver = () => {
         )}
       </div>
     </form>
-  ): <div>Invalid Link</div>;
+  ) : (
+    <div>Invalid Link</div>
+  );
 };
 
 export default RegistrationDriver;

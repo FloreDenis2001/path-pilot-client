@@ -5,7 +5,6 @@ export default interface Driver {
     email: string;
     firstName: string;
     lastName: string;
-    password: string;
     phone: string;
     salary: number;
     rating: number;

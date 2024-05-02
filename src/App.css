@@ -1007,7 +1007,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .modal__text {
   font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #ffffff;
 }
 .modal__subtitle {
@@ -1018,7 +1018,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .modal__subhead {
   font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #5f5f5f;
   font-weight: bold;
   margin-block: 0.2rem;
@@ -1111,7 +1111,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .modal__container__body__driversDetails, .modal__container__body__vehicleDetails {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
@@ -1124,7 +1124,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   justify-content: center;
   border: none;
-  width: 50%;
+  padding: 2rem;
+  width: 100%;
 }
 .modal__container__body__driversDetails__box__details, .modal__container__body__vehicleDetails__box__details {
   display: flex;
@@ -1138,12 +1139,15 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  gap: 0.2rem;
-  width: 100%;
+  flex-wrap: wrap;
+  width: 32%;
+  min-height: 100%;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
-  padding-left: 0.5rem;
-  margin-bottom: 0.5rem;
+}
+.modal__container__body__driversDetails__box__details__textBox :nth-child(1), .modal__container__body__vehicleDetails__box__details__textBox :nth-child(1) {
+  color: #2781e2;
 }
 .modal__container__body__content {
   margin-top: 2rem;
@@ -2583,7 +2587,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   max-height: 100vh;
 }
 .profile__content {
-  grid-area: 3/3/12/13;
+  grid-area: 1/3/13/13;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -2595,6 +2599,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin: 0 auto;
   width: 90%;
   max-width: 120rem;
+  margin-block: 1rem;
+  overflow-y: auto;
 }
 .profile__content__left {
   display: flex;
@@ -2634,21 +2640,29 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: column;
   gap: 2rem;
   width: 100%;
+  padding: 2rem;
 }
 .profile__content__right__box {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  flex-wrap: wrap;
+  width: 31%;
+  min-height: 100%;
 }
 .profile__content__right__box span {
+  max-width: 100%;
   font-size: 1.6rem;
   color: #ffffff;
+  word-break: break-word;
 }
 .profile__content__right__box :nth-child(1) {
   color: #7a7a7a;
 }
 .profile__content__right__details {
   background-color: #181820;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+  border-radius: 1rem;
+  border: 1px solid #5f5f5f;
   height: 50%;
   padding: 2rem;
 }

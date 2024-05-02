@@ -4,7 +4,6 @@ import UserService from "../service/UserService";
 import { LoginContext } from "../../context/LoginProvider";
 import LoginContextType from "../models/LoginContextType";
 import image from "../../../assets/logoDefault.png";
-import FormUser from "./FormUser";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBuilding,
@@ -12,12 +11,16 @@ import {
   faTrash,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import { Company } from "../../company/models/Company";
+import CompanyService from "../../company/services/CompanyServer";
 
 const Profile = () => {
   let [userImage, setUserImage] = useState<string>();
+  let [company, setCompany] = useState<Company>();
   const { user } = useContext(LoginContext) as LoginContextType;
 
   const userService = new UserService();
+  const companyService = new CompanyService();
   const fetchUserImage = async () => {
     try {
       let userImage = await userService.getImage(user.email);
@@ -28,8 +31,21 @@ const Profile = () => {
     }
   };
 
+  const fetchCompanyDetails = async () => {
+    try {
+      let company = await companyService.getCompanyByRegistrationNumber(
+        user.companyRegistrationNumber
+      );
+      console.log(company);
+      setCompany(company);
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+  };
+
   useEffect(() => {
     fetchUserImage();
+    fetchCompanyDetails();
   }, []);
   return (
     <section className="profile">
@@ -105,7 +121,24 @@ const Profile = () => {
 
               <div className="profile__content__right__box">
                 <span>Address</span>
-                <span>{user.companyRegistrationNumber}</span>
+                <span>Str. Mihai Eminescu, Nr. 1, Bucuresti</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>Country</span>
+                <span>Romania</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>City</span>
+                <span>Bucuresti</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>Postal Code</span>
+                <span>010011</span>
+              </div>
+
+              <div className="profile__content__right__box">
+                <span>Subscription</span>
+                <span>Basic</span>
               </div>
             </div>
           </div>
@@ -117,24 +150,49 @@ const Profile = () => {
 
             <div className="profile__content__right__details__information">
               <div className="profile__content__right__box">
-                <span>First Name</span>
-                <span>{user.firstName}</span>
-              </div>{" "}
+                <span>Company Name</span>
+                <span>{company?.name}</span>
+              </div>
               <div className="profile__content__right__box">
-                <span>First Name</span>
-                <span>{user.firstName}</span>
-              </div>{" "}
+                <span>Registration Number</span>
+                <span>{company?.registrationNumber}</span>
+              </div>
               <div className="profile__content__right__box">
-                <span>First Name</span>
-                <span>{user.firstName}</span>
-              </div>{" "}
+                <span>Email</span>
+                <span>
+                  {company?.email ? company?.email : "No email provided"}
+                </span>
+              </div>
               <div className="profile__content__right__box">
-                <span>First Name</span>
-                <span>{user.firstName}</span>
-              </div>{" "}
+                <span>Industry</span>
+                <span>{company?.industry}</span>
+              </div>
+
               <div className="profile__content__right__box">
-                <span>First Name</span>
-                <span>{user.firstName}</span>
+                <span>Capital</span>
+                <span>{company?.capital}</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>Phone</span>
+                <span>{company?.phone}</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>Address</span>
+                <span>
+                  {company?.address.street} {company?.address.streetNumber}
+                </span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>Country</span>
+                <span>{company?.address.country}</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>City</span>
+                <span>{company?.address.city}</span>
+              </div>
+              <div className="profile__content__right__box">
+                <span>Postal Code</span>
+                <span>{company?.address.postalCode}</span>
               </div>
             </div>
           </div>

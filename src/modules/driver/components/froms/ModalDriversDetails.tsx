@@ -1,11 +1,36 @@
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Driver from "../../models/Driver";
+import UserService from "../../../user/service/UserService";
+import image from "../../../../assets/logoDefault.png";
+
 interface ModalDriversProps {
+  driver: Driver;
   handleOpenModal: () => void;
 }
 
-const ModalDriversDetails: React.FC<ModalDriversProps> = ({ handleOpenModal }) => {
+const ModalDriversDetails: React.FC<ModalDriversProps> = ({
+  driver,
+  handleOpenModal,
+}) => {
+  const [driverImage, setDriverImage] = useState<string>();
+  const userService = new UserService();
+
+  const fetchDriverImage = async () => {
+    try {
+      let userImage = await userService.getImage(driver.email);
+      console.log(userImage);
+      setDriverImage(userImage);
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+  };
+
+  useEffect(() => {
+    fetchDriverImage();
+  }, []);
+
   return (
     <section className="modal">
       <div className="modal__container">
@@ -13,10 +38,7 @@ const ModalDriversDetails: React.FC<ModalDriversProps> = ({ handleOpenModal }) =
           <div className="modal__container__header__title">
             <span>Driver Profile</span>
           </div>
-          <button
-            className="button__close"
-            onClick={() => handleOpenModal()}
-          >
+          <button className="button__close" onClick={() => handleOpenModal()}>
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
@@ -25,68 +47,68 @@ const ModalDriversDetails: React.FC<ModalDriversProps> = ({ handleOpenModal }) =
           <div className="modal__container__body__driversDetails">
             <div className="modal__container__body__driversDetails__box">
               <div className="modal__container__body__driversDetails__box__image">
-                <img src="https://via.placeholder.com/250" alt="" />
+                {driverImage ? (
+                  <img
+                    src={`data:image/jpeg;base64,${driverImage}`}
+                    alt="user-photo"
+                    width={250}
+                  />
+                ) : (
+                  <img src={image} alt="default-user" width={250} />
+                )}
               </div>
-                    <p className="modal__subtitle">Flore Denis</p>
+              <p className="modal__subtitle">{driver.username}</p>
             </div>
 
             <div className="modal__container__body__driversDetails__box">
-                <div className="modal__container__body__driversDetails__box__details">
-                    <div className="modal__container__body__driversDetails__box__details__textBox">
-                     <h3 className="modal__subhead">Name</h3>
-                     <p className="modal__text">Flore Denis</p>
-                    </div>
-
-                    <div className="modal__container__body__driversDetails__box__details__textBox">
-                     <h3 className="modal__subhead">Phone</h3>
-                     <p className="modal__text">086512241</p>
-                    </div>
-
-                    <div className="modal__container__body__driversDetails__box__details__textBox">
-                     <h3 className="modal__subhead">Email</h3>
-                     <p className="modal__text">floredenis907@yahoo.com </p>
-                    </div>
-
-                    <div className="modal__container__body__driversDetails__box__details__textBox">
-                     <h3 className="modal__subhead">License Number</h3>
-                     <p className="modal__text">994127721522</p>
-
-                    </div>
-
-                    <div className="modal__container__body__driversDetails__box__details__textBox">
-                     <h3 className="modal__subhead">Status</h3>
-                     <p className="modal__text">Active</p>
-                    </div>
-
-
+              <div className="modal__container__body__driversDetails__box__details">
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">Name</h3>
+                  <p className="modal__text">
+                    {driver.firstName} {driver.lastName}
+                  </p>
                 </div>
 
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">Phone</h3>
+                  <p className="modal__text">{driver.phone}</p>
+                </div>
+
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">Email</h3>
+                  <p className="modal__text">{driver.email}</p>
+                </div>
+
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">License Number</h3>
+                  <p className="modal__text">{driver.licenseNumber}</p>
+                </div>
+
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">Status</h3>
+                  {!driver.isAvailable ? (
+                    <span className="modal__text done">Active</span>
+                  ) : (
+                    <span className="modal__text cancelled">Inactive</span>
+                  )}
+                </div>
+
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">Salary</h3>
+                  <p className="modal__text">{driver.salary}</p>
+                </div>
+
+                <div className="modal__container__body__driversDetails__box__details__textBox">
+                  <h3 className="modal__subhead">Experience</h3>
+                  <p className="modal__text">{driver.experience}</p>
+                </div>
+              </div>
             </div>
-        
           </div>
-
-     
-
-       
-        </div>
-
-        <div className="modal__container__footer--drivers">
-          <button
-            className="button__modal   button__modal__cancel"
-            onClick={() => handleOpenModal()}
-          >
-            Close
-          </button>
-          <button
-            className="button__modal   button__modal__delete"
-            onClick={() => handleOpenModal()}
-          >
-            Delete
-          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default  ModalDriversDetails;
+export default ModalDriversDetails;

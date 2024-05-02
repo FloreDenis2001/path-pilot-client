@@ -2,26 +2,17 @@ import React from "react";
 import VehicleService from "../modules/vehicle/service/VehicleService";
 
 interface DialogProps {
-  vehicleRegistrationNumber: string;
-  title: string;
-  handleOpenModal: () => void;
+    title: string;
+    handleConfirm: () => void;
+    handleOpenModal: () => void;
 }
 
 const Dialog: React.FC<DialogProps> = ({
   title,
-  vehicleRegistrationNumber,
+  handleConfirm,
   handleOpenModal,
 }) => {
-  const vehicleService = new VehicleService();
-
-  const handleDeleteVehicle = async () => {
-    try {
-      await vehicleService.deleteVehicle(vehicleRegistrationNumber);
-    } catch (err) {
-      console.log((err as Error).message);
-    }
-    handleOpenModal();
-  };
+ 
 
   return (
     <section className="modal">
@@ -34,7 +25,7 @@ const Dialog: React.FC<DialogProps> = ({
             </button>
             <button
               className="button__modal button__modal__confirm"
-              onClick={handleDeleteVehicle}
+              onClick={handleConfirm}
             >
               Confirm
             </button>

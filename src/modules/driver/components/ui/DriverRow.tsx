@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import OptionsDropDownDrivers from "../../../../components/driver/OptionsDropDownDrivers";
 import Driver from "../../models/Driver";
 import ModalDriversDetails from "../froms/ModalDriversDetails";
 import ModalEditDriver from "../froms/ModalEditDriver";
 import UserService from "../../../user/service/UserService";
+import Dialog from "../../../../components/Dialog";
+import DriverService from "../../service/DriverService";
+import { LoginContext } from "../../../context/LoginProvider";
+import LoginContextType from "../../../user/models/LoginContextType";
 
 interface DriverRowProps {
   driver: Driver;
@@ -13,7 +17,9 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openDriverDetails, setOpenDriverDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
-  const userServices = new UserService();
+  const [openDialogDelete, setOpenDialogDelete] = useState(false);
+  const driverService= new DriverService();
+  const {user}= useContext(LoginContext) as LoginContextType;
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
@@ -27,12 +33,18 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
     setOpenModalEdit(!openModalEdit);
   };
 
+  const handleOpenDialog= async () => {
+    setOpenDialogDelete(!openDialogDelete);
+  };
+
   const handleDeleteDriver = async () => {
     try {
-      // await userServices.deleteUser(driver.id);
+      await driverService.deleteDriver(driver.licenseNumber,user.email);
     } catch (err) {
       console.log((err as Error).message);
     }
+
+    handleOpenDialog();
   };
 
   return (
@@ -60,19 +72,28 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
             onToggle={handleDropdownToggle}
             onDetails={handleOpenDriverDetails}
             onEdit={handleOpenModalEdit}
-            onDelete={handleDeleteDriver}
+            onDelete={handleOpenDialog}
           />
         </td>
       </tr>
 
       {openDriverDetails && (
         <ModalDriversDetails
-          handleOpenModal={() => handleOpenDriverDetails()}
+          driver={driver}
+          handleOpenModal={handleOpenDriverDetails}
         />
       )}
 
       {openModalEdit && (
-        <ModalEditDriver driver={driver} handleOpenModal={() => handleOpenModalEdit()} />
+        <ModalEditDriver driver={driver} handleOpenModal={handleOpenModalEdit} />
+      )}
+
+      {openDialogDelete && (
+        <Dialog
+          title="Are you sure ?"
+          handleOpenModal={handleOpenDialog}
+          handleConfirm={handleDeleteDriver}
+        />
       )}
     </>
   );

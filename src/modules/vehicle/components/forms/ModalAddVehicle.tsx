@@ -147,7 +147,7 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
                     name="fuelType"
                     id="fuelType"
                     onChange={(e) =>
-                      setFuelType(parseInt(e.target.value) as FuelType)
+                      setFuelType(e.target.value as FuelType)
                     }
                   >
                     {Object.keys(FuelType)
@@ -319,7 +319,7 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
               </div>
 
               <div className="modal__container__body__content__input">
-                <label htmlFor="">Weight</label>
+                <label htmlFor="">Max Weight</label>
                 <div className="inputBox">
                   <FontAwesomeIcon
                     icon={faArrowDown91}

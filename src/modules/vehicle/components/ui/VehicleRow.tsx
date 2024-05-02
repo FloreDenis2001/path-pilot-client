@@ -29,8 +29,19 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
   const handleOpenModalEdit = () => {
     setOpenModalEdit(!openModalEdit);
   };
-  const handleDeleteVehicle = async () => {
+  const handleOpenDialog = async () => {
     setOpenDialogDelete(!openDialogDelete);
+  };
+
+  const vehicleService = new VehicleService();
+
+  const handleConfirm = async () => {
+    try {
+      await vehicleService.deleteVehicle(vehicle.registrationNumber);
+    } catch (err) {
+      console.log((err as Error).message);
+    }
+    handleOpenDialog();
   };
 
   return (
@@ -57,13 +68,14 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
             onToggle={handleDropdownToggle}
             onDetails={handleOpenVehicleDetails}
             onEdit={handleOpenModalEdit}
-            onDelete={handleDeleteVehicle}
+            onDelete={handleOpenDialog}
           />
         </td>
       </tr>
 
       {openVehicleDetails && (
         <ModalVehicleDetails
+          vehicle={vehicle}
           handleOpenModal={() => handleOpenVehicleDetails()}
         />
       )}
@@ -77,9 +89,9 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
 
       {openDialogDelete && (
         <Dialog
-          vehicleRegistrationNumber={vehicle.registrationNumber}
           title="Are you sure ?"
-          handleOpenModal={() => handleDeleteVehicle()}
+          handleOpenModal={handleOpenDialog}
+          handleConfirm={handleConfirm}
         />
       )}
     </>

@@ -2,6 +2,7 @@ import ApiServer from "../../system/service/ApiServer";
 import LoginRequest from "../dto/LoginRequest";
 import UserLogin from "../dto/UserLogin";
 import RegisterDTO from "../../auth/models/RegisterDTO";
+import ResetPasswordRequest from "../dto/ResetPasswordRequest";
 
 class UserService extends ApiServer {
   login = async (user: LoginRequest): Promise<UserLogin> => {
@@ -47,7 +48,24 @@ class UserService extends ApiServer {
     } else {
       return Promise.reject([]);
     }
-  }
+  };
+
+  resetPassword = async (
+    resetPassword: ResetPasswordRequest
+  ): Promise<string> => {
+    const response = await this.api<ResetPasswordRequest, string>(
+      `/user/reset/password`,
+      "PUT",
+      resetPassword,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.text();
+      return data;
+    } else {
+      return Promise.reject([]);
+    }
+  };
 }
 
 export default UserService;

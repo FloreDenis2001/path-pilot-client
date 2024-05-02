@@ -57,40 +57,13 @@ class DriverService extends ApiServer {
     }
   };
 
-  sendEmail = async (email: { to: string }, companyRegistrationNumber:string): Promise<void> => {
-    const response = await this.api<Object, void>(
-      `/email/send?companyRegistrationNumber=${companyRegistrationNumber}`,
-      "POST",
-      email,
-      ""
-    );
-    if (response.status === 200) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject([]);
-    }
-  };
 
-  isValid = async (code: String): Promise<boolean> => {
-    const response = await this.api<null, boolean>(
-      `/email/validate/${code}`,
-      "GET",
-      null,
-      ""
-    );
 
-    if (response.status === 200) {
-      const data = await response.json();
-      return data;
-    } else {
-      return Promise.reject([]);
-    }
-  };
 
-  removeLink = async (code: string): Promise<void> => {
+
+  deleteDriver = async (licenseNumber:string,email:string): Promise<String> => {
     const response = await this.api<null, void>(
-      `/email/remove/${code}`,
+      `/drivers/delete?licenseNumber=${licenseNumber}&email=${email}`,
       "DELETE",
       null,
       ""

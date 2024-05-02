@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import image from "../../../assets/logoDefault.png";
 
-import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import { faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
 import UserService from "../../user/service/UserService";
@@ -137,6 +137,16 @@ const Sidebar = () => {
       </div>
 
       <div className="sidebar__menuBar__bottomMenu">
+          <li
+          className="sidebar__menuBar__menu__link"
+          onClick={() => handleNavigation("/profile")}
+        >
+          <FontAwesomeIcon
+            icon={faUser}
+            className="sidebar__menuBar__menu__link__icon yellow"
+          />
+          <p>My Account</p>
+        </li>
           <li
           className="sidebar__menuBar__menu__link"
           onClick={() => handleNavigation("/")}
