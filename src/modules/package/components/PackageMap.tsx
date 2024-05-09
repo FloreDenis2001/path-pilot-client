@@ -91,10 +91,10 @@ const PackageMap = () => {
           })}
         </div>
 
-        {/* BUTTON GENERATE ROUTES */}
-        {/* <div className="order__container__footer">
+        {/* BUTTON GENERATE ROUTES  */}
+        <div className="order__container__footer">
           <button className="button button__first">Generate Routes</button>
-        </div> */}
+        </div>
       </div>
 
       {packClicked && <PackageInfo pack={packClicked} />}

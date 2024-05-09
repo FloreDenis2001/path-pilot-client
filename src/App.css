@@ -1746,6 +1746,12 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
     flex-wrap: wrap;
   }
 }
+.order__container__footer {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .order__map {
   display: flex;
   flex-direction: column;

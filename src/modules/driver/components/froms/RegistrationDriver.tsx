@@ -8,6 +8,7 @@ import { useLocation, useNavigate } from "react-router";
 import DriverService from "../../service/DriverService";
 import QontoConnector from "../../../core/components/QontoConnector";
 import EmailService from "../../../email/services/EmailService";
+import InvalidToken from "../../../core/components/InvalidToken";
 
 const RegistrationDriver = () => {
   const location = useLocation();
@@ -157,7 +158,7 @@ const RegistrationDriver = () => {
       </div>
     </form>
   ) : (
-    <div>Invalid Link</div>
+    <InvalidToken />
   );
 };
 

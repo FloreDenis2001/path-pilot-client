@@ -2,9 +2,12 @@ import { faCode } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { FaSignature } from "react-icons/fa";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
 import EmailService from "../../email/services/EmailService";
+import ResetPasswordRequest from "../../user/dto/ResetPasswordRequest";
+import UserService from "../../user/service/UserService";
+import InvalidToken from "../../core/components/InvalidToken";
 
 const ChangePassword = () => {
   const location = useLocation();
@@ -14,9 +17,11 @@ const ChangePassword = () => {
   const email = searchParams.get("identifier");
   const [isValid, setIsValid] = useState(false);
   const emailService = new EmailService();
+  const userServices = new UserService();
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const nav = useNavigate();
 
   const handlerVerificationCode = async () => {
     try {
@@ -40,10 +45,17 @@ const ChangePassword = () => {
   const handleResetPassword = async () => {
     handlerVerificationCode();
 
+    let data = {
+      email: email,
+      password: newPassword,
+      code: code,
+    } as ResetPasswordRequest;
+
     try {
       if (newPassword === confirmPassword) {
-        // call service to reset password
+        await userServices.resetPassword(data);
         handleRemoveLinkAfterCreate();
+        nav("/login");
       } else {
         alert("Passwords do not match");
       }
@@ -51,7 +63,7 @@ const ChangePassword = () => {
       console.log((error as Error).message);
     }
   };
-  return (
+  return isValid ? (
     <form action="" id="register">
       <div className="register__container">
         <div className="register__header">
@@ -94,6 +106,8 @@ const ChangePassword = () => {
         </button>
       </div>
     </form>
+  ) : (
+    <InvalidToken />
   );
 };
 

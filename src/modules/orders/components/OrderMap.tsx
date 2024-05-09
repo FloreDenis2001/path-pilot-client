@@ -302,19 +302,8 @@ const OrderMap = () => {
           {/* {activeButton === "invoices" && <InvoicesInformation />}  */}
         </div>
       </div>
-{/* 
-      {openModal && (
-        <ModalAddOrders
-          handleOpenModalAddOrder={() => handleOpenModalAddOrder()}
-        />
-      )}
-      {openOrderDetails && (
-        <ModalOrderDetails handleOpenModal={() => handleOpenOrdersDetails()} />
-      )} */}
 
-      {/* {openModalEdit && (
-        <ModalEditOrder handleOpenModal={() => handleOpenModalEdit()} />
-      )} */}
+      <button className="button button__first">GENERATE RO</button>
     </section>
   );
 };
