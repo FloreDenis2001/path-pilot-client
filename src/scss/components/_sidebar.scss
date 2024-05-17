@@ -120,6 +120,8 @@
         border-radius: 0.6rem;
         cursor: pointer;
 
+       
+
         @include respond(phone) {
           height: 4rem;
         }

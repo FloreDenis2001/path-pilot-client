@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
-import { FaEnvelope, FaFacebook, FaKey, FaFacebookF } from "react-icons/fa";
+import { FaEnvelope, FaKey, FaFacebookF } from "react-icons/fa";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 
 import LoginContextType from "../../user/models/LoginContextType";
 import UserService from "../../user/service/UserService";
 import { LoginContext } from "../../context/LoginProvider";
+import UserLogin from "../../user/dto/UserLogin";
 
 type FormData = {
   email: string;
@@ -19,18 +20,18 @@ type FormData = {
 
 const Login: React.FC = () =>  {
   
-  const  { user,setUserCookie,logOut } = useContext(LoginContext) as LoginContextType;
-  const { register, handleSubmit , formState:{errors} } = useForm<FormData>();
+  const  {setUserCookie} = useContext(LoginContext) as LoginContextType;
+  const { register, handleSubmit} = useForm<FormData>();
   let userService = new UserService();
   let nav=useNavigate();
 
 
 
   let onSubmit = async (data: FormData) => {
-
     try {
       let user = await userService.login(data);
-      setUserCookie(user);
+      console.log(user);
+      setUserCookie(user as UserLogin);
       handleNavHome();
      
     } catch (error) {

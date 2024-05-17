@@ -1,25 +1,11 @@
-import React, { useState } from "react";
-import Sidebar from "../../../components/Sidebar";
-import { FaPlus } from "react-icons/fa";
+import { useState } from "react";
+import Sidebar from "../../core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faCirclePlay,
-  faCircleStop,
-  faClock,
-  faIdCard,
-  faRoad,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCirclePlay, faCircleStop, faClock, faRoad } from "@fortawesome/free-solid-svg-icons";
 import ProgressSteps from "./ui/ProgressSteps";
-import OrderInformation from "./information/OrderInformation";
 import DriverInformation from "./information/DriverInformation";
 import VehicleInformation from "./information/VehicleInformation";
-import InvoicesInformation from "./information/InvoicesInformation";
-import SidebarMobile from "../../../components/SidebarMobile";
-import ModalAddOrders from "./forms/ModalAddOrders";
-import ModalOrderDetails from "./forms/ModalOrderDetails";
-import ModalEditOrder from "./forms/ModalEditOrder";
-import OptionsOrders from "./ui/OptionsOrders";
+import SidebarMobile from "../../core/components/SidebarMobile";
 import OptionsOrderDetails from "./ui/OptionsOrderDetails";
 
 const OrderMap = () => {
@@ -29,7 +15,6 @@ const OrderMap = () => {
     setActiveButton(button);
   };
   const [openDropdown, setOpenDropdown] = useState(-1);
-  const [openModal, setOpenModal] = useState(false);
   const [openOrderDetails, setOpenOrderDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
 
@@ -37,9 +22,7 @@ const OrderMap = () => {
     setOpenDropdown(openDropdown === index ? -1 : index);
   };
 
-  const handleOpenModalAddOrder = () => {
-    setOpenModal(!openModal);
-  };
+ 
 
   const handleOpenOrdersDetails = () => {
     setOpenOrderDetails(!openOrderDetails);
@@ -71,13 +54,7 @@ const OrderMap = () => {
             <h1 className="heading-primary">Orders</h1>
           </div>
 
-          <OptionsOrders
-              index={3}
-              onToggle={handleDropdownToggle}
-              onAdd={handleOpenModalAddOrder}
-              onImport={() => console.log("Import Orders")}
-              onExport={() => console.log("Export Orders")}
-            />
+      
         </div>
 
         <div className="order__container__maps">
@@ -319,25 +296,14 @@ const OrderMap = () => {
               Invoices
             </button>
           </div>
-          {activeButton === "order" && <OrderInformation />}
+          {/* {activeButton === "order" && <OrderInformation />} */}
           {activeButton === "driver" && <DriverInformation />}
           {activeButton === "vehicle" && <VehicleInformation />}
-          {activeButton === "invoices" && <InvoicesInformation />}
+          {/* {activeButton === "invoices" && <InvoicesInformation />}  */}
         </div>
       </div>
 
-      {openModal && (
-        <ModalAddOrders
-          handleOpenModalAddOrder={() => handleOpenModalAddOrder()}
-        />
-      )}
-      {openOrderDetails && (
-        <ModalOrderDetails handleOpenModal={() => handleOpenOrdersDetails()} />
-      )}
-
-      {openModalEdit && (
-        <ModalEditOrder handleOpenModal={() => handleOpenModalEdit()} />
-      )}
+      <button className="button button__first">GENERATE RO</button>
     </section>
   );
 };

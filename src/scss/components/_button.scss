@@ -1,4 +1,7 @@
 .button {
+  width: 100%;
+
+
   &,
   &:link,
   &:visited {
@@ -13,6 +16,12 @@
     border: none;
     cursor: pointer;
   }
+
+  svg{
+    margin-right: 1rem;
+  }
+
+  
 
   &:hover {
     transform: translateY(-3px);
@@ -29,6 +38,7 @@
     width: 25rem;
     border: none;
     font-weight: 700;
+    font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.2s;
     text-align: center;
@@ -147,7 +157,7 @@
     font-size: 1.6rem;
     border-radius: 50%;
     display: flex;
-    align-self: flex-start;
+    align-self: center;
     justify-content: center;
 
     &:active {
@@ -188,6 +198,11 @@
     align-self: flex-end;
     justify-content: center;
     color: $color-white;
+
+    &__confirm{
+      background: $linear-gradient-2;
+
+    }
 
     &__icon {
       align-self: center;
@@ -255,5 +270,17 @@
     border-radius: 5px;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+  }
+
+  &__next , &__prev { 
+    color : $color-grey-light;
+    background-color: $color-black-2;
+    width: 10rem;
+    padding:1rem;
+  }
+
+  &__next{
+    color : $color-white;
+    background:$linear-gradient-2;
   }
 }

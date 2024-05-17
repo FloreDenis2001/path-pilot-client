@@ -1,8 +1,8 @@
-import React from "react";
 import ApiServer from "../../system/service/ApiServer";
 import LoginRequest from "../dto/LoginRequest";
 import UserLogin from "../dto/UserLogin";
-import RegisterRequest from "../dto/RegisterRequest";
+import RegisterDTO from "../../auth/models/RegisterDTO";
+import ResetPasswordRequest from "../dto/ResetPasswordRequest";
 
 class UserService extends ApiServer {
   login = async (user: LoginRequest): Promise<UserLogin> => {
@@ -20,16 +20,48 @@ class UserService extends ApiServer {
     }
   };
 
-  register = async (user: RegisterRequest): Promise<UserLogin> => {
-    const data = await this.api<RegisterRequest, UserLogin>(
+  register = async (data: RegisterDTO): Promise<UserLogin> => {
+    const response = await this.api<RegisterDTO, UserLogin>(
       `/user/register`,
       "POST",
-      user,
+      data,
       ""
     );
-    if (data.status === 200) {
-      const user = await data.json();
+    if (response.status === 200) {
+      const user = await response.json();
       return user;
+    } else {
+      return Promise.reject([]);
+    }
+  };
+
+  getImage = async (email: string): Promise<string> => {
+    const response = await this.api<null, string>(
+      `/image/user/?email=${email}`,
+      "GET",
+      null,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.text();
+      return data;
+    } else {
+      return Promise.reject([]);
+    }
+  };
+
+  resetPassword = async (
+    resetPassword: ResetPasswordRequest
+  ): Promise<string> => {
+    const response = await this.api<ResetPasswordRequest, string>(
+      `/user/reset/password`,
+      "PUT",
+      resetPassword,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.text();
+      return data;
     } else {
       return Promise.reject([]);
     }

@@ -2,6 +2,7 @@
     font-size: 3rem;
     font-weight: 400;
     color: $color-white;
+    text-transform: uppercase;
     font-family: $font-family-secondary;
 
     @include respond(phone){
@@ -28,10 +29,13 @@
 
 .heading-secondary {
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 300;
     color: $color-white;
+    max-width: 35rem;
+    margin-top: 0.5rem;
 
-    font-family: $font-family-primary;
+    font-family: $font-family-secondary;
+    letter-spacing: 1px;
 }
 
 .heading-bottom{

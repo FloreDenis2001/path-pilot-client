@@ -67,16 +67,10 @@ const OptionsDropDownOrderDetails: React.FC<OptionsDropDownRowProps> = ({
         <li onClick={() => onMarkDevivered()}>
           <a href="#">
            <FontAwesomeIcon icon={faTruckRampBox} className="dropdonw__icon"  />
-            <button>Mark as Delivered</button>
+            <button>Mark as Assigned</button>
           </a>
         </li>
 
-        <li onClick={() => onDownload()}>
-          <a href="#">
-          <FontAwesomeIcon icon={faFilePdf} className="dropdonw__icon"  />
-            <button>Download PDF</button>
-          </a>
-        </li>
 
         <li onClick={() => onPrint()}>
           <a href="#">

@@ -32,6 +32,10 @@ html {
   background-color: #ffffff;
 }
 
+input[type=date]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+}
+
 body {
   box-sizing: border-box;
   background-color: #181820;
@@ -65,10 +69,15 @@ select {
   background-color: transparent;
 }
 
+.MuiStack-root span {
+  font-size: 1.3rem;
+}
+
 .heading-primary {
   font-size: 3rem;
   font-weight: 400;
   color: #ffffff;
+  text-transform: uppercase;
   font-family: "Red Hat Display", sans-serif;
 }
 @media only screen and (max-width: 37.5em) {
@@ -96,9 +105,12 @@ select {
 
 .heading-secondary {
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 300;
   color: #ffffff;
-  font-family: "Roboto", sans-serif;
+  max-width: 35rem;
+  margin-top: 0.5rem;
+  font-family: "Red Hat Display", sans-serif;
+  letter-spacing: 1px;
 }
 
 .heading-bottom {
@@ -173,6 +185,9 @@ select {
   background-color: rgba(169, 41, 240, 0.2);
 }
 
+.button {
+  width: 100%;
+}
 .button, .button:link, .button:visited {
   text-transform: uppercase;
   text-decoration: none;
@@ -184,6 +199,9 @@ select {
   font-size: 1.6rem;
   border: none;
   cursor: pointer;
+}
+.button svg {
+  margin-right: 1rem;
 }
 .button:hover {
   transform: translateY(-3px);
@@ -199,6 +217,7 @@ select {
   width: 25rem;
   border: none;
   font-weight: 700;
+  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.2s;
   text-align: center;
@@ -304,7 +323,7 @@ select {
   font-size: 1.6rem;
   border-radius: 50%;
   display: flex;
-  align-self: flex-start;
+  align-self: center;
   justify-content: center;
 }
 .button__close:active {
@@ -341,6 +360,9 @@ select {
   align-self: flex-end;
   justify-content: center;
   color: #ffffff;
+}
+.button__modal__confirm {
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
 }
 .button__modal__icon {
   align-self: center;
@@ -401,6 +423,16 @@ select {
   border-radius: 5px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+}
+.button__next, .button__prev {
+  color: #7a7a7a;
+  background-color: #181820;
+  width: 10rem;
+  padding: 1rem;
+}
+.button__next {
+  color: #ffffff;
+  background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
 }
 
 .sidebar {
@@ -542,19 +574,19 @@ select {
 .inputBox {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  padding: 1rem;
+  padding: 1.5rem;
   background-color: #181820;
-  font-family: "Roboto", sans-serif;
   font-size: 1.6rem;
   border-radius: 1rem;
   color: #ffffff;
   padding-bottom: 1rem;
   box-shadow: 0 0 5px 0 rgba(33, 33, 43, 0.8);
   margin-bottom: 1rem;
-  width: 70%;
+  width: 100%;
+  max-width: 22rem;
   transition: all 0.3s;
 }
 .inputBox:focus {
@@ -564,11 +596,21 @@ select {
   font-size: 2rem;
   color: #2781e2;
 }
+.inputBox input {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.6rem;
+  outline: none;
+}
 
 .searchBox {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 0.5rem;
 }
 .searchBox label {
   font-weight: 600;
@@ -606,6 +648,7 @@ select {
   flex-direction: column;
   align-items: flex-start;
   width: 20%;
+  gap: 0.5rem;
 }
 .filtersBox label {
   font-weight: 600;
@@ -614,13 +657,18 @@ select {
 }
 .filtersBox select {
   border: 1px solid rgba(122, 122, 122, 0.3);
-  padding-inline: 0.7rem;
+  padding-inline: 1rem;
   padding-block: 0.5rem;
   border-radius: 1rem;
   gap: 2rem;
   height: 5rem;
   color: #ffffff;
   width: 100%;
+}
+.filtersBox option {
+  font-size: 1.6rem;
+  color: #ffffff;
+  background-color: #181820;
 }
 
 table {
@@ -630,6 +678,7 @@ table {
 }
 table thead {
   background: #2781e2;
+  border: 1px solid #2781e2;
 }
 table thead th {
   font-size: 1.3rem;
@@ -663,7 +712,7 @@ table tbody tr {
   margin: 0 auto;
   margin-bottom: 2rem;
   transition: all 0.3s;
-  border: 1px solid #5f5f5f;
+  border: 1px solid #7a7a7a;
   border-radius: 1rem;
   cursor: pointer;
 }
@@ -780,30 +829,22 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .dropdown__menu li {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 1rem;
   cursor: pointer;
   transition: all 0.2s;
   list-style: none;
   width: 100%;
   color: #ffffff;
+  gap: 1rem;
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: #ffffff;
 }
 .dropdown__menu li:hover {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
 }
 .dropdown__menu li:hover a {
-  color: #ffffff;
-}
-.dropdown__menu a {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  text-align: left;
-  cursor: pointer;
-  text-decoration: none;
-  font-size: 1.4rem;
-  font-weight: 700;
-  width: 100%;
   color: #ffffff;
 }
 
@@ -930,9 +971,43 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: column;
   gap: 1rem;
 }
+.modal__dialog {
+  background-color: #181820;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 40rem;
+  height: 25rem;
+  text-align: center;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal__dialog__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.modal__dialog__content h2 {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+.modal__dialog__content__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
 .modal__text {
   font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   color: #ffffff;
 }
 .modal__subtitle {
@@ -943,7 +1018,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .modal__subhead {
   font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: #5f5f5f;
   font-weight: bold;
   margin-block: 0.2rem;
@@ -957,32 +1032,37 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
-  max-width: 90rem;
+  max-width: 95rem;
   text-align: center;
   z-index: 1;
 }
 .modal__container__header {
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 2rem;
 }
 .modal__container__header__title {
-  font-family: "Roboto", sans-serif;
+  font-family: "Red Hat Display", sans-serif;
+  text-transform: uppercase;
   font-size: 3rem;
+  display: flex;
+  flex-direction: row;
   color: #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
   margin-bottom: 1rem;
   width: 95%;
+  margin: 2rem;
 }
 .modal__container__header__actions {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  width: 5%;
+  width: fit-content;
   margin-left: auto;
-  gap: 1rem;
+  gap: 2rem;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
@@ -996,18 +1076,14 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   border-radius: 5px;
   font-size: 1.4rem;
   font-weight: 600;
-  color: #ffffff;
-  background-color: #2781e2;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-}
-.modal__container__header__actions__status:hover {
-  background-color: #2781e2;
 }
 .modal__container__body {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  gap: 2rem;
   margin-bottom: 2rem;
 }
 .modal__container__body__orderDetails {
@@ -1035,7 +1111,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .modal__container__body__driversDetails, .modal__container__body__vehicleDetails {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 2rem;
@@ -1048,7 +1124,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   justify-content: center;
   border: none;
-  width: 50%;
+  padding: 2rem;
+  width: 100%;
 }
 .modal__container__body__driversDetails__box__details, .modal__container__body__vehicleDetails__box__details {
   display: flex;
@@ -1062,111 +1139,71 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
-  gap: 0.2rem;
-  width: 100%;
+  flex-wrap: wrap;
+  width: 32%;
+  min-height: 100%;
+  padding-left: 1rem;
+  margin-bottom: 1rem;
   border-left: 1px solid rgba(255, 255, 255, 0.3);
-  padding-left: 0.5rem;
-  margin-bottom: 0.5rem;
+}
+.modal__container__body__driversDetails__box__details__textBox :nth-child(1), .modal__container__body__vehicleDetails__box__details__textBox :nth-child(1) {
+  color: #2781e2;
 }
 .modal__container__body__content {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  align-items: flex-start;
-  margin-bottom: 2rem;
-}
-.modal__container__body__content__text {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-.modal__container__body__content__text p {
-  font-family: "Roboto", sans-serif;
-  font-size: 1.5rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
-  font-weight: 400;
-}
-.modal__container__body__content h2 {
-  font-family: "Roboto", sans-serif;
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 1rem;
+  gap: 2rem;
+  width: 100%;
 }
 .modal__container__body__content__main {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   flex-wrap: wrap;
+  gap: 1rem;
   width: 100%;
-  gap: 2rem;
+}
+.modal__container__body__content h2 {
+  font-family: "Red Hat Display", sans-serif;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 2.5rem;
+  color: #ffffff;
   margin-bottom: 1rem;
-}
-.modal__container__body__content__main--drivers {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 2rem;
-  margin-block: 1rem;
-}
-.modal__container__body__content__select {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  transition: all 0.3s ease-in-out;
-  font-size: 1.5rem;
-  align-items: flex-start;
-  width: 20%;
-}
-.modal__container__body__content__select label {
-  padding-left: 1rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #5f5f5f;
-}
-.modal__container__body__content__select select {
-  width: 100%;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
-  transition: all 0.3s ease-in-out;
-}
-.modal__container__body__content__select select:focus {
-  border: 1px solid #2781e2;
 }
 .modal__container__body__content__input {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  font-family: "Roboto", sans-serif;
-  transition: all 0.3s ease-in-out;
-  font-size: 1.5rem;
   align-items: flex-start;
-  width: 20%;
+  margin-bottom: 1rem;
+  width: 30%;
 }
 .modal__container__body__content__input label {
-  padding-left: 1rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  color: #e7e7e7;
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
-.modal__container__body__content__input input {
+.modal__container__body__content__select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+  max-width: 26rem;
   width: 100%;
-  padding: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background-color: #181820;
-  border-radius: 5px;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.4rem;
-  transition: all 0.3s ease-in-out;
 }
-.modal__container__body__content__input input:focus {
-  border: 1px solid #2781e2;
+.modal__container__body__content__select label {
+  align-self: flex-start;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
 }
 .modal__container__footer, .modal__container__footer--drivers {
   display: flex;
@@ -1277,13 +1314,18 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 
 .register__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #21212b;
-  padding: 2rem;
+  padding: 3rem;
   border-radius: 10px;
   box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
   width: 100%;
-  max-width: 40rem;
+  max-width: 60rem;
   text-align: center;
+  min-height: 80%;
   z-index: 1;
 }
 .register__logo {
@@ -1295,14 +1337,15 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 .register__center {
-  padding-block: 2rem;
+  padding-block: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 1rem;
   gap: 0.5rem;
 }
 .register__center__checker {
@@ -1345,9 +1388,86 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   align-items: center;
   gap: 1rem;
   margin-top: 2rem;
+  width: 100%;
+}
+.register__bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.sendEmail__container {
+  background-color: #21212b;
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 rgba(33, 33, 43, 0.8);
+  width: 100%;
+  max-width: 40rem;
+  text-align: center;
+  z-index: 1;
+}
+.sendEmail__logo {
+  width: 13rem;
+  height: 13rem;
+}
+.sendEmail__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.sendEmail__center {
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sendEmail__center__checker {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+  width: 70%;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  color: #5f5f5f;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.sendEmail__center__checkbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+.sendEmail__center__checkbox input[type=checkbox] {
+  cursor: pointer;
+  accent-color: #2781e2;
+}
+.sendEmail__center__forgot p {
+  font-size: 1.4rem;
+  font-family: "Roboto", sans-serif;
+  color: #2781e2;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.sendEmail__center__forgot p:hover {
+  text-decoration: underline;
+}
+.sendEmail__center__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
   width: 70%;
 }
-.register__bottom__signup {
+.sendEmail__bottom__signup {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1357,16 +1477,13 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   color: #5f5f5f;
   margin-top: 1rem;
 }
-.register__bottom__signup span {
+.sendEmail__bottom__signup span {
   color: #2781e2;
   cursor: pointer;
   transition: all 0.3s;
 }
-.register__bottom__signup span:hover {
+.sendEmail__bottom__signup span:hover {
   text-decoration: underline;
-}
-.register__bottom__signup p {
-  color: #ffffff;
 }
 
 .retrievePassword__container {
@@ -1480,17 +1597,18 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
 }
 
-#register {
+#register, #sendEmail {
   background-image: url("./assets/slate-texture-background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   position: relative;
 }
-#register:before {
+#register:before, #sendEmail:before {
   content: "";
   position: absolute;
   top: 0;
@@ -1498,6 +1616,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   right: 0;
   bottom: 0;
   background: linear-gradient(180deg, rgba(33, 33, 43, 0.432) 0%, rgba(24, 24, 32, 0.685) 100%), linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
+}
+
+#sendEmail {
+  width: 100%;
 }
 
 #retrievePassword {
@@ -1624,6 +1746,12 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
     flex-wrap: wrap;
   }
 }
+.order__container__footer {
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .order__map {
   display: flex;
   flex-direction: column;
@@ -1711,7 +1839,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .order__card {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 0.6rem;
   gap: 1rem;
   width: 100%;
@@ -1867,7 +1995,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 90%;
   max-width: 120rem;
   z-index: 1;
@@ -1935,7 +2063,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   width: 90%;
   max-width: 120rem;
   z-index: 1;
@@ -1967,11 +2095,10 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   justify-content: space-between;
   align-items: center;
   padding-block: 2rem;
-  margin-bottom: 2rem;
   border-radius: 0.5rem;
-  margin-bottom: 2rem;
-  margin-block: 1rem 2rem;
-  margin-inline: 2rem;
+  margin: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
   max-width: 130rem;
 }
 @media only screen and (min-width: 100em) {
@@ -2077,7 +2204,12 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-left: 1rem;
+  cursor: pointer;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+}
+.dashboard__header__options__profile:hover {
+  background-color: #181820;
 }
 .dashboard__header__options__profile img {
   width: 3.5em;
@@ -2085,17 +2217,27 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   border-radius: 50%;
   border: 1px solid #2DB7EA;
 }
+.dashboard__header__options__profile p {
+  font-size: 1.6rem;
+  color: #ffffff;
+  font-family: "Red Hat Display", sans-serif;
+  margin-left: 1rem;
+}
 .dashboard__container {
   grid-area: 3/3/13/13;
+  box-shadow: 0 0.5rem 1rem rgba(24, 24, 32, 0.2);
+  background-color: #181820;
   display: flex;
   flex-direction: column;
-  background-color: transparent;
-  gap: 2rem;
-  position: relative;
+  align-items: center;
   overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #888 transparent;
-  max-width: 135rem;
+  padding-block: 2rem;
+  border-radius: 0.5rem;
+  gap: 2rem;
+  margin: 1rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  max-width: 130rem;
 }
 @media only screen and (min-width: 100em) {
   .dashboard__container {
@@ -2136,7 +2278,6 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   width: calc(100% - 4rem);
   height: 50rem;
   width: 60%;
-  margin-left: 2rem;
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 0.6rem;
 }
@@ -2282,8 +2423,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  margin-left: 2rem;
-  width: calc(100% - 4rem);
+  width: 100%;
+  padding-right: 2rem;
   gap: 2rem;
 }
 .dashboard__stats__box {
@@ -2370,7 +2511,6 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   }
 }
 .dashboard__orders__pie {
-  margin-left: 2rem;
   background-color: #21212b;
   width: 35%;
   border-radius: 0.6rem;
@@ -2443,6 +2583,116 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   .dashboard__orders__table {
     padding: 1rem;
   }
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 15rem repeat(11, 1fr);
+  grid-template-rows: 2rem repeat(11, 1fr);
+  min-height: 100vh;
+  max-height: 100vh;
+}
+.profile__content {
+  grid-area: 1/3/13/13;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: #21212b;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+  border-radius: 1rem;
+  margin: 0 auto;
+  width: 90%;
+  max-width: 120rem;
+  margin-block: 1rem;
+  overflow-y: auto;
+}
+.profile__content__left {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 30%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  background-color: #21212b;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+  border-radius: 1rem;
+  width: 90%;
+  height: 100%;
+}
+.profile__content__left__details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.profile__content__left__details p {
+  font-size: 2rem;
+  color: #ffffff;
+}
+.profile__content__left__details span {
+  font-size: 1.6rem;
+}
+.profile__content__left__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.profile__content__right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem;
+}
+.profile__content__right__box {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 31%;
+  min-height: 100%;
+}
+.profile__content__right__box span {
+  max-width: 100%;
+  font-size: 1.6rem;
+  color: #ffffff;
+  word-break: break-word;
+}
+.profile__content__right__box :nth-child(1) {
+  color: #7a7a7a;
+}
+.profile__content__right__details {
+  background-color: #181820;
+  box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
+  border-radius: 1rem;
+  border: 1px solid #5f5f5f;
+  height: 50%;
+  padding: 2rem;
+}
+.profile__content__right__details__information {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+  width: 100%;
+}
+.profile__content__right__details__title {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.profile__content__right__details__title h2 {
+  font-size: 2.5rem;
+  color: #ffffff;
+  font-weight: 400;
+}
+.profile__content__right__details__title svg {
+  font-size: 1.8rem;
 }
 
 /*# sourceMappingURL=App.css.map */

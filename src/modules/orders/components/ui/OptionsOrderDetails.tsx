@@ -1,7 +1,7 @@
 // OptionsDropDownRow.tsx
 
 import React, { useState, useRef, useEffect } from "react";
-import { FaEdit, FaEllipsisV, FaPrint, FaReceipt } from "react-icons/fa";
+import { FaEdit, FaEllipsisV, FaPrint,FaTrash } from "react-icons/fa";
 
 interface OptionsOrderDetailsProps {
   index: number;
@@ -61,23 +61,17 @@ const OptionsOrderDetails: React.FC<OptionsOrderDetailsProps> = ({
         }
       >
         <li onClick={() => onPrint()}>
-          <a href="#">
             <FaPrint className="dropdonw__icon" />
             <button>Print Order</button>
-          </a>
         </li>
         <li onClick={() => onEdit()}>
-          <a href="#">
             <FaEdit className="dropdonw__icon" />
             <button>Edit</button>
-          </a>
         </li>
 
         <li onClick={() => onDelete()}>
-          <a href="#">
-            <FaReceipt className="dropdonw__icon" />
+            <FaTrash className="dropdonw__icon" />
             <button>Delete</button>
-          </a>
         </li>
       </ul>
     </div>
