@@ -1,0 +1,99 @@
+.inputBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: $color-black-2;
+  font-family: $font-family-primary;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  color: $color-white;
+  padding-bottom: 1rem;
+  box-shadow: 0 0 5px 0 rgba($color-black, 0.8);
+  margin-bottom: 1rem;
+  width: 70%;
+  transition: all 0.3s;
+  &:focus {
+    border: 1px solid $color-grey;
+  }
+  &__icon {
+    font-size: 2rem;
+    color: $color-primary;
+  }
+}
+
+.searchBox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  
+
+  label {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: $color-white;
+  }
+
+  &__input{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    height: 5rem;
+    color: $color-grey;
+    border: 1px solid rgba($color-grey-light,0.3);
+    padding-inline: 0.9rem;
+    padding-block: 0.5rem;
+    border-radius: 1rem;
+    width: 35rem;
+
+  }
+
+
+
+
+  input {
+    height: 100%;
+    width: 100%;
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    color: $color-white;
+
+ 
+  }
+
+  &__icon {
+    font-size: 2rem;
+    color: $color-primary;
+  }
+}
+
+
+.filtersBox{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 20%;
+
+  label {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: $color-white;
+
+  }
+
+  select {
+    border: 1px solid rgba($color-grey-light,0.3);
+    padding-inline: 0.7rem;
+    padding-block: 0.5rem;
+    border-radius: 1rem;
+    gap: 2rem;
+    height: 5rem;
+    color: $color-white;
+
+    width: 100%;
+  }
+}

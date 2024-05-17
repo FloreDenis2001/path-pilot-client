@@ -1,0 +1,115 @@
+.heading-primary {
+    font-size: 3rem;
+    font-weight: 400;
+    color: $color-white;
+    font-family: $font-family-secondary;
+
+    @include respond(phone){
+        font-size: 2.5rem;
+    }
+}
+.heading-container {
+    font-size: 2rem;
+    font-weight: 400;
+    color: $color-white;
+    font-family: $font-family-secondary;
+    margin-bottom: 1rem;
+}
+.heading-card {
+    font-size: 1.8rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: $color-white;
+
+    font-family: $font-family-secondary; 
+}
+
+
+.heading-secondary {
+    font-size: 1rem;
+    font-weight: 400;
+    color: $color-white;
+
+    font-family: $font-family-primary;
+}
+
+.heading-bottom{
+        padding: 1rem;
+        font-size: 1rem;
+        font-family: $font-family-primary;
+        color: $color-white;
+}
+
+.progress{
+
+    &__icon{
+        font-size: 2rem;
+        color: $color-white;
+
+    }
+
+}
+
+.yellow{
+    color: $color-yellow2;
+}
+
+.red{
+    color: $color-red2;
+}
+
+.green{
+    color: $color-green;
+}
+
+
+.purple{
+    color: $color-purple2;
+}
+
+.pink{
+    color: $color-pink;
+}
+
+.orange{
+    color: $color-orange;
+}
+
+.brown{
+    color: $color-brown;
+}
+
+.blue{
+    color: $color-primary;
+}
+
+.done{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-green2;
+    background-color: rgba($color-green, $alpha: 0.2);
+}
+
+.ongoing{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-yellow2;
+    background-color: rgba($color-yellow, $alpha: 0.2);
+}
+
+.cancelled{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-red2;
+    background-color: rgba($color-red, $alpha: 0.2);
+}
+
+.intransit{
+    padding: 0.3rem;
+    border-radius: 5px;
+    color: $color-purple2;
+    background-color: rgba($color-purple, $alpha: 0.2);
+}
+
+

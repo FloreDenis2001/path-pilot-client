@@ -1,0 +1,20 @@
+#register{
+    background-image: url('./assets/slate-texture-background.jpg');
+
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    &:before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(180deg, rgba($color-black, 0.432) 0%, rgba($color-black-2, 0.685) 100%), linear-gradient(180deg, rgba(0,0,0,0.2) 0%, transparent 100%);
+    }
+}

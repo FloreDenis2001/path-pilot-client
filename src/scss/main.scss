@@ -3,21 +3,38 @@
 
 
 @import "abstracts/variables";
+@import "abstracts/mixins";
 
 
 // //BASE 
 @import "base/base";
-
+@import "base/typography";
 
 // // COMPONENTS 
-
+@import "components/button";
+@import "components/sidebar";
+@import "components/input";
+@import "components/table";
+@import "components/dropdown";
+@import "components/pagination";
+@import "components/information";
 
 
 
 
 
 // // LAYOUT
+@import "layout/modal";
+@import "layout/loginLayout";
+@import "layout/registerLayout";
+@import "layout/retrievePasswordLayout";
 
 
 // // PAGES 
 @import "pages/login";
+@import "pages/register";
+@import  "pages/retrievePassword";
+@import  "pages/order";
+@import  "pages/drivers";
+@import  "pages/vehicle";
+@import  "pages/dashboard";
