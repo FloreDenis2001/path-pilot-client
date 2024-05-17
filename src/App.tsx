@@ -30,7 +30,6 @@ function App() {
             <Route path="/dashboard/packages" element={<PackageMap />} />
             <Route path="/dashboard/drivers" element={<Drivers />} />
             <Route path="/dashboard/vehicles" element={<Vehicle />} />
-
             <Route path="/dashboard" element={<DashBoard />} />
             <Route path="/directions" element={<MapTest />} />
             <Route path="/drivers/add" element={<RegistrationDriver />} />

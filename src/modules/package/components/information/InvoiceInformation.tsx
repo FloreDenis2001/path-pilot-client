@@ -11,7 +11,7 @@ interface InvoiceInformationProps {
   pack: Package;
 }
 
-const InvoiceInformation:React.FC<InvoiceInformationProps> = ({pack}) => {
+const InvoiceInformation: React.FC<InvoiceInformationProps> = ({ pack }) => {
   return (
     <div className="information">
       <div className="information__column">
@@ -58,15 +58,16 @@ const InvoiceInformation:React.FC<InvoiceInformationProps> = ({pack}) => {
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Total Amount</h3>
-            <p>$1500.00</p>
+
+            <p>{pack.packageDetails.totalAmount} RON</p>
           </div>
           <div className="information__body__textBox">
             <h3>Amount Paid</h3>
-            <p>$0.00</p>
+            <p>0.00</p>
           </div>
           <div className="information__body__textBox">
             <h3>Amount Due</h3>
-            <p>$1500.00</p>
+            <p>{pack.packageDetails.totalAmount}</p>
           </div>
         </div>
       </div>

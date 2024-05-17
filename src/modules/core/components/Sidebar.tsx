@@ -118,21 +118,7 @@ const Sidebar = () => {
             <p>Vehicle</p>
           </li>
 
-          <li
-            className="sidebar__menuBar__menu__link"
-            onClick={() => handleNavigation("/dashboard/invoices")}
-          >
-            <FaFileInvoice className="sidebar__menuBar__menu__link__icon purple" />
-            <p>Invoices</p>
-          </li>
-
-          <li
-            className="sidebar__menuBar__menu__link"
-            onClick={() => handleNavigation("/dashboard/reports")}
-          >
-            <FaFile className="sidebar__menuBar__menu__link__icon red" />
-            <p>Reports</p>
-          </li>
+        
         </ul>
       </div>
 

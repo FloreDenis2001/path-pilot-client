@@ -37,10 +37,7 @@ const PackInformation: React.FC<PackInformationProps> = ({ pack }) => {
             <h3>Weight </h3>
             <p>{pack.packageDetails.weight} kg</p>
           </div>
-          <div className="information__body__textBox">
-            <h3>Total Ammount  </h3>
-            <p>{pack.packageDetails.totalAmount} RON</p>
-          </div>
+      
         </div>
       </div>
       <div className="information__column">

@@ -6,6 +6,7 @@ import PackInformation from "../information/PackInformation";
 import PackageService from "../../service/PackageService";
 import ModalEditPackage from "../forms/ModalEditPackage";
 import jsPDF from "jspdf";
+import Dialog from "../../../../components/Dialog";
 interface PackProps {
   pack: Package;
 }
@@ -37,19 +38,26 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   };
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModalEdit, setOpenModalEdit] = useState(false);
+  const [openDialogDelete, setOpenDialogDelete] = useState(false);
+
+  const handleOpenDialog= async () => {
+    setOpenDialogDelete(!openDialogDelete);
+  };
+
   let packService = new PackageService();
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
   };
 
-  let handleDeletePackage = async (): Promise<void> => {
+  let handleDeletePackage = async () => {
     try {
       let packs = await packService.deletePackage(pack.awb);
       console.log(packs);
     } catch (err) {
       console.log((err as Error).message);
     }
+    handleOpenDialog();
   };
 
   const handleOpenModalEdit = () => {
@@ -114,7 +122,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
           <OptionsOrderDetails
             index={3}
             onToggle={handleDropdownToggle}
-            onDelete={handleDeletePackage}
+            onDelete={handleOpenDialog}
             onEdit={handleOpenModalEdit}
             onPrint={handlePrintOrder}
           />
@@ -122,14 +130,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       </div>
 
       <div className="order__map__body">
-         {/* <iframe
+         <iframe
           title="map"
           src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}
           loading="lazy"
-        ></iframe>  */}
+        ></iframe> 
       </div>
 
       <div className="order__map__details">
@@ -162,7 +170,17 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
           handleOpenModal={() => handleOpenModalEdit()}
         />
       )}
+      
+      {openDialogDelete && (
+        <Dialog
+          title="Are you sure ?"
+          handleOpenModal={handleOpenDialog}
+          handleConfirm={handleDeletePackage}
+        />
+      )}
     </div>
+
+    
   );
 };
 
