@@ -93,7 +93,7 @@ const PackageMap = () => {
 
         {/* BUTTON GENERATE ROUTES  */}
         <div className="order__container__footer">
-          <button className="button button__first">Generate Routes</button>
+          <button className="button button__first">Generate Route</button>
         </div>
       </div>
 

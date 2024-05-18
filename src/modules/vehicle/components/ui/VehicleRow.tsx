@@ -47,7 +47,7 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
   return (
     <>
       <tr>
-        <td>{vehicle.id}</td>
+        <td>{}{vehicle.id}</td>
         <td>{vehicle.registrationNumber}</td>
         <td>{vehicle.make}</td>
         <td>{vehicle.model}</td>

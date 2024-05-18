@@ -7,5 +7,5 @@ export default interface Shipment{
     destinationPhone: string;
     origin: Address;
     destination: Address;
-    distance: number;
+    totalDistance: number;
 }

@@ -107,7 +107,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
     );
 
     doc.setTextColor("#333");
-    doc.text(`Total Distance: ${pack.shipmentDTO.distance} km`, 10, 220);
+    doc.text(`Total Distance: ${pack.shipmentDTO.totalDistance} km`, 10, 220);
 
     doc.save(`pack__info__${pack.awb}.pdf`);
   };
