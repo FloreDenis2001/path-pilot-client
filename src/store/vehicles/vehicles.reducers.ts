@@ -20,12 +20,11 @@ export const initialState: VehicleState = {
 
 const vehicleSlice = createSlice({
     name: "vehicles",
-    initialState,
+    initialState: initialState,
     reducers: {
         loadVehicles(state, action: PayloadAction<Vehicle[]>) {
             state.vehicles = action.payload;
         },
-
 
         retriveVehiclesSuccess(state) {
             state.retriveVehiclesState = LoadingState.SUCCES;
@@ -38,8 +37,9 @@ const vehicleSlice = createSlice({
         retrieveVehiclesError(state) {
             state.retriveVehiclesState = LoadingState.ERROR;
         },
+
     },
 });
 
-export const { } = vehicleSlice.actions;
+export const {loadVehicles, retrieveVehiclesError, retriveVehiclesLoading, retriveVehiclesSuccess } = vehicleSlice.actions;
 export default vehicleSlice;

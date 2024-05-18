@@ -1,15 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import vehicleSlice, { VehicleState } from './vehicles/vehicles.reducers';
-
-interface RootState {
-    vehicleState: VehicleState;
-}
+import vehicleSlice from './vehicles/vehicles.reducers';
+import driverSlice from './drivers/drivers.reducers';
+import packageSlice from './packages/packages.reducers';
 
 const rootReducer = combineReducers({
-    vehicleState: vehicleSlice.reducer
+    vehicleState: vehicleSlice.reducer,
+    driverState : driverSlice.reducer,
+    packageState: packageSlice.reducer,
 });
 
 const persistConfig = {

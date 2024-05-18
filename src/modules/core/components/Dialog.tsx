@@ -1,5 +1,4 @@
 import React from "react";
-import VehicleService from "../modules/vehicle/service/VehicleService";
 
 interface DialogProps {
     title: string;

@@ -12,6 +12,9 @@ import React, { useEffect, useState } from "react";
 import Vehicle from "../../models/Vehicle";
 import VehicleService from "../../service/VehicleService";
 import { FuelType } from "../../models/FuelType";
+import { useDispatch } from "react-redux";
+import { retriveVehiclesLoading } from "../../../../store/vehicles/vehicles.reducers";
+import { toast } from "react-toastify";
 interface ModalVehicleProps {
   handleOpenModal: () => void;
   vehicle: Vehicle;
@@ -20,8 +23,9 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
   handleOpenModal,
   vehicle,
 }) => {
-  let [make, setMake] = useState<string>(vehicle.make);
+  const dispatch = useDispatch();
 
+  let [make, setMake] = useState<string>(vehicle.make);
   let [model, setModel] = useState<string>(vehicle.model);
   let [year, setYear] = useState<number>(vehicle.year);
   let [fuelType, setFuelType] = useState<FuelType>(vehicle.fuelType);
@@ -56,11 +60,12 @@ const ModalEditVehicle: React.FC<ModalVehicleProps> = ({
       registrationNumber: vehicle.registrationNumber,
       capacity,
     } as Vehicle;
-
-    console.log(data);
     try {
       await vehicleService.updateVehicle(data);
+      dispatch(retriveVehiclesLoading());
+      toast.success("Vehicle updated successfully");
     } catch (err) {
+      toast.error("Error updating vehicle");
       console.log((err as Error).message);
     }
 

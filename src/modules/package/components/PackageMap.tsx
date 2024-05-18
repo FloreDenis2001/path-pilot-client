@@ -11,8 +11,26 @@ import LoginContextType from "../../user/models/LoginContextType";
 import PackageCard from "./ui/PackageCard";
 import PackageInfo from "./ui/PackageInfo";
 import ModalAddPackage from "./forms/ModalAddPackage";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectPackages,
+  selectRetrievePackagesState,
+} from "../../../store/packages/packages.selectors";
+import {
+  loadPackages,
+  retrievePackagesError,
+  retrievePackagesLoading,
+  retrievePackagesSuccess,
+} from "../../../store/packages/packages.reducers";
+import { LoadingState } from "../../../actionType/LoadingState";
+import LoaderSpin from "../../core/components/states/LoaderSpin";
+import { FaSearch } from "react-icons/fa";
 
 const PackageMap = () => {
+  const myPackages = useSelector(selectPackages);
+  const retrivePackagesState = useSelector(selectRetrievePackagesState);
+  const dispatch = useDispatch();
+
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
   const [packClicked, setPackClicked] = useState<Package>();
@@ -20,8 +38,6 @@ const PackageMap = () => {
   const hanlderPackageClick = (pack: Package) => {
     setPackClicked(pack);
   };
-
-  let [myPackages, setMyPackages] = useState(Array<Package>);
 
   let userLogin = useContext(LoginContext) as LoginContextType;
 
@@ -43,17 +59,20 @@ const PackageMap = () => {
   }
 
   let allPackages = async (): Promise<void> => {
+    dispatch(retrievePackagesLoading());
+    await new Promise((resolve) => setTimeout(resolve, 400));
     try {
       let packs = await packService.allPackages(userLogin.user.id as number);
-      console.log(packs);
-      setMyPackages(packs);
+      dispatch(retrievePackagesSuccess());
+      dispatch(loadPackages(packs));
     } catch (err) {
+      dispatch(retrievePackagesError());
       console.log((err as Error).message);
     }
   };
 
   useEffect(() => {
-    allPackages();
+    if (!(retrivePackagesState === LoadingState.SUCCES)) allPackages();
   }, []);
 
   return (
@@ -79,22 +98,36 @@ const PackageMap = () => {
           />
         </div>
 
-        <div className="order__container__maps">
-          {myPackages.map((pack, index) => {
-            return (
-              <PackageCard
-                key={index}
-                pack={pack}
-                onClick={() => hanlderPackageClick(pack)}
-              />
-            );
-          })}
+        <div className="order__container__search">
+          <div className="searchBox">
+            <label htmlFor="">What are you looking for ?</label>
+
+            <div className="searchBox__input2">
+              <FaSearch className="searchBox__icon" />
+              <input type="search" placeholder="Search..." />
+            </div>
+          </div>
         </div>
 
-        {/* BUTTON GENERATE ROUTES  */}
-        <div className="order__container__footer">
-          <button className="button button__first">Generate Route</button>
+        <div className="order__container__maps">
+          {retrivePackagesState === LoadingState.LOADING && <LoaderSpin />}
+          {retrivePackagesState === LoadingState.SUCCES &&
+            myPackages.map((pack, index) => {
+              return (
+                <PackageCard
+                  key={index}
+                  pack={pack}
+                  onClick={() => hanlderPackageClick(pack)}
+                />
+              );
+            })}
         </div>
+
+        {retrivePackagesState === LoadingState.SUCCES && (
+          <div className="order__container__footer">
+            <button className="button button__first">Generate Route</button>
+          </div>
+        )}
       </div>
 
       {packClicked && <PackageInfo pack={packClicked} />}

@@ -6,7 +6,7 @@ import PackInformation from "../information/PackInformation";
 import PackageService from "../../service/PackageService";
 import ModalEditPackage from "../forms/ModalEditPackage";
 import jsPDF from "jspdf";
-import Dialog from "../../../../components/Dialog";
+import Dialog from "../../../core/components/Dialog";
 interface PackProps {
   pack: Package;
 }
@@ -53,7 +53,6 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   let handleDeletePackage = async () => {
     try {
       let packs = await packService.deletePackage(pack.awb);
-      console.log(packs);
     } catch (err) {
       console.log((err as Error).message);
     }

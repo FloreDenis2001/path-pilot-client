@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
-import OptionsDropDownDrivers from "../../../../components/driver/OptionsDropDownDrivers";
 import Driver from "../../models/Driver";
 import ModalDriversDetails from "../froms/ModalDriversDetails";
 import ModalEditDriver from "../froms/ModalEditDriver";
 import UserService from "../../../user/service/UserService";
-import Dialog from "../../../../components/Dialog";
+import Dialog from "../../../core/components/Dialog";
 import DriverService from "../../service/DriverService";
 import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
+import OptionsDropDownDrivers from "./OptionsDropDownDrivers";
 
 interface DriverRowProps {
   driver: Driver;

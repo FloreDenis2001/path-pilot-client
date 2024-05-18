@@ -1,48 +1,60 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../../core/components/Pagination";
-import image from "../../../assets/logoDefault.png";
 
-// import { useDispatch, useSelector } from 'react-redux';
-import Vehicle from "../models/Vehicle";
 import VehicleService from "../service/VehicleService";
 import VehicleRow from "./ui/VehicleRow";
 import ModalAddVehicle from "./forms/ModalAddVehicle";
 import { LoginContext } from "../../context/LoginProvider";
 import LoginContextType from "../../user/models/LoginContextType";
-import UserService from "../../user/service/UserService";
-// import { selectVehicles, selectVehiclesState } from "../../../store/vehicles/vehicles.selectors";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectRetrieveVehiclesState,
+  selectVehicles,
+  selectVehiclesState,
+} from "../../../store/vehicles/vehicles.selectors";
+import {
+  loadVehicles,
+  retriveVehiclesLoading,
+  retriveVehiclesSuccess,
+  retrieveVehiclesError,
+} from "../../../store/vehicles/vehicles.reducers";
+import { LoadingState } from "../../../actionType/LoadingState";
+import LoadingTable from "../../core/components/states/LoaderSpin";
+import LoaderSpin from "../../core/components/states/LoaderSpin";
 
 const VehicleMap = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  // const retriveState = useSelector(selectVehiclesState);
-  // const dispatch = useDispatch();
+  const myVehicles = useSelector(selectVehicles);
+  const retriveState = useSelector(selectRetrieveVehiclesState);
+  const dispatch = useDispatch();
   const vehiclesPerPage = 8;
-
-  // const  vehicles = useSelector(selectVehicles);
-
-  let [myVehicles, setMyVehicles] = useState<Vehicle[]>([]);
-
   let { user } = useContext(LoginContext) as LoginContextType;
   const vehicleService = new VehicleService();
 
+ 
   const fetchVehicles = async () => {
+    dispatch(retriveVehiclesLoading());
+    await new Promise((resolve) => setTimeout(resolve, 400));
     try {
       let vehicles = await vehicleService.allVehiclesByCompany(
         user.companyRegistrationNumber
       );
-      console.log(vehicles);
-      setMyVehicles(vehicles);
+      dispatch(retriveVehiclesSuccess());
+      dispatch(loadVehicles(vehicles));
     } catch (err) {
+      dispatch(retrieveVehiclesError());
       console.log((err as Error).message);
     }
   };
 
   useEffect(() => {
-    fetchVehicles();
-  }, []);
+    if (!(retriveState === LoadingState.SUCCES)) {
+      fetchVehicles();
+     }   
+  }, [retriveState]);
 
   const handleOpenModalAddVehicle = () => {
     setOpenModal(!openModal);
@@ -87,8 +99,8 @@ const VehicleMap = () => {
           <label>Sort : </label>
           <select name="" id="">
             <option value="default">Default</option>
-            <option value="romanian">Ascending</option>
-            <option value="germany">Descending</option>
+            <option value="Ascending">Ascending</option>
+            <option value="Descending">Descending</option>
           </select>
         </div>
 
@@ -96,8 +108,8 @@ const VehicleMap = () => {
           <label>Status</label>
           <select name="" id="">
             <option value="all">All</option>
-            <option value="pending">Active</option>
-            <option value="completed">Inactive</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
           </select>
         </div>
 
@@ -107,33 +119,47 @@ const VehicleMap = () => {
       </div>
 
       <div className="vehicle__table">
-        <table>
-          <thead>
-            <tr>
-              <th>Vehicle No.</th>
-              <th>Registration Number</th>
-              <th>Make</th>
-              <th>Model</th>
-              <th>Year</th>
-              <th>Kilometers</th>
-              <th>Fuel Type</th>
-              <th>Fuel Consumtion</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
+        {retriveState === LoadingState.SUCCES && (
+          <>
+            <table>
+              <thead>
+                <tr>
+              
+                  <th>Registration Number</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Year</th>
+                  <th>Kilometers</th>
+                  <th>Fuel Type</th>
+                  <th>Fuel Consumtion</th>
+                  <th>Last Service</th>
 
-          <tbody>
-            {currentVehicles.map((vehicle, index) => (
-              <VehicleRow vehicle={vehicle} key={index} />
-            ))}
-          </tbody>
-        </table>
-        <Pagination
-          totalPages={Math.ceil(myVehicles.length / vehiclesPerPage)}
-          currentPage={currentPage}
-          onPageChange={handlePageChange}
-        />
+                 
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {currentVehicles.map((vehicle, index) => (
+                  <VehicleRow vehicle={vehicle} key={index} />
+                ))}
+              </tbody>
+            </table>
+            <Pagination
+              totalPages={Math.ceil(myVehicles.length / vehiclesPerPage)}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          </>
+        )}
+
+        {retriveState === LoadingState.LOADING &&
+        
+        <LoaderSpin />}
+
+
+
       </div>
 
       {openModal && (

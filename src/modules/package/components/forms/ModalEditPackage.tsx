@@ -110,13 +110,13 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
           <div className="modal__container__header__title">
             <span>Edit Package</span>
             <div className="modal__container__header__actions">
-              {pack.status === PackageStatus.UNASSIGNED ? (
-                <span className="modal__container__header__actions__status cancelled">
-                  UNASSIGNED
+              {pack.status === PackageStatus.ASSIGNED ? (
+                <span className="modal__container__header__actions__status done">
+                  {pack.status}
                 </span>
               ) : (
-                <span className="modal__container__header__actions__status done">
-                  ASSINGED
+                <span className="modal__container__header__actions__status cancelled">
+                  {pack.status}
                 </span>
               )}
               <button

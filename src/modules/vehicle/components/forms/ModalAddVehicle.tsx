@@ -1,7 +1,6 @@
 import {
   faArrowDown91,
   faBuilding,
-  faCalendar,
   faCalendarAlt,
   faCarAlt,
   faGasPump,
@@ -16,6 +15,11 @@ import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
 import { FuelType } from "../../models/FuelType";
 
+import { useDispatch } from "react-redux";
+import { retriveVehiclesLoading } from "../../../../store/vehicles/vehicles.reducers";
+import 'react-toastify/dist/ReactToastify.css';
+import {toast} from "react-toastify";
+
 interface ModalAddVehicleProps {
   handleOpenModalAddVehicle: () => void;
 }
@@ -23,27 +27,28 @@ interface ModalAddVehicleProps {
 const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
   handleOpenModalAddVehicle,
 }) => {
-  let [make, setMake] = useState<string>("");
-  let [model, setModel] = useState<string>("");
-  let [year, setYear] = useState<number>(0);
-  let [fuelType, setFuelType] = useState<FuelType>(FuelType.DIESEL);
-  let [fuelConsumption, setFuelConsumption] = useState<number>(0);
-  let [fuelCapacity, setFuelCapacity] = useState<number>(0);
-  let [lastService, setLastService] = useState<Date>(new Date());
-  let [nextService, setNextService] = useState<Date>(new Date());
+  const dispatch = useDispatch();
+  let [make, setMake] = useState<string>();
+  let [model, setModel] = useState<string>();
+  let [year, setYear] = useState<number>();
+  let [fuelType, setFuelType] = useState<FuelType>();
+  let [fuelConsumption, setFuelConsumption] = useState<number>();
+  let [fuelCapacity, setFuelCapacity] = useState<number>();
+  let [lastService, setLastService] = useState<Date>();
+  let [nextService, setNextService] = useState<Date>();
   let [km, setKm] = useState<number>(0);
-  let [registrationNumber, setRegistrationNumber] = useState<string>("");
-  let [capacity, setCapacity] = useState<number>(0);
-  let [height, setHeight] = useState<number>(0);
-  let [width, setWidth] = useState<number>(0);
-  let [length, setLength] = useState<number>(0);
-  let [weight, setWeight] = useState<number>(0);
+  let [registrationNumber, setRegistrationNumber] = useState<string>();
+  let [capacity, setCapacity] = useState<number>();
+  let [height, setHeight] = useState<number>();
+  let [width, setWidth] = useState<number>();
+  let [length, setLength] = useState<number>();
+  let [weight, setWeight] = useState<number>();
 
   let { user } = useContext(LoginContext) as LoginContextType;
 
   const vehicleService = new VehicleService();
-
   const handleCreateVehicle = async () => {
+
     let data = {
       make,
       model,
@@ -65,8 +70,11 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
 
     try {
       await vehicleService.createVehicle(data);
+      toast.success('The car has been added to the system.');
+      dispatch(retriveVehiclesLoading())
     } catch (err) {
-      console.log((err as Error).message);
+      toast.error('An error occurred while adding the car to the system.');
+      dispatch(retriveVehiclesLoading())
     }
 
     handleOpenModalAddVehicle();
@@ -146,9 +154,7 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
                   <select
                     name="fuelType"
                     id="fuelType"
-                    onChange={(e) =>
-                      setFuelType(e.target.value as FuelType)
-                    }
+                    onChange={(e) => setFuelType(e.target.value as FuelType)}
                   >
                     {Object.keys(FuelType)
                       .filter((key) => isNaN(Number(key)))
@@ -350,6 +356,9 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
             Save
           </button>
         </div>
+
+
+       
       </div>
     </section>
   );

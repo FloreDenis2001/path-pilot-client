@@ -46,7 +46,6 @@ const DashBoard = () => {
   const fetchUserImage = async () => {
     try {
       let userImage = await userService.getImage(user.email);
-      console.log(userImage);
       setUserImage(userImage);
     } catch (err) {
       console.log((err as Error).message);
@@ -58,7 +57,6 @@ const DashBoard = () => {
   }, []);
 
   let { user } = useContext(LoginContext) as LoginContextType;
-  console.log(user);
 
   const handlerNavProfile = () => {
     nav("/profile");

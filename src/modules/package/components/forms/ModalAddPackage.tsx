@@ -54,7 +54,6 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
   let servicePackage = new PackageService();
 
   const handleCreatePackage = async () => {
-    console.log(packageRequest);
     const response = await servicePackage.createPackage(packageRequest);
     if (response) {
       handleOpenModalAddOrder();

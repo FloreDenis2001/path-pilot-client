@@ -16,7 +16,7 @@ export const selectVehicles = createSelector(
 
 export const selectRetrieveVehiclesState = createSelector(
     selectVehiclesState,
-    (vehicleState) => vehicleState.retriveVehiclesState
+    (vehicleState) : typeof vehicleState.retriveVehiclesState => vehicleState.retriveVehiclesState
 );
 
 export const selectAddVehicleState = createSelector(

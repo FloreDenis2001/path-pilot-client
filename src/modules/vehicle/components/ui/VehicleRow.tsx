@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import OptionsDropDownDrivers from "../../../../components/driver/OptionsDropDownDrivers";
 import Vehicle from "../../models/Vehicle";
 import ModalVehicleDetails from "../forms/ModalVehicleDetails";
 import ModalEditVehicle from "../forms/ModalEditVehicle";
 import VehicleService from "../../service/VehicleService";
 import { set } from "react-hook-form";
-import Toast from "../../../../components/Dialog";
-import Dialog from "../../../../components/Dialog";
+import Dialog from "../../../core/components/Dialog";
+import OptionsDropDownDrivers from "../../../driver/components/ui/OptionsDropDownDrivers";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrieveVehiclesError, retriveVehiclesLoading } from "../../../../store/vehicles/vehicles.reducers";
 
 interface VehicleRowProps {
   vehicle: Vehicle;
 }
 
 const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
+  const dispatch = useDispatch();
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openVehicleDetails, setOpenVehicleDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -37,17 +40,21 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
 
   const handleConfirm = async () => {
     try {
-      await vehicleService.deleteVehicle(vehicle.registrationNumber);
+      let mesaj = await vehicleService.deleteVehicle(vehicle.registrationNumber);
+      toast.success(mesaj);
+      dispatch(retriveVehiclesLoading())
     } catch (err) {
+      toast.error("Error deleting vehicle");
       console.log((err as Error).message);
+      dispatch(retriveVehiclesLoading())
     }
+
     handleOpenDialog();
   };
 
   return (
     <>
       <tr>
-        <td>{}{vehicle.id}</td>
         <td>{vehicle.registrationNumber}</td>
         <td>{vehicle.make}</td>
         <td>{vehicle.model}</td>
@@ -55,6 +62,8 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
         <td>{vehicle.km}</td>
         <td>{vehicle.fuelType}</td>
         <td>{vehicle.fuelConsumption}</td>
+        <td>{vehicle.lastService.toString()}</td>
+
         <td className="td__status ">
           {vehicle.active === true ? (
             <span className="td__status__active">Active</span>
