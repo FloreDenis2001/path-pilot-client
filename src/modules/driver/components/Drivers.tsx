@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
-import ModalAddDriver from "./froms/ModalAddDriver";
-import Driver from "../models/Driver";
 import DriverService from "../service/DriverService";
 import DriverRow from "./ui/DriverRow";
 import Pagination from "../../core/components/Pagination";
@@ -20,7 +18,11 @@ import {
   retrieveDriversSuccess,
 } from "../../../store/drivers/drivers.reducers";
 import { LoadingState } from "../../../actionType/LoadingState";
-import LoaderSpin from "../../core/components/states/LoaderSpin";
+import LoaderSpin from "../../core/components/LoaderSpin";
+import ModalAddDriver from "./froms/ModalAddDriver";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 const Drivers = () => {
   const drivers = useSelector(selectDrivers);
@@ -31,11 +33,13 @@ const Drivers = () => {
   const driverService = new DriverService();
   const [currentPage, setCurrentPage] = useState(1);
   const driversPerPage = 8;
-  const indexOfLastDrivers = currentPage * driversPerPage;
-  const indexOfFirstDrivers = indexOfLastDrivers - driversPerPage;
-  const currentDrivers = drivers.slice(indexOfFirstDrivers, indexOfLastDrivers);
 
   let { user } = useContext(LoginContext) as LoginContextType;
+
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("default");
+  const [statusFilter, setStatusFilter] = useState("all");
+
   const fetchDrivers = async () => {
     dispatch(retrieveDriversLoading());
     await new Promise((resolve) => setTimeout(resolve, 400));
@@ -51,8 +55,7 @@ const Drivers = () => {
   };
 
   useEffect(() => {
-    if (!(retrieveState === LoadingState.SUCCES))
-    fetchDrivers();
+    if (retrieveState !== LoadingState.SUCCES) fetchDrivers();
   }, [retrieveState]);
 
   const handleOpenModalAddDriver = () => {
@@ -62,6 +65,69 @@ const Drivers = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
+
+  const filterAndSortDrivers = () => {
+    let filteredDrivers = drivers;
+
+    if (searchTerm) {
+      filteredDrivers = filteredDrivers.filter(
+        (driver) =>
+          driver.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          driver.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          driver.username.toLowerCase().includes(searchTerm.toLowerCase()) || 
+          driver.email.toLowerCase().includes(searchTerm.toLowerCase())     
+      );
+    }
+
+    if (statusFilter !== "all") {
+      filteredDrivers = filteredDrivers.filter(
+        (driver) => driver.isAvailable === (statusFilter === "Active")
+      );
+    }
+    if (sortOrder === "Ascending") {
+      filteredDrivers = [...filteredDrivers].sort(
+        (a, b) =>
+          a.firstName.localeCompare(b.firstName) ||
+          a.lastName.localeCompare(b.lastName)
+      );
+    } else if (sortOrder === "Descending") {
+      filteredDrivers = [...filteredDrivers].sort(
+        (a, b) =>
+          b.firstName.localeCompare(a.firstName) ||
+          b.lastName.localeCompare(a.lastName)
+      );
+    }
+    
+
+    return filteredDrivers;
+  };
+
+
+  useEffect(() => {
+    filterAndSortDrivers();
+  }, [searchTerm, sortOrder, statusFilter]);
+  
+  const refreshFilters = () => {
+    setSearchTerm("");
+    setSortOrder("default");
+    setStatusFilter("all");
+    toast.info("Filters reset");
+  };
+  
+  useEffect(() => {
+    if (retrieveState === LoadingState.SUCCES) {
+      filterAndSortDrivers();
+    }
+  }, [retrieveState]);
+
+  const filteredDrivers = filterAndSortDrivers();
+  const indexOfLastDrivers = currentPage * driversPerPage;
+  const indexOfFirstDrivers = indexOfLastDrivers - driversPerPage;
+  const currentDrivers = filteredDrivers.slice(
+    indexOfFirstDrivers,
+    indexOfLastDrivers
+  );
+
   return (
     <section className="drivers">
       <Sidebar />
@@ -79,16 +145,23 @@ const Drivers = () => {
       <div className="drivers__filters">
         <div className="searchBox">
           <label htmlFor="">What are you looking for ?</label>
-
           <div className="searchBox__input">
             <FaSearch className="searchBox__icon" />
-            <input type="search" placeholder="Search..." />
+            <input
+              type="search"
+              placeholder="Search..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
         </div>
 
         <div className="filtersBox">
           <label>Sort : </label>
-          <select name="" id="">
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
             <option value="default">Default</option>
             <option value="Ascending">Ascending</option>
             <option value="Descending">Descending</option>
@@ -97,15 +170,21 @@ const Drivers = () => {
 
         <div className="filtersBox">
           <label>Status</label>
-          <select name="" id="">
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
             <option value="all">All</option>
             <option value="Active">Active</option>
             <option value="Inactive">Inactive</option>
           </select>
         </div>
 
-        <button className="button__search">
-          <FaSearch className="button__search__icon" />
+        <button onClick={refreshFilters} className="button__search">
+          <FontAwesomeIcon
+            icon={faArrowsRotate}
+            className="button__search__icon"
+          />
         </button>
       </div>
       <div className="drivers__table">
@@ -118,7 +197,8 @@ const Drivers = () => {
           </div>
         )}
 
-        {retrieveState === LoadingState.SUCCES && (
+        {retrieveState === LoadingState.SUCCES &&
+        filteredDrivers.length > 0 ? (
           <>
             <table>
               <thead>
@@ -141,14 +221,16 @@ const Drivers = () => {
               </tbody>
             </table>
 
-            {drivers.length && (
-              <Pagination
-                totalPages={Math.ceil(drivers.length / driversPerPage)}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-              />
-            )}
+            <Pagination
+              totalPages={Math.ceil(filteredDrivers.length / driversPerPage)}
+              currentPage={currentPage}
+              onPageChange={handlePageChange}
+            />
           </>
+        ) : (
+          <h1 className="heading-primary">
+            No drivers found with this filters ...
+          </h1>
         )}
       </div>
 

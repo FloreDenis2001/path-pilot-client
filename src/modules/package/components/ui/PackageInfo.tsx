@@ -68,12 +68,12 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   };
   const handlePrintOrder = () => {
     const doc = new jsPDF();
-
+  
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
     doc.setTextColor("#333");
     doc.text("Package Details", 10, 15);
-
+  
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
     doc.setTextColor("#666");
@@ -81,14 +81,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
     doc.text(`Width: ${pack.packageDetails.width} cm`, 10, 40);
     doc.text(`Height: ${pack.packageDetails.height} cm`, 10, 50);
     doc.text(`Weight: ${pack.packageDetails.weight} g`, 10, 60);
-    // doc.text(`Type: ${pack.}`, 10, 70);
+    doc.text(`Type: ${pack.status}`, 10, 70);
     doc.text(`Total Amount: ${pack.packageDetails.totalAmount} RON`, 10, 80);
     doc.text(
       `Delivery Description: ${pack.packageDetails.deliveryDescription}`,
       10,
       90
     );
-
+  
     doc.setTextColor("#333");
     doc.text("Origin Information:", 10, 110);
     doc.setFontSize(10);
@@ -100,7 +100,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       10,
       140
     );
-
+  
     doc.setTextColor("#333");
     doc.text("Destination Information:", 10, 160);
     doc.setFontSize(10);
@@ -112,11 +112,18 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       10,
       190
     );
-
+  
     doc.setTextColor("#333");
     doc.text(`Total Distance: ${pack.shipmentDTO.totalDistance} km`, 10, 220);
+  
 
-    doc.save(`pack__info__${pack.awb}.pdf`);
+    doc.setLineWidth(0.5);
+    doc.setDrawColor("#999");
+    doc.line(10, 105, 200, 105);
+    doc.line(10, 155, 200, 155);
+    doc.line(10, 210, 200, 210); 
+  
+    doc.save(`pack_info_${pack.awb}.pdf`);
   };
 
   return (

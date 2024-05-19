@@ -52,6 +52,7 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
     handleOpenDialog();
   };
 
+
   return (
     <>
       <tr>
@@ -60,10 +61,7 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
         <td>{vehicle.model}</td>
         <td>{vehicle.year}</td>
         <td>{vehicle.km}</td>
-        <td>{vehicle.fuelType}</td>
-        <td>{vehicle.fuelConsumption}</td>
         <td>{vehicle.lastService.toString()}</td>
-
         <td className="td__status ">
           {vehicle.active === true ? (
             <span className="td__status__active">Active</span>

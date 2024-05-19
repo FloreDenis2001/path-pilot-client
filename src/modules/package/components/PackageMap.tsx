@@ -23,14 +23,17 @@ import {
   retrievePackagesSuccess,
 } from "../../../store/packages/packages.reducers";
 import { LoadingState } from "../../../actionType/LoadingState";
-import LoaderSpin from "../../core/components/states/LoaderSpin";
+import LoaderSpin from "../../core/components/LoaderSpin";
 import { FaSearch } from "react-icons/fa";
+import Papa from "papaparse";
+import { toast } from "react-toastify";
+import UploadFile from "../../core/components/UploadFile";
 
 const PackageMap = () => {
   const myPackages = useSelector(selectPackages);
   const retrievePackagesState = useSelector(selectRetrievePackagesState);
   const dispatch = useDispatch();
-
+  const [showUploadModal, setShowUploadModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
   const [packClicked, setPackClicked] = useState<Package>();
@@ -50,6 +53,10 @@ const PackageMap = () => {
 
   const handleOpenModalAddOrder = () => {
     setOpenModal(!openModal);
+  };
+
+  const handleOpenUploadModal = () => {
+    setShowUploadModal(true);
   };
 
   const openMenu = (): void => {
@@ -77,6 +84,7 @@ const PackageMap = () => {
     if (retrievePackagesState !== LoadingState.SUCCES) allPackages();
   }, [retrievePackagesState]);
 
+
   useEffect(() => {
     if (searchInput.length >= 2) {
       const filtered = myPackages.filter((pack) =>
@@ -88,6 +96,50 @@ const PackageMap = () => {
     }
   }, [searchInput, myPackages]);
 
+  const handleExportCSV = async () => {
+    const packService = new PackageService();
+    try {
+      const packages = await packService.allPackages(
+        userLogin.user.id as number
+      );
+
+      const csvData = packages.map((pack) => ({
+        AWB: pack.awb,
+        "Origin Name": pack.shipmentDTO.originName,
+        "Origin Phone": pack.shipmentDTO.originPhone,
+        "Origin City": pack.shipmentDTO.origin.city,
+        "Origin Country": pack.shipmentDTO.origin.country,
+        "Origin Street": pack.shipmentDTO.origin.street,
+        "Origin Street Number": pack.shipmentDTO.origin.streetNumber,
+        "Destination Name": pack.shipmentDTO.destinationName,
+        "Destination Phone": pack.shipmentDTO.destinationPhone,
+        "Destination City": pack.shipmentDTO.destination.city,
+        "Destination Country": pack.shipmentDTO.destination.country,
+        "Destination Street": pack.shipmentDTO.destination.street,
+        "Destination Street Number": pack.shipmentDTO.destination.streetNumber,
+        "Total Distance": pack.shipmentDTO.totalDistance,
+        Status: pack.status,
+        "Total Amount": pack.packageDetails.totalAmount,
+        Weight: pack.packageDetails.weight,
+        Height: pack.packageDetails.height,
+        Width: pack.packageDetails.width,
+        Length: pack.packageDetails.length,
+        "Delivery Description": pack.packageDetails.deliveryDescription,
+      }));
+
+      const csv = Papa.unparse(csvData, { header: true });
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", "packages.csv");
+      link.click();
+      toast.success("Packages exported successfully");
+    } catch (error) {
+      toast.error("Error exporting packages");
+    }
+  };
+
   return (
     <section className="order">
       <Sidebar />
@@ -96,8 +148,8 @@ const PackageMap = () => {
       <div className="order__container">
         <div className="order__container__header">
           <div className="order__container__header__left">
-            <FontAwesomeIcon icon={faBars} onClick={() => openMenu()} />
-            <h1 className="heading-primary" onClick={() => allPackages()}>
+            <FontAwesomeIcon icon={faBars} onClick={openMenu} />
+            <h1 className="heading-primary" onClick={allPackages}>
               Packages
             </h1>
           </div>
@@ -106,8 +158,8 @@ const PackageMap = () => {
             index={3}
             onToggle={handleDropdownToggle}
             onAdd={handleOpenModalAddOrder}
-            onImport={() => console.log("Import Orders")}
-            onExport={() => console.log("Export Orders")}
+            onImport={handleOpenUploadModal}
+            onExport={handleExportCSV}
           />
         </div>
 
@@ -151,6 +203,10 @@ const PackageMap = () => {
 
       {openModal && (
         <ModalAddPackage handleOpenModalAddOrder={handleOpenModalAddOrder} />
+      )}
+
+      {showUploadModal && (
+        <UploadFile onClose={() => setShowUploadModal(false)} />
       )}
     </section>
   );

@@ -3,6 +3,7 @@ import LoginRequest from "../dto/LoginRequest";
 import UserLogin from "../dto/UserLogin";
 import RegisterDTO from "../../auth/models/RegisterDTO";
 import ResetPasswordRequest from "../dto/ResetPasswordRequest";
+import DeleteUserRequest from "../dto/DeleteUserRequest";
 
 class UserService extends ApiServer {
   login = async (user: LoginRequest): Promise<UserLogin> => {
@@ -66,6 +67,22 @@ class UserService extends ApiServer {
       return Promise.reject([]);
     }
   };
+
+  delete = async (data : DeleteUserRequest): Promise<string> => {
+    const response = await this.api<DeleteUserRequest, string>(
+      `/user/delete`,
+      "DELETE",
+      data,
+      ""
+    );
+    if (response.status === 200) {
+      const data = await response.text();
+      return data;
+    } else {
+      return Promise.reject([]);
+    }
+  };
+
 }
 
 export default UserService;

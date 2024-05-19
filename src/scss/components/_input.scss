@@ -32,6 +32,12 @@
     font-size: 1.6rem;
     outline: none;
   }
+
+  option {
+    font-size: 1.6rem;
+    color: $color-white;
+    background-color: $color-black-2;
+  }
 }
 
 .searchBox {
@@ -111,9 +117,69 @@
   }
 
   option {
+    display: flex;
     font-size: 1.6rem;
-
     color: $color-white;
     background-color: $color-black-2;
   }
+}
+
+
+.file-upload-container {
+  display: flex;
+  justify-content: center;
+}
+
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed $color-grey-light;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  width: 25rem;
+
+}
+
+.file-upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.file-upload-image {
+   color: $color-white;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.file-upload-image-src {
+  object-fit: contain;
+}
+
+.file-upload-text {
+  pointer-events: none;
+  color: $color-grey-light;
+}
+
+.file-upload-text-small {
+  font-size: 1rem; 
+}
+
+.file-upload-link {
+  color: $color-secondary;
+  text-decoration: none;
+  font-size: 1rem; 
+
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: $color-primary;
+  }
+}
+
+.file-upload-input {
+  display: none;
 }

@@ -8,43 +8,43 @@ import LoginContextType from "../../user/models/LoginContextType";
 import UserService from "../../user/service/UserService";
 import { LoginContext } from "../../context/LoginProvider";
 import UserLogin from "../../user/dto/UserLogin";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrievePackagesLoading } from "../../../store/packages/packages.reducers";
+import { retrieveDriversLoading } from "../../../store/drivers/drivers.reducers";
+import { retriveVehiclesLoading } from "../../../store/vehicles/vehicles.reducers";
 
 type FormData = {
   email: string;
   password: string;
 };
 
-
-
-
-
-const Login: React.FC = () =>  {
-  
-  const  {setUserCookie} = useContext(LoginContext) as LoginContextType;
-  const { register, handleSubmit} = useForm<FormData>();
+const Login: React.FC = () => {
+  const { setUserCookie } = useContext(LoginContext) as LoginContextType;
+  const { register, handleSubmit } = useForm<FormData>();
   let userService = new UserService();
-  let nav=useNavigate();
-
-
+  let nav = useNavigate();
+  const dispatch = useDispatch();
 
   let onSubmit = async (data: FormData) => {
     try {
       let user = await userService.login(data);
-      console.log(user);
       setUserCookie(user as UserLogin);
+      toast.success(`Login successful! Welcome back, ${user.username}!`);
+
       handleNavHome();
-     
     } catch (error) {
-      console.log(error);
+      toast.error("Invalid email or password");
     }
   };
 
-
-
-  let handleNavHome=()=>{
+  let handleNavHome = () => {
+    dispatch(retrievePackagesLoading());
+    dispatch(retrieveDriversLoading());
+    dispatch(retriveVehiclesLoading());
     nav("/dashboard");
-  }
- 
+  };
+
   const handleSignUp = () => {
     nav("/register");
   };
@@ -52,8 +52,6 @@ const Login: React.FC = () =>  {
   const handleRetrivePassword = () => {
     nav("/retrievePassword");
   };
-
-
 
   return (
     <div id="login">
@@ -68,31 +66,33 @@ const Login: React.FC = () =>  {
           </h4>
         </div>
 
-        <form className="login__center" onSubmit={handleSubmit(onSubmit)} >
+        <form className="login__center" onSubmit={handleSubmit(onSubmit)}>
           <div className="inputBox">
             <FaEnvelope className="inputBox__icon" />
-            <input type="email" id="email" placeholder="Email" {...register("email", { required: true, minLength: 3 })} />
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              {...register("email", { required: true, minLength: 3 })}
+            />
           </div>
           <div className="inputBox">
             <FaKey className="inputBox__icon" />
-            <input type="password" id="password" placeholder="Password"  {...register("password", { required: true, minLength: 3 })} />
+            <input
+              type="password"
+              id="password"
+              placeholder="Password"
+              {...register("password", { required: true, minLength: 3 })}
+            />
           </div>
 
           <div className="login__center__checker">
             <div className="login__center__forgot">
               <p onClick={() => handleRetrivePassword()}>Forgot Password?</p>
             </div>
-
-            <div className="login__center__checkbox">
-              <input type="checkbox" />
-              <label>Remember Me</label>
-            </div>
           </div>
           <div className="login__center__button">
-            <button
-              className="button button__first"
-              type="submit"
-            >
+            <button className="button button__first" type="submit">
               Login
             </button>
           </div>
@@ -100,7 +100,7 @@ const Login: React.FC = () =>  {
 
         <div className="login__bottom">
           <div className="login__bottom__signup">
-            <p className="heading-bottom" >Don't have an account?</p>
+            <p className="heading-bottom">Don't have an account?</p>
             <span onClick={() => handleSignUp()}>Sign Up</span>
           </div>
 
@@ -123,5 +123,3 @@ const Login: React.FC = () =>  {
 };
 
 export default Login;
-
-

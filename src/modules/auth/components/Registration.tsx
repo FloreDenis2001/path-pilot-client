@@ -9,6 +9,7 @@ import { Company } from "../../company/models/Company";
 import Address from "../../address/model/Address";
 import UserService from "../../user/service/UserService";
 import { useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Registration = () => {
   let [dataAddressUser, setDataAddressUser] = useState({
@@ -122,10 +123,9 @@ const Registration = () => {
 
     try {
       let response = await userService.register(data);
-      alert("Account created successfully");
-      console.log(response);
+      toast.success(`Account created successfully! Welcome, ${response.username}!`);
     } catch (error) {
-      console.error(error);
+      toast.error("Error creating account!");
     }
 
     nav("/login");

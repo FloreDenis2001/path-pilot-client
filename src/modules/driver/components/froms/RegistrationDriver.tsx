@@ -10,6 +10,8 @@ import QontoConnector from "../../../core/components/QontoConnector";
 import EmailService from "../../../email/services/EmailService";
 import InvalidToken from "../../../core/components/InvalidToken";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrieveDriversLoading } from "../../../../store/drivers/drivers.reducers";
 
 const RegistrationDriver = () => {
   const location = useLocation();
@@ -19,6 +21,7 @@ const RegistrationDriver = () => {
   const companyRegistrationNumber = searchParams.get("identifier");
   const emailService = new EmailService();
   const driverService = new DriverService();
+  const dispatch = useDispatch();
 
   let handleRemoveLinkAfterCreate = async () => {
     await emailService.removeLink(code as string);
@@ -96,8 +99,10 @@ const RegistrationDriver = () => {
       await driverService.addDriver(dataDriver);
       handleRemoveLinkAfterCreate();
       toast.success("Driver created successfully");
+      dispatch(retrieveDriversLoading());
     } catch (error) {
       toast.error("Error creating driver");
+      dispatch(retrieveDriversLoading());
     }
     nav("/login");
   };

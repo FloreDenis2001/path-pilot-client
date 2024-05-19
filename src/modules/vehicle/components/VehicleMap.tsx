@@ -19,8 +19,11 @@ import {
   retrieveVehiclesError,
 } from "../../../store/vehicles/vehicles.reducers";
 import { LoadingState } from "../../../actionType/LoadingState";
-import LoaderSpin from "../../core/components/states/LoaderSpin";
+import LoaderSpin from "../../core/components/LoaderSpin";
 import Vehicle from "../models/Vehicle";
+import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 
 const VehicleMap = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -57,7 +60,9 @@ const VehicleMap = () => {
 
     if (searchTerm) {
       filtered = filtered.filter((vehicle) =>
-        vehicle.registrationNumber.toLowerCase().includes(searchTerm.toLowerCase())
+        vehicle.registrationNumber
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase())
       );
     }
 
@@ -80,6 +85,13 @@ const VehicleMap = () => {
     setFilteredVehicles(filtered);
   };
 
+  const refreshFilters = () => {
+    setSearchTerm("");
+    setSortOrder("default");
+    setStatusFilter("all");
+    toast.info("Filters reseted")
+  };
+
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
@@ -92,7 +104,7 @@ const VehicleMap = () => {
     if (retrieveState !== LoadingState.SUCCES) {
       fetchVehicles();
     }
-  }, [retrieveState]);
+  }, [retrieveState, user]);
 
   useEffect(() => {
     applyFilters();
@@ -100,14 +112,20 @@ const VehicleMap = () => {
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage;
   const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
-  const currentVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle) as Vehicle[];
+  const currentVehicles = filteredVehicles.slice(
+    indexOfFirstVehicle,
+    indexOfLastVehicle
+  ) as Vehicle[];
 
   return (
     <section className="drivers">
       <Sidebar />
       <header className="drivers__header">
         <h1 className="heading-primary">Vehicles</h1>
-        <button onClick={handleOpenModalAddVehicle} className="button__box__second">
+        <button
+          onClick={handleOpenModalAddVehicle}
+          className="button__box__second"
+        >
           <FaPlus />
           <span>New Vehicle</span>
         </button>
@@ -130,7 +148,10 @@ const VehicleMap = () => {
 
         <div className="filtersBox">
           <label>Sort</label>
-          <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+          >
             <option value="default">Default</option>
             <option value="Ascending">Ascending</option>
             <option value="Descending">Descending</option>
@@ -139,20 +160,26 @@ const VehicleMap = () => {
 
         <div className="filtersBox">
           <label>Status</label>
-          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+          <select
+            value={statusFilter}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
             <option value="all">All</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
         </div>
 
-        <button onClick={applyFilters} className="button__search">
-          <FaSearch className="button__search__icon" />
+        <button onClick={refreshFilters} className="button__search">
+          <FontAwesomeIcon
+            icon={faArrowsRotate}
+            className="button__search__icon"
+          />
         </button>
       </div>
 
       <div className="vehicle__table">
-        {retrieveState === LoadingState.SUCCES ? (
+        {retrieveState === LoadingState.SUCCES && currentVehicles.length > 0 ? (
           <>
             <table>
               <thead>
@@ -162,8 +189,6 @@ const VehicleMap = () => {
                   <th>Model</th>
                   <th>Year</th>
                   <th>Kilometers</th>
-                  <th>Fuel Type</th>
-                  <th>Fuel Consumption</th>
                   <th>Last Service</th>
                   <th>Status</th>
                   <th>Actions</th>
@@ -175,19 +200,28 @@ const VehicleMap = () => {
                 ))}
               </tbody>
             </table>
+
             <Pagination
-              totalPages={Math.ceil((filteredVehicles ?? []).length / vehiclesPerPage)}
+              totalPages={Math.ceil(
+                (filteredVehicles ?? []).length / vehiclesPerPage
+              )}
               currentPage={currentPage}
               onPageChange={handlePageChange}
             />
           </>
         ) : (
-          <LoaderSpin />
+          <h1 className="heading-primary">
+            No vehicles found with this filters ...
+          </h1>
         )}
+
+        {retrieveState === LoadingState.LOADING && <LoaderSpin />}
       </div>
 
       {openModal && (
-        <ModalAddVehicle handleOpenModalAddVehicle={handleOpenModalAddVehicle} />
+        <ModalAddVehicle
+          handleOpenModalAddVehicle={handleOpenModalAddVehicle}
+        />
       )}
     </section>
   );

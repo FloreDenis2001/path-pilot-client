@@ -5,6 +5,8 @@ import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
 import EmailService from "../../../email/services/EmailService";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrieveDriversLoading } from "../../../../store/drivers/drivers.reducers";
 
 interface ModalAddDriverProps {
   handleOpenModalAddDriver: () => void;
@@ -16,6 +18,7 @@ const ModalAddDriver: React.FC<ModalAddDriverProps> = ({
   let [email, setEmail] = useState("");
   const emailService=new EmailService();
   const { user } = useContext(LoginContext) as LoginContextType;
+  const dispatch = useDispatch();
 
   const sendEmail = async (email: string) => {
     try {
@@ -24,8 +27,12 @@ const ModalAddDriver: React.FC<ModalAddDriverProps> = ({
         user.companyRegistrationNumber
       );
       toast.success("Email sent successfully");
+      dispatch(retrieveDriversLoading());
+
     } catch (err) {
       toast.error("Error sending email");
+      dispatch(retrieveDriversLoading());
+
     }
     handleOpenModalAddDriver();
   };

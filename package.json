@@ -25,6 +25,7 @@
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
     "mui": "^0.0.1",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
@@ -70,6 +71,7 @@
   "devDependencies": {
     "@types/google-map-react": "^2.1.10",
     "@types/google-polyline": "^1.0.2",
-    "@types/js-cookie": "^3.0.6"
+    "@types/js-cookie": "^3.0.6",
+    "@types/papaparse": "^5.3.14"
   }
 }

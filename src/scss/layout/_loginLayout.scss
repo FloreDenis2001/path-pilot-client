@@ -36,9 +36,9 @@
 
     &__checker {
       display: flex;
-      flex-direction: row-reverse;
       justify-content: space-between;
       align-items: center;
+      justify-content: center;
       width: 70%;
       font-family: $font-family-primary;
       font-size: 1.4rem;

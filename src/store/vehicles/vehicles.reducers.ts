@@ -5,17 +5,11 @@ import Vehicle from "../../modules/vehicle/models/Vehicle";
 export interface VehicleState {
     vehicles: Vehicle[];
     retriveVehiclesState: LoadingState;
-    addVehicleState: LoadingState;
-    updateVehicleState: LoadingState;
-    deleteVehicleState: LoadingState;
 }
 
 export const initialState: VehicleState = {
     vehicles: [],
     retriveVehiclesState: LoadingState.NONE,
-    addVehicleState: LoadingState.NONE,
-    updateVehicleState: LoadingState.NONE,
-    deleteVehicleState: LoadingState.NONE,
 };
 
 const vehicleSlice = createSlice({

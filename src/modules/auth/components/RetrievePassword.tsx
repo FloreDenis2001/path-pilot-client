@@ -3,6 +3,7 @@ import { FaEnvelope } from "react-icons/fa";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";
 import { useNavigate } from "react-router-dom";
 import EmailService from "../../email/services/EmailService";
+import { toast } from "react-toastify";
 
 const RetrievePassword = () => {
   const [email, setEmail] = useState("");
@@ -13,14 +14,15 @@ const RetrievePassword = () => {
   }
 
   const handleResetPassword = async () => {
-    alert ("Reset Password");
     try {
       await emailService.resetEmail(email);
+      toast.success("Email sent successfully!");
+      navToLogin();
     } catch (err) {
-      console.log((err as Error).message);
+      toast.error("Email not sent!");
     }
 
-    navToLogin();
+  
   };
 
   return (

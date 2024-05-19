@@ -5,17 +5,12 @@ import Driver from "../../modules/driver/models/Driver";
 export interface DriverState {
     drivers: Driver[];
     retrieveDriversState: LoadingState;
-    addDriverState: LoadingState;
-    updateDriverState: LoadingState;
-    deleteDriverState: LoadingState;
+   
 }
 
 export const initialState: DriverState = {
     drivers: [],
     retrieveDriversState: LoadingState.NONE,
-    addDriverState: LoadingState.NONE,
-    updateDriverState: LoadingState.NONE,
-    deleteDriverState: LoadingState.NONE,
 };
 
 const driverSlice = createSlice({
@@ -37,6 +32,7 @@ const driverSlice = createSlice({
         retrieveDriversError(state) {
             state.retrieveDriversState = LoadingState.ERROR;
         },
+
     },
 });
 
