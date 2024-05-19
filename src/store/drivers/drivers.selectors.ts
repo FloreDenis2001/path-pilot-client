@@ -17,17 +17,4 @@ export const selectRetrieveDriversState = createSelector(
     (driverState): typeof driverState.retrieveDriversState => driverState.retrieveDriversState
 );
 
-export const selectAddDriverState = createSelector(
-    selectDriversState,
-    (driverState) => driverState.addDriverState
-);
 
-export const selectUpdateDriverState = createSelector(
-    selectDriversState,
-    (driverState) => driverState.updateDriverState
-);
-
-export const selectDeleteDriverState = createSelector(
-    selectDriversState,
-    (driverState) => driverState.deleteDriverState
-);

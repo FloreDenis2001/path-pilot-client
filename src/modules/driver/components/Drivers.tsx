@@ -24,7 +24,7 @@ import LoaderSpin from "../../core/components/states/LoaderSpin";
 
 const Drivers = () => {
   const drivers = useSelector(selectDrivers);
-  const retriveState = useSelector(selectRetrieveDriversState);
+  const retrieveState = useSelector(selectRetrieveDriversState);
   const dispatch = useDispatch();
 
   const [openModal, setOpenModal] = useState(false);
@@ -47,14 +47,13 @@ const Drivers = () => {
       dispatch(loadDrivers(drivers));
     } catch (err) {
       dispatch(retrieveDriversError());
-      console.log((err as Error).message);
     }
   };
 
   useEffect(() => {
-    if (!(retriveState === LoadingState.SUCCES))
+    if (!(retrieveState === LoadingState.SUCCES))
     fetchDrivers();
-  }, []);
+  }, [retrieveState]);
 
   const handleOpenModalAddDriver = () => {
     setOpenModal(!openModal);
@@ -110,16 +109,16 @@ const Drivers = () => {
         </button>
       </div>
       <div className="drivers__table">
-        {retriveState === LoadingState.LOADING && <LoaderSpin />}
+        {retrieveState === LoadingState.LOADING && <LoaderSpin />}
 
-        {retriveState === LoadingState.ERROR && (
+        {retrieveState === LoadingState.ERROR && (
           <div className="error__message">
             <h1>Something went wrong</h1>
             <p>Unable to retrieve drivers</p>
           </div>
         )}
 
-        {retriveState === LoadingState.SUCCES && (
+        {retrieveState === LoadingState.SUCCES && (
           <>
             <table>
               <thead>

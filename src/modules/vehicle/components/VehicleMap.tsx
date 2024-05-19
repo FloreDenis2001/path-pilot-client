@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../../core/components/Pagination";
-
 import VehicleService from "../service/VehicleService";
 import VehicleRow from "./ui/VehicleRow";
 import ModalAddVehicle from "./forms/ModalAddVehicle";
@@ -12,7 +11,6 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   selectRetrieveVehiclesState,
   selectVehicles,
-  selectVehiclesState,
 } from "../../../store/vehicles/vehicles.selectors";
 import {
   loadVehicles,
@@ -21,83 +19,118 @@ import {
   retrieveVehiclesError,
 } from "../../../store/vehicles/vehicles.reducers";
 import { LoadingState } from "../../../actionType/LoadingState";
-import LoadingTable from "../../core/components/states/LoaderSpin";
 import LoaderSpin from "../../core/components/states/LoaderSpin";
+import Vehicle from "../models/Vehicle";
 
 const VehicleMap = () => {
   const [openModal, setOpenModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortOrder, setSortOrder] = useState("default");
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
   const myVehicles = useSelector(selectVehicles);
-  const retriveState = useSelector(selectRetrieveVehiclesState);
+  const retrieveState = useSelector(selectRetrieveVehiclesState);
   const dispatch = useDispatch();
   const vehiclesPerPage = 8;
-  let { user } = useContext(LoginContext) as LoginContextType;
+  const { user } = useContext(LoginContext) as LoginContextType;
   const vehicleService = new VehicleService();
 
- 
   const fetchVehicles = async () => {
     dispatch(retriveVehiclesLoading());
     await new Promise((resolve) => setTimeout(resolve, 400));
     try {
-      let vehicles = await vehicleService.allVehiclesByCompany(
+      const vehicles = await vehicleService.allVehiclesByCompany(
         user.companyRegistrationNumber
       );
       dispatch(retriveVehiclesSuccess());
       dispatch(loadVehicles(vehicles));
+      setFilteredVehicles(vehicles);
     } catch (err) {
       dispatch(retrieveVehiclesError());
-      console.log((err as Error).message);
+      console.error(err);
     }
   };
 
-  useEffect(() => {
-    if (!(retriveState === LoadingState.SUCCES)) {
-      fetchVehicles();
-     }   
-  }, [retriveState]);
+  const applyFilters = () => {
+    let filtered = [...myVehicles];
 
-  const handleOpenModalAddVehicle = () => {
-    setOpenModal(!openModal);
+    if (searchTerm) {
+      filtered = filtered.filter((vehicle) =>
+        vehicle.registrationNumber.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (statusFilter !== "all") {
+      filtered = filtered.filter(
+        (vehicle) => vehicle.active === (statusFilter === "active")
+      );
+    }
+
+    if (sortOrder !== "default") {
+      filtered.sort((a, b) => {
+        if (sortOrder === "Ascending") {
+          return a.registrationNumber.localeCompare(b.registrationNumber);
+        } else {
+          return b.registrationNumber.localeCompare(a.registrationNumber);
+        }
+      });
+    }
+
+    setFilteredVehicles(filtered);
   };
-
-  const indexOfLastVehicle = currentPage * vehiclesPerPage;
-  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
-  const currentVehicles = myVehicles.slice(
-    indexOfFirstVehicle,
-    indexOfLastVehicle
-  );
 
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
 
+  const handleOpenModalAddVehicle = () => {
+    setOpenModal(!openModal);
+  };
+
+  useEffect(() => {
+    if (retrieveState !== LoadingState.SUCCES) {
+      fetchVehicles();
+    }
+  }, [retrieveState]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [searchTerm, sortOrder, statusFilter, myVehicles]);
+
+  const indexOfLastVehicle = currentPage * vehiclesPerPage;
+  const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
+  const currentVehicles = filteredVehicles.slice(indexOfFirstVehicle, indexOfLastVehicle) as Vehicle[];
+
   return (
     <section className="drivers">
       <Sidebar />
-      <div className="drivers__header">
+      <header className="drivers__header">
         <h1 className="heading-primary">Vehicles</h1>
-        <button
-          onClick={() => handleOpenModalAddVehicle()}
-          className="button__box__second"
-        >
+        <button onClick={handleOpenModalAddVehicle} className="button__box__second">
           <FaPlus />
-          <span>New Vehicle </span>
+          <span>New Vehicle</span>
         </button>
-      </div>
+      </header>
 
       <div className="drivers__filters">
         <div className="searchBox">
-          <label htmlFor="">What are you looking for ?</label>
-
+          <label htmlFor="search">What are you looking for?</label>
           <div className="searchBox__input">
             <FaSearch className="searchBox__icon" />
-            <input type="search" placeholder="Search..." />
+            <input
+              id="search"
+              type="search"
+              placeholder="Write the registration number ..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
         </div>
 
         <div className="filtersBox">
-          <label>Sort : </label>
-          <select name="" id="">
+          <label>Sort</label>
+          <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
             <option value="default">Default</option>
             <option value="Ascending">Ascending</option>
             <option value="Descending">Descending</option>
@@ -106,40 +139,36 @@ const VehicleMap = () => {
 
         <div className="filtersBox">
           <label>Status</label>
-          <select name="" id="">
+          <select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
             <option value="all">All</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
           </select>
         </div>
 
-        <button className="button__search">
+        <button onClick={applyFilters} className="button__search">
           <FaSearch className="button__search__icon" />
         </button>
       </div>
 
       <div className="vehicle__table">
-        {retriveState === LoadingState.SUCCES && (
+        {retrieveState === LoadingState.SUCCES ? (
           <>
             <table>
               <thead>
                 <tr>
-              
                   <th>Registration Number</th>
                   <th>Make</th>
                   <th>Model</th>
                   <th>Year</th>
                   <th>Kilometers</th>
                   <th>Fuel Type</th>
-                  <th>Fuel Consumtion</th>
+                  <th>Fuel Consumption</th>
                   <th>Last Service</th>
-
-                 
                   <th>Status</th>
                   <th>Actions</th>
                 </tr>
               </thead>
-
               <tbody>
                 {currentVehicles.map((vehicle, index) => (
                   <VehicleRow vehicle={vehicle} key={index} />
@@ -147,25 +176,18 @@ const VehicleMap = () => {
               </tbody>
             </table>
             <Pagination
-              totalPages={Math.ceil(myVehicles.length / vehiclesPerPage)}
+              totalPages={Math.ceil((filteredVehicles ?? []).length / vehiclesPerPage)}
               currentPage={currentPage}
               onPageChange={handlePageChange}
             />
           </>
+        ) : (
+          <LoaderSpin />
         )}
-
-        {retriveState === LoadingState.LOADING &&
-        
-        <LoaderSpin />}
-
-
-
       </div>
 
       {openModal && (
-        <ModalAddVehicle
-          handleOpenModalAddVehicle={handleOpenModalAddVehicle}
-        />
+        <ModalAddVehicle handleOpenModalAddVehicle={handleOpenModalAddVehicle} />
       )}
     </section>
   );

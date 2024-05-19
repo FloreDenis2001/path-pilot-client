@@ -15,6 +15,9 @@ import Address from "../../../address/model/Address";
 import PackageRequest from "../../dto/PackageRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
 interface ModalEditPackageProps {
   handleOpenModal: () => void;
   pack: Package;
@@ -25,6 +28,7 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   pack,
 }) => {
   const { user } = useContext(LoginContext) as LoginContextType;
+  const dispatch = useDispatch();
 
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: pack.shipmentDTO.originName,
@@ -78,7 +82,16 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   }, [originDetails, destinationDetails, packageDetailsInfo]);
 
   const handleEditPackage = async () => {
-    await servicePackage.updatePackage(pack.awb, packageRequest);
+
+    try {
+      await servicePackage.updatePackage(pack.awb, packageRequest);
+      toast.success("Package updated successfully");
+      dispatch(retrievePackagesLoading());
+    }
+    catch (error) {
+      toast.error("Error updating package");
+      dispatch(retrievePackagesLoading());
+    }
     handleOpenModal();
   };
 

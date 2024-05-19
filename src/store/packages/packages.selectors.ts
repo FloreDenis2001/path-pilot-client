@@ -17,19 +17,4 @@ export const selectRetrievePackagesState = createSelector(
     (packageState): typeof packageState.retrievePackagesState => packageState.retrievePackagesState
 );
 
-export const selectAddPackageState = createSelector(
-    selectPackagesState,
-    (packageState) => packageState.addPackageState
-);
-
-export const selectUpdatePackageState = createSelector(
-    selectPackagesState,
-    (packageState) => packageState.updatePackageState
-);
-
-export const selectDeletePackageState = createSelector(
-    selectPackagesState,
-    (packageState) => packageState.deletePackageState
-);
-
 

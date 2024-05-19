@@ -28,20 +28,21 @@ import { FaSearch } from "react-icons/fa";
 
 const PackageMap = () => {
   const myPackages = useSelector(selectPackages);
-  const retrivePackagesState = useSelector(selectRetrievePackagesState);
+  const retrievePackagesState = useSelector(selectRetrievePackagesState);
   const dispatch = useDispatch();
 
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
   const [packClicked, setPackClicked] = useState<Package>();
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
 
-  const hanlderPackageClick = (pack: Package) => {
+  const handlePackageClick = (pack: Package) => {
     setPackClicked(pack);
   };
 
-  let userLogin = useContext(LoginContext) as LoginContextType;
-
-  let packService = new PackageService();
+  const userLogin = useContext(LoginContext) as LoginContextType;
+  const packService = new PackageService();
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
@@ -51,20 +52,21 @@ const PackageMap = () => {
     setOpenModal(!openModal);
   };
 
-  function openMenu(): void {
+  const openMenu = (): void => {
     const sidebar = document.querySelector(
       ".sidebar__mobile__overlay"
     ) as HTMLElement;
     sidebar.style.display = "flex";
-  }
+  };
 
-  let allPackages = async (): Promise<void> => {
+  const allPackages = async (): Promise<void> => {
     dispatch(retrievePackagesLoading());
     await new Promise((resolve) => setTimeout(resolve, 400));
     try {
-      let packs = await packService.allPackages(userLogin.user.id as number);
+      const packs = await packService.allPackages(userLogin.user.id as number);
       dispatch(retrievePackagesSuccess());
       dispatch(loadPackages(packs));
+      setFilteredPackages(packs);
     } catch (err) {
       dispatch(retrievePackagesError());
       console.log((err as Error).message);
@@ -72,8 +74,19 @@ const PackageMap = () => {
   };
 
   useEffect(() => {
-    if (!(retrivePackagesState === LoadingState.SUCCES)) allPackages();
-  }, []);
+    if (retrievePackagesState !== LoadingState.SUCCES) allPackages();
+  }, [retrievePackagesState]);
+
+  useEffect(() => {
+    if (searchInput.length >= 2) {
+      const filtered = myPackages.filter((pack) =>
+        pack.awb.toLowerCase().includes(searchInput.toLowerCase())
+      );
+      setFilteredPackages(filtered);
+    } else {
+      setFilteredPackages(myPackages);
+    }
+  }, [searchInput, myPackages]);
 
   return (
     <section className="order">
@@ -100,30 +113,34 @@ const PackageMap = () => {
 
         <div className="order__container__search">
           <div className="searchBox">
-            <label htmlFor="">What are you looking for ?</label>
-
+            <label htmlFor="packageSearch">
+              Search for a package by AWB number :
+            </label>
             <div className="searchBox__input2">
               <FaSearch className="searchBox__icon" />
-              <input type="search" placeholder="Search..." />
+              <input
+                type="search"
+                placeholder="Write the AWB..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
             </div>
           </div>
         </div>
 
         <div className="order__container__maps">
-          {retrivePackagesState === LoadingState.LOADING && <LoaderSpin />}
-          {retrivePackagesState === LoadingState.SUCCES &&
-            myPackages.map((pack, index) => {
-              return (
-                <PackageCard
-                  key={index}
-                  pack={pack}
-                  onClick={() => hanlderPackageClick(pack)}
-                />
-              );
-            })}
+          {retrievePackagesState === LoadingState.LOADING && <LoaderSpin />}
+          {retrievePackagesState === LoadingState.SUCCES &&
+            filteredPackages.map((pack, index) => (
+              <PackageCard
+                key={index}
+                pack={pack}
+                onClick={() => handlePackageClick(pack)}
+              />
+            ))}
         </div>
 
-        {retrivePackagesState === LoadingState.SUCCES && (
+        {retrievePackagesState === LoadingState.SUCCES && (
           <div className="order__container__footer">
             <button className="button button__first">Generate Route</button>
           </div>

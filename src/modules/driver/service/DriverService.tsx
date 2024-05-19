@@ -61,7 +61,7 @@ class DriverService extends ApiServer {
 
 
 
-  deleteDriver = async (licenseNumber:string,email:string): Promise<String> => {
+  deleteDriver = async (licenseNumber:string,email:string): Promise<string> => {
     const response = await this.api<null, void>(
       `/drivers/delete?licenseNumber=${licenseNumber}&email=${email}`,
       "DELETE",
@@ -70,7 +70,7 @@ class DriverService extends ApiServer {
     );
 
     if (response.status === 200) {
-      const data = await response.json();
+      const data = await response.text();
       return data;
     } else {
       return Promise.reject([]);

@@ -15,6 +15,9 @@ import Driver from "../../models/Driver";
 import DriverService from "../../service/DriverService";
 import DriverUpdateRequest from "../../dto/DriverUpdateRequest";
 import { FaEnvelope } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrieveDriversLoading } from "../../../../store/drivers/drivers.reducers";
 interface ModalOrdersProps {
   handleOpenModal: () => void;
   driver: Driver;
@@ -23,6 +26,7 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
   handleOpenModal,
   driver,
 }) => {
+  const dispatch = useDispatch();
   const [username, setUsername] = useState(driver.username);
   const [email, setEmail] = useState(driver.email);
   const [firstName, setFirstName] = useState(driver.firstName);
@@ -48,8 +52,15 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
       licenseNumber,
       isAvailable,
     } as DriverUpdateRequest;
-    let response = await driverService.updateDriver(data);
-    console.log(response);
+
+    try {
+      await driverService.updateDriver(data);
+      toast.success("Driver updated successfully");
+      dispatch(retrieveDriversLoading());
+    } catch (error) {
+      toast.error("Error updating driver");
+      dispatch(retrieveDriversLoading());
+    }
     handleOpenModal();
   };
 

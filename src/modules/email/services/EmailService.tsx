@@ -4,7 +4,7 @@ class EmailService extends ApiServer {
   sendEmail = async (
     email: { to: string },
     companyRegistrationNumber: string
-  ): Promise<void> => {
+  ): Promise<string> => {
     const response = await this.api<Object, void>(
       `/email/send?companyRegistrationNumber=${companyRegistrationNumber}`,
       "POST",
@@ -12,7 +12,7 @@ class EmailService extends ApiServer {
       ""
     );
     if (response.status === 200) {
-      const data = await response.json();
+      const data = await response.text();
       return data;
     } else {
       return Promise.reject([]);

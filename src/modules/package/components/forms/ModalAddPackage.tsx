@@ -13,6 +13,9 @@ import QontoConnector from "../../../core/components/QontoConnector";
 import PackageAddress from "../../dto/PackageAddress";
 import PackageDetails from "../../dto/PackageDetails";
 import FormPackageDelivery from "./FormPackageDelivery";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
 
 interface ModalAddPackageProps {
   handleOpenModalAddOrder: () => void;
@@ -22,7 +25,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
   handleOpenModalAddOrder,
 }) => {
   const { user } = useContext(LoginContext) as LoginContextType;
-
+  const dispatch = useDispatch();
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
@@ -54,9 +57,16 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
   let servicePackage = new PackageService();
 
   const handleCreatePackage = async () => {
-    const response = await servicePackage.createPackage(packageRequest);
-    if (response) {
-      handleOpenModalAddOrder();
+    try {
+      const response = await servicePackage.createPackage(packageRequest);
+      if (response) {
+        toast.success("Package created successfully");
+        dispatch(retrievePackagesLoading());
+        handleOpenModalAddOrder();
+      }
+    } catch (error) {
+      toast.error("Error creating package");
+      dispatch(retrievePackagesLoading());
     }
   };
 

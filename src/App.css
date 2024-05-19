@@ -676,6 +676,8 @@ select {
   max-width: 35rem;
 }
 .searchBox label {
+  padding-inline: 0.9rem;
+  padding-block: 0.5rem;
   font-weight: 600;
   font-size: 1.4rem;
   color: #ffffff;
@@ -720,6 +722,8 @@ select {
   font-weight: 600;
   font-size: 1.4rem;
   color: #ffffff;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
 }
 .filtersBox select {
   border: 1px solid rgba(122, 122, 122, 0.3);

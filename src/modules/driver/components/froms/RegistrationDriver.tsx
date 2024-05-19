@@ -9,6 +9,7 @@ import DriverService from "../../service/DriverService";
 import QontoConnector from "../../../core/components/QontoConnector";
 import EmailService from "../../../email/services/EmailService";
 import InvalidToken from "../../../core/components/InvalidToken";
+import { toast } from "react-toastify";
 
 const RegistrationDriver = () => {
   const location = useLocation();
@@ -94,8 +95,9 @@ const RegistrationDriver = () => {
     try {
       await driverService.addDriver(dataDriver);
       handleRemoveLinkAfterCreate();
+      toast.success("Driver created successfully");
     } catch (error) {
-      console.log((error as Error).message);
+      toast.error("Error creating driver");
     }
     nav("/login");
   };

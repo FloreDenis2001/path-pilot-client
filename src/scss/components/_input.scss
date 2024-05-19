@@ -31,8 +31,6 @@
     color: $color-white;
     font-size: 1.6rem;
     outline: none;
-
-
   }
 }
 
@@ -45,12 +43,15 @@
   max-width: 35rem;
 
   label {
+    padding-inline: 0.9rem;
+    padding-block: 0.5rem;
     font-weight: 600;
     font-size: 1.4rem;
     color: $color-white;
   }
 
-  &__input , &__input2 {
+  &__input,
+  &__input2 {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -64,7 +65,7 @@
     width: 35rem;
   }
 
-  &__input2{
+  &__input2 {
     width: 100%;
   }
 
@@ -94,6 +95,8 @@
     font-weight: 600;
     font-size: 1.4rem;
     color: $color-white;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
   }
 
   select {

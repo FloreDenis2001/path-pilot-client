@@ -30,7 +30,7 @@ class PackageService extends ApiServer {
   };
 
 
-  deletePackage = async (awb: string): Promise<any> => {
+  deletePackage = async (awb: string): Promise<string> => {
     const response = await this.api<null, any>(
       `/packages/delete/` + awb,
       "DELETE",
@@ -38,7 +38,7 @@ class PackageService extends ApiServer {
       ""
     );
     if (response.status === 200) {
-      const data = await response.json();
+      const data = await response.text();
       return data;
     } else {
       return Promise.reject([]);
@@ -46,7 +46,7 @@ class PackageService extends ApiServer {
   };
 
 
-  updatePackage = async (awb:string ,data: PackageRequest): Promise<any> => {
+  updatePackage = async (awb:string ,data: PackageRequest): Promise<PackageRequest> => {
     const response = await this.api<PackageRequest, any>(
       `/packages/edit/` + awb,
       "PUT",
