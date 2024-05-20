@@ -2244,6 +2244,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   grid-template-rows: 2rem repeat(11, 1fr);
   min-height: 100vh;
   max-height: 100vh;
+  overflow: hidden;
 }
 @media only screen and (max-width: 56.25em) {
   .dashboard {
