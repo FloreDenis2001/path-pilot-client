@@ -33,6 +33,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
       setUploadedFileName(fileName);
       if (!isCSVorXMLFile(fileName)) {
         toast.warning("Please select a CSV or XML file");
+
         return;
       } else {
         toast.info("The type of file is valid");
@@ -58,7 +59,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
                 origin: {
                   name: data[1],
                   phone: data[2],
-                  address: {
+                  addressDTO: {
                     city: data[3],
                     street: data[4],
                     streetNumber: data[5],
@@ -69,7 +70,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
                 destination: {
                   name: data[8],
                   phone: data[9],
-                  address: {
+                  addressDTO: {
                     city: data[10],
                     street: data[11],
                     streetNumber: data[12],
@@ -106,12 +107,12 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
         await servicePackage.createPackage(packageCsv);
       }
       toast.success("All packages were created successfully");
-      dispatch(retrievePackagesLoading());
-      onClose();
     } catch (error) {
       toast.warning("This record doesn't have all the required fields");
-      dispatch(retrievePackagesLoading());
     }
+    dispatch(retrievePackagesLoading());
+    onClose();
+
   };
 
   return (

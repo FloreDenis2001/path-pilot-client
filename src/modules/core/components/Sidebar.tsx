@@ -6,6 +6,7 @@ import {
   FaIdCard,
   FaTruck,
   FaBox,
+  FaRoute,
 } from "react-icons/fa";
 
 import { faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
@@ -64,18 +65,19 @@ const Sidebar = () => {
           </li>
           <li
             className="sidebar__menuBar__menu__link"
-            onClick={() => handleNavigation("/dashboard/orders")}
+            onClick={() => handleNavigation("/dashboard/routes")}
           >
-            <FaCubes className="sidebar__menuBar__menu__link__icon yellow" />
+            <FaRoute className="sidebar__menuBar__menu__link__icon brown " />
 
-            <p>Orders</p>
+            <p>Routes</p>
           </li>
 
           <li
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard/packages")}
           >
-            <FaBox className="sidebar__menuBar__menu__link__icon brown " />
+            <FaCubes className="sidebar__menuBar__menu__link__icon yellow" />
+            
             <p>Packages</p>
           </li>
           <li

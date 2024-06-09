@@ -4,11 +4,13 @@ import storage from 'redux-persist/lib/storage';
 import vehicleSlice from './vehicles/vehicles.reducers';
 import driverSlice from './drivers/drivers.reducers';
 import packageSlice from './packages/packages.reducers';
+import routeSlice from './routes/routes.reducers';
 
 const rootReducer = combineReducers({
     vehicleState: vehicleSlice.reducer,
     driverState : driverSlice.reducer,
     packageState: packageSlice.reducer,
+    routeState: routeSlice.reducer,
 });
 
 const persistConfig = {

@@ -8,7 +8,6 @@ import Drivers from "./modules/driver/components/Drivers";
 import Vehicle from "./modules/vehicle/components/VehicleMap";
 import DashBoard from "./pages/Dashboard";
 import LoginProvider from "./modules/context/LoginProvider";
-import OrderMap from "./modules/orders/components/OrderMap";
 import PackageMap from "./modules/package/components/PackageMap";
 import RegistrationDriver from "./modules/driver/components/froms/RegistrationDriver";
 import Profile from "./modules/user/components/Profile";
@@ -17,6 +16,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import RouteMap from "./modules/route/components/RouteMap";
 
 function App() {
   return (
@@ -43,7 +43,7 @@ function App() {
               <Route path="/register" element={<Registration />} />
               <Route path="/retrievePassword" element={<RetrievePassword />} />
               <Route path="/reset-password" element={<ChangePassword />} />
-              <Route path="/dashboard/orders" element={<OrderMap />} />
+              <Route path="/dashboard/routes" element={<RouteMap />} />
               <Route path="/dashboard/packages" element={<PackageMap />} />
               <Route path="/dashboard/drivers" element={<Drivers />} />
               <Route path="/dashboard/vehicles" element={<Vehicle />} />

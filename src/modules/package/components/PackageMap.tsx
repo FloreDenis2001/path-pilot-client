@@ -135,8 +135,11 @@ const PackageMap = () => {
       link.setAttribute("download", "packages.csv");
       link.click();
       toast.success("Packages exported successfully");
+      dispatch(retrievePackagesLoading());
     } catch (error) {
       toast.error("Error exporting packages");
+      dispatch(retrievePackagesLoading());
+
     }
   };
 
@@ -183,7 +186,7 @@ const PackageMap = () => {
         <div className="order__container__maps">
           {retrievePackagesState === LoadingState.LOADING && <LoaderSpin />}
           {retrievePackagesState === LoadingState.SUCCES &&
-            filteredPackages.map((pack, index) => (
+            filteredPackages.slice().reverse().map((pack, index) => (
               <PackageCard
                 key={index}
                 pack={pack}

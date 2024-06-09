@@ -23,7 +23,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack, onClick }) => {
     <div className="order__card " onClick={handlePackClick}>
       <div className="order__card__header">
         <h2>AWB : </h2>
-        <span>{pack.awb}</span>
+        <p>{pack.awb}</p>
       </div>
 
       <div className="order__card__body">
@@ -61,7 +61,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack, onClick }) => {
 
       <div className="order__card__status">
         {pack.status === PackageStatus.ASSIGNED ? (
-          <button className="button__status assigned">{pack.status}</button>
+          <button className="button__status done">{pack.status}</button>
         ) : (
           <button className="button__status cancelled">{pack.status}</button>
         )}

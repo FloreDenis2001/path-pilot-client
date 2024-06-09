@@ -1,67 +1,68 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCar, faGasPump, faCog } from "@fortawesome/free-solid-svg-icons";
+import Vehicle from "../../../vehicle/models/Vehicle";
 
-const VehicleInformation = () => {
+interface VehicleInformationProps {
+  vehicle: Vehicle;
+}
+
+const VehicleInformation: React.FC<VehicleInformationProps> = ({ vehicle }) => {
+
   return (
     <div className="information">
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faCar} className="orange"  />
+          <FontAwesomeIcon icon={faCar} className="orange" />
           <h2>Vehicle Info</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Make</h3>
-            <p>Toyota</p>
+            <p>{vehicle.make}</p>
           </div>
           <div className="information__body__textBox">
             <h3>Model</h3>
-            <p>Camry</p>
+            <p>{vehicle.model}</p>
           </div>
           <div className="information__body__textBox">
             <h3>Year</h3>
-            <p>2020</p>
+            <p>{vehicle.year}</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faGasPump} className="purple"  />
+          <FontAwesomeIcon icon={faGasPump} className="purple" />
           <h2>Fuel Information</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Fuel Type</h3>
-            <p>Petrol</p>
+            <p>{vehicle.fuelType}</p>
           </div>
           <div className="information__body__textBox">
             <h3>Fuel Capacity</h3>
-            <p>60 liters</p>
-          </div>
-          <div className="information__body__textBox">
-            <h3>Current Fuel Level</h3>
-            <p>40 liters</p>
+            <p>{vehicle.fuelCapacity}</p>
           </div>
         </div>
       </div>
       <div className="information__column">
         <div className="information__header">
-          <FontAwesomeIcon icon={faCog} className="red"  />
+          <FontAwesomeIcon icon={faCog} className="red" />
           <h2>Maintenance</h2>
         </div>
         <div className="information__body">
           <div className="information__body__textBox">
             <h3>Last Service</h3>
-            <p>20 Jan 2024</p>
+            <p>{vehicle.lastService.toString()}</p>
           </div>
           <div className="information__body__textBox">
             <h3>Next Service Due</h3>
-            <p>20 Jul 2024</p>
+            <p>{vehicle.nextService.toString()}</p>
           </div>
           <div className="information__body__textBox">
-            <h3>Mileage</h3>
-            <p>50,000 km</p>
+            <h3>Kilometers</h3>
+            <p>{vehicle.km} km</p>
           </div>
         </div>
       </div>

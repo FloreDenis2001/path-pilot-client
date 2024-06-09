@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import OptionsOrderDetails from "../../../orders/components/ui/OptionsOrderDetails";
 import InvoicesInformation from "../information/InvoiceInformation";
 import Package from "../../model/Package";
 import PackInformation from "../information/PackInformation";
@@ -10,6 +9,7 @@ import Dialog from "../../../core/components/Dialog";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
+import OptionsOrderDetails from "../../../route/components/ui/OptionsOrderDetails";
 interface PackProps {
   pack: Package;
 }
@@ -144,14 +144,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       </div>
 
       <div className="order__map__body">
-        <iframe
+        {/* <iframe
           title="map"
           src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}
           loading="lazy"
-        ></iframe>
+        ></iframe> */}
       </div>
 
       <div className="order__map__details">

@@ -29,13 +29,13 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
-    address: {} as Address,
+    addressDTO: {} as Address,
   });
 
   let [destinationDetails, setDestinationDetails] = useState<PackageAddress>({
     name: "",
     phone: "",
-    address: {} as Address,
+    addressDTO: {} as Address,
   });
 
   let [packageDetailsInfo, setPackageDetailsInfo] = useState<PackageDetails>({

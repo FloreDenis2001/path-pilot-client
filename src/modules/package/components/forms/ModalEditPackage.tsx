@@ -33,13 +33,13 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: pack.shipmentDTO.originName,
     phone: pack.shipmentDTO.originPhone,
-    address: pack.shipmentDTO.origin,
+    addressDTO: pack.shipmentDTO.origin,
   });
 
   let [destinationDetails, setDestinationDetails] = useState<PackageAddress>({
     name: pack.shipmentDTO.destinationName,
     phone: pack.shipmentDTO.destinationPhone,
-    address: pack.shipmentDTO.destination,
+    addressDTO: pack.shipmentDTO.destination,
   });
 
   let [packageDetailsInfo, setPackageDetailsInfo] = useState<PackageDetails>({
