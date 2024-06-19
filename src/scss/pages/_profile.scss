@@ -51,6 +51,14 @@
         span {
           font-size: 1.6rem;
         }
+
+        img{
+          width: 100%;
+          height: 70%;
+          border-radius: 2rem;
+          max-height: 30rem;
+          max-width: 30rem;
+        }
       }
 
       &__actions {

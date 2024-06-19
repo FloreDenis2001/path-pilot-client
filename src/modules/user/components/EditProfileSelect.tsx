@@ -17,12 +17,19 @@ const EditProfileSelect: React.FC<EditProfileSelectProps> = ({
         <h2 className="heading-primary">Select what you want to edit</h2>
 
         <div className="modal__container__profiles">
-          <button className="button button__switch" onClick={handleEditCompany}>
-            Company Profile
-          </button>
-          <button className="button button_switch" onClick={handleEditUser}>
-            User Profile
-          </button>
+          <div className="profileAvatar" onClick={handleEditCompany}>
+            <div className="intransit profileAvatar__icon">
+              <span>C</span>
+            </div>
+            <p className="profileAvatar__text">Company</p>
+          </div>
+
+          <div className="profileAvatar" onClick={handleEditUser}>
+            <div className="pending profileAvatar__icon">
+              <span>U</span>
+            </div>
+            <p className="profileAvatar__text">User</p>
+          </div>
         </div>
 
         <button

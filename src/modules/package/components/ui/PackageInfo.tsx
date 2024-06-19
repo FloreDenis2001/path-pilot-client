@@ -68,12 +68,12 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   };
   const handlePrintOrder = () => {
     const doc = new jsPDF();
-  
+
     doc.setFont("helvetica", "bold");
     doc.setFontSize(20);
     doc.setTextColor("#333");
     doc.text("Package Details", 10, 15);
-  
+
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
     doc.setTextColor("#666");
@@ -88,7 +88,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       10,
       90
     );
-  
+
     doc.setTextColor("#333");
     doc.text("Origin Information:", 10, 110);
     doc.setFontSize(10);
@@ -100,7 +100,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       10,
       140
     );
-  
+
     doc.setTextColor("#333");
     doc.text("Destination Information:", 10, 160);
     doc.setFontSize(10);
@@ -112,17 +112,16 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       10,
       190
     );
-  
+
     doc.setTextColor("#333");
     doc.text(`Total Distance: ${pack.shipmentDTO.totalDistance} km`, 10, 220);
-  
 
     doc.setLineWidth(0.5);
     doc.setDrawColor("#999");
     doc.line(10, 105, 200, 105);
     doc.line(10, 155, 200, 155);
-    doc.line(10, 210, 200, 210); 
-  
+    doc.line(10, 210, 200, 210);
+
     doc.save(`pack_info_${pack.awb}.pdf`);
   };
 
@@ -144,14 +143,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       </div>
 
       <div className="order__map__body">
-        {/* <iframe
+        <iframe
           title="map"
           src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}
           loading="lazy"
-        ></iframe> */}
+        ></iframe>
       </div>
 
       <div className="order__map__details">

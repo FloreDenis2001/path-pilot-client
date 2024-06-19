@@ -9,7 +9,6 @@ const ModalEditCompany: React.FC<ModalEditCompanyProps> = ({ handleClose }) => {
     <div className="modal">
       <div className="modal__container">
         <h2>Edit Company</h2>
-        {/* Add form or content for editing the company */}
         <button onClick={handleClose}>Close</button>
       </div>
     </div>

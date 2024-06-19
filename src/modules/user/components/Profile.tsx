@@ -22,7 +22,7 @@ import ModalEditCompany from "./ModalEditCompany";
 import ModalEditUser from "./ModalEditUser";
 
 const Profile: React.FC = () => {
-  const [userImage, setUserImage] = useState<string>();
+  const [userImage, setUserImage] = useState<string>("");
   const [company, setCompany] = useState<Company>();
   const { user, logOut } = useContext(LoginContext) as LoginContextType;
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
@@ -128,7 +128,7 @@ const Profile: React.FC = () => {
               </button>
               <button className="button cancelled" onClick={handleOpenDialog}>
                 <FontAwesomeIcon icon={faTrash} />
-                Delete Account
+                Remove Account
               </button>
             </div>
           </div>
@@ -162,19 +162,19 @@ const Profile: React.FC = () => {
 
                 <div className="profile__content__right__box">
                   <span>Address</span>
-                  <span>Str. Mihai Eminescu, Nr. 1, Bucuresti</span>
+                  <span>{user.addressDTO.street} {user.addressDTO.streetNumber}</span>
                 </div>
                 <div className="profile__content__right__box">
                   <span>Country</span>
-                  <span>Romania</span>
+                  <span>{user.addressDTO.country}</span>
                 </div>
                 <div className="profile__content__right__box">
                   <span>City</span>
-                  <span>Bucuresti</span>
+                  <span>{user.addressDTO.city}</span>
                 </div>
                 <div className="profile__content__right__box">
                   <span>Postal Code</span>
-                  <span>010011</span>
+                  <span>{user.addressDTO.postalCode}</span>
                 </div>
 
                 <div className="profile__content__right__box">
@@ -257,7 +257,7 @@ const Profile: React.FC = () => {
         )}
 
         {openEditUser && (
-          <ModalEditUser handleClose={() => setOpenEditUser(false)} />
+          <ModalEditUser userAvatar={userImage} handleClose={() => setOpenEditUser(false)} />
         )}
       </section>
     )

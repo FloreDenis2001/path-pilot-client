@@ -18,6 +18,13 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
     email: "NOEMAIL",
     role: "NOUSERROLE",
     phone: "NOPHONE",
+    addressDTO: {
+      city: "",
+      street: "",
+      streetNumber: "",
+      country: "",
+      postalCode: ""
+    },
     companyRegistrationNumber: "0",
     token: "NOTOKEN"  });
 
@@ -45,6 +52,13 @@ const LoginProvider: React.FC<LoginContextProps> = ({ children }) => {
       email: "NOEMAIL",
       role: "NOUSERROLE",
       phone: "NOPHONE",
+      addressDTO: {
+        city: "",
+        street: "",
+        streetNumber: "",
+        country: "",
+        postalCode: ""
+      },
       companyRegistrationNumber: "0",
       token: "NOTOKEN"
     });

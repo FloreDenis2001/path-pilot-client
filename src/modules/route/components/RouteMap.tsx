@@ -48,7 +48,7 @@ const RouteMap = () => {
 
   useEffect(() => {
     if (
-      retriverRoutesState !== LoadingState.SUCCES &&
+      retriverRoutesState !== LoadingState.SUCCES ||
       retriverDriversState !== LoadingState.SUCCES &&
       retriverVehiclesState !== LoadingState.SUCCES
     )
