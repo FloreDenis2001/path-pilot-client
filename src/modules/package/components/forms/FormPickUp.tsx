@@ -3,36 +3,59 @@ import {
   faLocation,
   faLocationArrow,
   faLocationDot,
-  faLocationPin,
   faSignature,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import PackageAddress from "../../dto/PackageAddress";
 import Address from "../../../address/model/Address";
-
+import roData from "../../../../resources/ro.json";
+import CityData from "../../../core/models/CityData";
 interface PickUpProps {
   name: string;
   phone: string;
-  address:Address;
+  addressDTO: Address;
   updatePickUp: (data: PackageAddress) => void;
 }
 
 const FormPickUp: React.FC<PickUpProps> = ({
   name,
   phone,
-  address,
+  addressDTO,
   updatePickUp,
 }) => {
   let [originName, setOriginName] = useState<string>(name || "");
   let [originPhone, setOriginPhone] = useState<string>(phone || "");
-  let [originCity, setOriginCity] = useState<string>(address.city || "");
-  let [originStreet, setOriginStreet] = useState<string>(address.street || "");
-  let [originNumber, setOriginNumber] = useState<string>(address.streetNumber || "");
-  let [originCountry, setOriginCountry] = useState<string>(address.country || "");
+  let [originCity, setOriginCity] = useState<string>(addressDTO.city || "");
+  let [originStreet, setOriginStreet] = useState<string>(addressDTO.street || "");
+  let [originNumber, setOriginNumber] = useState<string>(addressDTO.streetNumber || "");
+  let [originCountry, setOriginCountry] = useState<string>(addressDTO.country || "");
   let [originPostalCode, setOriginPostalCode] = useState<string>(
-    address.postalCode || ""
+    addressDTO.postalCode || ""
   );
+
+  const [countries, setCountries] = useState<string[]>([]);
+  const [cities, setCities] = useState<{ [key: string]: string[] }>({});
+
+  useEffect(() => {
+    const countrySet = new Set<string>();
+    const cityMap: { [key: string]: string[] } = {};
+  
+    roData.forEach((item: CityData) => {
+      countrySet.add(item.country);
+      if (!cityMap[item.country]) {
+        cityMap[item.country] = [];
+      }
+      cityMap[item.country].push(item.city);
+    });
+  
+    setCountries(Array.from(countrySet));
+    setCities(cityMap);
+  }, []);
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOriginCountry(e.target.value);
+    setOriginCity(""); 
+  };
 
   const memorizedUpdatePickUp = (data: PackageAddress) => {
     updatePickUp(data);
@@ -42,7 +65,7 @@ const FormPickUp: React.FC<PickUpProps> = ({
     memorizedUpdatePickUp({
       name: originName,
       phone: originPhone,
-      address: {
+      addressDTO: {
         city: originCity,
         street: originStreet,
         streetNumber: originNumber,
@@ -66,56 +89,52 @@ const FormPickUp: React.FC<PickUpProps> = ({
 
   return (
     <div className="modal__container__body__content">
-      <h2>Pick-up from </h2>
+      <h2>Pick-up from</h2>
       <div className="modal__container__body__content__main">
         <div className="modal__container__body__content__input">
-          <label htmlFor="">Name</label>
-
+          <label htmlFor="country">Country</label>
           <div className="inputBox">
-            <FontAwesomeIcon icon={faSignature} className="inputBox__icon" />
-            <input
-              type="text"
-              placeholder="Enter the name"
-              value={originName}
-              onChange={(e) => setOriginName(e.target.value)}
-            />
+          <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
+            <select
+              id="country"
+              value={originCountry}
+              onChange={handleCountryChange}
+            >
+              <option value="">Select a country</option>
+              {countries.map((country, index) => (
+                <option key={index} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
 
         <div className="modal__container__body__content__input">
-          <label htmlFor="">Phone</label>
+          <label htmlFor="city">City</label>
           <div className="inputBox">
-            <FontAwesomeIcon icon={faHashtag} className="inputBox__icon" />
-
-            <input
-              type="text"
-              placeholder="Enter phone number"
-              value={originPhone}
-              onChange={(e) => setOriginPhone(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="modal__container__body__content__input">
-          <label htmlFor="">City</label>
-          <div className="inputBox">
-            <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
-
-            <input
-              type="text"
-              required
-              placeholder="Enter the city"
+          <FontAwesomeIcon icon={faLocationArrow} className="inputBox__icon" />
+            <select
+              id="city"
               value={originCity}
               onChange={(e) => setOriginCity(e.target.value)}
-            />
+              disabled={!originCountry}
+            >
+              <option value="">Select a city</option>
+              {originCountry &&
+                cities[originCountry]?.map((city, index) => (
+                  <option key={index} value={city}>
+                    {city}
+                  </option>
+                ))}
+            </select>
           </div>
         </div>
 
         <div className="modal__container__body__content__input">
-          <label htmlFor="">Street</label>
+          <label htmlFor="street">Street</label>
           <div className="inputBox">
             <FontAwesomeIcon icon={faSignature} className="inputBox__icon" />
-
             <input
               type="text"
               required
@@ -126,11 +145,9 @@ const FormPickUp: React.FC<PickUpProps> = ({
           </div>
         </div>
         <div className="modal__container__body__content__input">
-          <label htmlFor="">Number</label>
-
+          <label htmlFor="number">Number</label>
           <div className="inputBox">
             <FontAwesomeIcon icon={faHashtag} className="inputBox__icon" />
-
             <input
               type="text"
               required
@@ -142,30 +159,9 @@ const FormPickUp: React.FC<PickUpProps> = ({
         </div>
 
         <div className="modal__container__body__content__input">
-          <label htmlFor="">Country</label>
-
-          <div className="inputBox">
-            <FontAwesomeIcon
-              icon={faLocationArrow}
-              className="inputBox__icon"
-            />
-
-            <input
-              type="text"
-              required
-              placeholder="Enter the country"
-              value={originCountry}
-              onChange={(e) => setOriginCountry(e.target.value)}
-            />
-          </div>
-        </div>
-
-        <div className="modal__container__body__content__input">
-          <label htmlFor="">Postal Code</label>
-
+          <label htmlFor="postalCode">Postal Code</label>
           <div className="inputBox">
             <FontAwesomeIcon icon={faLocationDot} className="inputBox__icon" />
-
             <input
               type="text"
               required

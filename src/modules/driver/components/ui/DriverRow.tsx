@@ -1,19 +1,23 @@
 import React, { useContext, useState } from "react";
-import OptionsDropDownDrivers from "../../../../components/driver/OptionsDropDownDrivers";
 import Driver from "../../models/Driver";
 import ModalDriversDetails from "../froms/ModalDriversDetails";
 import ModalEditDriver from "../froms/ModalEditDriver";
 import UserService from "../../../user/service/UserService";
-import Dialog from "../../../../components/Dialog";
+import Dialog from "../../../core/components/Dialog";
 import DriverService from "../../service/DriverService";
 import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
+import OptionsDropDownDrivers from "./OptionsDropDownDrivers";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrieveDriversLoading } from "../../../../store/drivers/drivers.reducers";
 
 interface DriverRowProps {
   driver: Driver;
 }
 
 const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
+  const dispatch = useDispatch();
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openDriverDetails, setOpenDriverDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -40,8 +44,11 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
   const handleDeleteDriver = async () => {
     try {
       await driverService.deleteDriver(driver.licenseNumber,user.email);
+      toast.success("Driver deleted successfully");
+      dispatch(retrieveDriversLoading());
     } catch (err) {
-      console.log((err as Error).message);
+      toast.error("Error deleting driver");
+      dispatch(retrieveDriversLoading());
     }
 
     handleOpenDialog();

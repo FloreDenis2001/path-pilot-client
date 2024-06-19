@@ -1,3 +1,4 @@
+import Address from "../../address/model/Address";
 import { Company } from "../../company/models/Company";
 
 export default interface UserLogin{
@@ -8,6 +9,7 @@ export default interface UserLogin{
     role:string,
     email:string,
     phone:string,
+    addressDTO:Address,
     token:string,
     companyRegistrationNumber:string,
 }

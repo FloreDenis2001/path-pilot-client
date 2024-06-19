@@ -4,6 +4,7 @@
   grid-template-rows: 2rem repeat(11, 1fr);
   min-height: 100vh;
   max-height: 100vh;
+  overflow: hidden;
 
   @include respond(tab-port) {
     grid-template-columns: repeat(12, 1fr);

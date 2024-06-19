@@ -38,7 +38,8 @@
       border-radius: 0.6rem;
     }
 
-    &__header {
+    &__header,
+    &__search {
       display: flex;
       width: 95%;
       justify-content: space-between;
@@ -251,6 +252,24 @@
         @include respond(tab-land) {
           font-size: 1rem;
         }
+      }
+
+      p,
+      span {
+        font-family: $font-family-primary;
+        font-size: 1.4rem;
+        color: $color-primary;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        font-weight: 800;
+
+        @include respond(tab-land) {
+          font-size: 1rem;
+        }
+      }
+
+      span {
+        font-size: 1.8rem;
       }
     }
 

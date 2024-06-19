@@ -1,17 +1,21 @@
 import React, { useState } from "react";
-import OptionsOrderDetails from "../../../orders/components/ui/OptionsOrderDetails";
 import InvoicesInformation from "../information/InvoiceInformation";
 import Package from "../../model/Package";
 import PackInformation from "../information/PackInformation";
 import PackageService from "../../service/PackageService";
 import ModalEditPackage from "../forms/ModalEditPackage";
 import jsPDF from "jspdf";
-import Dialog from "../../../../components/Dialog";
+import Dialog from "../../../core/components/Dialog";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
+import OptionsOrderDetails from "../../../route/components/ui/OptionsOrderDetails";
 interface PackProps {
   pack: Package;
 }
 
 const PackageInfo: React.FC<PackProps> = ({ pack }) => {
+  const dispatch = useDispatch();
   const [activeButton, setActiveButton] = useState("package");
   const original =
     pack.shipmentDTO.origin.city +
@@ -30,9 +34,6 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
     " , " +
     pack.shipmentDTO.destination.streetNumber;
 
-  const apiKey = "AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0";
-  // const [openModal, setOpenModal] = useState(false);
-  // const [openOrderDetails, setOpenOrderDetails] = useState(false);
   const handleButtonClick = (button: string) => {
     setActiveButton(button);
   };
@@ -40,7 +41,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [openDialogDelete, setOpenDialogDelete] = useState(false);
 
-  const handleOpenDialog= async () => {
+  const handleOpenDialog = async () => {
     setOpenDialogDelete(!openDialogDelete);
   };
 
@@ -52,10 +53,12 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
 
   let handleDeletePackage = async () => {
     try {
-      let packs = await packService.deletePackage(pack.awb);
-      console.log(packs);
+      await packService.deletePackage(pack.awb);
+      dispatch(retrievePackagesLoading());
+      toast.success("Package deleted successfully");
     } catch (err) {
-      console.log((err as Error).message);
+      dispatch(retrievePackagesLoading());
+      toast.error("Error deleting package");
     }
     handleOpenDialog();
   };
@@ -78,9 +81,13 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
     doc.text(`Width: ${pack.packageDetails.width} cm`, 10, 40);
     doc.text(`Height: ${pack.packageDetails.height} cm`, 10, 50);
     doc.text(`Weight: ${pack.packageDetails.weight} g`, 10, 60);
-    // doc.text(`Type: ${pack.}`, 10, 70);
+    doc.text(`Type: ${pack.status}`, 10, 70);
     doc.text(`Total Amount: ${pack.packageDetails.totalAmount} RON`, 10, 80);
-    doc.text(`Delivery Description: ${pack.packageDetails.deliveryDescription}`, 10, 90);
+    doc.text(
+      `Delivery Description: ${pack.packageDetails.deliveryDescription}`,
+      10,
+      90
+    );
 
     doc.setTextColor("#333");
     doc.text("Origin Information:", 10, 110);
@@ -107,9 +114,15 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
     );
 
     doc.setTextColor("#333");
-    doc.text(`Total Distance: ${pack.shipmentDTO.distance} km`, 10, 220);
+    doc.text(`Total Distance: ${pack.shipmentDTO.totalDistance} km`, 10, 220);
 
-    doc.save(`pack__info__${pack.awb}.pdf`);
+    doc.setLineWidth(0.5);
+    doc.setDrawColor("#999");
+    doc.line(10, 105, 200, 105);
+    doc.line(10, 155, 200, 155);
+    doc.line(10, 210, 200, 210);
+
+    doc.save(`pack_info_${pack.awb}.pdf`);
   };
 
   return (
@@ -130,14 +143,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       </div>
 
       <div className="order__map__body">
-         <iframe
+        <iframe
           title="map"
           src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}
           loading="lazy"
-        ></iframe> 
+        ></iframe>
       </div>
 
       <div className="order__map__details">
@@ -170,7 +183,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
           handleOpenModal={() => handleOpenModalEdit()}
         />
       )}
-      
+
       {openDialogDelete && (
         <Dialog
           title="Are you sure ?"
@@ -179,8 +192,6 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
         />
       )}
     </div>
-
-    
   );
 };
 

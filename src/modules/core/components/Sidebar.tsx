@@ -1,27 +1,20 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LogoDefault from "../../../assets/logoDefault.png";
 import {
   FaHome,
   FaCubes,
   FaIdCard,
   FaTruck,
-  FaFile,
-  FaFileInvoice,
   FaBox,
+  FaRoute,
 } from "react-icons/fa";
-import image from "../../../assets/logoDefault.png";
 
 import { faRightFromBracket, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router";
-import UserService from "../../user/service/UserService";
-import LoginContextType from "../../user/models/LoginContextType";
-import { LoginContext } from "../../context/LoginProvider";
-
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(true);
   let nav = useNavigate();
-  const [userImage, setUserImage] = useState<string>();
 
   const handleNavigation = (path: string) => {
     nav(path);
@@ -42,23 +35,6 @@ const Sidebar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const userService = new UserService();
-
-  const fetchUserImage = async () => {
-    try {
-      let userImage = await userService.getImage(user.email);
-      console.log(userImage);
-      setUserImage(userImage);
-    } catch (err) {
-      console.log((err as Error).message);
-    }
-  };
-
-  const { user } = useContext(LoginContext) as LoginContextType;
-
-  useEffect(() => {
-    fetchUserImage();
-  }, []);
 
   return (
     <header
@@ -89,18 +65,19 @@ const Sidebar = () => {
           </li>
           <li
             className="sidebar__menuBar__menu__link"
-            onClick={() => handleNavigation("/dashboard/orders")}
+            onClick={() => handleNavigation("/dashboard/routes")}
           >
-            <FaCubes className="sidebar__menuBar__menu__link__icon yellow" />
+            <FaRoute className="sidebar__menuBar__menu__link__icon brown " />
 
-            <p>Orders</p>
+            <p>Routes</p>
           </li>
 
           <li
             className="sidebar__menuBar__menu__link"
             onClick={() => handleNavigation("/dashboard/packages")}
           >
-            <FaBox className="sidebar__menuBar__menu__link__icon brown " />
+            <FaCubes className="sidebar__menuBar__menu__link__icon yellow" />
+            
             <p>Packages</p>
           </li>
           <li

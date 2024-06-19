@@ -62,7 +62,7 @@ const PackInformation: React.FC<PackInformationProps> = ({ pack }) => {
           <div className="information__body__textBox">
             <h3>Distance </h3>
             <p>
-              {pack.shipmentDTO.distance}638  km
+              {pack.shipmentDTO.totalDistance} km
             </p>
           </div>
         </div>

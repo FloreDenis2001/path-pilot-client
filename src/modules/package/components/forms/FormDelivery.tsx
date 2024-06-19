@@ -9,47 +9,75 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import Address from "../../../address/model/Address";
 import PackageAddress from "../../dto/PackageAddress";
+import roData from "../../../../resources/ro.json";
+import CityData from "../../../core/models/CityData";
+
 
 interface FormDeliveryProps {
   name: string;
   phone: string;
-  address: Address;
+  addressDTO: Address;
   updateDelivery: (data: PackageAddress) => void;
 }
+
+
 
 const FormDelivery: React.FC<FormDeliveryProps> = ({
   name,
   phone,
-  address,
+  addressDTO,
   updateDelivery,
 }) => {
   let [destinationName, setDestinationName] = useState<string>(name || "");
   let [destinationPhone, setDestinationPhone] = useState<string>(phone || "");
   let [destinationCity, setDestinationCity] = useState<string>(
-    address.city || ""
+    addressDTO.city || ""
   );
   let [destinationStreet, setDestinationStreet] = useState<string>(
-    address.street || ""
+    addressDTO.street || ""
   );
   let [destinationNumber, setDestinationNumber] = useState<string>(
-    address.streetNumber || ""
+    addressDTO.streetNumber || ""
   );
   let [destinationCountry, setDestinationCountry] = useState<string>(
-    address.country || ""
+    addressDTO.country || ""
   );
   let [destinationPostalCode, setDestinationPostalCode] = useState<string>(
-    address.postalCode || ""
+    addressDTO.postalCode || ""
   );
+  const [countries, setCountries] = useState<string[]>([]);
+  const [cities, setCities] = useState<{ [key: string]: string[] }>({});
 
   const memorizedUpdateDelivery = (data: PackageAddress) => {
     updateDelivery(data);
+  };
+
+  useEffect(() => {
+    const countrySet = new Set<string>();
+    const cityMap: { [key: string]: string[] } = {};
+  
+    roData.forEach((item: CityData) => {
+      countrySet.add(item.country);
+      if (!cityMap[item.country]) {
+        cityMap[item.country] = [];
+      }
+      cityMap[item.country].push(item.city);
+    });
+  
+    setCountries(Array.from(countrySet));
+    setCities(cityMap);
+  }, []);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDestinationCountry(e.target.value);
+    setDestinationCity(""); 
   };
 
   const updateDeliveryData = () => {
     memorizedUpdateDelivery({
       name: destinationName,
       phone: destinationPhone,
-      address: {
+      addressDTO: {
         city: destinationCity,
         street: destinationStreet,
         streetNumber: destinationNumber,
@@ -104,17 +132,22 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
         </div>
 
         <div className="modal__container__body__content__input">
-          <label htmlFor="">City</label>
+          <label htmlFor="">Country</label>
           <div className="inputBox">
-            <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
+             <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
+            <select
+              id="country"
+              value={destinationCountry}
+              onChange={handleCountryChange}
+            >
+              <option value="">Select a country</option>
+              {countries.map((country, index) => (
+                <option key={index} value={country}>
+                  {country}
+                </option>
+              ))}
 
-            <input
-              type="text"
-              required
-              placeholder="Enter the city"
-              value={destinationCity}
-              onChange={(e) => setDestinationCity(e.target.value)}
-            />
+            </select>
           </div>
         </div>
 
@@ -149,21 +182,24 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
         </div>
 
         <div className="modal__container__body__content__input">
-          <label htmlFor="">Country</label>
+          <label htmlFor="">City</label>
 
           <div className="inputBox">
-            <FontAwesomeIcon
-              icon={faLocationArrow}
-              className="inputBox__icon"
-            />
-
-            <input
-              type="text"
-              required
-              placeholder="Enter the country"
-              value={destinationCountry}
-              onChange={(e) => setDestinationCountry(e.target.value)}
-            />
+          <FontAwesomeIcon icon={faLocationArrow} className="inputBox__icon" />
+            <select
+              id="city"
+              value={destinationCity}
+              onChange={(e) => setDestinationCity(e.target.value)}
+              disabled={!destinationCountry}
+            >
+              <option value="">Select a city</option>
+              {destinationCountry &&
+                cities[destinationCountry]?.map((city, index) => (
+                  <option key={index} value={city}>
+                    {city}
+                  </option>
+                ))}
+            </select>
           </div>
         </div>
 

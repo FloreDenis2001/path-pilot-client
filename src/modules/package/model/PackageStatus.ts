@@ -1,4 +1,4 @@
 export enum PackageStatus {
-    ASSIGNED = 1,
-    UNASSIGNED = 2,
+    ASSIGNED= 'ASSIGNED',
+    UNASSIGNED = 'UNASSIGNED',
 }

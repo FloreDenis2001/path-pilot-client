@@ -185,6 +185,124 @@ select {
   background-color: rgba(169, 41, 240, 0.2);
 }
 
+.pending {
+  padding: 0.3rem;
+  border-radius: 5px;
+  color: #2DB7EA;
+  background-color: rgba(45, 183, 234, 0.2);
+}
+
+.profileAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+  width: 14rem;
+  height: 14rem;
+  cursor: pointer;
+  border-radius: 2rem;
+}
+.profileAvatar:hover {
+  background-color: #181820;
+}
+.profileAvatar__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+}
+.profileAvatar__text {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.top-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 2rem;
+  color: #ffffff;
+  background: linear-gradient(90deg, #2781e2 0%, #2DB7EA 54%);
+  padding: 1rem;
+  cursor: pointer;
+}
+.top-right:hover {
+  background-color: #5f5f5f;
+}
+
+.profileImage {
+  position: relative;
+  width: fit-content;
+  align-self: center;
+}
+.profileImage img {
+  width: 100%;
+  height: 70%;
+  border-radius: 2rem;
+  max-height: 30rem;
+  max-width: 30rem;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border: 4px solid rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  border-color: #ccc rgba(0, 0, 0, 0);
+  animation: l16 1s infinite linear;
+}
+
+.loader::before,
+.loader::after {
+  content: "";
+  grid-area: 1/1;
+  margin: 2px;
+  border: inherit;
+  border-radius: 50%;
+}
+
+.loader::before {
+  border-color: #2DB7EA rgba(0, 0, 0, 0);
+  animation: inherit;
+  animation-duration: 0.5s;
+  animation-direction: reverse;
+}
+
+.loader::after {
+  margin: 8px;
+}
+
+@keyframes l16 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+.loaderSpin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  color: #2DB7EA;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+.loaderSpin h2 {
+  letter-spacing: 1px;
+}
+
+.Toastify__toast-body {
+  font-size: 1.6rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+}
+
 .button {
   width: 100%;
 }
@@ -577,7 +695,7 @@ select {
   justify-content: flex-start;
   align-items: center;
   gap: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   background-color: #181820;
   font-size: 1.6rem;
   border-radius: 1rem;
@@ -605,19 +723,40 @@ select {
   font-size: 1.6rem;
   outline: none;
 }
+.inputBox option {
+  font-size: 1.6rem;
+  color: #ffffff;
+  background-color: #181820;
+}
+.inputBox option span {
+  padding: 1rem;
+}
+.inputBox select {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  font-size: 1.6rem;
+  outline: none;
+}
 
 .searchBox {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
+  width: 100%;
+  max-width: 35rem;
 }
 .searchBox label {
+  padding-inline: 0.9rem;
+  padding-block: 0.5rem;
   font-weight: 600;
   font-size: 1.4rem;
   color: #ffffff;
 }
-.searchBox__input {
+.searchBox__input, .searchBox__input2 {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -629,6 +768,9 @@ select {
   padding-block: 0.5rem;
   border-radius: 1rem;
   width: 35rem;
+}
+.searchBox__input2 {
+  width: 100%;
 }
 .searchBox input {
   height: 100%;
@@ -654,6 +796,8 @@ select {
   font-weight: 600;
   font-size: 1.4rem;
   color: #ffffff;
+  padding-inline: 1rem;
+  padding-block: 0.5rem;
 }
 .filtersBox select {
   border: 1px solid rgba(122, 122, 122, 0.3);
@@ -666,9 +810,66 @@ select {
   width: 100%;
 }
 .filtersBox option {
+  display: flex;
   font-size: 1.6rem;
   color: #ffffff;
   background-color: #181820;
+}
+
+.file-upload-container {
+  display: flex;
+  justify-content: center;
+}
+
+.file-upload-label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed #7a7a7a;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  width: 25rem;
+}
+
+.file-upload-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.file-upload-image {
+  color: #ffffff;
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.file-upload-image-src {
+  object-fit: contain;
+}
+
+.file-upload-text {
+  pointer-events: none;
+  color: #7a7a7a;
+}
+
+.file-upload-text-small {
+  font-size: 1rem;
+}
+
+.file-upload-link {
+  color: #2DB7EA;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s ease-in-out;
+}
+.file-upload-link:hover {
+  color: #2781e2;
+}
+
+.file-upload-input {
+  display: none;
 }
 
 table {
@@ -691,10 +892,6 @@ table thead th {
   margin: 0 auto;
   margin-bottom: 1rem;
   transition: all 0.3s;
-  border-top: none;
-  border-right: none;
-  border-bottom: none;
-  border-left: none;
 }
 @media only screen and (max-width: 37.5em) {
   table thead th {
@@ -854,6 +1051,8 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .pagination ul {
   width: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
   background: #181820;
   padding: 0.8rem;
@@ -978,6 +1177,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   width: 100%;
   max-width: 40rem;
   height: 25rem;
+  max-height: 35rem;
   text-align: center;
   z-index: 1;
   display: flex;
@@ -999,6 +1199,38 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin-bottom: 1rem;
 }
 .modal__dialog__content__actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.modal__upload {
+  background-color: #181820;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 40rem;
+  max-height: 50rem;
+  text-align: center;
+  z-index: 1;
+}
+.modal__upload__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+.modal__upload__content h2 {
+  font-family: "Red Hat Display", sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+.modal__upload__content__actions {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -1035,6 +1267,14 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   max-width: 95rem;
   text-align: center;
   z-index: 1;
+}
+.modal__container__profiles {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem;
+  flex-direction: row;
+  gap: 2rem;
 }
 .modal__container__header {
   display: flex;
@@ -1248,9 +1488,9 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 }
 .login__center__checker {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
+  justify-content: center;
   width: 70%;
   font-family: "Roboto", sans-serif;
   font-size: 1.4rem;
@@ -1688,7 +1928,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
     border-radius: 0.6rem;
   }
 }
-.order__container__header {
+.order__container__header, .order__container__search {
   display: flex;
   width: 95%;
   justify-content: space-between;
@@ -1701,16 +1941,16 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin: 0 auto;
   margin-bottom: 1rem;
 }
-.order__container__header__left {
+.order__container__header__left, .order__container__search__left {
   gap: 1rem;
   display: flex;
   align-items: center;
 }
-.order__container__header__left svg {
+.order__container__header__left svg, .order__container__search__left svg {
   display: none;
 }
 @media only screen and (max-width: 37.5em) {
-  .order__container__header__left svg {
+  .order__container__header__left svg, .order__container__search__left svg {
     display: block;
     font-size: 2rem;
     color: #2781e2;
@@ -1719,7 +1959,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
     padding: 1rem;
     border-radius: 0.5rem;
   }
-  .order__container__header__left svg:hover {
+  .order__container__header__left svg:hover, .order__container__search__left svg:hover {
     background-color: #181820;
   }
 }
@@ -1890,6 +2130,24 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   .order__card__header span {
     font-size: 1rem;
   }
+}
+.order__card__header p,
+.order__card__header span {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.4rem;
+  color: #2781e2;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+@media only screen and (max-width: 75em) {
+  .order__card__header p,
+  .order__card__header span {
+    font-size: 1rem;
+  }
+}
+.order__card__header span {
+  font-size: 1.8rem;
 }
 .order__card__body {
   display: flex;
@@ -2081,6 +2339,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   grid-template-rows: 2rem repeat(11, 1fr);
   min-height: 100vh;
   max-height: 100vh;
+  overflow: hidden;
 }
 @media only screen and (max-width: 56.25em) {
   .dashboard {
@@ -2636,6 +2895,13 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .profile__content__left__details span {
   font-size: 1.6rem;
 }
+.profile__content__left__details img {
+  width: 100%;
+  height: 70%;
+  border-radius: 2rem;
+  max-height: 30rem;
+  max-width: 30rem;
+}
 .profile__content__left__actions {
   display: flex;
   flex-direction: column;
@@ -2644,6 +2910,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
 .profile__content__right {
   display: flex;
   flex-direction: column;
+  height: 100%;
   gap: 2rem;
   width: 100%;
   padding: 2rem;
@@ -2653,7 +2920,6 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: column;
   flex-wrap: wrap;
   width: 31%;
-  min-height: 100%;
 }
 .profile__content__right__box span {
   max-width: 100%;
@@ -2669,7 +2935,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   box-shadow: 0 0.5rem 1rem rgba(33, 33, 43, 0.2);
   border-radius: 1rem;
   border: 1px solid #5f5f5f;
-  height: 50%;
+  height: 100%;
   padding: 2rem;
 }
 .profile__content__right__details__information {
@@ -2677,6 +2943,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  height: 80%;
   gap: 2rem;
   width: 100%;
 }
@@ -2685,6 +2952,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   flex-direction: row;
   align-items: center;
   gap: 1rem;
+  padding: 2rem;
 }
 .profile__content__right__details__title h2 {
   font-size: 2.5rem;

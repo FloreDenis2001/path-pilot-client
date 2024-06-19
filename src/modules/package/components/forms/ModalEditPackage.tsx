@@ -15,6 +15,9 @@ import Address from "../../../address/model/Address";
 import PackageRequest from "../../dto/PackageRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
 interface ModalEditPackageProps {
   handleOpenModal: () => void;
   pack: Package;
@@ -25,17 +28,18 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   pack,
 }) => {
   const { user } = useContext(LoginContext) as LoginContextType;
+  const dispatch = useDispatch();
 
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: pack.shipmentDTO.originName,
     phone: pack.shipmentDTO.originPhone,
-    address: pack.shipmentDTO.origin,
+    addressDTO: pack.shipmentDTO.origin,
   });
 
   let [destinationDetails, setDestinationDetails] = useState<PackageAddress>({
     name: pack.shipmentDTO.destinationName,
     phone: pack.shipmentDTO.destinationPhone,
-    address: pack.shipmentDTO.destination,
+    addressDTO: pack.shipmentDTO.destination,
   });
 
   let [packageDetailsInfo, setPackageDetailsInfo] = useState<PackageDetails>({
@@ -78,7 +82,16 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   }, [originDetails, destinationDetails, packageDetailsInfo]);
 
   const handleEditPackage = async () => {
-    await servicePackage.updatePackage(pack.awb, packageRequest);
+
+    try {
+      await servicePackage.updatePackage(pack.awb, packageRequest);
+      toast.success("Package updated successfully");
+      dispatch(retrievePackagesLoading());
+    }
+    catch (error) {
+      toast.error("Error updating package");
+      dispatch(retrievePackagesLoading());
+    }
     handleOpenModal();
   };
 
@@ -110,13 +123,13 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
           <div className="modal__container__header__title">
             <span>Edit Package</span>
             <div className="modal__container__header__actions">
-              {pack.status === PackageStatus.UNASSIGNED ? (
-                <span className="modal__container__header__actions__status cancelled">
-                  UNASSIGNED
+              {pack.status === PackageStatus.ASSIGNED ? (
+                <span className="modal__container__header__actions__status done">
+                  {pack.status}
                 </span>
               ) : (
-                <span className="modal__container__header__actions__status done">
-                  ASSINGED
+                <span className="modal__container__header__actions__status cancelled">
+                  {pack.status}
                 </span>
               )}
               <button

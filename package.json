@@ -18,12 +18,14 @@
     "@types/node": "^16.18.73",
     "@types/react": "^18.2.48",
     "@types/react-dom": "^18.2.18",
+    "antd": "^5.17.2",
     "chart.js": "^4.4.2",
     "google-map-react": "^2.2.1",
     "google-polyline": "^1.0.3",
     "js-cookie": "^3.0.5",
     "jspdf": "^2.5.1",
     "mui": "^0.0.1",
+    "papaparse": "^5.4.1",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.2.0",
@@ -34,6 +36,7 @@
     "react-router": "^6.22.0",
     "react-router-dom": "^6.22.3",
     "react-scripts": "5.0.1",
+    "react-toastify": "^10.0.5",
     "redux-persist": "^6.0.0",
     "redux-thunk": "^3.1.0",
     "sass": "^1.70.0",
@@ -68,6 +71,7 @@
   "devDependencies": {
     "@types/google-map-react": "^2.1.10",
     "@types/google-polyline": "^1.0.2",
-    "@types/js-cookie": "^3.0.6"
+    "@types/js-cookie": "^3.0.6",
+    "@types/papaparse": "^5.3.14"
   }
 }

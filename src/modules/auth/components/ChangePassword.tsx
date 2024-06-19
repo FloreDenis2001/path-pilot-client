@@ -8,6 +8,7 @@ import EmailService from "../../email/services/EmailService";
 import ResetPasswordRequest from "../../user/dto/ResetPasswordRequest";
 import UserService from "../../user/service/UserService";
 import InvalidToken from "../../core/components/InvalidToken";
+import { toast } from "react-toastify";
 
 const ChangePassword = () => {
   const location = useLocation();
@@ -54,10 +55,11 @@ const ChangePassword = () => {
     try {
       if (newPassword === confirmPassword) {
         await userServices.resetPassword(data);
+        toast.success("Password reset successful!");
         handleRemoveLinkAfterCreate();
         nav("/login");
       } else {
-        alert("Passwords do not match");
+        toast.error("Passwords do not match");
       }
     } catch (error) {
       console.log((error as Error).message);

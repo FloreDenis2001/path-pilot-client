@@ -9,7 +9,7 @@ class VehicleService extends ApiServer {
       data,
       ""
     );
-    if (response.status === 201) {
+    if (response.status === 200) {
       const data = await response.json();
       return data;
     } else {
@@ -32,7 +32,7 @@ class VehicleService extends ApiServer {
     }
   };
 
-  deleteVehicle = async (registrationNumber: string): Promise<any> => {
+  deleteVehicle = async (registrationNumber: string): Promise<string> => {
     const response = await this.api<null, any>(
       `/vehicles/delete=` + registrationNumber,
       "DELETE",
@@ -40,7 +40,7 @@ class VehicleService extends ApiServer {
       ""
     );
     if (response.status === 200) {
-      const data = await response.json();
+      const data = await response.text();
       return data;
     } else {
       return Promise.reject([]);
