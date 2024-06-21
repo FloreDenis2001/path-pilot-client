@@ -1,32 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import UserService from "../../user/service/UserService";
+import { LoginContext } from "../../context/LoginProvider";
+import LoginContextType from "../../user/models/LoginContextType";
 
 interface UploadImgProps {
   onClose: () => void;
+  imageProfile: string | null;
 }
 
-const UploadImg: React.FC<UploadImgProps> = ({ onClose }) => {
-  const [uploadedImage, setUploadedImage] = useState<string | null>(null);
+const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile }) => {
+  const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
+
+  const userService = new UserService();
+  const { user } = useContext(LoginContext) as LoginContextType;
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const file = event.target.files?.[0];
     if (file) {
-      const fileName = file.name;
-      setUploadedFileName(fileName);
-      const reader = new FileReader();
-      reader.onload = () => {
-        setUploadedImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      setUploadedImage(file);
+      setUploadedFileName(file.name);
     }
   };
 
-  const handleConfirm = (): void => {
-    toast.success("Image uploaded successfully");
-    onClose();
+  const handleConfirm = async () => {
+    try {
+      if (uploadedImage) {
+        console.log("Uploading image...");
+        console.log(user.email);
+        console.log(uploadedImage);
+        await userService.uploadImage( user.email , uploadedImage);
+        toast.success("Image uploaded successfully");
+        onClose();
+      } else {
+        toast.error("Please upload an image first");
+      }
+    } catch (err) {
+      console.error("Failed to upload image", err);
+      toast.error("Failed to upload image");
+    }
   };
 
   return (
@@ -34,6 +50,15 @@ const UploadImg: React.FC<UploadImgProps> = ({ onClose }) => {
       <div className="modal__upload">
         <div className="modal__upload__content">
           <h2>Upload Image</h2>
+
+          {uploadedImage && (
+            <div className="profileImage">
+              <LazyLoadImage src={URL.createObjectURL(uploadedImage)} alt="user-photo" width={250} effect="blur" />
+              <p>
+                Selected image: <span className="green">{uploadedFileName}</span>
+              </p>
+            </div>
+          )}
 
           <div className="file-upload-container">
             <label className="file-upload-label">

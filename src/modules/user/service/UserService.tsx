@@ -4,6 +4,8 @@ import UserLogin from "../dto/UserLogin";
 import RegisterDTO from "../../auth/models/RegisterDTO";
 import ResetPasswordRequest from "../dto/ResetPasswordRequest";
 import DeleteUserRequest from "../dto/DeleteUserRequest";
+import UpdateUserRequest from "../dto/UpdateUserRequest";
+import { toast } from "react-toastify";
 
 class UserService extends ApiServer {
   login = async (user: LoginRequest): Promise<UserLogin> => {
@@ -82,6 +84,48 @@ class UserService extends ApiServer {
       return Promise.reject([]);
     }
   };
+
+   update = async (data: UpdateUserRequest): Promise<string> => {
+    console.log(data);
+    try {
+      const response = await this.api<UpdateUserRequest, string>(
+        '/user/update',
+        'PUT',
+        data,
+        ''
+      );
+      if (response.status === 200) {
+        const responseData = await response.text();
+        return responseData;
+      } else {
+        return Promise.reject('Update failed'); 
+      }
+    } catch (error) {
+      return Promise.reject('Update failed');
+    }
+  };
+
+  uploadImage = async (email:string , file : File): Promise<string> => {
+    
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('email', email);
+
+    const response = await this.api<FormData, string>(
+      `/user/update/image`,
+      'POST',
+      formData,
+      ''
+    );
+    if (response.status === 200) {
+      const data = await response.text();
+      return data;
+    } else {
+      toast.error('Failed to upload image');
+      return Promise.reject([]);
+    }
+  };
+  
 
 }
 

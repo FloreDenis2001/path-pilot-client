@@ -10,7 +10,12 @@ import {
   faSignature,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+import "react-lazy-load-image-component/src/effects/blur.css";
 import UploadImg from "../../core/components/UploadImage";
+import UserService from "../service/UserService";
+import { toast } from "react-toastify";
+import UpdateUserRequest from "../dto/UpdateUserRequest";
 
 interface ModalEditUserProps {
   userAvatar: string;
@@ -29,14 +34,45 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
   const [phone, setPhone] = useState(user.phone);
   const [city, setCity] = useState(user.addressDTO.city);
   const [country, setCountry] = useState(user.addressDTO.country);
+  const [street, setStreet] = useState(user.addressDTO.street);
+  const [streetNumber, setStreetNumber] = useState(
+    user.addressDTO.streetNumber
+  );
   const [postalCode, setPostalCode] = useState(user.addressDTO.postalCode);
-
   const [showUploadImg, setShowUploadImg] = useState(false);
+  const userSerivce = new UserService();
 
   const handleUploadImg = () => {
     setShowUploadImg(!showUploadImg);
   };
 
+
+
+  const handleSubmit = async () => {
+    try { 
+      
+      
+
+    const updatedData: UpdateUserRequest = {
+      email,
+      firstName,
+      lastName,
+      phone,
+      city,
+      country,
+      street,
+      streetNumber,
+      postalCode,
+    };
+    
+      console.log(updatedData);
+      const response = await userSerivce.update(updatedData);
+      toast.success(`Update successful:${response}`);
+      handleClose(); 
+    } catch (error) {
+      toast.error(`Update failed: ${error}`);
+    }
+  };
   return (
     <section className="modal">
       <div className="modal__container">
@@ -49,14 +85,17 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
-        {showUploadImg && <UploadImg onClose={handleUploadImg} />}
+        {showUploadImg && (
+          <UploadImg onClose={handleUploadImg} imageProfile={userAvatar}  />
+        )}
         <div className="modal__container__body">
           <div className="modal__container__body__content">
             <div className="profileImage">
-              <img
+              <LazyLoadImage
                 src={`data:image/jpeg;base64,${userAvatar}`}
                 alt="user-photo"
                 width={250}
+                effect="blur"
               />
 
               <FontAwesomeIcon
@@ -158,6 +197,36 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
               </div>
 
               <div className="modal__container__body__content__input">
+                <label htmlFor="">Street</label>
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faSignature}
+                    className="inputBox__icon"
+                  />
+                  <input
+                    type="text"
+                    value={street}
+                    onChange={(e) => setStreet(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label htmlFor="">Street Number</label>
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faSignature}
+                    className="inputBox__icon"
+                  />
+                  <input
+                    type="text"
+                    value={streetNumber}
+                    onChange={(e) => setStreetNumber(e.target.value)}
+                  />
+                </div>
+              </div>
+
+              <div className="modal__container__body__content__input">
                 <label htmlFor="">Postal Code</label>
                 <div className="inputBox">
                   <FontAwesomeIcon
@@ -181,7 +250,11 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
             >
               Cancel
             </button>
-            <button className="button__modal button__modal__save" type="submit">
+            <button
+              className="button__modal button__modal__save"
+              type="button"
+              onClick={handleSubmit}
+            >
               Save
             </button>
           </div>
