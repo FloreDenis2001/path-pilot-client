@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import RetrievePassword from "./modules/auth/components/RetrievePassword";
 import Drivers from "./modules/driver/components/Drivers";
 import Vehicle from "./modules/vehicle/components/VehicleMap";
-import DashBoard from "./pages/Dashboard";
+import DashBoard from "./modules/company/components/Dashboard";
 import LoginProvider from "./modules/context/LoginProvider";
 import PackageMap from "./modules/package/components/PackageMap";
 import RegistrationDriver from "./modules/driver/components/froms/RegistrationDriver";

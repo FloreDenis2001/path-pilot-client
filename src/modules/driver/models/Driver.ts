@@ -1,5 +1,3 @@
-import Route from "../../route/model/Route";
-
 export default interface Driver {
     username: string;
     email: string;
@@ -11,5 +9,4 @@ export default interface Driver {
     experience: number;
     licenseNumber: string;
     isAvailable: boolean;
-    routes:Route[];
 }
