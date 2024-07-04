@@ -105,26 +105,28 @@ class UserService extends ApiServer {
     }
   };
 
-  uploadImage = async (email:string , file : File): Promise<string> => {
-    
+  uploadImage = async (email: string, file: File): Promise<string> => {
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('email', email);
-
-    const response = await this.api<FormData, string>(
-      `/user/update/image`,
-      'POST',
-      formData,
-      ''
-    );
-    if (response.status === 200) {
-      const data = await response.text();
-      return data;
-    } else {
-      toast.error('Failed to upload image');
-      return Promise.reject([]);
+  
+    try {
+      const response = await this.api<FormData, string>(
+        `/user/update/image?email=${email}`,
+        'POST',
+        formData,
+        ''
+      );
+      if (response.status === 200) {
+        const data = await response.text();
+        return data;
+      } else {
+        throw new Error('Failed to upload image');
+      }
+    } catch (error) {
+      throw error;
     }
   };
+  
   
 
 }

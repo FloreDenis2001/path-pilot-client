@@ -20,6 +20,7 @@ import { useNavigate } from "react-router";
 import EditProfileSelect from "./EditProfileSelect";
 import ModalEditCompany from "./ModalEditCompany";
 import ModalEditUser from "./ModalEditUser";
+import DeleteUserRequest from "../dto/DeleteUserRequest";
 
 const Profile: React.FC = () => {
   const [userImage, setUserImage] = useState<string>("");
@@ -30,7 +31,7 @@ const Profile: React.FC = () => {
   const [openEditCompany, setOpenEditCompany] = useState(false);
   const [openEditUser, setOpenEditUser] = useState(false);
   const nav = useNavigate();
-  console.log(company);
+
   const userService = new UserService();
   const companyService = new CompanyService();
 
@@ -63,7 +64,7 @@ const Profile: React.FC = () => {
       const mesaj = await userService.delete({
         email: user.email,
         token: user.token,
-      });
+      } as DeleteUserRequest);
       toast.success(mesaj);
       logOut();
       nav("/login");
@@ -162,7 +163,9 @@ const Profile: React.FC = () => {
 
                 <div className="profile__content__right__box">
                   <span>Address</span>
-                  <span>{user.addressDTO.street} {user.addressDTO.streetNumber}</span>
+                  <span>
+                    {user.addressDTO.street} {user.addressDTO.streetNumber}
+                  </span>
                 </div>
                 <div className="profile__content__right__box">
                   <span>Country</span>
@@ -231,6 +234,16 @@ const Profile: React.FC = () => {
                   <span>Postal Code</span>
                   <span>{company?.address.postalCode}</span>
                 </div>
+
+                <div className="profile__content__right__box">
+                  <span>Capital</span>
+                  <span>{company?.capital}</span>
+                </div>
+
+                <div className="profile__content__right__box">
+                  <span>Website</span>
+                  <span>{company?.website}</span>
+                </div>
               </div>
             </div>
           </div>
@@ -251,13 +264,18 @@ const Profile: React.FC = () => {
             handleClose={() => setOpenEditProfileSelect(false)}
           />
         )}
-
-        {openEditCompany && (
-          <ModalEditCompany handleClose={() => setOpenEditCompany(false)} />
+        {openEditCompany && company && (
+          <ModalEditCompany
+            handleClose={() => setOpenEditCompany(false)}
+            company={company}
+          />
         )}
 
         {openEditUser && (
-          <ModalEditUser userAvatar={userImage} handleClose={() => setOpenEditUser(false)} />
+          <ModalEditUser
+            userAvatar={userImage}
+            handleClose={() => setOpenEditUser(false)}
+          />
         )}
       </section>
     )

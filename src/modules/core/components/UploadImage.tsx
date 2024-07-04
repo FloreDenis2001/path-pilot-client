@@ -10,16 +10,19 @@ import LoginContextType from "../../user/models/LoginContextType";
 interface UploadImgProps {
   onClose: () => void;
   imageProfile: string | null;
+  onImageUpload: (newImage: string) => void;
 }
 
-const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile }) => {
+const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile,onImageUpload }) => {
   const [uploadedImage, setUploadedImage] = useState<File | null>(null);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
 
   const userService = new UserService();
   const { user } = useContext(LoginContext) as LoginContextType;
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleImageChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const file = event.target.files?.[0];
     if (file) {
       setUploadedImage(file);
@@ -29,11 +32,9 @@ const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile }) => {
 
   const handleConfirm = async () => {
     try {
-      if (uploadedImage) {
-        console.log("Uploading image...");
-        console.log(user.email);
-        console.log(uploadedImage);
-        await userService.uploadImage( user.email , uploadedImage);
+      if (uploadedImage) {  
+        const response = await userService.uploadImage(user.email, uploadedImage);
+        onImageUpload(response);
         toast.success("Image uploaded successfully");
         onClose();
       } else {
@@ -53,9 +54,15 @@ const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile }) => {
 
           {uploadedImage && (
             <div className="profileImage">
-              <LazyLoadImage src={URL.createObjectURL(uploadedImage)} alt="user-photo" width={250} effect="blur" />
+              <LazyLoadImage
+                src={URL.createObjectURL(uploadedImage)}
+                alt="user-photo"
+                width={250}
+                effect="blur"
+              />
               <p>
-                Selected image: <span className="green">{uploadedFileName}</span>
+                Selected image:{" "}
+                <span className="green">{uploadedFileName}</span>
               </p>
             </div>
           )}
@@ -63,16 +70,25 @@ const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile }) => {
           <div className="file-upload-container">
             <label className="file-upload-label">
               <div className="file-upload-content">
-                <FontAwesomeIcon icon={faCloudUploadAlt} className="file-upload-image" />
+                <FontAwesomeIcon
+                  icon={faCloudUploadAlt}
+                  className="file-upload-image"
+                />
                 <p className="file-upload-text">
                   {uploadedFileName ? (
                     <span className="file-upload-link">{uploadedFileName}</span>
                   ) : (
-                    <span className="file-upload-link">Select an image from your computer</span>
+                    <span className="file-upload-link">
+                      Select an image from your computer
+                    </span>
                   )}
                 </p>
               </div>
-              <input type="file" className="file-upload-input" onChange={handleImageChange} />
+              <input
+                type="file"
+                className="file-upload-input"
+                onChange={handleImageChange}
+              />
             </label>
           </div>
 
@@ -80,7 +96,10 @@ const UploadImg: React.FC<UploadImgProps> = ({ onClose, imageProfile }) => {
             <button className="button__modal" onClick={onClose}>
               Cancel
             </button>
-            <button className="button__modal button__modal__confirm" onClick={handleConfirm}>
+            <button
+              className="button__modal button__modal__confirm"
+              onClick={handleConfirm}
+            >
               Confirm
             </button>
           </div>

@@ -1,4 +1,5 @@
 import ApiServer from "../../system/service/ApiServer";
+import CompanyUpdateRequest from "../dto/CompanyUpdateRequest";
 import { Company } from "../models/Company";
 import CompanyDataDashboard from "../models/CompanyDataDashboard";
 
@@ -34,6 +35,22 @@ class CompanyService extends ApiServer {
             return Promise.reject([]);
         }
     }
+
+
+    updateCompany = async (company: CompanyUpdateRequest): Promise<string> => {
+        const response = await this.api<CompanyUpdateRequest, string>(
+            `/companies/update`,
+            "PUT",
+            company,
+            ""
+        );
+        if (response.status === 200) {
+            const data = await response.text();
+            return data;
+        } else {
+            return Promise.reject([]);
+        }
+    };
     
 }
 

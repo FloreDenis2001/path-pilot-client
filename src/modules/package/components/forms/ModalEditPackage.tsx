@@ -26,7 +26,6 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
   pack,
 }) => {
   const { user } = useContext(LoginContext) as LoginContextType;
-  const dispatch = useDispatch();
 
   let [originDetails, setOriginDetails] = useState<PackageAddress>({
     name: pack.shipmentDTO.originName,

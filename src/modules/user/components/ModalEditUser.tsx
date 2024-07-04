@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { LoginContext } from "../../context/LoginProvider";
 import LoginContextType from "../models/LoginContextType";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,6 +17,7 @@ import UserService from "../service/UserService";
 import { toast } from "react-toastify";
 import UpdateUserRequest from "../dto/UpdateUserRequest";
 import { useNavigate } from "react-router";
+import roData from '../../../resources/ro.json'; 
 
 interface ModalEditUserProps {
   userAvatar: string;
@@ -27,7 +28,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
   userAvatar,
   handleClose,
 }) => {
-  const { user , logOut } = useContext(LoginContext) as LoginContextType;
+  const { user, setUserCookie } = useContext(LoginContext) as LoginContextType;
   const nav = useNavigate();
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
@@ -36,48 +37,82 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
   const [city, setCity] = useState(user.addressDTO.city);
   const [country, setCountry] = useState(user.addressDTO.country);
   const [street, setStreet] = useState(user.addressDTO.street);
-  const [streetNumber, setStreetNumber] = useState(
-    user.addressDTO.streetNumber
-  );
+  const [streetNumber, setStreetNumber] = useState(user.addressDTO.streetNumber);
   const [postalCode, setPostalCode] = useState(user.addressDTO.postalCode);
   const [showUploadImg, setShowUploadImg] = useState(false);
+  const [currentAvatar, setCurrentAvatar] = useState(userAvatar); 
+  const [countries, setCountries] = useState<string[]>([]);
+  const [cities, setCities] = useState<{ [key: string]: string[] }>({});
   const userSerivce = new UserService();
 
+  useEffect(() => {
+    const countrySet = new Set<string>();
+    const cityMap: { [key: string]: string[] } = {};
 
+    roData.forEach((item) => {
+      countrySet.add(item.country);
+      if (!cityMap[item.country]) {
+        cityMap[item.country] = [];
+      }
+      cityMap[item.country].push(item.city);
+    });
 
-  const handleUploadImg = () => {
-    setShowUploadImg(!showUploadImg);
+    setCountries(Array.from(countrySet));
+    setCities(cityMap);
+  }, []);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountry(e.target.value);
+    setCity(''); 
   };
 
+  // Handle pentru schimbarea orașului
+  const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCity(e.target.value);
+  };
 
-
+  // Handle pentru trimiterea formularului
   const handleSubmit = async () => {
-    try { 
-      
-      
+    try {
+      const updatedData: UpdateUserRequest = {
+        email,
+        firstName,
+        lastName,
+        phone,
+        city,
+        country,
+        street,
+        streetNumber,
+        postalCode,
+      };
 
-    const updatedData: UpdateUserRequest = {
-      email,
-      firstName,
-      lastName,
-      phone,
-      city,
-      country,
-      street,
-      streetNumber,
-      postalCode,
-    };
-    
       const response = await userSerivce.update(updatedData);
-      
-      toast.success(`Update successful:${response}`);
-      logOut();
-      nav("/")
-      handleClose(); 
+      setUserCookie({
+        ...user,
+        firstName,
+        lastName,
+        email,
+        phone,
+        addressDTO: {
+          city,
+          country,
+          street,
+          streetNumber,
+          postalCode,
+        },
+      });
+      toast.success(`Update successful: ${response}`);
+      window.location.reload();
+      handleClose();
     } catch (error) {
       toast.error(`Update failed: ${error}`);
     }
   };
+
+  const handleImageUpload = (newImage: string) => {
+    setCurrentAvatar(newImage); 
+  };
+
   return (
     <section className="modal">
       <div className="modal__container">
@@ -91,13 +126,17 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
           </button>
         </div>
         {showUploadImg && (
-          <UploadImg onClose={handleUploadImg} imageProfile={userAvatar}  />
+          <UploadImg
+            onClose={() => setShowUploadImg(!showUploadImg)}
+            imageProfile={currentAvatar}
+            onImageUpload={handleImageUpload}
+          />
         )}
         <div className="modal__container__body">
           <div className="modal__container__body__content">
             <div className="profileImage">
               <LazyLoadImage
-                src={`data:image/jpeg;base64,${userAvatar}`}
+                src={`data:image/jpeg;base64,${currentAvatar}`}
                 alt="user-photo"
                 width={250}
                 effect="blur"
@@ -106,7 +145,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
               <FontAwesomeIcon
                 icon={faEdit}
                 className="top-right"
-                onClick={handleUploadImg}
+                onClick={() => setShowUploadImg(!showUploadImg)}
               />
             </div>
             <div className="modal__container__body__content__main">
@@ -132,7 +171,6 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
                     icon={faSignature}
                     className="inputBox__icon"
                   />
-
                   <input
                     type="text"
                     value={lastName}
@@ -148,7 +186,6 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
                     icon={faSignature}
                     className="inputBox__icon"
                   />
-
                   <input
                     type="email"
                     value={email}
@@ -161,7 +198,6 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
                 <label htmlFor="">Phone</label>
                 <div className="inputBox">
                   <FontAwesomeIcon icon={faPhone} className="inputBox__icon" />
-
                   <input
                     type="tel"
                     value={phone}
@@ -171,33 +207,47 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
               </div>
 
               <div className="modal__container__body__content__input">
-                <label htmlFor="">City</label>
-                <div className="inputBox">
-                  <FontAwesomeIcon
-                    icon={faLocationArrow}
-                    className="inputBox__icon"
-                  />
-
-                  <input
-                    type="text"
-                    value={city}
-                    onChange={(e) => setCity(e.target.value)}
-                  />
-                </div>
-              </div>
-
-              <div className="modal__container__body__content__input">
-                <label htmlFor="">Country</label>
+                <label htmlFor="country">Country</label>
                 <div className="inputBox">
                   <FontAwesomeIcon
                     icon={faLocation}
                     className="inputBox__icon"
                   />
-                  <input
-                    type="text"
+                  <select
+                    id="country"
                     value={country}
-                    onChange={(e) => setCountry(e.target.value)}
+                    onChange={handleCountryChange}
+                  >
+                    <option value="">Select a country</option>
+                    {countries.map((country, index) => (
+                      <option key={index} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label htmlFor="city">City</label>
+                <div className="inputBox">
+                  <FontAwesomeIcon
+                    icon={faLocationArrow}
+                    className="inputBox__icon"
                   />
+                  <select
+                    id="city"
+                    value={city}
+                    onChange={handleCityChange}
+                    disabled={!country}
+                  >
+                    <option value="">Select a city</option>
+                    {country && cities[country]?.map((city, index) => (
+                      <option key={index} value={city}>
+                        {city}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
 
