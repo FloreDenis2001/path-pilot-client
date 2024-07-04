@@ -16,6 +16,7 @@ import UploadImg from "../../core/components/UploadImage";
 import UserService from "../service/UserService";
 import { toast } from "react-toastify";
 import UpdateUserRequest from "../dto/UpdateUserRequest";
+import { useNavigate } from "react-router";
 
 interface ModalEditUserProps {
   userAvatar: string;
@@ -26,8 +27,8 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
   userAvatar,
   handleClose,
 }) => {
-  const { user } = useContext(LoginContext) as LoginContextType;
-
+  const { user , logOut } = useContext(LoginContext) as LoginContextType;
+  const nav = useNavigate();
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
@@ -41,6 +42,8 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
   const [postalCode, setPostalCode] = useState(user.addressDTO.postalCode);
   const [showUploadImg, setShowUploadImg] = useState(false);
   const userSerivce = new UserService();
+
+
 
   const handleUploadImg = () => {
     setShowUploadImg(!showUploadImg);
@@ -65,9 +68,11 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
       postalCode,
     };
     
-      console.log(updatedData);
       const response = await userSerivce.update(updatedData);
+      
       toast.success(`Update successful:${response}`);
+      logOut();
+      nav("/")
       handleClose(); 
     } catch (error) {
       toast.error(`Update failed: ${error}`);

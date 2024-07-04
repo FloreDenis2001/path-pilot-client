@@ -201,7 +201,11 @@
 
     &__confirm{
       background: $linear-gradient-2;
-
+          &--disabled{
+            background: $color-black;
+            border :1px solid $color-primary;
+            cursor: not-allowed;
+          }
     }
 
     &__icon {

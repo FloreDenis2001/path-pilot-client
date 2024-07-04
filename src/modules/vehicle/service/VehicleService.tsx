@@ -1,9 +1,10 @@
 import ApiServer from "../../system/service/ApiServer";
+import VehicleCreateRequest from "../dto/VehicleCreateRequest";
 import Vehicle from "../models/Vehicle";
 
 class VehicleService extends ApiServer {
-  createVehicle = async (data: Vehicle): Promise<Vehicle> => {
-    const response = await this.api<Vehicle, Vehicle>(
+  createVehicle = async (data: VehicleCreateRequest): Promise<Vehicle> => {
+    const response = await this.api<VehicleCreateRequest, VehicleCreateRequest>(
       `/vehicles/create`,
       "POST",
       data,

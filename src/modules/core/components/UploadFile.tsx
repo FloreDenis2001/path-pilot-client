@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Papa from "papaparse";
 import { toast } from "react-toastify";
 import PackageService from "../../package/service/PackageService";
@@ -6,7 +6,8 @@ import PackageRequest from "../../package/dto/PackageRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
-import { retrievePackagesLoading } from "../../../store/packages/packages.reducers";
+import { LoginContext } from "../../context/LoginProvider";
+import LoginContextType from "../../user/models/LoginContextType";
 
 interface UploadFileProps {
   onClose: () => void;
@@ -16,7 +17,9 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
   const dispatch = useDispatch();
   const [csvData, setCsvData] = useState<PackageRequest[]>([]);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
+  const [isEmailValid, setIsEmailValid] = useState<boolean>(false);
   const servicePackage = new PackageService();
+  const { user } = useContext(LoginContext) as LoginContextType;
 
   const isCSVorXMLFile = (fileName: string): boolean => {
     const allowedExtensions = [".csv", ".xml"];
@@ -33,7 +36,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
       setUploadedFileName(fileName);
       if (!isCSVorXMLFile(fileName)) {
         toast.warning("Please select a CSV or XML file");
-
+        setIsEmailValid(false);
         return;
       } else {
         toast.info("The type of file is valid");
@@ -88,16 +91,26 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
               };
             });
 
-            setCsvData(mappedPackages);
+            const isValidEmail = mappedPackages.every(p => p.customerEmail === user.email);
+            if (isValidEmail) {
+              setCsvData(mappedPackages);
+              setIsEmailValid(true);
+            } else {
+              toast.error("The email in the file does not match the user email");
+              setIsEmailValid(false);
+            }
           } else {
             toast.error("Invalid CSV data");
+            setIsEmailValid(false);
           }
         },
         error: (error) => {
           toast.error("Error parsing CSV file");
+          setIsEmailValid(false);
         },
       });
     }
+
   };
 
   const handleConfirm = async (): Promise<void> => {
@@ -109,9 +122,8 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
     } catch (error) {
       toast.warning("This record doesn't have all the required fields");
     }
-    dispatch(retrievePackagesLoading());
+    window.location.reload();
     onClose();
-
   };
 
   return (
@@ -151,8 +163,9 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
               Cancel
             </button>
             <button
-              className="button__modal button__modal__confirm"
+              className={`button__modal button__modal__confirm ${!isEmailValid ? 'button__modal__confirm--disabled' : ''}`}
               onClick={handleConfirm}
+              disabled={!isEmailValid}
             >
               Confirm
             </button>

@@ -31,18 +31,17 @@ import useExportPacksCSV from "../hooks/useExportPacksCSV";
 import RouteService from "../../route/services/RouteService";
 
 const PackageMap = () => {
-  const {user} = useContext(LoginContext) as LoginContextType;
+  const { user } = useContext(LoginContext) as LoginContextType;
   const routeService = new RouteService();
-  const myPackages = useSelector(selectPackages);
-  const retrievePackagesState = useSelector(selectRetrievePackagesState);
-  const dispatch = useDispatch();
+  const [myPackages, setPackages] = useState<Package[]>([]);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
   const [packClicked, setPackClicked] = useState<Package>();
   const [searchInput, setSearchInput] = useState("");
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
-  const { exportCSV} = useExportPacksCSV();
+  const [loading, setLoading] = useState(true);
+  const { exportCSV } = useExportPacksCSV();
   const handlePackageClick = (pack: Package) => {
     setPackClicked(pack);
   };
@@ -71,25 +70,24 @@ const PackageMap = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      dispatch(retrievePackagesLoading());
       try {
-        const packs = await packService.allPackages(
-          userLogin.user.id as number
-        );
-        dispatch(loadPackages(packs));
-        setFilteredPackages(packs);
-        dispatch(retrievePackagesSuccess());
+        setTimeout(async () => {
+          const packs = await packService.allPackages(
+            userLogin.user.id as number
+          );
+          setPackages(packs);
+        },400);
       } catch (err) {
-        dispatch(retrievePackagesError());
         toast.error("Error loading packages");
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     };
 
-    if (retrievePackagesState !== LoadingState.SUCCES) {
-      fetchData();
-    }
-
-  }, [retrievePackagesState]);
+    fetchData();
+  }, [user]);
 
   useEffect(() => {
     if (searchInput.length >= 2) {
@@ -110,7 +108,7 @@ const PackageMap = () => {
     }
   };
 
-  const handleGenerateRoute = async() => {
+  const handleGenerateRoute = async () => {
     try {
       await routeService.generateRoute(user.companyRegistrationNumber);
       toast.success("Route generated successfully");
@@ -158,8 +156,9 @@ const PackageMap = () => {
         </div>
 
         <div className="order__container__maps">
-          {retrievePackagesState === LoadingState.LOADING && <LoaderSpin />}
-          {retrievePackagesState === LoadingState.SUCCES &&
+          {loading ? (
+            <LoaderSpin />
+          ) : filteredPackages.length > 0 ? (
             filteredPackages
               .slice()
               .reverse()
@@ -169,14 +168,20 @@ const PackageMap = () => {
                   pack={pack}
                   onClick={() => handlePackageClick(pack)}
                 />
-              ))}
+              ))
+          ) : (
+            <h1 className="heading-primary">No packages found...</h1>
+          )}
         </div>
 
-        {retrievePackagesState === LoadingState.SUCCES && (
-          <div className="order__container__footer">
-            <button className="button button__first" onClick={handleGenerateRoute} >Generate Route</button>
-          </div>
-        )}
+        <div className="order__container__footer">
+          <button
+            className="button button__first"
+            onClick={handleGenerateRoute}
+          >
+            Generate Route
+          </button>
+        </div>
       </div>
 
       {packClicked && <PackageInfo pack={packClicked} />}

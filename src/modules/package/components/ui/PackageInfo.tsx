@@ -7,7 +7,6 @@ import ModalEditPackage from "../forms/ModalEditPackage";
 import jsPDF from "jspdf";
 import Dialog from "../../../core/components/Dialog";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
 import OptionsOrderDetails from "../../../route/components/ui/OptionsOrderDetails";
 interface PackProps {
@@ -15,7 +14,6 @@ interface PackProps {
 }
 
 const PackageInfo: React.FC<PackProps> = ({ pack }) => {
-  const dispatch = useDispatch();
   const [activeButton, setActiveButton] = useState("package");
   const original =
     pack.shipmentDTO.origin.city +
@@ -54,10 +52,9 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   let handleDeletePackage = async () => {
     try {
       await packService.deletePackage(pack.awb);
-      dispatch(retrievePackagesLoading());
       toast.success("Package deleted successfully");
+      window.location.reload();
     } catch (err) {
-      dispatch(retrievePackagesLoading());
       toast.error("Error deleting package");
     }
     handleOpenDialog();
@@ -66,61 +63,137 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
   const handleOpenModalEdit = () => {
     setOpenModalEdit(!openModalEdit);
   };
+
   const handlePrintOrder = () => {
     const doc = new jsPDF();
 
+    doc.setFillColor("#e0f7fa");
+    doc.rect(0, 0, 210, 30, "F");
+
     doc.setFont("helvetica", "bold");
-    doc.setFontSize(20);
-    doc.setTextColor("#333");
-    doc.text("Package Details", 10, 15);
+    doc.setFontSize(22);
+    doc.setTextColor("#00796b");
+    doc.text("Invoice", 10, 20);
+
+    doc.setFontSize(12);
+    doc.setTextColor("#00796b");
+    doc.text(`${pack.status}`, 150, 20);
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.setTextColor("#00796b");
+    doc.text("Package Details", 10, 40);
 
     doc.setFont("helvetica", "normal");
     doc.setFontSize(12);
-    doc.setTextColor("#666");
-    doc.text(`Package AWB: ${pack.awb}`, 10, 30);
-    doc.text(`Width: ${pack.packageDetails.width} cm`, 10, 40);
-    doc.text(`Height: ${pack.packageDetails.height} cm`, 10, 50);
-    doc.text(`Weight: ${pack.packageDetails.weight} g`, 10, 60);
-    doc.text(`Type: ${pack.status}`, 10, 70);
-    doc.text(`Total Amount: ${pack.packageDetails.totalAmount} RON`, 10, 80);
+    doc.setTextColor("#333");
+
+    const packageStartY = 50;
+    const column1X = 10;
+    const column2X = 110;
+
+    doc.text(`AWB: ${pack.awb}`, column1X, packageStartY);
+    doc.text(
+      `Width: ${pack.packageDetails.width} cm`,
+      column1X,
+      packageStartY + 10
+    );
+    doc.text(
+      `Height: ${pack.packageDetails.height} cm`,
+      column1X,
+      packageStartY + 20
+    );
+    doc.text(
+      `Length: ${pack.packageDetails.length} cm`,
+      column1X,
+      packageStartY + 30
+    );
+    doc.text(
+      `Weight: ${pack.packageDetails.weight} g`,
+      column1X,
+      packageStartY + 40
+    );
+    doc.text(`Type: ${pack.status}`, column1X, packageStartY + 50);
+    doc.text(
+      `Total Amount:$ ${pack.packageDetails.totalAmount} `,
+      column1X,
+      packageStartY + 60
+    );
     doc.text(
       `Delivery Description: ${pack.packageDetails.deliveryDescription}`,
-      10,
-      90
+      column1X,
+      packageStartY + 70,
+      { maxWidth: 90 }
     );
-
-    doc.setTextColor("#333");
-    doc.text("Origin Information:", 10, 110);
-    doc.setFontSize(10);
-    doc.setTextColor("#666");
-    doc.text(`Name: ${pack.shipmentDTO.originName}`, 10, 120);
-    doc.text(`Phone: ${pack.shipmentDTO.originPhone}`, 10, 130);
-    doc.text(
-      `Address: ${pack.shipmentDTO.origin.streetNumber}, ${pack.shipmentDTO.origin.street}, ${pack.shipmentDTO.origin.city}, ${pack.shipmentDTO.origin.country}, ${pack.shipmentDTO.origin.postalCode}`,
-      10,
-      140
-    );
-
-    doc.setTextColor("#333");
-    doc.text("Destination Information:", 10, 160);
-    doc.setFontSize(10);
-    doc.setTextColor("#666");
-    doc.text(`Name: ${pack.shipmentDTO.destinationName}`, 10, 170);
-    doc.text(`Phone: ${pack.shipmentDTO.destinationPhone}`, 10, 180);
-    doc.text(
-      `Address: ${pack.shipmentDTO.destination.streetNumber}, ${pack.shipmentDTO.destination.street}, ${pack.shipmentDTO.destination.city}, ${pack.shipmentDTO.destination.country}, ${pack.shipmentDTO.destination.postalCode}`,
-      10,
-      190
-    );
-
-    doc.setTextColor("#333");
-    doc.text(`Total Distance: ${pack.shipmentDTO.totalDistance} km`, 10, 220);
 
     doc.setLineWidth(0.5);
     doc.setDrawColor("#999");
-    doc.line(10, 105, 200, 105);
-    doc.line(10, 155, 200, 155);
-    doc.line(10, 210, 200, 210);
+    doc.line(10, packageStartY + 80, 200, packageStartY + 80);
+
+    const originStartY = packageStartY + 90;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.setTextColor("#00796b");
+    doc.text("Origin Information", column1X, originStartY);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.setTextColor("#333");
+
+    doc.text(
+      `Name: ${pack.shipmentDTO.originName}`,
+      column1X,
+      originStartY + 10
+    );
+    doc.text(
+      `Phone: ${pack.shipmentDTO.originPhone}`,
+      column1X,
+      originStartY + 20
+    );
+    doc.text(
+      `Address: ${pack.shipmentDTO.origin.streetNumber}, ${pack.shipmentDTO.origin.street}, ${pack.shipmentDTO.origin.city}, ${pack.shipmentDTO.origin.country}, ${pack.shipmentDTO.origin.postalCode}`,
+      column1X,
+      originStartY + 30,
+      { maxWidth: 90 }
+    );
+
+    const destinationStartY = originStartY;
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(18);
+    doc.setTextColor("#00796b");
+    doc.text("Destination Information", column2X, destinationStartY);
+
+    doc.setFont("helvetica", "normal");
+    doc.setFontSize(12);
+    doc.setTextColor("#333");
+
+    doc.text(
+      `Name: ${pack.shipmentDTO.destinationName}`,
+      column2X,
+      destinationStartY + 10
+    );
+    doc.text(
+      `Phone: ${pack.shipmentDTO.destinationPhone}`,
+      column2X,
+      destinationStartY + 20
+    );
+    doc.text(
+      `Address: ${pack.shipmentDTO.destination.streetNumber}, ${pack.shipmentDTO.destination.street}, ${pack.shipmentDTO.destination.city}, ${pack.shipmentDTO.destination.country}, ${pack.shipmentDTO.destination.postalCode}`,
+      column2X,
+      destinationStartY + 30,
+      { maxWidth: 90 }
+    );
+
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(14);
+    doc.setTextColor("#00796b");
+    doc.text(
+      `Total Distance: ${pack.shipmentDTO.totalDistance} km`,
+      column1X,
+      originStartY + 70
+    );
 
     doc.save(`pack_info_${pack.awb}.pdf`);
   };
@@ -143,14 +216,14 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       </div>
 
       <div className="order__map__body">
-        {/* <iframe
+        <iframe
           title="map"
-          src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
+          // src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}
           loading="lazy"
-        ></iframe> */}
+        ></iframe>
       </div>
 
       <div className="order__map__details">

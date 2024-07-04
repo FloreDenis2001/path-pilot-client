@@ -488,6 +488,11 @@ select {
 .button__modal__confirm {
   background: linear-gradient(150deg, #2DB7EA 0%, #2781e2 54%);
 }
+.button__modal__confirm--disabled {
+  background: #21212b;
+  border: 1px solid #2781e2;
+  cursor: not-allowed;
+}
 .button__modal__icon {
   align-self: center;
 }

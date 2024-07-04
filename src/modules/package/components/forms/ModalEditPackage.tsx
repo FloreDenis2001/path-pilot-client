@@ -11,13 +11,11 @@ import FormDelivery from "./FormDelivery";
 import QontoConnector from "../../../core/components/QontoConnector";
 import PackageAddress from "../../dto/PackageAddress";
 import PackageDetails from "../../dto/PackageDetails";
-import Address from "../../../address/model/Address";
 import PackageRequest from "../../dto/PackageRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { retrievePackagesLoading } from "../../../../store/packages/packages.reducers";
 interface ModalEditPackageProps {
   handleOpenModal: () => void;
   pack: Package;
@@ -86,11 +84,11 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
     try {
       await servicePackage.updatePackage(pack.awb, packageRequest);
       toast.success("Package updated successfully");
-      dispatch(retrievePackagesLoading());
+      window.location.reload();
+
     }
     catch (error) {
       toast.error("Error updating package");
-      dispatch(retrievePackagesLoading());
     }
     handleOpenModal();
   };

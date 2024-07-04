@@ -8,17 +8,18 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import VehicleService from "../../service/VehicleService";
-import Vehicle from "../../models/Vehicle";
 import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
 import { FuelType } from "../../models/FuelType";
+import roData from "../../../../resources/ro.json";
+import CityData from "../../../core/models/CityData";
 
-import { useDispatch } from "react-redux";
-import { retriveVehiclesLoading } from "../../../../store/vehicles/vehicles.reducers";
-import 'react-toastify/dist/ReactToastify.css';
-import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { FaGlobe } from "react-icons/fa";
+import VehicleCreateRequest from "../../dto/VehicleCreateRequest";
 
 interface ModalAddVehicleProps {
   handleOpenModalAddVehicle: () => void;
@@ -27,7 +28,6 @@ interface ModalAddVehicleProps {
 const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
   handleOpenModalAddVehicle,
 }) => {
-  const dispatch = useDispatch();
   let [make, setMake] = useState<string>();
   let [model, setModel] = useState<string>();
   let [year, setYear] = useState<number>();
@@ -43,12 +43,28 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
   let [width, setWidth] = useState<number>();
   let [length, setLength] = useState<number>();
   let [weight, setWeight] = useState<number>();
-
+  const [city, setCity] = useState<string>("");
+  const [country, setCountry] = useState<string>("");
+  const [currentLocation, setCurrentLocation] = useState<string[]>([]);
+  const [cities, setCities] = useState<{ [key: string]: string[] }>({});
   let { user } = useContext(LoginContext) as LoginContextType;
+  useEffect(() => {
+    const countrySet = new Set<string>();
+    const cityMap: { [key: string]: string[] } = {};
 
+    roData.forEach((item: CityData) => {
+      countrySet.add(item.country);
+      if (!cityMap[item.country]) {
+        cityMap[item.country] = [];
+      }
+      cityMap[item.country].push(item.city);
+    });
+
+    setCurrentLocation(Array.from(countrySet));
+    setCities(cityMap);
+  }, []);
   const vehicleService = new VehicleService();
   const handleCreateVehicle = async () => {
-
     let data = {
       make,
       model,
@@ -65,21 +81,24 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
       width,
       length,
       weight,
+      currentLocation: city,
       companyRegistrationNumber: user.companyRegistrationNumber,
-    } as Vehicle;
+    } as VehicleCreateRequest;
 
     try {
       await vehicleService.createVehicle(data);
-      toast.success('The car has been added to the system.');
-      dispatch(retriveVehiclesLoading())
+      toast.success("The car has been added to the system.");
     } catch (err) {
-      toast.error('An error occurred while adding the car to the system.');
-      dispatch(retriveVehiclesLoading())
+      toast.error("An error occurred while adding the car to the system.");
     }
-
+    window.location.reload();
     handleOpenModalAddVehicle();
   };
 
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountry(e.target.value);
+    setCity("");
+  };
   return (
     <section className="modal">
       <div className="modal__container">
@@ -141,6 +160,46 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
                     placeholder="Enter the year"
                     onChange={(e) => setYear(parseInt(e.target.value))}
                   />
+                </div>
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label htmlFor="">Country</label>
+                <div className="inputBox">
+                  <FaGlobe className="inputBox__icon" />
+                  <select
+                    id="country"
+                    value={country}
+                    onChange={handleCountryChange}
+                  >
+                    <option value="">Select a country</option>
+                    {currentLocation.map((country, index) => (
+                      <option key={index} value={country}>
+                        {country}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              </div>
+
+              <div className="modal__container__body__content__input">
+                <label htmlFor="">City</label>
+                <div className="inputBox">
+                  <FaGlobe className="inputBox__icon" />
+                  <select
+                    id="city"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    disabled={!country}
+                  >
+                    <option value="">Select a city</option>
+                    {country &&
+                      cities[country]?.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                  </select>
                 </div>
               </div>
 
@@ -356,9 +415,6 @@ const ModalAddVehicle: React.FC<ModalAddVehicleProps> = ({
             Save
           </button>
         </div>
-
-
-       
       </div>
     </section>
   );

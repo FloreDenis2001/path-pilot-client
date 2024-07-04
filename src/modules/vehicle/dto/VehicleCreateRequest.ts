@@ -1,10 +1,9 @@
 import CityData from "../../core/models/CityData";
 import Route from "../../route/model/Route";
 import Vehicle from "../components/VehicleMap";
-import { FuelType } from "./FuelType";
+import { FuelType } from "../models/FuelType";
 
 export default interface Vehicle{
-    id:number;
     make:string;
     model:string;
     year:number;
@@ -20,8 +19,6 @@ export default interface Vehicle{
     width:number;
     length:number;
     weight:number;
-    active:boolean;
-    currentLocation:CityData;
-    routes:Route[];
+    currentLocation:string;
     companyRegistrationNumber:string;
 }

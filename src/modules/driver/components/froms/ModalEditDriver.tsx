@@ -10,14 +10,15 @@ import {
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Driver from "../../models/Driver";
 import DriverService from "../../service/DriverService";
 import DriverUpdateRequest from "../../dto/DriverUpdateRequest";
 import { FaEnvelope } from "react-icons/fa";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { retrieveDriversLoading } from "../../../../store/drivers/drivers.reducers";
+import { LoginContext } from "../../../context/LoginProvider";
+import LoginContextType from "../../../user/models/LoginContextType";
+
 interface ModalOrdersProps {
   handleOpenModal: () => void;
   driver: Driver;
@@ -26,7 +27,7 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
   handleOpenModal,
   driver,
 }) => {
-  const dispatch = useDispatch();
+
   const [username, setUsername] = useState(driver.username);
   const [email, setEmail] = useState(driver.email);
   const [firstName, setFirstName] = useState(driver.firstName);
@@ -37,6 +38,9 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
   const [rating, setRating] = useState(driver.rating);
   const [experience, setExperience] = useState(driver.experience);
   const [isAvailable, setIsAvailabe] = useState(driver.isAvailable);
+
+  const {user} = useContext(LoginContext) as LoginContextType;
+
   const driverService = new DriverService();
 
   const handleUpdate = async () => {
@@ -51,15 +55,15 @@ const ModalEditDriver: React.FC<ModalOrdersProps> = ({
       experience,
       licenseNumber,
       isAvailable,
+      companyRegistrationNumber: user.companyRegistrationNumber,
     } as DriverUpdateRequest;
 
     try {
       await driverService.updateDriver(data);
       toast.success("Driver updated successfully");
-      dispatch(retrieveDriversLoading());
+      window.location.reload();
     } catch (error) {
       toast.error("Error updating driver");
-      dispatch(retrieveDriversLoading());
     }
     handleOpenModal();
   };

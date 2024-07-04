@@ -27,7 +27,14 @@ const store = configureStore({
         getDefaultMiddleware({
             thunk: true,
             serializableCheck: {
-                ignoredActions: ['persist/PERSIST'],
+               ignoredActions: [
+                    'persist/PERSIST',
+                    'persist/REHYDRATE',
+                    'persist/PAUSE',
+                    'persist/PURGE',
+                    'persist/FLUSH',
+                    'persist/REGISTER',
+                ],
             },
         }),
 });

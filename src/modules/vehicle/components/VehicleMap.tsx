@@ -7,18 +7,6 @@ import VehicleRow from "./ui/VehicleRow";
 import ModalAddVehicle from "./forms/ModalAddVehicle";
 import { LoginContext } from "../../context/LoginProvider";
 import LoginContextType from "../../user/models/LoginContextType";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectRetrieveVehiclesState,
-  selectVehicles,
-} from "../../../store/vehicles/vehicles.selectors";
-import {
-  loadVehicles,
-  retriveVehiclesLoading,
-  retriveVehiclesSuccess,
-  retrieveVehiclesError,
-} from "../../../store/vehicles/vehicles.reducers";
-import { LoadingState } from "../../../actionType/LoadingState";
 import LoaderSpin from "../../core/components/LoaderSpin";
 import Vehicle from "../models/Vehicle";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
@@ -32,28 +20,33 @@ const VehicleMap = () => {
   const [sortOrder, setSortOrder] = useState("default");
   const [statusFilter, setStatusFilter] = useState("all");
   const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
-  const myVehicles = useSelector(selectVehicles);
-  const retrieveState = useSelector(selectRetrieveVehiclesState);
-  const dispatch = useDispatch();
+  const [myVehicles, setMyVehicles] = useState<Vehicle[]>([]);
+  const [loading, setLoading] = useState(true);
   const vehiclesPerPage = 8;
   const { user } = useContext(LoginContext) as LoginContextType;
   const vehicleService = new VehicleService();
 
-  const fetchVehicles = async () => {
-    dispatch(retriveVehiclesLoading());
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    try {
-      const vehicles = await vehicleService.allVehiclesByCompany(
-        user.companyRegistrationNumber
-      );
-      dispatch(retriveVehiclesSuccess());
-      dispatch(loadVehicles(vehicles));
-      setFilteredVehicles(vehicles);
-    } catch (err) {
-      dispatch(retrieveVehiclesError());
-      console.error(err);
-    }
-  };
+  useEffect(() => {
+    const fetchVehicles = async () => {
+      try {
+        const vehicles = await vehicleService.allVehiclesByCompany(
+          user.companyRegistrationNumber
+        );
+        setMyVehicles(vehicles);
+        setFilteredVehicles(vehicles);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setTimeout(() => setLoading(false), 400);
+      }
+    };
+
+    fetchVehicles();
+  }, [user]);
+
+  useEffect(() => {
+    applyFilters();
+  }, [searchTerm, sortOrder, statusFilter, myVehicles]);
 
   const applyFilters = () => {
     let filtered = [...myVehicles];
@@ -86,10 +79,8 @@ const VehicleMap = () => {
   };
 
   const refreshFilters = () => {
-    setSearchTerm("");
-    setSortOrder("default");
-    setStatusFilter("all");
-    toast.info("Filters reseted")
+    window.location.reload();
+    toast.info("Filters reseted");
   };
 
   const handlePageChange = (pageNumber: number) => {
@@ -99,16 +90,6 @@ const VehicleMap = () => {
   const handleOpenModalAddVehicle = () => {
     setOpenModal(!openModal);
   };
-
-  useEffect(() => {
-    if (retrieveState !== LoadingState.SUCCES) {
-      fetchVehicles();
-    }
-  }, [retrieveState, user]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [searchTerm, sortOrder, statusFilter, myVehicles]);
 
   const indexOfLastVehicle = currentPage * vehiclesPerPage;
   const indexOfFirstVehicle = indexOfLastVehicle - vehiclesPerPage;
@@ -179,7 +160,9 @@ const VehicleMap = () => {
       </div>
 
       <div className="vehicle__table">
-        {retrieveState === LoadingState.SUCCES && currentVehicles.length > 0 ? (
+        {loading ? (
+          <LoaderSpin />
+        ) : currentVehicles.length > 0 ? (
           <>
             <table>
               <thead>
@@ -214,8 +197,6 @@ const VehicleMap = () => {
             No vehicles found with this filters ...
           </h1>
         )}
-
-        {retrieveState === LoadingState.LOADING && <LoaderSpin />}
       </div>
 
       {openModal && (

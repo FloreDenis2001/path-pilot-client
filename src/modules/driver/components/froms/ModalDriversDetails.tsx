@@ -20,7 +20,6 @@ const ModalDriversDetails: React.FC<ModalDriversProps> = ({
   const fetchDriverImage = async () => {
     try {
       let userImage = await userService.getImage(driver.email);
-      console.log(userImage);
       setDriverImage(userImage);
     } catch (err) {
       console.log((err as Error).message);

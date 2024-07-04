@@ -9,15 +9,12 @@ import { LoginContext } from "../../../context/LoginProvider";
 import LoginContextType from "../../../user/models/LoginContextType";
 import OptionsDropDownDrivers from "./OptionsDropDownDrivers";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { retrieveDriversLoading } from "../../../../store/drivers/drivers.reducers";
 
 interface DriverRowProps {
   driver: Driver;
 }
 
 const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
-  const dispatch = useDispatch();
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openDriverDetails, setOpenDriverDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -43,14 +40,12 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
 
   const handleDeleteDriver = async () => {
     try {
-      await driverService.deleteDriver(driver.licenseNumber,user.email);
+      await driverService.deleteDriver(driver.licenseNumber,user.email,user.companyRegistrationNumber);
       toast.success("Driver deleted successfully");
-      dispatch(retrieveDriversLoading());
     } catch (err) {
       toast.error("Error deleting driver");
-      dispatch(retrieveDriversLoading());
     }
-
+    window.location.reload();
     handleOpenDialog();
   };
 

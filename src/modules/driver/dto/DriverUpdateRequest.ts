@@ -9,4 +9,5 @@ export default interface DriverUpdateRequest {
     experience: number;
     licenseNumber: string;
     isAvailable: boolean;
+    companyRegistrationNumber:string;
 }

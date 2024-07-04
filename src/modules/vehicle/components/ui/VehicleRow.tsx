@@ -7,15 +7,12 @@ import { set } from "react-hook-form";
 import Dialog from "../../../core/components/Dialog";
 import OptionsDropDownDrivers from "../../../driver/components/ui/OptionsDropDownDrivers";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { retrieveVehiclesError, retriveVehiclesLoading } from "../../../../store/vehicles/vehicles.reducers";
 
 interface VehicleRowProps {
   vehicle: Vehicle;
 }
 
 const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
-  const dispatch = useDispatch();
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openVehicleDetails, setOpenVehicleDetails] = useState(false);
   const [openModalEdit, setOpenModalEdit] = useState(false);
@@ -40,18 +37,16 @@ const VehicleRow: React.FC<VehicleRowProps> = ({ vehicle }) => {
 
   const handleConfirm = async () => {
     try {
-      let mesaj = await vehicleService.deleteVehicle(vehicle.registrationNumber);
+      let mesaj = await vehicleService.deleteVehicle(
+        vehicle.registrationNumber
+      );
       toast.success(mesaj);
-      dispatch(retriveVehiclesLoading())
     } catch (err) {
       toast.error("Error deleting vehicle");
-      console.log((err as Error).message);
-      dispatch(retriveVehiclesLoading())
     }
-
+    window.location.reload();
     handleOpenDialog();
   };
-
 
   return (
     <>

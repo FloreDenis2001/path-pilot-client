@@ -6,76 +6,56 @@ import DriverRow from "./ui/DriverRow";
 import Pagination from "../../core/components/Pagination";
 import { LoginContext } from "../../context/LoginProvider";
 import LoginContextType from "../../user/models/LoginContextType";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectDrivers,
-  selectRetrieveDriversState,
-} from "../../../store/drivers/drivers.selectors";
-import {
-  loadDrivers,
-  retrieveDriversError,
-  retrieveDriversLoading,
-  retrieveDriversSuccess,
-} from "../../../store/drivers/drivers.reducers";
-import { LoadingState } from "../../../actionType/LoadingState";
-import LoaderSpin from "../../core/components/LoaderSpin";
+import { toast } from "react-toastify";
 import ModalAddDriver from "./froms/ModalAddDriver";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsRotate } from "@fortawesome/free-solid-svg-icons";
-import { toast } from "react-toastify";
+import Driver from "../models/Driver";
+import LoaderSpin from "../../core/components/LoaderSpin";
 
 const Drivers = () => {
-  const drivers = useSelector(selectDrivers);
-  const retrieveState = useSelector(selectRetrieveDriversState);
-  const dispatch = useDispatch();
-
+  const [drivers, setDrivers] = useState<Driver[]>([]);
   const [openModal, setOpenModal] = useState(false);
-  const driverService = new DriverService();
   const [currentPage, setCurrentPage] = useState(1);
   const driversPerPage = 8;
-
-  let { user } = useContext(LoginContext) as LoginContextType;
-
   const [searchTerm, setSearchTerm] = useState("");
   const [sortOrder, setSortOrder] = useState("default");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [loading, setLoading] = useState(true);
+
+  const driverService = new DriverService();
+  let { user } = useContext(LoginContext) as LoginContextType;
 
   useEffect(() => {
     const fetchDrivers = async () => {
-      dispatch(retrieveDriversLoading());
-      await new Promise((resolve) => setTimeout(resolve, 400));
       try {
-        let drivers = await driverService.getAllDriversByCompany(
+        const fetchedDrivers = await driverService.getAllDriversByCompany(
           user.companyRegistrationNumber
         );
-        dispatch(retrieveDriversSuccess());
-        dispatch(loadDrivers(drivers));
+        console.log(fetchedDrivers);
+        setDrivers(fetchedDrivers);
       } catch (err) {
-        dispatch(retrieveDriversError());
+        toast.error("Unable to retrieve drivers");
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
       }
     };
-    
-    if (retrieveState !== LoadingState.SUCCES) fetchDrivers();
-  }, [retrieveState]);
 
-  const handleOpenModalAddDriver = () => {
-    setOpenModal(!openModal);
-  };
+    fetchDrivers();
+  }, [user]);
 
-  const handlePageChange = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-  };
+  useEffect(() => {
+    filterAndSortDrivers();
+  }, [searchTerm, sortOrder, statusFilter]);
 
   const filterAndSortDrivers = () => {
     let filteredDrivers = drivers;
 
     if (searchTerm) {
-      filteredDrivers = filteredDrivers.filter(
-        (driver) =>
-          driver.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          driver.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          driver.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          driver.email.toLowerCase().includes(searchTerm.toLowerCase())
+      filteredDrivers = filteredDrivers.filter((driver) =>
+        driver.username.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -84,6 +64,7 @@ const Drivers = () => {
         (driver) => driver.isAvailable === (statusFilter === "Active")
       );
     }
+
     if (sortOrder === "Ascending") {
       filteredDrivers = [...filteredDrivers].sort(
         (a, b) =>
@@ -101,22 +82,10 @@ const Drivers = () => {
     return filteredDrivers;
   };
 
-  useEffect(() => {
-    filterAndSortDrivers();
-  }, [searchTerm, sortOrder, statusFilter]);
-
   const refreshFilters = () => {
-    setSearchTerm("");
-    setSortOrder("default");
-    setStatusFilter("all");
+    window.location.reload();
     toast.info("Filters reset");
   };
-
-  useEffect(() => {
-    if (retrieveState === LoadingState.SUCCES) {
-      filterAndSortDrivers();
-    }
-  }, [retrieveState]);
 
   const filteredDrivers = filterAndSortDrivers();
   const indexOfLastDrivers = currentPage * driversPerPage;
@@ -132,11 +101,11 @@ const Drivers = () => {
       <div className="drivers__header">
         <h1 className="heading-primary">Drivers</h1>
         <div
-          onClick={() => handleOpenModalAddDriver()}
+          onClick={() => setOpenModal(!openModal)}
           className="button__box__second"
         >
           <FaPlus />
-          <button>New Driver </button>
+          <button>New Driver</button>
         </div>
       </div>
 
@@ -147,7 +116,7 @@ const Drivers = () => {
             <FaSearch className="searchBox__icon" />
             <input
               type="search"
-              placeholder="Search..."
+              placeholder="Search by username ..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
@@ -155,7 +124,7 @@ const Drivers = () => {
         </div>
 
         <div className="filtersBox">
-          <label>Sort : </label>
+          <label>Sort by name</label>
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
@@ -185,17 +154,11 @@ const Drivers = () => {
           />
         </button>
       </div>
+
       <div className="drivers__table">
-        {retrieveState === LoadingState.LOADING && <LoaderSpin />}
-
-        {retrieveState === LoadingState.ERROR && (
-          <div className="error__message">
-            <h1>Something went wrong</h1>
-            <p>Unable to retrieve drivers</p>
-          </div>
-        )}
-
-        {retrieveState === LoadingState.SUCCES && filteredDrivers.length > 0 ? (
+        {loading ? (
+          <LoaderSpin />
+        ) : filteredDrivers.length > 0 ? (
           <>
             <table>
               <thead>
@@ -221,19 +184,19 @@ const Drivers = () => {
             <Pagination
               totalPages={Math.ceil(filteredDrivers.length / driversPerPage)}
               currentPage={currentPage}
-              onPageChange={handlePageChange}
+              onPageChange={setCurrentPage}
             />
           </>
         ) : (
           <h1 className="heading-primary">
-            No drivers found with this filters ...
+            No drivers found with these filters...
           </h1>
         )}
       </div>
 
       {openModal && (
         <ModalAddDriver
-          handleOpenModalAddDriver={() => handleOpenModalAddDriver()}
+          handleOpenModalAddDriver={() => setOpenModal(!openModal)}
         />
       )}
     </section>
