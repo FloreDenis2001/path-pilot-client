@@ -47,7 +47,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pack, onClick }) => {
             icon={faMoneyBill}
             className="order__card__body__infoItem__icon orange"
           />
-          <span>{pack.packageDetails.totalAmount} RON</span>
+          <span>$ {pack.packageDetails.totalAmount}</span>
         </div>
 
         <div className="order__card__body__infoItem">

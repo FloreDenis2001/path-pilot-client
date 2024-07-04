@@ -79,12 +79,11 @@ const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
                   },
                 },
                 packageDetails: {
-                  totalAmount: parseInt(data[15]),
-                  weight: parseInt(data[16]),
-                  height: parseInt(data[17]),
-                  width: parseInt(data[18]),
-                  length: parseInt(data[19]),
-                  deliveryDescription: data[20],
+                  weight: parseInt(data[15]),
+                  height: parseInt(data[16]),
+                  width: parseInt(data[17]),
+                  length: parseInt(data[18]),
+                  deliveryDescription: data[19],
                 },
               };
             });

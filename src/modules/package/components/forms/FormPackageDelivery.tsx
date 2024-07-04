@@ -1,20 +1,17 @@
-import {
-  faArrowDown19,
-  faMoneyBill,
-  faSignature,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useCallback, useEffect, useState } from "react";
 import PackageDetails from "../../dto/PackageDetails";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDown19, faMoneyBill, faSignature } from "@fortawesome/free-solid-svg-icons";
 
 interface FormPackageDeliveryProps {
   weight: number;
   height: number;
   width: number;
   length: number;
-  totalAmount: number;
+  totalAmount?: number; 
   deliveryDescription: string;
   updatePackageDetails: (data: PackageDetails) => void;
+  editable?: boolean; 
 }
 
 const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
@@ -25,6 +22,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
   totalAmount: initialTotalAmount,
   deliveryDescription: initialDeliveryDescription,
   updatePackageDetails,
+  editable = true, 
 }) => {
   let [weight, setWeight] = useState<number>(initialWeight || 0);
   let [height, setHeight] = useState<number>(initialHeight || 0);
@@ -44,7 +42,6 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
     [updatePackageDetails]
   );
 
-
   const updatePackageDetailsData = () => {
     memorizedUpdatePackageDetails({
       totalAmount: totalAmount,
@@ -59,9 +56,6 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
   useEffect(() => {
     updatePackageDetailsData();
   }, [weight, height, width, length, totalAmount, deliveryDescription]);
-
-
-
 
   return (
     <div className="modal__container__body__content">
@@ -83,10 +77,8 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
 
         <div className="modal__container__body__content__input">
           <label htmlFor="">Height</label>
-
           <div className="inputBox">
             <FontAwesomeIcon icon={faArrowDown19} className="inputBox__icon" />
-
             <input
               type="number"
               required
@@ -101,7 +93,6 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
           <label htmlFor="">Length</label>
           <div className="inputBox">
             <FontAwesomeIcon icon={faArrowDown19} className="inputBox__icon" />
-
             <input
               type="number"
               required
@@ -114,10 +105,8 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
 
         <div className="modal__container__body__content__input">
           <label htmlFor="">Width</label>
-
           <div className="inputBox">
             <FontAwesomeIcon icon={faArrowDown19} className="inputBox__icon" />
-
             <input
               type="number"
               required
@@ -128,28 +117,26 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
           </div>
         </div>
 
-        <div className="modal__container__body__content__input">
-          <label htmlFor="">Price</label>
-
-          <div className="inputBox">
-            <FontAwesomeIcon icon={faMoneyBill} className="inputBox__icon" />
-
-            <input
-              type="number"
-              placeholder="Enter the price"
-              required
-              value={totalAmount}
-              onChange={(e) => setTotalAmount(+e.target.value)}
-            />
+        {editable && ( 
+          <div className="modal__container__body__content__input">
+            <label htmlFor="">Price</label>
+            <div className="inputBox">
+              <FontAwesomeIcon icon={faMoneyBill} className="inputBox__icon" />
+              <input
+                type="number"
+                placeholder="Enter the price"
+                required
+                value={totalAmount}
+                onChange={(e) => setTotalAmount(+e.target.value)}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <div className="modal__container__body__content__input">
           <label htmlFor="">Delivery Details :</label>
-
           <div className="inputBox">
             <FontAwesomeIcon icon={faSignature} className="inputBox__icon" />
-
             <input
               type="text"
               placeholder="Enter the details for our driver"

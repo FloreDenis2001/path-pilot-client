@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
   const [openEditCompany, setOpenEditCompany] = useState(false);
   const [openEditUser, setOpenEditUser] = useState(false);
   const nav = useNavigate();
-
+  console.log(company);
   const userService = new UserService();
   const companyService = new CompanyService();
 

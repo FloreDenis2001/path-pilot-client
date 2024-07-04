@@ -512,6 +512,7 @@
       background-color: $color-black;
       padding: 2rem;
       display: flex;
+      align-self: flex-start;
       flex-direction: column;
       justify-content: space-around;
       gap: 1rem;

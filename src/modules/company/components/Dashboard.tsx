@@ -23,18 +23,23 @@ import LoginContextType from "../../user/models/LoginContextType";
 import { LoginContext } from "../../context/LoginProvider";
 import UserService from "../../user/service/UserService";
 import CompanyService from "../services/CompanyServer";
-import CompanyDataDashboard from "../models/CompanyDataDashboard";
+import CompanyDataDashboard from "../dto/CompanyDataDashboard";
 import PackRowDashboard from "./forms/PackRowDashboard";
-
-Chart.register(...registerables);
+import { toast } from "react-toastify";
+import StatsBox from "./forms/StateBox";
+import ModalDriversDetails from "../../driver/components/froms/ModalDriversDetails";
+import Driver from "../../driver/models/Driver";
 
 const DashBoard = () => {
+  Chart.register(...registerables);
   const labelsData = ["January", "February", "March", "April", "May", "June"];
   const expensesData = [65, 59, 80, 81, 56, 55];
   const profitData = [28, 48, 40, 19, 86, 27];
   const [userImage, setUserImage] = useState("");
   let { user } = useContext(LoginContext) as LoginContextType;
-
+  const userService = new UserService();
+  const companyService = new CompanyService();
+  const nav = useNavigate();
   const [companyDataDashboard, setCompanyDataDashboard] =
     useState<CompanyDataDashboard>({
       totalSumLastMonthPackages: 0,
@@ -52,36 +57,61 @@ const DashBoard = () => {
     sidebar.style.display = "flex";
   }
 
-  const userService = new UserService();
-  const companyService = new CompanyService();
-  const nav = useNavigate();
-  const fetchUserImage = async () => {
-    try {
-      let userImage = await userService.getImage(user.email);
-      setUserImage(userImage);
-    } catch (err) {
-      console.log((err as Error).message);
-    }
-  };
+  
 
-  const fetchCompanyDataDashboard = async () => {
-    try {
-      let companyData = await companyService.getDataCompanyDashboard(
-        user.companyRegistrationNumber
-      );
-      setCompanyDataDashboard(companyData);
-    } catch (err) {
-      console.log((err as Error).message);
-    }
-  };
   useEffect(() => {
-    fetchUserImage();
-    fetchCompanyDataDashboard();
+    const fetchUserAndCompanyData = async () => {
+      try {
+        const [userImage, companyData] = await Promise.all([
+          userService.getImage(user.email),
+          companyService.getDataCompanyDashboard(
+            user.companyRegistrationNumber
+          ),
+        ]);
+
+        setUserImage(userImage);
+        setCompanyDataDashboard(companyData);
+      } catch (err) {
+        toast.error("Error fetching user or company data");
+      }
+    };
+
+    fetchUserAndCompanyData();
   }, [user]);
 
-  const handlerNavProfile = () => {
-    nav("/profile");
-  };
+  const statsData = [
+    {
+      icon: faTruckRampBox,
+      heading: "Services",
+      value: `$${companyDataDashboard.totalSumLastMonthPackages}`,
+      label: "Last Month",
+      className: "dashboard__stats__box__iconS",
+    },
+    {
+      icon: faBoxesStacked,
+      heading: "Shipments",
+      value: companyDataDashboard.totalNumberOfPackagesLastMonth,
+      label: "Last Month",
+      className: "dashboard__stats__box__iconShip",
+    },
+    {
+      icon: faChartColumn,
+      heading: "Expenses",
+      value: `$${companyDataDashboard.totalSumLastMonthOfSalary}`,
+      label: "Last Month",
+      className: "dashboard__stats__box__iconE",
+    },
+    {
+      icon: faMoneyBill,
+      heading: "Profit",
+      value: `$${companyDataDashboard.totalSumLastMonthProfit}`,
+      label: "Last Month",
+      className: "dashboard__stats__box__iconP",
+    },
+  ];
+
+ 
+  
   return (
     <section className="dashboard">
       <Sidebar />
@@ -106,7 +136,7 @@ const DashBoard = () => {
 
           <div
             className="dashboard__header__options__profile"
-            onClick={handlerNavProfile}
+            onClick={() => nav("/profile")}
           >
             {userImage ? (
               <>
@@ -133,51 +163,18 @@ const DashBoard = () => {
 
       <div className="dashboard__container">
         <div className="dashboard__stats">
-          <div className="dashboard__stats__box">
-            <div className="dashboard__stats__box__header">
-              <FontAwesomeIcon
-                className="dashboard__stats__box__iconS"
-                icon={faTruckRampBox}
-              />
-              <h2 className="heading-card">Services</h2>
-            </div>
+          {statsData.map((stat, index) => (
+            <StatsBox
+              icon={stat.icon}
+              heading={stat.heading}
+              value={stat.value}
+              label={stat.label}
+              className={stat.className}
+              key={index}
+            />
+          ))}
 
-            <p>${companyDataDashboard.totalSumLastMonthPackages}</p>
-            <span>Last Month</span>
-          </div>
-          <div className="dashboard__stats__box">
-            <div className="dashboard__stats__box__header">
-              <FontAwesomeIcon
-                icon={faBoxesStacked}
-                className="dashboard__stats__box__iconShip"
-              />
-              <h2 className="heading-card">Shipments</h2>
-            </div>
-            <p>{companyDataDashboard.totalNumberOfPackagesLastMonth}</p>
-            <span>Last Month</span>
-          </div>
-          <div className="dashboard__stats__box">
-            <div className="dashboard__stats__box__header">
-              <FontAwesomeIcon
-                className="dashboard__stats__box__iconE"
-                icon={faChartColumn}
-              />
-              <h2 className="heading-card">Expenses</h2>
-            </div>
-            <p>${companyDataDashboard.totalSumLastMonthOfSalary}</p>
-            <span>Last Month</span>
-          </div>
-          <div className="dashboard__stats__box">
-            <div className="dashboard__stats__box__header">
-              <FontAwesomeIcon
-                className="dashboard__stats__box__iconP"
-                icon={faMoneyBill}
-              />
-              <h2 className="heading-card">Profit</h2>
-            </div>
-            <p>${companyDataDashboard.totalSumLastMonthProfit}</p>
-            <span>Last Month</span>
-          </div>
+       
         </div>
 
         <div className="dashboard__bar">
@@ -218,7 +215,7 @@ const DashBoard = () => {
           <div className="dashboard__orders__table">
             <div className="dashboard__bar__drivers__header">
               <h2>Recent Packages</h2>
-              <Link to="/dashboard/pacakges">
+              <Link to="/dashboard/packages">
                 <button className="button__secondary">See All</button>
               </Link>
             </div>
@@ -235,17 +232,21 @@ const DashBoard = () => {
               </thead>
 
               <tbody>
-                {
-                  companyDataDashboard.lastFivePackagesAdded.map((pack, index) => (
+                {companyDataDashboard.lastFivePackagesAdded.map(
+                  (pack, index) => (
                     <PackRowDashboard key={index} pack={pack} />
-                  ))
-                }
-           
+                  )
+                )}
               </tbody>
             </table>
           </div>
+
+          
         </div>
       </div>
+
+      
+    
     </section>
   );
 };

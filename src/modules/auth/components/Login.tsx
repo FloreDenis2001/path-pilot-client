@@ -10,9 +10,6 @@ import { LoginContext } from "../../context/LoginProvider";
 import UserLogin from "../../user/dto/UserLogin";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
-import { retrievePackagesLoading } from "../../../store/packages/packages.reducers";
-import { retrieveDriversLoading } from "../../../store/drivers/drivers.reducers";
-import { retriveVehiclesLoading } from "../../../store/vehicles/vehicles.reducers";
 
 type FormData = {
   email: string;
@@ -24,7 +21,6 @@ const Login: React.FC = () => {
   const { register, handleSubmit } = useForm<FormData>();
   let userService = new UserService();
   let nav = useNavigate();
-  const dispatch = useDispatch();
 
   let onSubmit = async (data: FormData) => {
     try {
@@ -39,9 +35,6 @@ const Login: React.FC = () => {
   };
 
   let handleNavHome = () => {
-    dispatch(retrievePackagesLoading());
-    dispatch(retrieveDriversLoading());
-    dispatch(retriveVehiclesLoading());
     nav("/dashboard");
   };
 

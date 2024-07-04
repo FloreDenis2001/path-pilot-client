@@ -91,6 +91,36 @@ const FormPickUp: React.FC<PickUpProps> = ({
     <div className="modal__container__body__content">
       <h2>Pick-up from</h2>
       <div className="modal__container__body__content__main">
+
+        <div className="modal__container__body__content__input">
+          <label htmlFor="name">Name</label>
+          <div className="inputBox">
+            <FontAwesomeIcon icon={faSignature} className="inputBox__icon" />
+            <input
+              type="text"
+              required
+              placeholder="Enter the name"
+              value={originName}
+              onChange={(e) => setOriginName(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="modal__container__body__content__input">
+          <label htmlFor="phone">Phone</label>
+          <div className="inputBox">
+            <FontAwesomeIcon icon={faHashtag} className="inputBox__icon" />
+            <input
+              type="text"
+              required
+              placeholder="Enter the phone"
+              value={originPhone}
+              onChange={(e) => setOriginPhone(e.target.value)}
+            />
+          </div>
+
+        </div>
+
         <div className="modal__container__body__content__input">
           <label htmlFor="country">Country</label>
           <div className="inputBox">

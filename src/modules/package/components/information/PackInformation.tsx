@@ -12,7 +12,6 @@ interface PackInformationProps {
 }
 
 const PackInformation: React.FC<PackInformationProps> = ({ pack }) => {
-  console.log(pack);  
   return (
     <div className="information">
       <div className="information__column">

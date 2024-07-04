@@ -25,11 +25,14 @@ import {
 import { LoadingState } from "../../../actionType/LoadingState";
 import LoaderSpin from "../../core/components/LoaderSpin";
 import { FaSearch } from "react-icons/fa";
-import Papa from "papaparse";
 import { toast } from "react-toastify";
 import UploadFile from "../../core/components/UploadFile";
+import useExportPacksCSV from "../hooks/useExportPacksCSV";
+import RouteService from "../../route/services/RouteService";
 
 const PackageMap = () => {
+  const {user} = useContext(LoginContext) as LoginContextType;
+  const routeService = new RouteService();
   const myPackages = useSelector(selectPackages);
   const retrievePackagesState = useSelector(selectRetrievePackagesState);
   const dispatch = useDispatch();
@@ -39,7 +42,7 @@ const PackageMap = () => {
   const [packClicked, setPackClicked] = useState<Package>();
   const [searchInput, setSearchInput] = useState("");
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
-
+  const { exportCSV} = useExportPacksCSV();
   const handlePackageClick = (pack: Package) => {
     setPackClicked(pack);
   };
@@ -66,24 +69,27 @@ const PackageMap = () => {
     sidebar.style.display = "flex";
   };
 
-  const allPackages = async (): Promise<void> => {
-    dispatch(retrievePackagesLoading());
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    try {
-      const packs = await packService.allPackages(userLogin.user.id as number);
-      dispatch(retrievePackagesSuccess());
-      dispatch(loadPackages(packs));
-      setFilteredPackages(packs);
-    } catch (err) {
-      dispatch(retrievePackagesError());
-      console.log((err as Error).message);
-    }
-  };
-
   useEffect(() => {
-    if (retrievePackagesState !== LoadingState.SUCCES) allPackages();
-  }, [retrievePackagesState]);
+    const fetchData = async () => {
+      dispatch(retrievePackagesLoading());
+      try {
+        const packs = await packService.allPackages(
+          userLogin.user.id as number
+        );
+        dispatch(loadPackages(packs));
+        setFilteredPackages(packs);
+        dispatch(retrievePackagesSuccess());
+      } catch (err) {
+        dispatch(retrievePackagesError());
+        toast.error("Error loading packages");
+      }
+    };
 
+    if (retrievePackagesState !== LoadingState.SUCCES) {
+      fetchData();
+    }
+
+  }, [retrievePackagesState]);
 
   useEffect(() => {
     if (searchInput.length >= 2) {
@@ -96,50 +102,20 @@ const PackageMap = () => {
     }
   }, [searchInput, myPackages]);
 
-  const handleExportCSV = async () => {
-    const packService = new PackageService();
+  const handleExportCSV = async (packages: Package[]): Promise<void> => {
     try {
-      const packages = await packService.allPackages(
-        userLogin.user.id as number
-      );
-
-      const csvData = packages.map((pack) => ({
-        AWB: pack.awb,
-        "Origin Name": pack.shipmentDTO.originName,
-        "Origin Phone": pack.shipmentDTO.originPhone,
-        "Origin City": pack.shipmentDTO.origin.city,
-        "Origin Country": pack.shipmentDTO.origin.country,
-        "Origin Street": pack.shipmentDTO.origin.street,
-        "Origin Street Number": pack.shipmentDTO.origin.streetNumber,
-        "Destination Name": pack.shipmentDTO.destinationName,
-        "Destination Phone": pack.shipmentDTO.destinationPhone,
-        "Destination City": pack.shipmentDTO.destination.city,
-        "Destination Country": pack.shipmentDTO.destination.country,
-        "Destination Street": pack.shipmentDTO.destination.street,
-        "Destination Street Number": pack.shipmentDTO.destination.streetNumber,
-        "Total Distance": pack.shipmentDTO.totalDistance,
-        Status: pack.status,
-        "Total Amount": pack.packageDetails.totalAmount,
-        Weight: pack.packageDetails.weight,
-        Height: pack.packageDetails.height,
-        Width: pack.packageDetails.width,
-        Length: pack.packageDetails.length,
-        "Delivery Description": pack.packageDetails.deliveryDescription,
-      }));
-
-      const csv = Papa.unparse(csvData, { header: true });
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.setAttribute("href", url);
-      link.setAttribute("download", "packages.csv");
-      link.click();
-      toast.success("Packages exported successfully");
-      dispatch(retrievePackagesLoading());
+      await exportCSV(packages, "packages.csv");
     } catch (error) {
       toast.error("Error exporting packages");
-      dispatch(retrievePackagesLoading());
+    }
+  };
 
+  const handleGenerateRoute = async() => {
+    try {
+      await routeService.generateRoute(user.companyRegistrationNumber);
+      toast.success("Route generated successfully");
+    } catch (err) {
+      toast.error("Error generating route");
     }
   };
 
@@ -152,9 +128,7 @@ const PackageMap = () => {
         <div className="order__container__header">
           <div className="order__container__header__left">
             <FontAwesomeIcon icon={faBars} onClick={openMenu} />
-            <h1 className="heading-primary" onClick={allPackages}>
-              Packages
-            </h1>
+            <h1 className="heading-primary">Packages</h1>
           </div>
 
           <OptionsPackage
@@ -162,7 +136,7 @@ const PackageMap = () => {
             onToggle={handleDropdownToggle}
             onAdd={handleOpenModalAddOrder}
             onImport={handleOpenUploadModal}
-            onExport={handleExportCSV}
+            onExport={() => handleExportCSV(myPackages)}
           />
         </div>
 
@@ -186,18 +160,21 @@ const PackageMap = () => {
         <div className="order__container__maps">
           {retrievePackagesState === LoadingState.LOADING && <LoaderSpin />}
           {retrievePackagesState === LoadingState.SUCCES &&
-            filteredPackages.slice().reverse().map((pack, index) => (
-              <PackageCard
-                key={index}
-                pack={pack}
-                onClick={() => handlePackageClick(pack)}
-              />
-            ))}
+            filteredPackages
+              .slice()
+              .reverse()
+              .map((pack, index) => (
+                <PackageCard
+                  key={index}
+                  pack={pack}
+                  onClick={() => handlePackageClick(pack)}
+                />
+              ))}
         </div>
 
         {retrievePackagesState === LoadingState.SUCCES && (
           <div className="order__container__footer">
-            <button className="button button__first">Generate Route</button>
+            <button className="button button__first" onClick={handleGenerateRoute} >Generate Route</button>
           </div>
         )}
       </div>

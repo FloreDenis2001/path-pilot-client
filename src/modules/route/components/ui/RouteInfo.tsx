@@ -16,7 +16,6 @@ const RouteInfo: React.FC<RouteProps>  = ({route}) => {
   const [openModalEdit, setOpenModalEdit] = useState(false);
   const [activeButton, setActiveButton] = useState("order");
 
-  console.log(route);
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
@@ -95,19 +94,11 @@ const RouteInfo: React.FC<RouteProps>  = ({route}) => {
           >
             Vehicle
           </button>
-          <button
-            className={`button__details ${
-              activeButton === "invoices" ? "active" : ""
-            }`}
-            onClick={() => handleButtonClick("invoices")}
-          >
-            Invoices
-          </button>
+         
         </div>
         {activeButton === "order" && <OrderInformation orders={route.orders}/>}
         {activeButton === "driver" && <DriverInformation driver={route.driver} />}
         {activeButton === "vehicle" && <VehicleInformation vehicle={route.vehicle} />}
-        {/* {activeButton === "invoices" && <InvoicesInformation />}  */}
       </div>
     </div>
   );

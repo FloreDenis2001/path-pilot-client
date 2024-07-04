@@ -1,5 +1,5 @@
 export default interface PackageDetails {
-    totalAmount: number;
+    totalAmount?: number;
     weight: number;
     height: number;
     width: number;

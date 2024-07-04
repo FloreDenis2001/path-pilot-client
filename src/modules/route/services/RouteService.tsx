@@ -19,6 +19,23 @@ class RouteService extends ApiServer {
         return Promise.reject([]);
     }
   };
+
+
+  generateRoute = async (companyRegistrationNumber: string): Promise<String> => {
+    const data = await this.api<null, Route>(
+      `/route/generateRoute?companyRegistrationNumber=${companyRegistrationNumber}`,
+      "POST",
+      null,
+      ""
+    );
+
+    if(data.status===200){
+        const route= await data.text();
+        return route;
+    }else { 
+        return Promise.reject([]);
+    }
+  };
 }
 
 export default RouteService;

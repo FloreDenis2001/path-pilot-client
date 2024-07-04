@@ -1,4 +1,3 @@
-import Address from "../../address/model/Address";
 import PackageAddress from "./PackageAddress";
 import PackageDetails from "./PackageDetails";
 

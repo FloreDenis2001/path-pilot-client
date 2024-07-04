@@ -59,15 +59,15 @@ const InvoiceInformation: React.FC<InvoiceInformationProps> = ({ pack }) => {
           <div className="information__body__textBox">
             <h3>Total Amount</h3>
 
-            <p>{pack.packageDetails.totalAmount} RON</p>
+            <p>$ {pack.packageDetails.totalAmount} </p>
           </div>
           <div className="information__body__textBox">
             <h3>Amount Paid</h3>
-            <p>0.00</p>
+            <p>$ 0.00</p>
           </div>
           <div className="information__body__textBox">
             <h3>Amount Due</h3>
-            <p>{pack.packageDetails.totalAmount}</p>
+            <p>$ {pack.packageDetails.totalAmount}</p>
           </div>
         </div>
       </div>

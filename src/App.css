@@ -2831,6 +2831,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   background-color: #21212b;
   padding: 2rem;
   display: flex;
+  align-self: flex-start;
   flex-direction: column;
   justify-content: space-around;
   gap: 1rem;

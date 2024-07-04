@@ -102,6 +102,8 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
     <FormPackageDelivery
       {...packageDetailsInfo}
       updatePackageDetails={updatePackageDetails}
+      editable={false}
+      
     />,
     <FormPickUp {...originDetails} updatePickUp={updatePickUp} />,
     <FormDelivery {...destinationDetails} updateDelivery={updateDelivery} />,

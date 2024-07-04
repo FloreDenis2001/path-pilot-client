@@ -34,6 +34,7 @@ const FormUser: React.FC<FormUserProps> = ({
   const [lastName, setLastName] = useState(initialLastName || "");
   const [password, setPassword] = useState(initialPassword || "");
   const [phone, setPhone] = useState(initialPhone || "");
+
   const memoizedUpdateDataUser = useCallback(
     (data: RegisterRequest) => {
       updateDataUser(data);
@@ -42,7 +43,7 @@ const FormUser: React.FC<FormUserProps> = ({
   );
 
   useEffect(() => {
-    memoizedUpdateDataUser({
+    const data: RegisterRequest = {
       username,
       email,
       firstName,
@@ -50,17 +51,10 @@ const FormUser: React.FC<FormUserProps> = ({
       password,
       phone,
       address: initialAddress,
-    });
-  }, [
-    username,
-    email,
-    firstName,
-    lastName,
-    password,
-    phone,
-    initialAddress,
-    memoizedUpdateDataUser,
-  ]);
+    };
+    memoizedUpdateDataUser(data);
+  }, [username, email, firstName, lastName, password, phone, initialAddress]);
+
 
   return (
     <>

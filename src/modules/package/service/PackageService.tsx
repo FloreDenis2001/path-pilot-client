@@ -21,7 +21,6 @@ class PackageService extends ApiServer {
   allPackages = async (customerId : number): Promise<Package[]> => {
     const response = await this.api<null, Package[]>(`/packages/findAllByCustomer=`+customerId, "GET",null,"");
     if (response.status === 200) {
-      console.log(response);
       const data = await response.json();
       return data;
     } else {

@@ -40,21 +40,21 @@ const Drivers = () => {
   const [sortOrder, setSortOrder] = useState("default");
   const [statusFilter, setStatusFilter] = useState("all");
 
-  const fetchDrivers = async () => {
-    dispatch(retrieveDriversLoading());
-    await new Promise((resolve) => setTimeout(resolve, 400));
-    try {
-      let drivers = await driverService.getAllDriversByCompany(
-        user.companyRegistrationNumber
-      );
-      dispatch(retrieveDriversSuccess());
-      dispatch(loadDrivers(drivers));
-    } catch (err) {
-      dispatch(retrieveDriversError());
-    }
-  };
-
   useEffect(() => {
+    const fetchDrivers = async () => {
+      dispatch(retrieveDriversLoading());
+      await new Promise((resolve) => setTimeout(resolve, 400));
+      try {
+        let drivers = await driverService.getAllDriversByCompany(
+          user.companyRegistrationNumber
+        );
+        dispatch(retrieveDriversSuccess());
+        dispatch(loadDrivers(drivers));
+      } catch (err) {
+        dispatch(retrieveDriversError());
+      }
+    };
+    
     if (retrieveState !== LoadingState.SUCCES) fetchDrivers();
   }, [retrieveState]);
 
@@ -74,8 +74,8 @@ const Drivers = () => {
         (driver) =>
           driver.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
           driver.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          driver.username.toLowerCase().includes(searchTerm.toLowerCase()) || 
-          driver.email.toLowerCase().includes(searchTerm.toLowerCase())     
+          driver.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          driver.email.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
 
@@ -97,23 +97,21 @@ const Drivers = () => {
           b.lastName.localeCompare(a.lastName)
       );
     }
-    
 
     return filteredDrivers;
   };
 
-
   useEffect(() => {
     filterAndSortDrivers();
   }, [searchTerm, sortOrder, statusFilter]);
-  
+
   const refreshFilters = () => {
     setSearchTerm("");
     setSortOrder("default");
     setStatusFilter("all");
     toast.info("Filters reset");
   };
-  
+
   useEffect(() => {
     if (retrieveState === LoadingState.SUCCES) {
       filterAndSortDrivers();
@@ -197,8 +195,7 @@ const Drivers = () => {
           </div>
         )}
 
-        {retrieveState === LoadingState.SUCCES &&
-        filteredDrivers.length > 0 ? (
+        {retrieveState === LoadingState.SUCCES && filteredDrivers.length > 0 ? (
           <>
             <table>
               <thead>
