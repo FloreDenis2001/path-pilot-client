@@ -2,18 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SidebarMobile from "../../core/components/SidebarMobile";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectRetrieveRoutesState,
-  selectRoutes,
-} from "../../../store/routes/routes.selectors";
 import RouteService from "../services/RouteService";
-import {
-  loadRoutes,
-  retrieveRoutesError,
-  retrieveRoutesLoading,
-  retrieveRoutesSuccess,
-} from "../../../store/routes/routes.reducers";
 import { LoadingState } from "../../../actionType/LoadingState";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import LoaderSpin from "../../core/components/LoaderSpin";
@@ -24,36 +13,30 @@ import { LoginContext } from "../../context/LoginProvider";
 import RouteInfo from "./ui/RouteInfo";
 
 const RouteMap = () => {
-  const dispatch = useDispatch();
-  const myRoutes = useSelector(selectRoutes);
-  const retriverRoutesState = useSelector(selectRetrieveRoutesState);
-  const retriverDriversState = useSelector(selectRetrieveRoutesState);
-  const retriverVehiclesState = useSelector(selectRetrieveRoutesState);
+  const [myRoutes, setMyRoutes] = useState<Route[]>([]);
   const routeService = new RouteService();
+  let user = useContext(LoginContext) as LoginContextType;
 
-  const userLogin = useContext(LoginContext) as LoginContextType;
-  const fetchAllRoutesForCompany = async () => {
-    dispatch(retrieveRoutesLoading());
-    try {
-      const routes = await routeService.getAllRoutesByCompanyRegistrationNumber(
-        userLogin.user.companyRegistrationNumber
-      );
-
-      dispatch(retrieveRoutesSuccess());
-      dispatch(loadRoutes(routes));
-    } catch (error) {
-      dispatch(retrieveRoutesError());
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (
-      retriverRoutesState !== LoadingState.SUCCES ||
-      retriverDriversState !== LoadingState.SUCCES &&
-      retriverVehiclesState !== LoadingState.SUCCES
-    )
+    const fetchAllRoutesForCompany = async () => {
+      try {
+        const routes =
+          await routeService.getAllRoutesByCompanyRegistrationNumber(
+            user.user.companyRegistrationNumber
+          );
+        setMyRoutes(routes);
+      } catch (error) {
+      } finally {
+        setTimeout(() => {
+          setLoading(false);
+        }, 500);
+      }
+    };
+
       fetchAllRoutesForCompany();
-  }, [retriverRoutesState, retriverDriversState, retriverVehiclesState]);
+  }, [user]);
 
   const [routeClicked, setRouteClicked] = useState<Route>();
 
@@ -82,15 +65,19 @@ const RouteMap = () => {
         </div>
 
         <div className="order__container__maps">
-          {retriverRoutesState === LoadingState.LOADING && <LoaderSpin />}
-          {retriverRoutesState === LoadingState.SUCCES &&
+          {loading ? (
+            <LoaderSpin />
+          ) : myRoutes.length > 0 ? (
             myRoutes.map((route, index) => (
               <RouteCard
                 key={index}
                 route={route}
                 onClick={() => handleRouteClick(route)}
               />
-            ))}
+            ))
+          ) : (
+            <h1>No routes found</h1>
+          )}
         </div>
       </div>
       {routeClicked && <RouteInfo route={routeClicked} />}
