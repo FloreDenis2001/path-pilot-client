@@ -11,32 +11,20 @@ import LoginContextType from "../../user/models/LoginContextType";
 import PackageCard from "./ui/PackageCard";
 import PackageInfo from "./ui/PackageInfo";
 import ModalAddPackage from "./forms/ModalAddPackage";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectPackages,
-  selectRetrievePackagesState,
-} from "../../../store/packages/packages.selectors";
-import {
-  loadPackages,
-  retrievePackagesError,
-  retrievePackagesLoading,
-  retrievePackagesSuccess,
-} from "../../../store/packages/packages.reducers";
-import { LoadingState } from "../../../actionType/LoadingState";
 import LoaderSpin from "../../core/components/LoaderSpin";
 import { FaSearch } from "react-icons/fa";
 import { toast } from "react-toastify";
 import UploadFile from "../../core/components/UploadFile";
 import useExportPacksCSV from "../hooks/useExportPacksCSV";
-import RouteService from "../../route/services/RouteService";
+import PackageOfficeModal from "./ui/PackageOfficeModal";
 
 const PackageMap = () => {
   const { user } = useContext(LoginContext) as LoginContextType;
-  const routeService = new RouteService();
   const [myPackages, setPackages] = useState<Package[]>([]);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(-1);
   const [openModal, setOpenModal] = useState(false);
+  const [openSelectedOffice, setOpenSelectedOffice] = useState(false);
   const [packClicked, setPackClicked] = useState<Package>();
   const [searchInput, setSearchInput] = useState("");
   const [filteredPackages, setFilteredPackages] = useState<Package[]>([]);
@@ -76,7 +64,7 @@ const PackageMap = () => {
             userLogin.user.id as number
           );
           setPackages(packs);
-        },400);
+        }, 400);
       } catch (err) {
         toast.error("Error loading packages");
       } finally {
@@ -108,14 +96,11 @@ const PackageMap = () => {
     }
   };
 
-  const handleGenerateRoute = async () => {
-    try {
-      await routeService.generateRoute(user.companyRegistrationNumber);
-      toast.success("Route generated successfully");
-    } catch (err) {
-      toast.error("Error generating route");
-    }
+  const handleSelectedOffice =  () => {
+    setOpenSelectedOffice(!openSelectedOffice);
   };
+
+
 
   return (
     <section className="order">
@@ -177,7 +162,7 @@ const PackageMap = () => {
         <div className="order__container__footer">
           <button
             className="button button__first"
-            onClick={handleGenerateRoute}
+            onClick={handleSelectedOffice}
           >
             Generate Route
           </button>
@@ -193,6 +178,8 @@ const PackageMap = () => {
       {showUploadModal && (
         <UploadFile onClose={() => setShowUploadModal(false)} />
       )}
+
+      {openSelectedOffice && <PackageOfficeModal onClose={handleSelectedOffice} />}
     </section>
   );
 };

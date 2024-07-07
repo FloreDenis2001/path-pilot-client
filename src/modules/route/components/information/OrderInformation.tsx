@@ -33,6 +33,8 @@ const OrderInformation: React.FC<OrderInformationProps> = ({ orders }) => {
                         <thead>
                             <tr>
                                 <th>Order AWB</th>
+                                <th>Origin </th>
+                                <th>Destination</th>
                                 <th>Height</th>
                                 <th>Length</th>
                                 <th>Weight</th>
@@ -45,6 +47,8 @@ const OrderInformation: React.FC<OrderInformationProps> = ({ orders }) => {
                             {currentOrders.map((order, index) => (
                                 <tr key={index}>
                                     <td>{order.awb}</td>
+                                    <td>{order.shipment.originAddress.cityDetails.city}</td>
+                                    <td>{order.shipment.destinationAddress.cityDetails.city}</td>
                                     <td>{order.height}</td>
                                     <td>{order.length}</td>
                                     <td>{order.weight}</td>

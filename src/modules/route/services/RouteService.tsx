@@ -21,9 +21,9 @@ class RouteService extends ApiServer {
   };
 
 
-  generateRoute = async (companyRegistrationNumber: string): Promise<String> => {
+  generateRoute = async (companyRegistrationNumber: string , city : string): Promise<String> => {
     const data = await this.api<null, Route>(
-      `/route/generateRoute?companyRegistrationNumber=${companyRegistrationNumber}`,
+      `/route/generateRoute?companyRegistrationNumber=${companyRegistrationNumber}&city=${city}`,
       "POST",
       null,
       ""

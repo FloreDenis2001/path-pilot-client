@@ -7,8 +7,7 @@ interface CityData {
     admin_name: string;
     capital: string;
     population: string;
-    population_proper: string;
-  
+    population_proper: string;  
 }
 
 export default CityData;

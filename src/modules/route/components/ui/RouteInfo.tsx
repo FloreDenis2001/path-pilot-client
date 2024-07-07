@@ -35,6 +35,7 @@ const RouteInfo: React.FC<RouteProps>  = ({route}) => {
     setActiveButton(button);
   };
 
+  console.log(route);
 
   return (
     <div className="order__map">

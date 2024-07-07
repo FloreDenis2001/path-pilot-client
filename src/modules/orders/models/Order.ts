@@ -1,3 +1,6 @@
+import ShipmentRoute from "../../shipment/dto/ShipmentRoute";
+import Shipment from "../../shipment/model/Shipment";
+
 export default interface Order {
     awb: string;
     weight: number;
@@ -7,4 +10,5 @@ export default interface Order {
     deliveryDescription: string;
     orderDate: Date;
     totalAmount: number;
+    shipment:ShipmentRoute;
 }
