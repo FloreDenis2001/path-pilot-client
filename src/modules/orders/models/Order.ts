@@ -11,4 +11,5 @@ export default interface Order {
     orderDate: Date;
     totalAmount: number;
     shipment:ShipmentRoute;
+    deliverySequence:number;
 }

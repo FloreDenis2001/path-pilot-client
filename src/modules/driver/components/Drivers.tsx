@@ -32,7 +32,6 @@ const Drivers = () => {
         const fetchedDrivers = await driverService.getAllDriversByCompany(
           user.companyRegistrationNumber
         );
-        console.log(fetchedDrivers);
         setDrivers(fetchedDrivers);
       } catch (err) {
         toast.error("Unable to retrieve drivers");
@@ -61,9 +60,11 @@ const Drivers = () => {
 
     if (statusFilter !== "all") {
       filteredDrivers = filteredDrivers.filter(
-        (driver) => driver.isAvailable === (statusFilter === "Active")
+        (driver) => !driver.isAvailable === (statusFilter === "Active")
       );
     }
+
+
 
     if (sortOrder === "Ascending") {
       filteredDrivers = [...filteredDrivers].sort(

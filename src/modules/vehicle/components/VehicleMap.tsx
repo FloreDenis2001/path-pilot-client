@@ -128,7 +128,7 @@ const VehicleMap = () => {
         </div>
 
         <div className="filtersBox">
-          <label>Sort</label>
+          <label>Sort by registration number</label>
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}

@@ -11,7 +11,6 @@ interface DoughnutChartProps {
 }
 
 const DoughnutChart: React.FC<DoughnutChartProps> = ({ companyData }) => {
-  console.log(companyData);
   const data = {
     labels: ["Services", "Profit", "Expenses"],
     datasets: [

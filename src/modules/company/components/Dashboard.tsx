@@ -123,16 +123,9 @@ const DashBoard = () => {
         </div>
 
         <div className="dashboard__header__options">
-          <div className="dashboard__header__searchBox">
-            <FaSearch />
-            <input type="search" placeholder="Search anything..." />
-          </div>
+         
 
-          <div className="dashboard__header__options__notification">
-            <Badge badgeContent={4} color="primary">
-              <FontAwesomeIcon icon={faBell} />
-            </Badge>
-          </div>
+         
 
           <div
             className="dashboard__header__options__profile"
@@ -146,14 +139,14 @@ const DashBoard = () => {
                   width={25}
                 />
                 <p>
-                  {user.firstName} {user.lastName}
+                {user.username} 
                 </p>
               </>
             ) : (
               <>
                 <img src={image} alt="default-user" width={25} />
                 <p>
-                  {user.firstName} {user.lastName}
+                  {user.username} 
                 </p>
               </>
             )}

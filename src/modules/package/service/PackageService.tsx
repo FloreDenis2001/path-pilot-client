@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import ApiServer from "../../system/service/ApiServer";
 import PackageRequest from "../dto/PackageRequest";
 import Package from "../model/Package";
@@ -45,21 +46,30 @@ class PackageService extends ApiServer {
   };
 
 
-  updatePackage = async (awb:string ,data: PackageRequest): Promise<PackageRequest> => {
-    const response = await this.api<PackageRequest, any>(
-      `/packages/edit/` + awb,
-      "PUT",
-      data,
-      ""
-    );
-    if (response.status === 200) {
-      const data = await response.json();
-      console.log(data);
-      return data;
-    } else {
-      return Promise.reject([]);
+  updatePackage = async (awb: string, data: PackageRequest): Promise<PackageRequest> => {
+    try {
+        const response = await this.api<PackageRequest, any>(
+            `/packages/edit/` + awb,
+            "PUT",
+            data,
+            ""
+        );
+        if (response.status === 200) {
+            const data = await response.json();
+            console.log(data);
+            return data;
+        } else {
+            const errorMessage = await response.text();
+            if (response.status === 409) {
+                toast.warning("Package is already assigned");
+            }
+            return Promise.reject([]);
+        }
+    } catch (error) {
+        toast.error("An error occurred while updating the package");
+        return Promise.reject(error);
     }
-  };
+};
 
 
 

@@ -40,7 +40,7 @@ const DriverRow: React.FC<DriverRowProps> = ({ driver }) => {
 
   const handleDeleteDriver = async () => {
     try {
-      await driverService.deleteDriver(driver.licenseNumber,user.email,user.companyRegistrationNumber);
+      await driverService.deleteDriver(driver.licenseNumber,driver.email,user.companyRegistrationNumber);
       toast.success("Driver deleted successfully");
     } catch (err) {
       toast.error("Error deleting driver");

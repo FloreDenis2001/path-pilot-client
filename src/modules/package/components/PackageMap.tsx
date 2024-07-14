@@ -59,12 +59,10 @@ const PackageMap = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        setTimeout(async () => {
           const packs = await packService.allPackages(
             userLogin.user.id as number
           );
           setPackages(packs);
-        }, 400);
       } catch (err) {
         toast.error("Error loading packages");
       } finally {

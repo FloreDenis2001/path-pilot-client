@@ -218,7 +218,7 @@ const PackageInfo: React.FC<PackProps> = ({ pack }) => {
       <div className="order__map__body">
         <iframe
           title="map"
-          // src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
+          src={`https://www.google.com/maps/embed/v1/directions?key=AIzaSyAbyUrZndq4ZPLjIvBO_HeFy4r3heapRg0&origin=${original}&destination=${destination}`}
           width="100%"
           height="100%"
           style={{ border: 0 }}

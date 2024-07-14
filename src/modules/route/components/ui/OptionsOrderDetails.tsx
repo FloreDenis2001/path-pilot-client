@@ -2,6 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { FaEdit, FaEllipsisV, FaPrint,FaTrash } from "react-icons/fa";
+import Package from "../../../package/model/Package";
+import { PackageStatus } from "../../../package/model/PackageStatus";
 
 interface OptionsOrderDetailsProps {
   index: number;

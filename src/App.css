@@ -2285,7 +2285,6 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   max-height: 100vh;
 }
 .vehicle__header {
-  grid-area: 2/3/3/13;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2299,6 +2298,7 @@ table tbody tr .td__status__refused, table tbody tr .td__status__inActive {
   margin-bottom: 1rem;
   width: 90%;
   max-width: 120rem;
+  grid-area: 2/3/3/13;
 }
 .vehicle__filters {
   grid-area: 3/3/4/13;

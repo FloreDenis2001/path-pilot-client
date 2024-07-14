@@ -7,6 +7,7 @@ import {
     faRoad,
   } from "@fortawesome/free-solid-svg-icons";
 import Route from '../../model/Route';
+import { RouteStatus } from '../../model/RouteStatus';
 
 interface RouteCardProps {
     route:Route;
@@ -18,6 +19,21 @@ const RouteCard:React.FC<RouteCardProps> = ({route,onClick}) => {
     const handleRouteClick = () => {
         onClick(route);
       };
+
+      const getStatusClass = (status: string) => {
+        switch (status) {
+            case RouteStatus.PLANNEED:
+                return 'pending';
+            case RouteStatus.IN_PROGRESS:
+                return 'intransit';
+            case RouteStatus.COMPLETED:
+                return 'done';
+            case RouteStatus.CANCELLED:
+                return 'cancelled';
+            default:
+                return '';
+        }
+    };
   return (
     <div className="order__card" onClick={handleRouteClick}>
             <div className="order__card__header">
@@ -31,7 +47,7 @@ const RouteCard:React.FC<RouteCardProps> = ({route,onClick}) => {
                   icon={faCirclePlay}
                   className="order__card__body__infoItem__icon green"
                 />
-                <span>New York</span>
+                <span>{route.startPoint}</span>
               </div>
 
               <div className="order__card__body__infoItem">
@@ -39,7 +55,7 @@ const RouteCard:React.FC<RouteCardProps> = ({route,onClick}) => {
                   icon={faCircleStop}
                   className="order__card__body__infoItem__icon red"
                 />
-                <span>Los Angeles</span>
+                <span>{route.endPoint}</span>
               </div>
               <div className="order__card__body__infoItem">
                 <FontAwesomeIcon
@@ -59,7 +75,7 @@ const RouteCard:React.FC<RouteCardProps> = ({route,onClick}) => {
             </div>
 
             <div className="order__card__status">
-              <button className="button__status intransit">In Transit</button>
+              <button className={`button__status ${getStatusClass(route.status)}`}>{route.status}</button>
             </div>
           </div>
   )
