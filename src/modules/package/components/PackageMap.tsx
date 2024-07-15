@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -35,7 +35,7 @@ const PackageMap = () => {
   };
 
   const userLogin = useContext(LoginContext) as LoginContextType;
-  const packService = new PackageService();
+  const packService = useMemo(() => new PackageService(), []);
 
   const handleDropdownToggle = (index: number) => {
     setOpenDropdown(openDropdown === index ? -1 : index);
@@ -73,7 +73,7 @@ const PackageMap = () => {
     };
 
     fetchData();
-  }, [user]);
+  }, [user,packService , userLogin.user.id]);
 
   useEffect(() => {
     if (searchInput.length >= 2) {

@@ -3,7 +3,6 @@ import Sidebar from "../../core/components/Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SidebarMobile from "../../core/components/SidebarMobile";
 import RouteService from "../services/RouteService";
-import { LoadingState } from "../../../actionType/LoadingState";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import LoaderSpin from "../../core/components/LoaderSpin";
 import RouteCard from "./ui/RouteCard";
@@ -14,13 +13,14 @@ import RouteInfo from "./ui/RouteInfo";
 
 const RouteMap = () => {
   const [myRoutes, setMyRoutes] = useState<Route[]>([]);
-  const routeService = new RouteService();
   let user = useContext(LoginContext) as LoginContextType;
 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchAllRoutesForCompany = async () => {
+      const routeService = new RouteService();
+
       try {
         const routes =
           await routeService.getAllRoutesByCompanyRegistrationNumber(
@@ -35,7 +35,7 @@ const RouteMap = () => {
       }
     };
 
-      fetchAllRoutesForCompany();
+    fetchAllRoutesForCompany();
   }, [user]);
 
   const [routeClicked, setRouteClicked] = useState<Route>();

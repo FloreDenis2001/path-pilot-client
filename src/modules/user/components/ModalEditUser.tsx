@@ -16,7 +16,6 @@ import UploadImg from "../../core/components/UploadImage";
 import UserService from "../service/UserService";
 import { toast } from "react-toastify";
 import UpdateUserRequest from "../dto/UpdateUserRequest";
-import { useNavigate } from "react-router";
 import roData from '../../../resources/ro.json'; 
 
 interface ModalEditUserProps {
@@ -29,7 +28,6 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
   handleClose,
 }) => {
   const { user, setUserCookie } = useContext(LoginContext) as LoginContextType;
-  const nav = useNavigate();
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
   const [email, setEmail] = useState(user.email);
@@ -66,12 +64,10 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({
     setCity(''); 
   };
 
-  // Handle pentru schimbarea orașului
   const handleCityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCity(e.target.value);
   };
 
-  // Handle pentru trimiterea formularului
   const handleSubmit = async () => {
     try {
       const updatedData: UpdateUserRequest = {

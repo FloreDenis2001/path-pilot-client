@@ -1,16 +1,13 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBars,
-  faBell,
   faTruckRampBox,
   faBoxesStacked,
   faChartColumn,
   faMoneyBill,
 } from "@fortawesome/free-solid-svg-icons";
-import { FaSearch } from "react-icons/fa";
-import { Badge } from "@mui/material";
 import { Chart, registerables } from "chart.js";
 import Sidebar from "../../core/components/Sidebar";
 import SidebarMobile from "../../core/components/SidebarMobile";
@@ -25,59 +22,46 @@ import UserService from "../../user/service/UserService";
 import CompanyService from "../services/CompanyServer";
 import CompanyDataDashboard from "../dto/CompanyDataDashboard";
 import PackRowDashboard from "./forms/PackRowDashboard";
-import { toast } from "react-toastify";
 import StatsBox from "./forms/StateBox";
-import ModalDriversDetails from "../../driver/components/froms/ModalDriversDetails";
-import Driver from "../../driver/models/Driver";
 
 const DashBoard = () => {
   Chart.register(...registerables);
   const labelsData = ["January", "February", "March", "April", "May", "June"];
   const expensesData = [65, 59, 80, 81, 56, 55];
   const profitData = [28, 48, 40, 19, 86, 27];
-  const [userImage, setUserImage] = useState("");
-  let { user } = useContext(LoginContext) as LoginContextType;
-  const userService = new UserService();
-  const companyService = new CompanyService();
+  const [userImage, setUserImage] = useState<string>("");
+  const { user } = useContext(LoginContext) as LoginContextType;
   const nav = useNavigate();
-  const [companyDataDashboard, setCompanyDataDashboard] =
-    useState<CompanyDataDashboard>({
-      totalSumLastMonthPackages: 0,
-      totalNumberOfPackagesLastMonth: 0,
-      totalSumLastMonthOfSalary: 0,
-      totalSumLastMonthProfit: 0,
-      bestFiveDriversByRanking: [],
-      lastFivePackagesAdded: [],
-    });
-
-  function openMenu(): void {
-    const sidebar = document.querySelector(
-      ".sidebar__mobile__overlay"
-    ) as HTMLElement;
-    sidebar.style.display = "flex";
-  }
+  const [companyDataDashboard, setCompanyDataDashboard] = useState<CompanyDataDashboard>({
+    totalSumLastMonthPackages: 0,
+    totalNumberOfPackagesLastMonth: 0,
+    totalSumLastMonthOfSalary: 0,
+    totalSumLastMonthProfit: 0,
+    bestFiveDriversByRanking: [],
+    lastFivePackagesAdded: [],
+  });
 
   
+
+  const userService = useMemo(() => new UserService(), []);
+  const companyService = useMemo(() => new CompanyService(), []);
 
   useEffect(() => {
     const fetchUserAndCompanyData = async () => {
       try {
         const [userImage, companyData] = await Promise.all([
           userService.getImage(user.email),
-          companyService.getDataCompanyDashboard(
-            user.companyRegistrationNumber
-          ),
+          companyService.getDataCompanyDashboard(user.companyRegistrationNumber),
         ]);
 
         setUserImage(userImage);
         setCompanyDataDashboard(companyData);
       } catch (err) {
-        toast.error("Error fetching user or company data");
       }
     };
 
     fetchUserAndCompanyData();
-  }, [user]);
+  }, [user.email, user.companyRegistrationNumber, userService, companyService]);
 
   const statsData = [
     {
@@ -110,23 +94,24 @@ const DashBoard = () => {
     },
   ];
 
- 
-  
+  function openMenu(): void {
+    const sidebar = document.querySelector(".sidebar__mobile__overlay") as HTMLElement;
+    if (sidebar) {
+      sidebar.style.display = "flex";
+    }
+  }
+
   return (
     <section className="dashboard">
       <Sidebar />
-      <SidebarMobile />
+      <SidebarMobile  />
       <div className="dashboard__header">
         <div className="dashboard__header__left">
-          <FontAwesomeIcon icon={faBars} onClick={() => openMenu()} />
+          <FontAwesomeIcon icon={faBars} onClick={openMenu} />
           <h1 className="heading-primary">Dashboard</h1>
         </div>
 
         <div className="dashboard__header__options">
-         
-
-         
-
           <div
             className="dashboard__header__options__profile"
             onClick={() => nav("/profile")}
@@ -135,19 +120,15 @@ const DashBoard = () => {
               <>
                 <img
                   src={`data:image/jpeg;base64,${userImage}`}
-                  alt="user-photo"
+                  alt={`${user.username}'s profile`}
                   width={25}
                 />
-                <p>
-                {user.username} 
-                </p>
+                <p>{user.username}</p>
               </>
             ) : (
               <>
-                <img src={image} alt="default-user" width={25} />
-                <p>
-                  {user.username} 
-                </p>
+                <img src={image} alt="Default user profile" width={25} />
+                <p>{user.username}</p>
               </>
             )}
           </div>
@@ -166,8 +147,6 @@ const DashBoard = () => {
               key={index}
             />
           ))}
-
-       
         </div>
 
         <div className="dashboard__bar">
@@ -183,18 +162,15 @@ const DashBoard = () => {
           <div className="dashboard__bar__drivers">
             <div className="dashboard__bar__drivers__header">
               <h2>Drivers</h2>
-
               <Link to="/dashboard/drivers">
                 <button className="button__secondary">See All</button>
               </Link>
             </div>
 
             <ul className="dashboard__bar__drivers__content">
-              {companyDataDashboard.bestFiveDriversByRanking.map(
-                (driver, index) => (
-                  <CardTopDrivers key={index} driver={driver} />
-                )
-              )}
+              {companyDataDashboard.bestFiveDriversByRanking.map((driver, index) => (
+                <CardTopDrivers key={index} driver={driver} />
+              ))}
             </ul>
           </div>
         </div>
@@ -216,7 +192,7 @@ const DashBoard = () => {
             <table>
               <thead>
                 <tr>
-                  <th>Packages AWB </th>
+                  <th>Packages AWB</th>
                   <th>Customer</th>
                   <th>Distance</th>
                   <th>Price</th>
@@ -225,21 +201,14 @@ const DashBoard = () => {
               </thead>
 
               <tbody>
-                {companyDataDashboard.lastFivePackagesAdded.map(
-                  (pack, index) => (
-                    <PackRowDashboard key={index} pack={pack} />
-                  )
-                )}
+                {companyDataDashboard.lastFivePackagesAdded.map((pack, index) => (
+                  <PackRowDashboard key={index} pack={pack} />
+                ))}
               </tbody>
             </table>
           </div>
-
-          
         </div>
       </div>
-
-      
-    
     </section>
   );
 };

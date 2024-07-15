@@ -6,12 +6,11 @@ import {
   faSignature,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import Address from "../../../address/model/Address";
 import PackageAddress from "../../dto/PackageAddress";
 import roData from "../../../../resources/ro.json";
 import CityData from "../../../core/models/CityData";
-
 
 interface FormDeliveryProps {
   name: string;
@@ -19,8 +18,6 @@ interface FormDeliveryProps {
   addressDTO: Address;
   updateDelivery: (data: PackageAddress) => void;
 }
-
-
 
 const FormDelivery: React.FC<FormDeliveryProps> = ({
   name,
@@ -48,32 +45,14 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
   const [countries, setCountries] = useState<string[]>([]);
   const [cities, setCities] = useState<{ [key: string]: string[] }>({});
 
-  const memorizedUpdateDelivery = (data: PackageAddress) => {
-    updateDelivery(data);
-  };
+  const memorizedUpdateDelivery = useCallback(
+    (data: PackageAddress) => {
+      updateDelivery(data);
+    },
+    [updateDelivery]
+  );
 
-  useEffect(() => {
-    const countrySet = new Set<string>();
-    const cityMap: { [key: string]: string[] } = {};
-  
-    roData.forEach((item: CityData) => {
-      countrySet.add(item.country);
-      if (!cityMap[item.country]) {
-        cityMap[item.country] = [];
-      }
-      cityMap[item.country].push(item.city);
-    });
-  
-    setCountries(Array.from(countrySet));
-    setCities(cityMap);
-  }, []);
-
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setDestinationCountry(e.target.value);
-    setDestinationCity(""); 
-  };
-
-  const updateDeliveryData = () => {
+  const updateDeliveryData = useCallback(() => {
     memorizedUpdateDelivery({
       name: destinationName,
       phone: destinationPhone,
@@ -85,10 +64,6 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
         postalCode: destinationPostalCode,
       },
     });
-  };
-
-  useEffect(() => {
-    updateDeliveryData();
   }, [
     destinationName,
     destinationPhone,
@@ -97,7 +72,33 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
     destinationNumber,
     destinationCountry,
     destinationPostalCode,
+    memorizedUpdateDelivery,
   ]);
+
+  useEffect(() => {
+    updateDeliveryData();
+  }, [updateDeliveryData]);
+
+  useEffect(() => {
+    const countrySet = new Set<string>();
+    const cityMap: { [key: string]: string[] } = {};
+
+    roData.forEach((item: CityData) => {
+      countrySet.add(item.country);
+      if (!cityMap[item.country]) {
+        cityMap[item.country] = [];
+      }
+      cityMap[item.country].push(item.city);
+    });
+
+    setCountries(Array.from(countrySet));
+    setCities(cityMap);
+  }, []);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setDestinationCountry(e.target.value);
+    setDestinationCity("");
+  };
 
   return (
     <div className="modal__container__body__content">
@@ -134,7 +135,7 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
         <div className="modal__container__body__content__input">
           <label htmlFor="">Country</label>
           <div className="inputBox">
-             <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
+            <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
             <select
               id="country"
               value={destinationCountry}
@@ -146,7 +147,6 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
                   {country}
                 </option>
               ))}
-
             </select>
           </div>
         </div>
@@ -185,7 +185,10 @@ const FormDelivery: React.FC<FormDeliveryProps> = ({
           <label htmlFor="">City</label>
 
           <div className="inputBox">
-          <FontAwesomeIcon icon={faLocationArrow} className="inputBox__icon" />
+            <FontAwesomeIcon
+              icon={faLocationArrow}
+              className="inputBox__icon"
+            />
             <select
               id="city"
               value={destinationCity}

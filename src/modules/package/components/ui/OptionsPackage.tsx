@@ -8,7 +8,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useState, useRef, useEffect } from "react";
 import { FaEllipsisV } from "react-icons/fa";
-import LoaderSpin from "../../../core/components/LoaderSpin";
 
 interface OptionsPackageProps {
   index: number;

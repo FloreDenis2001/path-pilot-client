@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   FaEnvelope,
   FaGlobe,
-  FaKey,
   FaMoneyBill,
   FaPhoneAlt,
   FaSignature,
@@ -46,7 +45,7 @@ const FormCompany: React.FC<FormCompanyProps> = ({
   const [phone, setPhone] = useState(initialPhone || "");
   const [website, setWebsite] = useState(initialWebsite || "");
 
-  useEffect(() => {
+  const handleUpdateDataCompany = useCallback(() => {
     updateDataCompany({
       name: companyName,
       email,
@@ -55,9 +54,13 @@ const FormCompany: React.FC<FormCompanyProps> = ({
       capital,
       phone,
       website,
-      address: initialAddress
+      address: initialAddress,
     });
-  }, [companyName, email, registrationNumber, industry, capital, phone, website, initialAddress]);
+  }, [companyName, email, registrationNumber, industry, capital, phone, website, initialAddress, updateDataCompany]);
+
+  useEffect(() => {
+    handleUpdateDataCompany();
+  }, [handleUpdateDataCompany]);
 
 
   return (

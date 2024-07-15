@@ -5,7 +5,6 @@ import {
   FaCubes,
   FaIdCard,
   FaTruck,
-  FaBox,
   FaRoute,
 } from "react-icons/fa";
 

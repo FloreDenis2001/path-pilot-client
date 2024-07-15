@@ -1,5 +1,4 @@
 import ApiServer from "../../system/service/ApiServer";
-import LoginRequest from "../../user/dto/LoginRequest";
 import DriverCreateRequest from "../dto/DriverCreateRequest";
 import DriverUpdateRequest from "../dto/DriverUpdateRequest";
 import Driver from "../models/Driver";
@@ -30,7 +29,7 @@ class DriverService extends ApiServer {
         ""
       );
       if (response.status === 201) {
-        const message = await response.text();
+        await response.text();
         console.error("Failed to create driver:", response.statusText);
       }
     } catch (error) {

@@ -4,7 +4,6 @@ import {
   faCalendarAlt,
   faCarAlt,
   faGasPump,
-  faSignature,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +11,6 @@ import React, { useEffect, useState } from "react";
 import Vehicle from "../../models/Vehicle";
 import VehicleService from "../../service/VehicleService";
 import { FuelType } from "../../models/FuelType";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 interface ModalVehicleProps {
   handleOpenModal: () => void;

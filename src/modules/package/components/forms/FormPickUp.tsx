@@ -6,11 +6,12 @@ import {
   faSignature,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import PackageAddress from "../../dto/PackageAddress";
 import Address from "../../../address/model/Address";
 import roData from "../../../../resources/ro.json";
 import CityData from "../../../core/models/CityData";
+
 interface PickUpProps {
   name: string;
   phone: string;
@@ -24,15 +25,13 @@ const FormPickUp: React.FC<PickUpProps> = ({
   addressDTO,
   updatePickUp,
 }) => {
-  let [originName, setOriginName] = useState<string>(name || "");
-  let [originPhone, setOriginPhone] = useState<string>(phone || "");
-  let [originCity, setOriginCity] = useState<string>(addressDTO.city || "");
-  let [originStreet, setOriginStreet] = useState<string>(addressDTO.street || "");
-  let [originNumber, setOriginNumber] = useState<string>(addressDTO.streetNumber || "");
-  let [originCountry, setOriginCountry] = useState<string>(addressDTO.country || "");
-  let [originPostalCode, setOriginPostalCode] = useState<string>(
-    addressDTO.postalCode || ""
-  );
+  const [originName, setOriginName] = useState<string>(name || "");
+  const [originPhone, setOriginPhone] = useState<string>(phone || "");
+  const [originCity, setOriginCity] = useState<string>(addressDTO.city || "");
+  const [originStreet, setOriginStreet] = useState<string>(addressDTO.street || "");
+  const [originNumber, setOriginNumber] = useState<string>(addressDTO.streetNumber || "");
+  const [originCountry, setOriginCountry] = useState<string>(addressDTO.country || "");
+  const [originPostalCode, setOriginPostalCode] = useState<string>(addressDTO.postalCode || "");
 
   const [countries, setCountries] = useState<string[]>([]);
   const [cities, setCities] = useState<{ [key: string]: string[] }>({});
@@ -40,7 +39,7 @@ const FormPickUp: React.FC<PickUpProps> = ({
   useEffect(() => {
     const countrySet = new Set<string>();
     const cityMap: { [key: string]: string[] } = {};
-  
+
     roData.forEach((item: CityData) => {
       countrySet.add(item.country);
       if (!cityMap[item.country]) {
@@ -48,21 +47,13 @@ const FormPickUp: React.FC<PickUpProps> = ({
       }
       cityMap[item.country].push(item.city);
     });
-  
+
     setCountries(Array.from(countrySet));
     setCities(cityMap);
   }, []);
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setOriginCountry(e.target.value);
-    setOriginCity(""); 
-  };
 
-  const memorizedUpdatePickUp = (data: PackageAddress) => {
-    updatePickUp(data);
-  };
-
-  const updatePickUpData = () => {
-    memorizedUpdatePickUp({
+  const updatePickUpData = useCallback(() => {
+    updatePickUp({
       name: originName,
       phone: originPhone,
       addressDTO: {
@@ -73,10 +64,6 @@ const FormPickUp: React.FC<PickUpProps> = ({
         postalCode: originPostalCode,
       },
     });
-  };
-
-  useEffect(() => {
-    updatePickUpData();
   }, [
     originName,
     originPhone,
@@ -85,13 +72,22 @@ const FormPickUp: React.FC<PickUpProps> = ({
     originNumber,
     originCountry,
     originPostalCode,
+    updatePickUp,
   ]);
+
+  useEffect(() => {
+    updatePickUpData();
+  }, [updatePickUpData]);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setOriginCountry(e.target.value);
+    setOriginCity(""); 
+  };
 
   return (
     <div className="modal__container__body__content">
       <h2>Pick-up from</h2>
       <div className="modal__container__body__content__main">
-
         <div className="modal__container__body__content__input">
           <label htmlFor="name">Name</label>
           <div className="inputBox">
@@ -105,7 +101,6 @@ const FormPickUp: React.FC<PickUpProps> = ({
             />
           </div>
         </div>
-
         <div className="modal__container__body__content__input">
           <label htmlFor="phone">Phone</label>
           <div className="inputBox">
@@ -118,13 +113,11 @@ const FormPickUp: React.FC<PickUpProps> = ({
               onChange={(e) => setOriginPhone(e.target.value)}
             />
           </div>
-
         </div>
-
         <div className="modal__container__body__content__input">
           <label htmlFor="country">Country</label>
           <div className="inputBox">
-          <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
+            <FontAwesomeIcon icon={faLocation} className="inputBox__icon" />
             <select
               id="country"
               value={originCountry}
@@ -139,11 +132,10 @@ const FormPickUp: React.FC<PickUpProps> = ({
             </select>
           </div>
         </div>
-
         <div className="modal__container__body__content__input">
           <label htmlFor="city">City</label>
           <div className="inputBox">
-          <FontAwesomeIcon icon={faLocationArrow} className="inputBox__icon" />
+            <FontAwesomeIcon icon={faLocationArrow} className="inputBox__icon" />
             <select
               id="city"
               value={originCity}
@@ -160,7 +152,6 @@ const FormPickUp: React.FC<PickUpProps> = ({
             </select>
           </div>
         </div>
-
         <div className="modal__container__body__content__input">
           <label htmlFor="street">Street</label>
           <div className="inputBox">
@@ -187,7 +178,6 @@ const FormPickUp: React.FC<PickUpProps> = ({
             />
           </div>
         </div>
-
         <div className="modal__container__body__content__input">
           <label htmlFor="postalCode">Postal Code</label>
           <div className="inputBox">

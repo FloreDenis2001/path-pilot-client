@@ -5,7 +5,6 @@ import PackageService from "../../package/service/PackageService";
 import PackageRequest from "../../package/dto/PackageRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudArrowUp } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
 import { LoginContext } from "../../context/LoginProvider";
 import LoginContextType from "../../user/models/LoginContextType";
 
@@ -14,7 +13,6 @@ interface UploadFileProps {
 }
 
 const UploadFile: React.FC<UploadFileProps> = ({ onClose }) => {
-  const dispatch = useDispatch();
   const [csvData, setCsvData] = useState<PackageRequest[]>([]);
   const [uploadedFileName, setUploadedFileName] = useState<string>("");
   const [isEmailValid, setIsEmailValid] = useState<boolean>(false);

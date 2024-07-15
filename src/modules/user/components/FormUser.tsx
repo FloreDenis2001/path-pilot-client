@@ -53,7 +53,7 @@ const FormUser: React.FC<FormUserProps> = ({
       address: initialAddress,
     };
     memoizedUpdateDataUser(data);
-  }, [username, email, firstName, lastName, password, phone, initialAddress]);
+  }, [username, email, firstName, lastName, password, phone, initialAddress , memoizedUpdateDataUser]);
 
 
   return (

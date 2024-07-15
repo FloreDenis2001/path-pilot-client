@@ -14,7 +14,6 @@ import PackageDetails from "../../dto/PackageDetails";
 import PackageRequest from "../../dto/PackageRequest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 interface ModalEditPackageProps {
   handleOpenModal: () => void;
@@ -76,14 +75,13 @@ const ModalEditPackage: React.FC<ModalEditPackageProps> = ({
       destination: destinationDetails,
       packageDetails: packageDetailsInfo,
     });
-  }, [originDetails, destinationDetails, packageDetailsInfo]);
+  }, [originDetails, destinationDetails, packageDetailsInfo, user.email]);
 
   const handleEditPackage = async () => {
 
     try {
       await servicePackage.updatePackage(pack.awb, packageRequest);
       toast.success("Package updated successfully");
-      window.location.reload();
 
     }
     catch (error) {

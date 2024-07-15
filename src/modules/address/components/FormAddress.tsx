@@ -4,6 +4,7 @@ import { FaGlobe, FaHashtag, FaSignature } from "react-icons/fa";
 import Address from "../model/Address";
 import CityData from "../../core/models/CityData";
 import roData from "../../../resources/ro.json";
+
 interface FormAddressProps {
   title: string;
   city: string;
@@ -11,7 +12,7 @@ interface FormAddressProps {
   streetNumber: string;
   country: string;
   postalCode: string;
-  updateDataAddress: (data: any) => void;
+  updateDataAddress: (data: Address) => void;
 }
 
 const FormAddress: React.FC<FormAddressProps> = ({
@@ -35,7 +36,7 @@ const FormAddress: React.FC<FormAddressProps> = ({
     (data: Address) => {
       updateDataAddress(data);
     },
-    [updateDataAddress]
+    [updateDataAddress] 
   );
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const FormAddress: React.FC<FormAddressProps> = ({
 
   useEffect(() => {
     memorizedUpdateDataAddress({ city, street, streetNumber, country, postalCode });
-  }, [city, street, streetNumber, country, postalCode]);
+  }, [city, street, streetNumber, country, postalCode, memorizedUpdateDataAddress]);
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCountry(e.target.value);
@@ -66,14 +67,12 @@ const FormAddress: React.FC<FormAddressProps> = ({
   return (
     <>
       <div className="register__header">
-        <div className="register__header">
-          <LogoSvg className="register__logo" />
-          <h1 className="heading-primary">{title}</h1>
-          <h4 className="heading-secondary">
-            Reengage with precision pathfinding: Your gateway to streamlined
-            route optimization and smarter travel decisions.
-          </h4>
-        </div>
+        <LogoSvg className="register__logo" />
+        <h1 className="heading-primary">{title}</h1>
+        <h4 className="heading-secondary">
+          Reengage with precision pathfinding: Your gateway to streamlined
+          route optimization and smarter travel decisions.
+        </h4>
       </div>
 
       <div className="register__center">

@@ -1,6 +1,4 @@
-import { faCode } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { FaSignature } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router";
 import { ReactComponent as LogoSvg } from "../../../assets/logo2.svg";

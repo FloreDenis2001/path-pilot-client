@@ -85,7 +85,7 @@ const ModalAddPackage: React.FC<ModalAddPackageProps> = ({
       destination: destinationDetails,
       packageDetails: packageDetailsInfo,
     });
-  }, [originDetails, destinationDetails, packageDetailsInfo]);
+  }, [originDetails, destinationDetails, packageDetailsInfo, user.email]);
 
   const {
     currentStepIndex,

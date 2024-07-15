@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import Driver from "../../models/Driver";
 import ModalDriversDetails from "../froms/ModalDriversDetails";
 import ModalEditDriver from "../froms/ModalEditDriver";
-import UserService from "../../../user/service/UserService";
 import Dialog from "../../../core/components/Dialog";
 import DriverService from "../../service/DriverService";
 import { LoginContext } from "../../../context/LoginProvider";

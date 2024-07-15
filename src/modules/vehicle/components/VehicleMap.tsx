@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import Pagination from "../../core/components/Pagination";
@@ -24,31 +24,8 @@ const VehicleMap = () => {
   const [loading, setLoading] = useState(true);
   const vehiclesPerPage = 8;
   const { user } = useContext(LoginContext) as LoginContextType;
-  const vehicleService = new VehicleService();
 
-  useEffect(() => {
-    const fetchVehicles = async () => {
-      try {
-        const vehicles = await vehicleService.allVehiclesByCompany(
-          user.companyRegistrationNumber
-        );
-        setMyVehicles(vehicles);
-        setFilteredVehicles(vehicles);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setTimeout(() => setLoading(false), 400);
-      }
-    };
-
-    fetchVehicles();
-  }, [user]);
-
-  useEffect(() => {
-    applyFilters();
-  }, [searchTerm, sortOrder, statusFilter, myVehicles]);
-
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = [...myVehicles];
 
     if (searchTerm) {
@@ -76,7 +53,32 @@ const VehicleMap = () => {
     }
 
     setFilteredVehicles(filtered);
-  };
+  }, [searchTerm, sortOrder, statusFilter, myVehicles]); 
+
+  useEffect(() => {
+    const vehicleService = new VehicleService();
+
+    const fetchVehicles = async () => {
+      try {
+        const vehicles = await vehicleService.allVehiclesByCompany(
+          user.companyRegistrationNumber
+        );
+        setMyVehicles(vehicles);
+        setFilteredVehicles(vehicles);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setTimeout(() => setLoading(false), 400);
+      }
+    };
+
+    fetchVehicles();
+ 
+  }, [user]); 
+
+  useEffect(() => {
+    applyFilters();
+  }, [applyFilters]);
 
   const refreshFilters = () => {
     window.location.reload();

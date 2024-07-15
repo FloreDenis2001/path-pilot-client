@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import Sidebar from "../../core/components/Sidebar";
 import { FaPlus, FaSearch } from "react-icons/fa";
 import DriverService from "../service/DriverService";
@@ -23,8 +23,9 @@ const Drivers = () => {
   const [statusFilter, setStatusFilter] = useState("all");
   const [loading, setLoading] = useState(true);
 
-  const driverService = new DriverService();
-  let { user } = useContext(LoginContext) as LoginContextType;
+  const { user } = useContext(LoginContext) as LoginContextType;
+
+  const driverService = useMemo(() => new DriverService(), []);
 
   useEffect(() => {
     const fetchDrivers = async () => {
@@ -36,20 +37,14 @@ const Drivers = () => {
       } catch (err) {
         toast.error("Unable to retrieve drivers");
       } finally {
-        setTimeout(() => {
-          setLoading(false);
-        }, 500);
+        setLoading(false);
       }
     };
 
     fetchDrivers();
-  }, [user]);
+  }, [driverService, user.companyRegistrationNumber]);
 
-  useEffect(() => {
-    filterAndSortDrivers();
-  }, [searchTerm, sortOrder, statusFilter]);
-
-  const filterAndSortDrivers = () => {
+  const filterAndSortDrivers = useCallback(() => {
     let filteredDrivers = drivers;
 
     if (searchTerm) {
@@ -60,11 +55,10 @@ const Drivers = () => {
 
     if (statusFilter !== "all") {
       filteredDrivers = filteredDrivers.filter(
-        (driver) => !driver.isAvailable === (statusFilter === "Active")
+        (driver) => (driver.isAvailable && statusFilter === "Active") ||
+                    (!driver.isAvailable && statusFilter === "Inactive")
       );
     }
-
-
 
     if (sortOrder === "Ascending") {
       filteredDrivers = [...filteredDrivers].sort(
@@ -81,12 +75,7 @@ const Drivers = () => {
     }
 
     return filteredDrivers;
-  };
-
-  const refreshFilters = () => {
-    window.location.reload();
-    toast.info("Filters reset");
-  };
+  }, [drivers, searchTerm, sortOrder, statusFilter]);
 
   const filteredDrivers = filterAndSortDrivers();
   const indexOfLastDrivers = currentPage * driversPerPage;
@@ -95,6 +84,14 @@ const Drivers = () => {
     indexOfFirstDrivers,
     indexOfLastDrivers
   );
+
+  const refreshFilters = () => {
+    setSearchTerm("");
+    setSortOrder("default");
+    setStatusFilter("all");
+    setCurrentPage(1);
+    toast.info("Filters reset");
+  };
 
   return (
     <section className="drivers">

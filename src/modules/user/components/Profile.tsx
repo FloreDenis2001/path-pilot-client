@@ -15,7 +15,6 @@ import { Company } from "../../company/models/Company";
 import CompanyService from "../../company/services/CompanyServer";
 import Dialog from "../../core/components/Dialog";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import EditProfileSelect from "./EditProfileSelect";
 import ModalEditCompany from "./ModalEditCompany";

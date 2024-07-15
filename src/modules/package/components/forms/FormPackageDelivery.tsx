@@ -24,16 +24,12 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
   updatePackageDetails,
   editable = true, 
 }) => {
-  let [weight, setWeight] = useState<number>(initialWeight || 0);
-  let [height, setHeight] = useState<number>(initialHeight || 0);
-  let [width, setWidth] = useState<number>(initialWidth || 0);
-  let [length, setLength] = useState<number>(initialLength || 0);
-  let [totalAmount, setTotalAmount] = useState<number>(
-    initialTotalAmount || 0
-  );
-  let [deliveryDescription, setDeliveryDescription] = useState<string>(
-    initialDeliveryDescription || ""
-  );
+  const [weight, setWeight] = useState<number>(initialWeight || 0);
+  const [height, setHeight] = useState<number>(initialHeight || 0);
+  const [width, setWidth] = useState<number>(initialWidth || 0);
+  const [length, setLength] = useState<number>(initialLength || 0);
+  const [totalAmount, setTotalAmount] = useState<number>(initialTotalAmount || 0);
+  const [deliveryDescription, setDeliveryDescription] = useState<string>(initialDeliveryDescription || "");
 
   const memorizedUpdatePackageDetails = useCallback(
     (data: PackageDetails) => {
@@ -42,7 +38,7 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
     [updatePackageDetails]
   );
 
-  const updatePackageDetailsData = () => {
+  const updatePackageDetailsData = useCallback(() => {
     memorizedUpdatePackageDetails({
       totalAmount: totalAmount,
       weight: weight,
@@ -51,11 +47,11 @@ const FormPackageDelivery: React.FC<FormPackageDeliveryProps> = ({
       length: length,
       deliveryDescription: deliveryDescription,
     });
-  };
+  }, [totalAmount, weight, height, width, length, deliveryDescription, memorizedUpdatePackageDetails]);
 
   useEffect(() => {
     updatePackageDetailsData();
-  }, [weight, height, width, length, totalAmount, deliveryDescription]);
+  }, [updatePackageDetailsData]);  
 
   return (
     <div className="modal__container__body__content">

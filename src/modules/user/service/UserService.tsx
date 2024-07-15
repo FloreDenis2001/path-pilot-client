@@ -5,7 +5,6 @@ import RegisterDTO from "../../auth/models/RegisterDTO";
 import ResetPasswordRequest from "../dto/ResetPasswordRequest";
 import DeleteUserRequest from "../dto/DeleteUserRequest";
 import UpdateUserRequest from "../dto/UpdateUserRequest";
-import { toast } from "react-toastify";
 
 class UserService extends ApiServer {
   login = async (user: LoginRequest): Promise<UserLogin> => {
