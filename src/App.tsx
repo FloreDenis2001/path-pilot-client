@@ -17,7 +17,6 @@ import { store } from "./store/store";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import RouteMap from "./modules/route/components/RouteMap";
-import PrivateRoutes from "./modules/auth/components/PrivateRoutes";
  
 
 function App() {
@@ -45,7 +44,6 @@ function App() {
               <Route path="/register" element={<Registration />} />
               <Route path="/retrievePassword" element={<RetrievePassword />} />
               <Route path="/reset-password" element={<ChangePassword />} />
-              <Route path="" element={<PrivateRoutes />}>
               <Route path="/dashboard/routes" element={<RouteMap />} />
               <Route path="/dashboard/packages" element={<PackageMap />} />
               <Route path="/dashboard/drivers" element={<Drivers />} />
@@ -53,7 +51,6 @@ function App() {
               <Route path="/dashboard" element={<DashBoard />} />
               <Route path="/drivers/add" element={<RegistrationDriver />} />
               <Route path="/profile" element={<Profile />} />
-              </Route>
             </Routes>
           </BrowserRouter>
         </div>
