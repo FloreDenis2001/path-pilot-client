@@ -67,7 +67,7 @@ const DashBoard = () => {
     {
       icon: faTruckRampBox,
       heading: "Services",
-      value: `$${companyDataDashboard.totalSumLastMonthPackages}`,
+      value: `$${companyDataDashboard.totalSumLastMonthPackages.toFixed(2)}`,
       label: "Last Month",
       className: "dashboard__stats__box__iconS",
     },
@@ -81,14 +81,14 @@ const DashBoard = () => {
     {
       icon: faChartColumn,
       heading: "Expenses",
-      value: `$${companyDataDashboard.totalSumLastMonthOfSalary}`,
+      value: `$${companyDataDashboard.totalSumLastMonthOfSalary.toFixed(2)}`,
       label: "Last Month",
       className: "dashboard__stats__box__iconE",
     },
     {
       icon: faMoneyBill,
       heading: "Profit",
-      value: `$${companyDataDashboard.totalSumLastMonthProfit}`,
+      value: `$${companyDataDashboard.totalSumLastMonthProfit.toFixed(2)}`,
       label: "Last Month",
       className: "dashboard__stats__box__iconP",
     },
